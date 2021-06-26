@@ -38,4 +38,4 @@ jubeatやREFLEC BEATでは筐体にイヤホンジャックが無いため、筐
 https://xd.adobe.com/view/4befa147-7997-4f29-8056-00eb881f1444-1ebc/grid
 
 ## ER図
-https://drive.google.com/file/d/1tmVGoYc3Y12yq0A7BXm4Dm10ngewaCfF/view
+https://drive.google.com/file/d/1Yd7gnmS_snu8ji0QbHUvLu1HjWqNdh0N/view
