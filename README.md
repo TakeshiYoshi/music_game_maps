@@ -36,3 +36,6 @@ jubeatやREFLEC BEATでは筐体にイヤホンジャックが無いため、筐
 
 ## 画面遷移図
 https://xd.adobe.com/view/4befa147-7997-4f29-8056-00eb881f1444-1ebc/grid
+
+## ER図
+https://drive.google.com/file/d/161wLCXlqaYn8jnigK1rYrzTsQzkCkavd/view
