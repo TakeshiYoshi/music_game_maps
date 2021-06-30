@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_091331) do
+ActiveRecord::Schema.define(version: 2021_06_30_092859) do
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 2021_06_30_091331) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_cities_on_name", unique: true
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
+
+  create_table "game_machines", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.bigint "game_id", null: false
+    t.integer "count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_machines_on_game_id"
+    t.index ["shop_id", "game_id"], name: "index_game_machines_on_shop_id_and_game_id", unique: true
+    t.index ["shop_id"], name: "index_game_machines_on_shop_id"
   end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -73,6 +84,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_091331) do
   end
 
   add_foreign_key "cities", "prefectures"
+  add_foreign_key "game_machines", "games"
+  add_foreign_key "game_machines", "shops"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
   add_foreign_key "user_reviews", "shops"
