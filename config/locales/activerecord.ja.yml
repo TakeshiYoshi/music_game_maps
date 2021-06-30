@@ -8,6 +8,7 @@ ja:
       shop: '店舗'
       user_review: 'ユーザー投稿'
       game_machine: '設置ゲーム'
+      playing_game: '遊んでいるゲーム'
     attributes:
       user:
         id: 'ID'
