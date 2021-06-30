@@ -1,0 +1,39 @@
+ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+      game: 'ゲーム'
+      prefecture: '都道府県'
+      city: '市区町村'
+      shop: '店舗'
+      user_review: 'ユーザー投稿'
+      game_machine: '設置ゲーム'
+      playing_game: '遊んでいるゲーム'
+      about_game: '投稿分類'
+    attributes:
+      user:
+        id: 'ID'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード再入力'
+        nickname: 'ニックネーム'
+        description: '自己紹介'
+        anonymous: '匿名設定'
+        created_at: '登録日'
+      game:
+        id: 'ID'
+        title: 'ゲームタイトル'
+      prefecture:
+        name: '都道府県名'
+      city:
+        name: '市区町村名'
+      shop:
+        name: '店舗名'
+        twitter_id: 'Twitter ID'
+        opening_time: '開店時間'
+        closing_time: '閉店時間'
+        address: '住所'
+      user_review:
+        body: '本文'
+      game_machine:
+        count: '設置台数'
