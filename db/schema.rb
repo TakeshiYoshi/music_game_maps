@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_074958) do
+ActiveRecord::Schema.define(version: 2021_06_30_085556) do
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -35,6 +35,21 @@ ActiveRecord::Schema.define(version: 2021_06_30_074958) do
     t.index ["name"], name: "index_prefectures_on_name", unique: true
   end
 
+  create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "twitter_id"
+    t.datetime "opening_time"
+    t.datetime "closing_time"
+    t.text "address"
+    t.bigint "prefecture_id", null: false
+    t.bigint "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_shops_on_city_id"
+    t.index ["name"], name: "index_shops_on_name", unique: true
+    t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -48,4 +63,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_074958) do
   end
 
   add_foreign_key "cities", "prefectures"
+  add_foreign_key "shops", "cities"
+  add_foreign_key "shops", "prefectures"
 end
