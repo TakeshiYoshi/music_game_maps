@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
+      game: 'ゲーム'
     attributes:
       user:
         id: 'ID'
@@ -12,3 +13,6 @@ ja:
         description: '自己紹介'
         anonymous: '匿名設定'
         created_at: '登録日'
+      game:
+        id: 'ID'
+        name: 'ゲーム名'
