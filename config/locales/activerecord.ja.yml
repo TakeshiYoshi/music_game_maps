@@ -4,6 +4,7 @@ ja:
       user: 'ユーザー'
       game: 'ゲーム'
       prefecture: '都道府県'
+      city: '市区町村'
     attributes:
       user:
         id: 'ID'
@@ -19,3 +20,5 @@ ja:
         title: 'ゲームタイトル'
       prefecture:
         name: '都道府県名'
+      city:
+        name: '市区町村名'
