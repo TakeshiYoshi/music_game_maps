@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      user: 'ユーザー'
+    attributes:
+      user:
+        id: 'ID'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード再入力'
+        nickname: 'ニックネーム'
+        description: '自己紹介'
+        anonymous: '匿名設定'
+        created_at: '登録日'
