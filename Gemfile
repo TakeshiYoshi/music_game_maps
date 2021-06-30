@@ -21,6 +21,9 @@ gem 'active_decorator'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 
+# UI/UX
+gem 'rails-i18n'
+
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
 gem 'turbolinks', '~> 5'
@@ -44,11 +47,11 @@ group :development, :test do
   # Test
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'faker'
 end
 
 group :test do
   gem 'capybara'
-  gem 'faker'
   gem 'webdrivers'
 end
 
