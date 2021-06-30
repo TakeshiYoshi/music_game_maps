@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_073841) do
+ActiveRecord::Schema.define(version: 2021_06_30_074958) do
+
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "prefecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false
@@ -38,4 +47,5 @@ ActiveRecord::Schema.define(version: 2021_06_30_073841) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "cities", "prefectures"
 end

@@ -1,5 +1,5 @@
-class Prefecture < ApplicationRecord
-  has_many :cities
+class City < ApplicationRecord
+  belongs_to :prefecture
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 end
