@@ -9,6 +9,7 @@ ja:
       user_review: 'ユーザー投稿'
       game_machine: '設置ゲーム'
       playing_game: '遊んでいるゲーム'
+      about_game: '投稿分類'
     attributes:
       user:
         id: 'ID'
