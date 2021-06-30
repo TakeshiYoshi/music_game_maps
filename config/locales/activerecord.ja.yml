@@ -15,4 +15,4 @@ ja:
         created_at: '登録日'
       game:
         id: 'ID'
-        name: 'ゲーム名'
+        title: 'ゲームタイトル'

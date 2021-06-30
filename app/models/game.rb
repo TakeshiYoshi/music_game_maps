@@ -1,3 +1,3 @@
 class Game < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: { case_sensitive: false }
 end

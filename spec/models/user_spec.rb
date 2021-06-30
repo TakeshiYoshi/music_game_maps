@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include('を入力してください')
   end
 
-  it '重複したメールアドレスなら無効であること' do
+  it 'メールアドレスは一意であること' do
     user
     another_user = build(:user, email: user.email)
     another_user.valid?
