@@ -1,4 +1,4 @@
-# みんなで作る音ゲーマップ(仮)
+# OTOMAP | みんなで作る音ゲーマップ
 
 ## サービス概要
 ゲームセンターを探している音ゲーマーが求めている音楽ゲーム筐体の設置店舗をマップ検索出来るサービスです。
@@ -38,4 +38,4 @@ jubeatやREFLEC BEATでは筐体にイヤホンジャックが無いため、筐
 https://xd.adobe.com/view/4befa147-7997-4f29-8056-00eb881f1444-1ebc/grid
 
 ## ER図
-https://drive.google.com/file/d/161wLCXlqaYn8jnigK1rYrzTsQzkCkavd/view
+https://drive.google.com/file/d/1-6hOcQ8eSo6bBupj_dzWiqK7VSqq9GLb/view
