@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: music_game_maps_production
-  username: music_game_maps
-  password: <%= ENV['MUSIC_GAME_MAPS_DATABASE_PASSWORD'] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
