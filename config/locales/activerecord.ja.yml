@@ -3,6 +3,7 @@ ja:
     models:
       user: 'ユーザー'
       game: 'ゲーム'
+      prefecture: '都道府県'
     attributes:
       user:
         id: 'ID'
@@ -16,3 +17,5 @@ ja:
       game:
         id: 'ID'
         title: 'ゲームタイトル'
+      prefecture:
+        name: '都道府県名'
