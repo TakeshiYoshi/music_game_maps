@@ -46,6 +46,13 @@ $theme: normal;
   $bg-end: #07202b;
   $site-title: #bfc56e;
 }
+@if $theme == mono {
+  $bg-start: #000000;
+  $bg-end: #000000;
+  $site-title: #FFFFFF;
+  $field-color: #292929;
+  $label-open: #3b0b14;
+}
 
 html {
   min-height: 100%;
