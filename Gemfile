@@ -21,6 +21,7 @@ gem 'active_decorator'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'bootstrap', '~> 5.0'
+gem 'font-awesome-rails'
 
 # UI/UX
 gem 'rails-i18n'

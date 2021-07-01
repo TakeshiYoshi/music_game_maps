@@ -1,6 +1,486 @@
-h1
-  | Shops#index
-p
-  | Find me in app/views/shops/index.html.erb
+.container-xl.px-0
+  header.glass.d-flex.align-items-center
+    .col-6.d-flex.align-items-center
+      = link_to root_path, class: 'd-flex align-items-center'
+        = image_tag 'logo.png', class: 'logo'
+        h1.site-title OTOMAP
+    .col-6.text-end.d-flex.align-items-center.justify-content-end
+      form.d-flex.search-form
+        button.btn.btn-glass.rounded-pill.filter-button FILTER
+        .input-group.search-field
+          input.form-control type="text" placeholder="フリーワード検索"
+          button.btn.btn-glass
+            = fa_icon 'search'
+      = link_to '#collapseMenu', role: 'button', 'data-bs-toggle': 'collapse', 'aria-expanded': 'false', 'aria-controls': 'collapseExample'
+        = image_tag 'icon.jpeg', class: 'rounded-circle icon'
+  .user-menu.dropdown-glass.collapse#collapseMenu
+    ul.dropdown-text
+      li マイページ
+      li 設定
+      li ログアウト
+  .col-12.map-container.d-flex.align-items-center.justify-content-center
+    p MAP
 
-a.btn.btn-primary href="#" hogehoge
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 1
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター1号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 2
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター2号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 3
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター3号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 4
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター4号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 5
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター5号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 6
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター6号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 7
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター7号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 8
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター8号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 9
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター9号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  .col-12.glass.shop-card.d-flex.align-content-start
+    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    .shop-description.d-flex.flex-column.justify-content-start
+      .shop-head.d-flex.align-items-start
+        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+          p.m-0 10
+        .shop-name-wrapper.d-flex.align-items-center.flex-wrap
+          h2.glass-text.shop-name ゲームセンター10号店
+          .label-opening-hours.rounded-pill.d-flex.align-items-center 営業中
+      .shop-games.d-flex.align-items-center.flex-wrap
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title 太鼓の達人
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 20
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title REFLEC BEAT
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title jubeat
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title maimai
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title CHUNITHM
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 3
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title オンゲキ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 2
+        .badge.p-0
+          .badge-content.d-flex.align-items-center.rounded-pill
+            .game-title シンクロニカ
+            .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+              .game-count 1
+
+  footer.glass.d-flex.align-items-center
+    .glass-text.copyright.col-6 © 2021 OTOMAP
+    .glass-text.col-6.text-end フィードバック
