@@ -1,0 +1,24 @@
+input.d-none#search-btn-check type="checkbox"
+input.d-none#nav-menu-check type="checkbox"
+header.glass.d-flex.align-items-center
+    .col-6.d-flex.align-items-center
+      = link_to root_path, class: 'd-flex align-items-center'
+        = image_tag 'logo.png', class: 'logo'
+        h1.site-title = t('defaults.app_name')
+    .col-6.text-end.d-flex.align-items-center.justify-content-end
+      button.btn.btn-glass.rounded-pill.filter-button FILTER
+      form.d-flex.search-form
+        .input-group.search-field
+          input.form-control type="text" placeholder="#{t('defaults.form.header_search_placeholder')}"
+          button.btn.btn-glass
+            = fa_icon 'search'
+      .search-btn
+        label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
+          = fa_icon 'search'
+      label for="nav-menu-check"
+        = image_tag 'icon.jpeg', class: 'rounded-circle icon'
+.user-menu.dropdown-glass
+  ul.dropdown-text
+    li マイページ
+    li 設定
+    li = t('defaults.logout')

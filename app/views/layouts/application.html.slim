@@ -2,12 +2,14 @@ doctype html
 html
   head
     meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
-    title
-      | MusicGameMaps
+    title = page_title(yield(:title))
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = yield
+    .container-xl.px-0
+      = render 'layouts/header'
+      = yield
+      = render 'layouts/footer'

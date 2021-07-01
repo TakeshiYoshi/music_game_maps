@@ -1,33 +1,8 @@
-.container-xl.px-0
-  input.d-none#search-btn-check type="checkbox"
-  input.d-none#nav-menu-check type="checkbox"
-  header.glass.d-flex.align-items-center
-    .col-6.d-flex.align-items-center
-      = link_to root_path, class: 'd-flex align-items-center'
-        = image_tag 'logo.png', class: 'logo'
-        h1.site-title OTOMAP
-    .col-6.text-end.d-flex.align-items-center.justify-content-end
-      button.btn.btn-glass.rounded-pill.filter-button FILTER
-      form.d-flex.search-form
-        .input-group.search-field
-          input.form-control type="text" placeholder="フリーワード検索"
-          button.btn.btn-glass
-            = fa_icon 'search'
-      .search-btn
-        label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
-          = fa_icon 'search'
-      label for="nav-menu-check"
-        = image_tag 'icon.jpeg', class: 'rounded-circle icon'
   .col-12.map-container.d-flex.align-items-center.justify-content-center
     p MAP
-  .user-menu.dropdown-glass
-    ul.dropdown-text
-      li マイページ
-      li 設定
-      li ログアウト
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -74,7 +49,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -121,7 +96,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -168,7 +143,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -215,7 +190,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -262,7 +237,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -309,7 +284,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -356,7 +331,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -403,7 +378,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -450,7 +425,7 @@
               .game-count 1
 
   .col-12.glass.shop-card.d-flex.align-content-start
-    = image_tag 'appearance_img.jpeg', class: 'appearance_img'
+    = image_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
@@ -495,7 +470,3 @@
             .game-title シンクロニカ
             .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
               .game-count 1
-
-  footer.glass.d-flex.align-items-center
-    .glass-text.copyright.col-6 © 2021 OTOMAP
-    .glass-text.col-6.text-end フィードバック

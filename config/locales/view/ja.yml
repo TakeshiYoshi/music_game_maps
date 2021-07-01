@@ -1,0 +1,8 @@
+ja:
+  defaults:
+    app_name: 'OTOMAP'
+    base_title: 'OTOMAP | みんなで作る音ゲーマップ'
+    copyright: '© 2021 OTOMAP'
+    logout: 'ログアウト'
+    form:
+      header_search_placeholder: 'フリーワード検索'
