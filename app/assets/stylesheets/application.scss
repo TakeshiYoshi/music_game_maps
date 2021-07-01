@@ -41,6 +41,11 @@ $theme: normal;
   $field-color: #30a2b6;
   $label-open: #ee83af;
 }
+@if $theme == shinkai {
+  $bg-start: #0d355a;
+  $bg-end: #07202b;
+  $site-title: #bfc56e;
+}
 
 html {
   min-height: 100%;
@@ -55,22 +60,21 @@ a {
 }
 
 .glass {
-  background: rgba(white, 0.1);
-  backdrop-filter: blur(5px) brightness(110%);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(white, 0.3);
+  backdrop-filter: blur(5px);
   border: $glass-border-size solid rgba(white, 0.3);
   padding: $glass-padding 20px;
   box-shadow: 0 0 6px 0 rgba(black, 0.2);
 }
 
 .dropdown-glass {
-  background: rgba(white, 0.1);
-  backdrop-filter: blur(5px) brightness(80%);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(black, 0.1);
+  backdrop-filter: blur(5px);
   border: 1px solid rgba(white, 0.3);
   padding: 0;
   border-radius: 20px;
   box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  z-index: 1000;
 }
 
 .glass-text {
@@ -91,45 +95,58 @@ header {
     color: $site-title;
     letter-spacing: 0.4rem;
     margin: 0;
+    transition: 0.5s;
   }
   .icon {
     width: 50px;
     border: 1px solid $gray-200;
+    transition: all 0.3s;
+  }
+  .filter-button {
+    height: 38px;
+    margin-right: 15px;
+    padding: 0 20px;
+    box-shadow: 0 0 6px 0 $field-color;
+    transition: all 0.3s;
   }
   .search-form {
     height: 38px;
-    .filter-button {
-      margin-right: 15px;
-      padding: 0 20px;
-      box-shadow: 0 0 6px 0 $field-color;
-    }
     .search-field {
-      width: 300px;
+      width: 320px;
       margin-right: 15px;
+      transition: all 0.3s;
       input {
         border: 2px solid $field-color;
         border-radius: 19px 0 0 19px;
         padding-left: 19px;
         box-shadow: 0 0 6px 0 $field-color;
+        transition: all 0.3s;
       }
       button {
+        transition: all 0.3s;
         border-radius: 0 19px 19px 0;
         box-shadow: 0 0 6px 0 $field-color;
+        transition: all 0.3s;
         i {
           margin-right: 4px;
         }
       } 
     }
   }
+  .search-btn {
+    display: none;
+  }
 }
 .container-xl {
   position: relative;
 }
 .user-menu {
+  display: none;
   margin-top: 1px;
   position: absolute;
   top: $logo-height-size + (($glass-padding + $glass-border-size) *2);
   right: 0%;
+  transition: all 0.3s;
   ul {
     list-style: none;
     padding: 0;
@@ -140,11 +157,11 @@ header {
       margin: 3px 0;
       padding: 5px 25px;
       transition: all 0.3s;
-    }
-    li:hover {
-      border-radius: 20px;
-      text-shadow: 0 0 0 black;
-      background-color: rgba(black, 0.3);
+      &:hover {
+        border-radius: 20px;
+        text-shadow: 0 0 0 black;
+        background-color: rgba(black, 0.3);
+      }
     }
   }
   .dropdown-text {
@@ -154,8 +171,8 @@ header {
 }
 
 .map-container {
-  background-color: $gray-200;
   border-radius: 20px;
+  background-color: $gray-200;
   height: 300px;
   margin-bottom: 20px;
   box-shadow: 0 0 6px 0 rgba(black, 0.2);
@@ -181,10 +198,11 @@ header {
     margin-right: 20px;
   }
   .ordered-list {
+    width: 35px;
+    height: 35px;
     min-width: 35px;
     min-height: 35px;
-    background-color: rgba(black, 0.1);
-    backdrop-filter: brightness(0%);
+    background-color: rgba(black, 0.2);
     margin-right: 10px;
     p {
       font-size: 1.4rem;
@@ -194,13 +212,15 @@ header {
   .shop-name {
     font-size: 1.4rem;
     margin-right: 20px;
-    margin-top: 3px;
+    margin-top: 4px;
   }
   .label-opening-hours {
-    padding: 0 25px;
-    margin-top: 3px;
-    height: 30px;
-    box-shadow: 0 0 6px 0 $label-open;
+    display: inline-block;
+    font-size: 1.2rem;
+    text-shadow: 0 0 0 white;
+    padding: 2px 20px;
+    margin-left: 5px;
+    box-shadow: 0 0 3px 0 $label-open;
     background: rgba($label-open, 0.5);
     backdrop-filter: brightness(105%);
     color: white;
@@ -210,8 +230,7 @@ header {
     margin-bottom: 5px;
     .badge-content {
       padding: 3px 3px 3px 15px;
-      background-color: rgba(black, 0.1);
-      backdrop-filter: brightness(0%);
+      background-color: rgba(black, 0.2);
       .game-title { 
         font-size: 1.1rem;
         color: white;
@@ -229,10 +248,9 @@ header {
       }
     }
   }
-}
-
-.shop-card:hover {
-  background: rgba(white, 0.3);
+  &:hover {
+    background: rgba(white, 0.3);
+  }
 }
 
 footer {
@@ -248,10 +266,164 @@ footer {
   background-color: $field-color;
   border-color: $field-color;
   box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+  &:hover {
+    color: white;
+    background-color: lighten($field-color, 4%);
+    border-color: lighten($field-color, 4%);
+    box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+  }
 }
-.btn-glass:hover {
-  color: white;
-  background-color: lighten($field-color, 4%);
-  border-color: lighten($field-color, 4%);
-  box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+
+#nav-menu-check:checked ~ .user-menu {
+  display: block;
+}
+
+// 以下iPad縦表示向け
+@include media-breakpoint-down(lg) {
+  header .search-form > .search-field {
+    width: 230px;
+  }
+}
+
+// 以下タブレット, スマホ向け
+
+@include media-breakpoint-down(md) {
+  header {
+    .filter-button {
+      width: 35px;
+      height: 35px;
+      font-size: 0;
+      padding: 0;
+      margin-right: 8px;
+      &:before {
+        font-size: 0.9rem;
+        font-family: FontAwesome;
+        content: '\f0b0';
+      }
+    }
+    .search-form {
+      .search-field {
+        width: 230px;
+        display: none;
+      }
+    }
+    
+    .search-btn {
+      display: block;
+      pointer-events: auto;
+      label {
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        margin-right: 8px;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  #search-btn-check:checked ~ header .site-title {
+    display: none;
+  }
+  #search-btn-check:checked ~ header .filter-button {
+    display: none;
+  }
+  #search-btn-check:checked ~ header .icon {
+    display: none;
+  }
+  #search-btn-check:checked ~ header .search-btn > label {
+    font-size: 0;
+    margin-right: 0;
+  }
+  #search-btn-check:checked ~ header .search-btn > label:after {
+    font-size: 0.9rem;
+    font-family: FontAwesome;
+    content: '\f00d';
+  }
+  #search-btn-check:checked ~ header .search-field {
+    display: flex;
+  }
+}
+
+// 以下スマホ向け
+
+@include media-breakpoint-down(sm) {
+  $logo-height-size: 36px;
+
+  header {
+    border-radius: 0 0 10px 10px;
+    .logo {
+      height: $logo-height-size;
+    }
+    .site-title {
+      font-size: 1.8rem;
+      letter-spacing: 0.2rem;
+    }
+    .icon {
+      width: 35px;
+    }
+  }
+
+  .user-menu {
+    top: $logo-height-size + (($glass-padding + $glass-border-size) *2);
+  }
+
+  footer {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .dropdown-glass {
+    border-radius: 10px;
+  }
+
+  .map-container {
+    border-radius: 10px;
+  }
+
+  .glass {
+    padding: $glass-padding;
+  }
+
+  .shop-card {
+    border-radius: 10px;
+    .appearance_img {
+      display: none;
+    }
+    .ordered-list {
+      width: 25px;
+      height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+      margin-right: 10px;
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    .shop-name {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      margin-top: 0;
+    }
+    .label-opening-hours {
+      font-size: 1.0rem;
+      padding: 3px 10px;
+    }
+    .badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      .badge-content {
+        padding: 2px 2px 2px 13px;
+        .game-title { 
+          font-size: 0.8rem;
+        }
+        .count-circle {
+          min-width: 22px;
+          height: 22px;
+          .game-count {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
 }
