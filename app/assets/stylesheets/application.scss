@@ -1,1 +1,257 @@
 @import "bootstrap";
+@import "font-awesome";
+
+@font-face {
+  font-family: 'LEMONMILK-BOLD';
+  src: font-url('LEMONMILK-Bold');
+}
+
+// 初期化
+$bg-start: #6ABBC4;
+$bg-end: #6E74BC;
+$site-title: #378892;
+$field-color: #326FFA;
+$label-open: #E26A9D;
+$logo-height-size: 50px;
+$glass-padding: 10px;
+$glass-border-size: 1px;
+$theme: normal;
+
+@if $theme == normal {
+  $bg-start: #6ABBC4;
+  $bg-end: #6E74BC;
+  $site-title: #378892;
+}
+@if $theme == dark {
+  $bg-start: #1B474D;
+  $bg-end: #370D62;
+  $site-title: #78BCC4;
+}
+@if $theme == dark-blue {
+  $bg-start: #001;
+  $bg-end: rgb(16, 16, 48);
+  $site-title: #BBF;
+  $field-color: #3d5796;
+  $label-open: #913f61;
+}
+@if $theme == yumekawa {
+  $bg-start: #c2afe6;
+  $bg-end: #bc6e9b;
+  $site-title: #6fb8d4;
+  $field-color: #30a2b6;
+  $label-open: #ee83af;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(135deg, $bg-start, $bg-end);
+}
+
+a {
+  text-decoration: none;
+}
+
+.glass {
+  background: rgba(white, 0.1);
+  backdrop-filter: blur(5px) brightness(110%);
+  -webkit-backdrop-filter: blur(5px);
+  border: $glass-border-size solid rgba(white, 0.3);
+  padding: $glass-padding 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+}
+
+.dropdown-glass {
+  background: rgba(white, 0.1);
+  backdrop-filter: blur(5px) brightness(80%);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(white, 0.3);
+  padding: 0;
+  border-radius: 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+}
+
+.glass-text {
+  color: white;
+  text-shadow: 0 0 6px #0D3A40;
+  margin: 0;
+}
+
+header {
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 20px;
+  .logo {
+    height: $logo-height-size;
+  }
+  .site-title {
+    font-size: 2.7rem;
+    font-family: LEMONMILK-BOLD;
+    color: $site-title;
+    letter-spacing: 0.4rem;
+    margin: 0;
+  }
+  .icon {
+    width: 50px;
+    border: 1px solid $gray-200;
+  }
+  .search-form {
+    height: 38px;
+    .filter-button {
+      margin-right: 15px;
+      padding: 0 20px;
+      box-shadow: 0 0 6px 0 $field-color;
+    }
+    .search-field {
+      width: 300px;
+      margin-right: 15px;
+      input {
+        border: 2px solid $field-color;
+        border-radius: 19px 0 0 19px;
+        padding-left: 19px;
+        box-shadow: 0 0 6px 0 $field-color;
+      }
+      button {
+        border-radius: 0 19px 19px 0;
+        box-shadow: 0 0 6px 0 $field-color;
+        i {
+          margin-right: 4px;
+        }
+      } 
+    }
+  }
+}
+.container-xl {
+  position: relative;
+}
+.user-menu {
+  margin-top: 1px;
+  position: absolute;
+  top: $logo-height-size + (($glass-padding + $glass-border-size) *2);
+  right: 0%;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    li {
+      padding: 0 10px;
+      text-align: center;
+      margin: 3px 0;
+      padding: 5px 25px;
+      transition: all 0.3s;
+    }
+    li:hover {
+      border-radius: 20px;
+      text-shadow: 0 0 0 black;
+      background-color: rgba(black, 0.3);
+    }
+  }
+  .dropdown-text {
+    color: white;
+    text-shadow: 0 0 6px black;
+  }
+}
+
+.map-container {
+  background-color: $gray-200;
+  border-radius: 20px;
+  height: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  p {
+    font-size: 8rem;
+    color: $gray-700;
+    letter-spacing: 0.4rem;
+  }
+}
+
+.shop-card {
+  border-radius: 20px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+  .shop-head {
+    margin-bottom: 10px;
+  }
+  .appearance_img {
+    max-width: 160px;
+    max-height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0 rgba(white, 0.7);
+    margin-right: 20px;
+  }
+  .ordered-list {
+    min-width: 35px;
+    min-height: 35px;
+    background-color: rgba(black, 0.1);
+    backdrop-filter: brightness(0%);
+    margin-right: 10px;
+    p {
+      font-size: 1.4rem;
+      color: white;
+    }
+  }
+  .shop-name {
+    font-size: 1.4rem;
+    margin-right: 20px;
+    margin-top: 3px;
+  }
+  .label-opening-hours {
+    padding: 0 25px;
+    margin-top: 3px;
+    height: 30px;
+    box-shadow: 0 0 6px 0 $label-open;
+    background: rgba($label-open, 0.5);
+    backdrop-filter: brightness(105%);
+    color: white;
+  }
+  .badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    .badge-content {
+      padding: 3px 3px 3px 15px;
+      background-color: rgba(black, 0.1);
+      backdrop-filter: brightness(0%);
+      .game-title { 
+        font-size: 1.1rem;
+        color: white;
+        margin-right: 7px;
+      }
+      .count-circle {
+        min-width: 24px;
+        height: 24px;
+        background-color: rgba(black, 0.3);
+        .game-count {
+          margin: 0 8px;
+          font-size: 1.1rem;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.shop-card:hover {
+  background: rgba(white, 0.3);
+}
+
+footer {
+  border-radius: 20px 20px 0 0;
+  margin-top: 20px;
+  .copyright {
+    font-family: LEMONMILK-BOLD;
+  }
+}
+
+.btn-glass {
+  color: white;
+  background-color: $field-color;
+  border-color: $field-color;
+  box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+}
+.btn-glass:hover {
+  color: white;
+  background-color: lighten($field-color, 4%);
+  border-color: lighten($field-color, 4%);
+  box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+}
