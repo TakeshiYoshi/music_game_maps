@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_101417) do
     t.bigint "prefecture_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_cities_on_name", unique: true
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
