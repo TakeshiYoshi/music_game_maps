@@ -1,0 +1,15 @@
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/bin/ruby -I /opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/lib/ruby/2.7.0 -r ./siteconf20210702-35483-x5hzrm.rb extconf.rb
+creating Makefile
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20210702-35483-1i4o7u/skiptrace/internal

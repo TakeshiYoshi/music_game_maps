@@ -1,0 +1,152 @@
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ext/nokogiri
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/bin/ruby -I /opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/lib/ruby/2.7.0 -r ./siteconf20210702-35483-6nfwiw.rb extconf.rb
+checking for whether -I/opt/homebrew/opt/openssl@1.1/include is accepted as CPPFLAGS... yes
+checking for whether -L/opt/homebrew/opt/openssl@1.1/lib is accepted as LDFLAGS... yes
+checking for whether -g is accepted as CFLAGS... yes
+checking for whether -Winline is accepted as CFLAGS... yes
+checking for whether -Wmissing-noreturn is accepted as CFLAGS... yes
+checking for whether -Wno-error=unused-command-line-argument-hard-error-in-future is accepted as CFLAGS... no
+Building nokogiri using packaged libraries.
+Static linking is enabled.
+Cross build is disabled.
+checking for iconv.h... yes
+checking for gzdopen() in -lz... yes
+Using mini_portile version 2.5.3
+checking for iconv... yes
+---------- IMPORTANT NOTICE ----------
+Building Nokogiri with a packaged version of libxml2-2.9.12.
+Configuration options: --host\=arm64-apple-darwin20 --enable-static --disable-shared --libdir\=/Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports/arm64-apple-darwin20/libxml2/2.9.12/lib --with-iconv\=yes --without-python --without-readline --with-c14n --with-debug --with-threads --disable-shared --enable-static RANLIB\=/usr/bin/ranlib AR\=/usr/bin/ar CFLAGS\=-O2\ -U_FORTIFY_SOURCE\ -g\ -fPIC
+The following patches are being applied:
+  - 0001-Remove-script-macro-support.patch
+  - 0002-Update-entities-to-remove-handling-of-ssi.patch
+  - 0003-libxml2.la-is-in-top_builddir.patch
+  - 0004-use-glibc-strlen.patch
+  - 0005-avoid-isnan-isinf.patch
+  - 0006-update-automake-files-for-arm64.patch
+  - 0007-Fix-XPath-recursion-limit.patch
+
+The Nokogiri maintainers intend to provide timely security updates, but if
+this is a concern for you and want to use your OS/distro system library
+instead, then abort this installation process and install nokogiri as
+instructed at:
+
+  https://nokogiri.org/tutorials/installing_nokogiri.html#installing-using-standard-system-libraries
+
+Note, however, that nokogiri cannot guarantee compatiblity with every
+version of libxml2 that may be provided by OS/package vendors.
+
+Extracting libxml2-2.9.12.tar.gz into tmp/arm64-apple-darwin20/ports/libxml2/2.9.12... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0001-Remove-script-macro-support.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0002-Update-entities-to-remove-handling-of-ssi.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0003-libxml2.la-is-in-top_builddir.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0004-use-glibc-strlen.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0005-avoid-isnan-isinf.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0006-update-automake-files-for-arm64.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxml2/0007-Fix-XPath-recursion-limit.patch... OK
+Running 'configure' for libxml2 2.9.12... OK
+Running 'compile' for libxml2 2.9.12... OK
+Running 'install' for libxml2 2.9.12... OK
+Activating libxml2 2.9.12 (from /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports/arm64-apple-darwin20/libxml2/2.9.12)...
+Using mini_portile version 2.5.3
+---------- IMPORTANT NOTICE ----------
+Building Nokogiri with a packaged version of libxslt-1.1.34.
+Configuration options: --host\=arm64-apple-darwin20 --enable-static --disable-shared --libdir\=/Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports/arm64-apple-darwin20/libxslt/1.1.34/lib --without-python --without-crypto --with-debug --with-libxml-prefix\=/Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports/arm64-apple-darwin20/libxml2/2.9.12 --disable-shared --enable-static RANLIB\=/usr/bin/ranlib AR\=/usr/bin/ar CFLAGS\=-O2\ -U_FORTIFY_SOURCE\ -g\ -fPIC
+The following patches are being applied:
+  - 0001-update-automake-files-for-arm64.patch
+  - 0002-Fix-xml2-config-check-in-configure-script.patch
+
+The Nokogiri maintainers intend to provide timely security updates, but if
+this is a concern for you and want to use your OS/distro system library
+instead, then abort this installation process and install nokogiri as
+instructed at:
+
+  https://nokogiri.org/tutorials/installing_nokogiri.html#installing-using-standard-system-libraries
+
+Extracting libxslt-1.1.34.tar.gz into tmp/arm64-apple-darwin20/ports/libxslt/1.1.34... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxslt/0001-update-automake-files-for-arm64.patch... OK
+Running git apply with /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/patches/libxslt/0002-Fix-xml2-config-check-in-configure-script.patch... OK
+Running 'configure' for libxslt 1.1.34... OK
+Running 'compile' for libxslt 1.1.34... OK
+Running 'install' for libxslt 1.1.34... OK
+Activating libxslt 1.1.34 (from /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports/arm64-apple-darwin20/libxslt/1.1.34)...
+checking for whether -DNOKOGIRI_PACKAGED_LIBRARIES is accepted as CPPFLAGS... yes
+checking for whether -DNOKOGIRI_LIBXML2_PATCHES="\"0001-Remove-script-macro-support.patch 0002-Update-entities-to-remove-handling-of-ssi.patch 0003-libxml2.la-is-in-top_builddir.patch 0004-use-glibc-strlen.patch 0005-avoid-isnan-isinf.patch 0006-update-automake-files-for-arm64.patch 0007-Fix-XPath-recursion-limit.patch\"" is accepted as CPPFLAGS... yes
+checking for -llzma... yes
+checking for whether -DNOKOGIRI_LIBXSLT_PATCHES="\"0001-update-automake-files-for-arm64.patch 0002-Fix-xml2-config-check-in-configure-script.patch\"" is accepted as CPPFLAGS... yes
+checking for xmlParseDoc() in libxml/parser.h... yes
+checking for xsltParseStylesheetDoc() in libxslt/xslt.h... yes
+checking for exsltFuncRegister() in libexslt/exslt.h... yes
+checking for xmlHasFeature()... yes
+checking for xmlFirstElementChild()... yes
+checking for xmlRelaxNGSetParserStructuredErrors()... yes
+checking for xmlRelaxNGSetValidStructuredErrors()... yes
+checking for xmlSchemaSetValidStructuredErrors()... yes
+checking for xmlSchemaSetParserStructuredErrors()... yes
+checking for vasprintf()... yes
+checking for whether -DNOKOGIRI_OTHER_LIBRARY_VERSIONS="\"\"" is accepted as CPPFLAGS... yes
+creating Makefile
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ext/nokogiri
+make "DESTDIR=" clean
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ext/nokogiri
+make "DESTDIR="
+compiling html_document.c
+compiling html_element_description.c
+compiling html_entity_lookup.c
+compiling html_sax_parser_context.c
+compiling html_sax_push_parser.c
+compiling libxml2_backwards_compat.c
+compiling nokogiri.c
+compiling test_global_handlers.c
+compiling xml_attr.c
+compiling xml_attribute_decl.c
+compiling xml_cdata.c
+xml_cdata.c:32:23: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
+    content_str_len = RSTRING_LEN(content);
+                    ~ ^~~~~~~~~~~~~~~~~~~~
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/include/ruby-2.7.0/ruby/ruby.h:1007:6: note: expanded from macro 'RSTRING_LEN'
+     RSTRING_EMBED_LEN(str) : \
+     ^~~~~~~~~~~~~~~~~~~~~~
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/include/ruby-2.7.0/ruby/ruby.h:1003:6: note: expanded from macro 'RSTRING_EMBED_LEN'
+     (long)((RBASIC(str)->flags >> RSTRING_EMBED_LEN_SHIFT) & \
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+xml_cdata.c:32:23: warning: implicit conversion loses integer precision: 'long' to 'int' [-Wshorten-64-to-32]
+    content_str_len = RSTRING_LEN(content);
+                    ~ ^~~~~~~~~~~~~~~~~~~~
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.3/include/ruby-2.7.0/ruby/ruby.h:1008:28: note: expanded from macro 'RSTRING_LEN'
+     RSTRING(str)->as.heap.len)
+     ~~~~~~~~~~~~~~~~~~~~~~^~~
+2 warnings generated.
+compiling xml_comment.c
+compiling xml_document.c
+compiling xml_document_fragment.c
+compiling xml_dtd.c
+compiling xml_element_content.c
+compiling xml_element_decl.c
+compiling xml_encoding_handler.c
+compiling xml_entity_decl.c
+compiling xml_entity_reference.c
+compiling xml_namespace.c
+compiling xml_node.c
+compiling xml_node_set.c
+compiling xml_processing_instruction.c
+compiling xml_reader.c
+compiling xml_relax_ng.c
+compiling xml_sax_parser.c
+compiling xml_sax_parser_context.c
+compiling xml_sax_push_parser.c
+compiling xml_schema.c
+compiling xml_syntax_error.c
+compiling xml_text.c
+compiling xml_xpath_context.c
+compiling xslt_stylesheet.c
+linking shared-object nokogiri/nokogiri.bundle
+Cleaning files only used during build.
+rm -rf /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ext/nokogiri/tmp/arm64-apple-darwin20/ports
+rm -rf /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ports
+
+current directory: /Users/yoshikawatakeshi/environment/music_game_maps/vendor/bundle/ruby/2.7.0/gems/nokogiri-1.11.7/ext/nokogiri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 nokogiri.bundle ./.gem.20210702-35483-eqr0pz/nokogiri
+installing nokogiri libraries

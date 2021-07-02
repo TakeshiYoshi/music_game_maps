@@ -23,3 +23,20 @@ cities_list.each do |city|
   prefecture = Prefecture.find_by(name: city[0])
   prefecture.cities.create(name: city[1])
 end
+
+# ゲームデータ作成
+Game.create(title: 'SOUND VOLTEX -Valkyrie model-')
+Game.create(title: 'SOUND VOLTEX')
+Game.create(title: "pop'n music")
+Game.create(title: 'beatmania IIDX LIGHTNING MODEL')
+Game.create(title: 'beatmania IIDX')
+Game.create(title: 'ノスタルジア')
+Game.create(title: 'GuitarFreaks')
+Game.create(title: 'DrumMania')
+Game.create(title: 'DDR')
+Game.create(title: 'DDR 20th model')
+Game.create(title: 'jubeat')
+Game.create(title: 'DANCERUSH')
+Game.create(title: 'REFLEC BEAT')
+Game.create(title: 'MUSECA')
+Game.create(title: 'DanceEvolution')
