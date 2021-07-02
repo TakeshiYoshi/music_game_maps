@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :user_reviews
-  has_many :games, through: :playing_games
   has_many :playing_games
+  has_many :games, through: :playing_games
 
   authenticates_with_sorcery!
 
