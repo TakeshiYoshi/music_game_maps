@@ -1,5 +1,5 @@
-require 'open-uri'
 require './scraping_konami'
+require './scraping_sega'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -20,5 +20,12 @@ namespace :scraping do
     scraping_konami 'REFLECC'
     scraping_konami 'MUSECA'
     scraping_konami 'DANEVOAC'
+  end
+
+  task sega: :environment do
+    scraping_sega 'CHUNITHM'
+    scraping_sega 'maimai'
+    scraping_sega 'WACCA'
+    scraping_sega 'オンゲキ'
   end
 end

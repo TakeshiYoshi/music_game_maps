@@ -11,7 +11,7 @@ AllCops:
     - "config/**/*"
     - "node_modules/**/*"
     - "Gemfile"
-    - "scraping_**.rb"
+    - "scraping**.rb"
   DisplayCopNames: true
 
 Rails:
