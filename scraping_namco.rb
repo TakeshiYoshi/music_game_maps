@@ -2,7 +2,7 @@ require './scraping'
 
 def scraping_namco(game_title)
   # 変数初期化
-  sleep_time = 1
+  sleep_time = 10
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|

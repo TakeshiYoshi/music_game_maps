@@ -2,7 +2,7 @@ require './scraping'
 
 def scraping_sega(game_title)
   # 変数初期化
-  sleep_time = 1
+  sleep_time = 10
   game_code = {
     CHUNITHM: 58,
     maimai: 96,
@@ -47,12 +47,6 @@ def scraping_sega(game_title)
                 game: game_title,
                 detail_page_url: detail_page_url }
       shops_all << shop
-    end
-
-    # フォーマット整理
-    shops_all.map do |shop|
-      format_shop_name shop[:name]
-      format_address shop[:address]
     end
 
     shops_all.each do |shop|
