@@ -4,7 +4,6 @@ require 'json'
 def scraping_taito(game_title)
   # 変数初期化
   sleep_time = 10
-
   # 以下スクレイピング処理
   1.upto(47) do |n|
     # 変数初期化

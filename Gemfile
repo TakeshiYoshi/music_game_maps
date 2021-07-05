@@ -28,6 +28,7 @@ gem 'font-awesome-rails'
 gem 'rails-i18n'
 gem 'slim-rails'
 gem 'html2slim'
+gem 'kaminari'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'

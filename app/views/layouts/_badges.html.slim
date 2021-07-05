@@ -1,0 +1,3 @@
+.badges.d-flex.align-items-center.flex-wrap
+  - shop.game_machines.each do |game_machine| 
+    = render 'layouts/badge', game: game_machine.game, count: game_machine.count
