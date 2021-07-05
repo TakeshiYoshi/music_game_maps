@@ -1,6 +1,7 @@
 require './scraping_konami'
 require './scraping_sega'
 require './scraping_namco'
+require './scraping_taito'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -34,6 +35,10 @@ namespace :scraping do
     scraping_namco '太鼓の達人'
   end
 
+  task taito: :environment do
+    scraping_taito 'GROOVE COASTER'
+  end
+
   task all: :environment do
     scraping_konami 'SDVX_VM'
     scraping_konami 'SDVX'
@@ -55,5 +60,6 @@ namespace :scraping do
     scraping_sega 'WACCA'
     scraping_sega 'オンゲキ'
     scraping_namco '太鼓の達人'
+    scraping_taito 'GROOVE COASTER'
   end
 end

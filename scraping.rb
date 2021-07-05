@@ -67,9 +67,9 @@ def register_shop_data(shops)
   end
 end
 
-def register_relationship_shop_between_game(shop_name, game)
+def register_relationship_shop_between_game(shop_name, game, count = 0)
   puts "\n*** 店舗に設置筐体情報を追加します ***"
-  game_machine = GameMachine.new(shop_id: Shop.find_by(name: shop_name).id, game_id: game.id)
+  game_machine = GameMachine.new(shop_id: Shop.find_by(name: shop_name).id, game_id: game.id, count: count)
   if game_machine.save
     puts "#{shop_name}に#{game.title}の設置情報を追加しました。game_machine_id: #{game_machine.id}"
   else
@@ -83,7 +83,7 @@ def get_operation_time(shop)
   page = URI.parse(url).open.read
   document = Nokogiri::HTML(page)
   # サーバー負荷軽減のため待機
-  sleep 1
+  sleep 10
 
   return if document.at_css("li:contains('営業時間')").blank?
 
@@ -99,7 +99,7 @@ def get_lat_and_lon(shop)
   page = URI.parse(url).open.read
   document = Nokogiri::HTML(page)
   # サーバー負荷軽減のため待機
-  sleep 1
+  sleep 10
 
   return if document.at_css('button#routesearch_btn').blank?
 
@@ -217,6 +217,7 @@ def format_address(address)
   address = address.gsub(/([〇一二三四五六七八九十百千]*)(丁目|番地|号)/) { Regexp.last_match(1).tr('〇一二三四五六七八九', '0123456789') + Regexp.last_match(2) }
   address = address.gsub(/([十百千])(丁目|番地|号)/) { Regexp.last_match(1).gsub('十', '10').gsub('百', '100').gsub('千', '1000') + Regexp.last_match(2) }
   address = address.gsub('丁目', '-').gsub('番地', '-').gsub('号', '-')
+  address = address.gsub(/([0123456789]*)(条)/) { conversion_from_num_to_kanji(Regexp.last_match(1).to_i) + Regexp.last_match(2) }
   address = address.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z')
   address = address.gsub(/(\d+)十(\d+)/) { Regexp.last_match(1) + Regexp.last_match(2) }
   address = address.gsub(/(\d+)百(\d+)/) { Regexp.last_match(1) + Regexp.last_match(2) }
