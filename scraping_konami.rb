@@ -40,8 +40,8 @@ def scraping_konami(game_key)
       end
 
       document.css('div.cl_shop_bloc').each do |node|
-        shop = {  name: node['data-name'],
-                  address: node['data-address'],
+        shop = {  name: format_shop_name(node['data-name']),
+                  address: format_address(node['data-address']),
                   prefecture_id: prefecture.id,
                   operation_time: node['data-operationtime'],
                   lat: node['data-latitude'],
