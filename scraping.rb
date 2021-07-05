@@ -53,7 +53,7 @@ def register_shop_data(shops)
     end
 
     # GameMachineモデル作成(店舗とゲームを関連付けする)
-    register_relationship_shop_between_game(name, game)
+    register_relationship_shop_between_game(name, game, shop[:count])
 
     # ログ出力
     puts name
@@ -67,8 +67,9 @@ def register_shop_data(shops)
   end
 end
 
-def register_relationship_shop_between_game(shop_name, game, count = 0)
+def register_relationship_shop_between_game(shop_name, game, count)
   puts "\n*** 店舗に設置筐体情報を追加します ***"
+  count = 0 if count.nil?
   game_machine = GameMachine.new(shop_id: Shop.find_by(name: shop_name).id, game_id: game.id, count: count)
   if game_machine.save
     puts "#{shop_name}に#{game.title}の設置情報を追加しました。game_machine_id: #{game_machine.id}"
@@ -140,6 +141,7 @@ def check_duplication(shop)
   # 手段1: 店名の一致検索
   registered_shop = Shop.find_by(name: shop[:name])
   registered_shop = Shop.find_by(name: "#{shop[:name]}店") if registered_shop.nil?
+  registered_shop = Shop.find_by(name: shop[:name].chop) if registered_shop.nil?
   # 店名が被った際は店名の後ろに(県名)を追記する
   if registered_shop.present? && registered_shop.prefecture.id != shop[:prefecture_id]
     shop[:name] = "#{shop[:name]}(#{Prefecture.find(shop[:prefecture_id]).name})"
@@ -161,15 +163,16 @@ def check_duplication(shop)
   registered_shop = Shop.where('address LIKE ?', "%#{shop_address}%").first unless shop_address.nil?
   # 住所（〜号）が同じで住所（〜号）以下がある場合、店舗名の先頭3文字を比較し違っていれば別店舗として登録する
   # ショッピングモール内で複数ゲーセンがあると同じ住所で別店舗が存在するため
-  return if different_shop_in_same_shopping_mole?(shop, registered_shop)
+  return nil if different_shop_in_same_shopping_mole?(shop, registered_shop)
   return registered_shop if output_log(shop, registered_shop, shop_address, '3.住所(〜号)の一致検索')
 
   # 手段4: 緯度経度の一致検索
-  # 東京の場合はゲームセンター同士の位置が近いためこの手段は用いない
+  # 都会の場合はゲームセンター同士の位置が近いためこの手段は用いない
   return if Prefecture.find(shop[:prefecture_id]).name == '東京都'
+  return if Prefecture.find(shop[:prefecture_id]).name == '大阪府'
   return if shop[:lat].nil? || shop[:lon].nil?
 
-  reg = /\d{1,3}\.\d{4}/
+  reg = /\d{1,3}\.\d{3}/
   lat = shop[:lat][reg]
   lon = shop[:lon][reg]
   registered_shop = Shop.where('lat LIKE ? AND lon LIKE ?', "#{lat}%", "#{lon}%").first
@@ -183,7 +186,7 @@ end
 
 def different_shop_in_same_shopping_mole?(shop, registered_shop)
   reg_shopping_mole = /^\D*[\d|\-|条]*(.*)/
-  registered_shop && shop[:address][reg_shopping_mole, 1].present? && shop[:name][0, 3] != registered_shop.name[0, 3]
+  registered_shop && shop[:address][reg_shopping_mole, 1].present? && shop[:name][0, 3] != registered_shop.name[0, 3] && (shop[:address][reg_shopping_mole, 1].include?('イオン') || shop[:address][reg_shopping_mole, 1].include?('けやき') || shop[:address][reg_shopping_mole, 1].include?('アリオ') || shop[:address][reg_shopping_mole, 1].include?('パルナ') || shop[:address][reg_shopping_mole, 1].include?('ららぽーと'))
 end
 
 def output_log(shop, registered_shop, search_word, log_head)
@@ -207,6 +210,12 @@ def format_shop_name(shop_name)
   shop_name = shop_name.gsub(' ', '')
   shop_name = shop_name.gsub('　', '')
   shop_name = shop_name.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z')
+  # 例外処理
+  shop_name = shop_name.gsub('T／S', 'タイトーステーション')
+  shop_name = shop_name.gsub('T/S', 'タイトーステーション')
+  shop_name = shop_name.gsub('タイトー旭サンモール店', 'タイトーステーション旭サンモール店')
+  shop_name = shop_name.gsub('DAIKEIEN', '大慶園')
+  shop_name = shop_name.gsub('サードプラネットB京都二条店', 'THE3RDプラネットBiVi京都二条店')
 end
 
 def format_address(address)

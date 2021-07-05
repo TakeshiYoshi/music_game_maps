@@ -1,0 +1,12 @@
+.col-12.glass.shop-card.d-flex.align-content-start
+  = image_tag 'appearance_img.png', class: 'appearance_img'
+  .shop-description.d-flex.flex-column.justify-content-start
+    .shop-head.d-flex.align-items-start
+      .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
+        p.m-0
+      .shop-name-wrapper.d-flex.flex-wrap
+        h2.glass-text.shop-name
+          = shop.name
+          span.label-opening-hours.rounded-pill.align-items-center
+            | 営業中
+    = render 'layouts/badges', shop: shop

@@ -1,3 +1,5 @@
 class ShopsController < ApplicationController
-  def index; end
+  def index
+    @shops = Shop.all.includes(:games).page(params[:page])
+  end
 end
