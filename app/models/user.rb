@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :user_reviews
-  has_many :playing_games
+  has_many :user_reviews, dependent: :destroy
+  has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
 
   authenticates_with_sorcery!
