@@ -7,6 +7,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
 
 # Database
 gem 'mysql2', '>= 0.4.4'
+gem 'nokogiri'
 
 # Seeds
 gem 'seed-fu'
@@ -34,6 +35,9 @@ gem 'turbolinks', '~> 5'
 
 # Authentication
 gem 'sorcery'
+
+# Time
+gem 'chronic'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
