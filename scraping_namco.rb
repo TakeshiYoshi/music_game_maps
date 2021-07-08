@@ -1,12 +1,9 @@
 require './scraping'
 
 def scraping_namco(game_title)
-  # 変数初期化
-  sleep_time = 10
-
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    puts "#{prefecture.name}で#{game_title}が設置されている店舗のスクレイピングを開始します。"
+    start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
     shops = []
@@ -16,56 +13,54 @@ def scraping_namco(game_title)
     page = URI.parse(url).open.read
     document = Nokogiri::HTML(page)
     # サーバー負荷軽減のため待機
-    sleep sleep_time
+    sleep $sleep_time
 
     # 店舗数0の時の処理
-    if document.css('dl').blank?
-      puts '[scraping] 店舗数: 0'
-      next
-    end
+    next if document.css('dl').blank?
 
     # 店舗情報取得
     doc_shop_list = document.at_css('dl')
-    shop_name_list = doc_shop_list.css('dt').map { |node| format_shop_name node.text }
+    shop_name_list = doc_shop_list.css('dt')
     shop_detail_link_list = doc_shop_list.css('a').map { |node| "https://taiko.namco-ch.net/taiko/location/#{node[:href][/detail(.*)/]}" }
-    shop_address_list = doc_shop_list.css('dd').map { |node| format_address node.text }
+    shop_address_list = doc_shop_list.css('dd').map { |node| node.text.gsub(' ', '').gsub('　', ' ') }
 
     shop_name_list.size.times do |n|
-      shop = {  name: shop_name_list[n],
-                address: shop_address_list[n],
-                prefecture_id: prefecture.id,
-                operation_time: nil,
-                lat: nil,
-                lon: nil,
-                game: game_title,
-                detail_page_url: shop_detail_link_list[n] }
-      shops_all << shop
-    end
+      name = shop_name_list[n].text
+      address = shop_address_list[n]
 
-    shops_all.each do |shop|
-      # 店舗詳細ページから営業時間を取得
-      get_lat_and_lon(shop)
-      # 既にデータベース登録されているか調べ登録されていれば戻り値で取得する
-      registered_shop = check_duplication(shop)
+      # 例外処理
+      name = 'ギャラクシーゲート 星が浦' if name == 'GALAXY GATE 星が浦'
+      name = 'キッズパーク イオン岩見沢店' if name == 'キッズパーク イオン岩見沢'
+      name = 'MS仙台南店' if name == 'MS仙台南'
+      name = '万代 多賀城店' if name == 'MS多賀城'
+      name = 'Be-come 成沢店' if name == 'ビーカム成沢'
+      name = 'フタバ図書 ソフトピア八本松店' if name == 'GIGA八本松'
+      name = 'スポガ久留米 ボウリング' if name == 'バナナパーティー久留米'
+      name = 'G-Stage 浜町店' if name == 'G-stage浜の町'
+      next if name == 'HapipiLand阿見' # 閉店
 
-      if registered_shop
-        # 既存データの品質が低い場合更新を行う
-        update_registered_shop(shop, registered_shop)
-        # GameMachineモデル作成(店舗とゲームを関連付けする)
-        register_relationship_shop_between_game(registered_shop.name, Game.find_by(title: shop[:game]))
-      else
-        # データベース登録用にフォーマットを整える
-        shop[:address] = shop[:address][/...??[都道府県](.*)/, 1]
-        # データベースに登録するデータを配列に格納
-        shops << shop
-      end
+      # デバッグ用
+      # next if shop_name_list[n].text != '店舗名'
+
+      shop = { name: name,
+               address: address,
+               prefecture: prefecture.name,
+               lat: nil,
+               lon: nil,
+               game: game_title,
+               detail_page_url: shop_detail_link_list[n],
+               place_id: nil }
+      # 緯度経度情報を取得
+      shop = get_lat_and_lon shop
+      # Places APIを用いて店舗データ取得
+      shop = get_places_data shop
+      puts shop
       output_line
+      shops_all << shop if shop.present?
     end
 
-    if shops.present?
-      register_shop_data shops
-    end
-
-    puts shops
+    # 以下DB登録処理
+    shops = get_need_to_register_shops(shops_all)
+    register_shop_data shops if shops.present?
   end
 end
