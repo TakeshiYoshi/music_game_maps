@@ -12,10 +12,11 @@ $bg-end: #6E74BC;
 $site-title: #378892;
 $field-color: #326FFA;
 $label-open: #E26A9D;
+$label-close: #406b8f;
 $logo-height-size: 50px;
 $glass-padding: 10px;
 $glass-border-size: 1px;
-$theme: normal;
+$theme: dark;
 
 @if $theme == normal {
   $bg-start: #6ABBC4;
@@ -33,6 +34,7 @@ $theme: normal;
   $site-title: #BBF;
   $field-color: #3d5796;
   $label-open: #913f61;
+  $label-close: #375975;
 }
 @if $theme == yumekawa {
   $bg-start: #c2afe6;
@@ -40,6 +42,7 @@ $theme: normal;
   $site-title: #6fb8d4;
   $field-color: #30a2b6;
   $label-open: #ee83af;
+  $label-close: #427299;
 }
 @if $theme == shinkai {
   $bg-start: #0d355a;
@@ -52,6 +55,7 @@ $theme: normal;
   $site-title: #FFFFFF;
   $field-color: #292929;
   $label-open: #3b0b14;
+  $label-close: #0b253b;
 }
 
 html {
@@ -292,16 +296,24 @@ header {
     margin-right: 20px;
     margin-top: 4px;
   }
-  .label-opening-hours {
+  .label-hours {
     display: inline-block;
     font-size: 1.2rem;
     text-shadow: 0 0 0 white;
     padding: 2px 20px;
     margin-left: 5px;
-    box-shadow: 0 0 3px 0 $label-open;
-    background: rgba($label-open, 0.5);
     backdrop-filter: brightness(105%);
     color: white;
+  }
+
+  .label-open {
+    box-shadow: 0 0 3px 0 $label-open;
+    background: rgba($label-open, 0.5);
+  }
+
+  .label-close {
+    box-shadow: 0 0 3px 0 $label-close;
+    background: rgba($label-close, 0.5);
   }
 
   .badge {
@@ -324,6 +336,16 @@ header {
           font-size: 1.1rem;
           color: white;
         }
+      }
+    }
+    .badge-content-no-data {
+      padding: 3px 7px;
+      background-color: rgba(black, 0.2);
+      .game-title-no-data { 
+        height: 24px;
+        font-size: 1.1rem;
+        color: white;
+        margin: 0 7px;
       }
     }
   }
@@ -385,6 +407,9 @@ footer {
   }
   span:last-child, span:last-child > a {
     border-radius: 0 10px 10px 0;
+  }
+  span.glass-paginate {
+    background: rgba(white, 0.15);
   }
 }
 
@@ -503,7 +528,7 @@ footer {
       margin-right: 10px;
       margin-top: 0;
     }
-    .label-opening-hours {
+    .label-hours {
       font-size: 1.0rem;
       padding: 3px 10px;
     }
@@ -521,6 +546,13 @@ footer {
           .game-count {
             font-size: 0.8rem;
           }
+        }
+      }
+      .badge-content-no-data {
+        padding: 2px 5px;
+        .game-title-no-data { 
+          height: 22px;
+          font-size: 0.8rem;
         }
       }
     }

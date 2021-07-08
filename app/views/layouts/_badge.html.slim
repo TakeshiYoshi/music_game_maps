@@ -1,7 +1,8 @@
 .badge.p-0
-  .badge-content.d-flex.align-items-center.rounded-pill
-    .game-title
+  .d-flex.align-items-center.rounded-pill class="badge-content#{'-no-data' if count.zero?}"
+    div class="game-title#{'-no-data d-flex align-items-center justify-content-center' if count.zero?}"
       = game.title
-    .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
-      .game-count
-        = count == 0 ? '?' : count
+    - if count != 0
+      .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
+        .game-count
+          = count == 0 ? '?' : count

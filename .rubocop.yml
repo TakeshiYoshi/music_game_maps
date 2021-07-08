@@ -12,6 +12,7 @@ AllCops:
     - "node_modules/**/*"
     - "Gemfile"
     - "scraping**.rb"
+    - "app/decorators/*"
   DisplayCopNames: true
 
 Rails:

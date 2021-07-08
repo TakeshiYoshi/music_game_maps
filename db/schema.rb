@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_091142) do
+ActiveRecord::Schema.define(version: 2021_07_07_184235) do
 
   create_table "about_games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_review_id", null: false
@@ -68,15 +68,18 @@ ActiveRecord::Schema.define(version: 2021_07_02_091142) do
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "twitter_id"
-    t.datetime "opening_time"
-    t.datetime "closing_time"
     t.text "address"
     t.bigint "prefecture_id", null: false
     t.bigint "city_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "lat"
-    t.string "lon"
+    t.string "lng"
+    t.text "opening_hours"
+    t.string "phone_number"
+    t.text "website"
+    t.string "photo_reference"
+    t.string "place_id"
     t.index ["city_id"], name: "index_shops_on_city_id"
     t.index ["name"], name: "index_shops_on_name", unique: true
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"

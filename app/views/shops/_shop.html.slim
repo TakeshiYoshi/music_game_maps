@@ -7,6 +7,6 @@
       .shop-name-wrapper.d-flex.flex-wrap
         h2.glass-text.shop-name
           = shop.name
-          span.label-opening-hours.rounded-pill.align-items-center
-            | 営業中
+          span.label-hours.rounded-pill.align-items-center class="label-#{shop.opening_time?}"
+            = t "defaults.#{shop.opening_time?}"
     = render 'layouts/badges', shop: shop
