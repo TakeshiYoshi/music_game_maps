@@ -1,8 +1,6 @@
 require './scraping'
 
 def scraping_sega(game_title)
-  # 変数初期化
-  sleep_time = 10
   game_code = {
     CHUNITHM: 58,
     maimai: 96,
@@ -12,7 +10,7 @@ def scraping_sega(game_title)
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    puts "#{prefecture.name}で#{game_title}が設置されている店舗のスクレイピングを開始します。"
+    start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
     shops = []
@@ -22,13 +20,10 @@ def scraping_sega(game_title)
     page = URI.parse(url).open.read
     document = Nokogiri::HTML(page)
     # サーバー負荷軽減のため待機
-    sleep sleep_time
+    sleep $sleep_time
 
     # 店舗数0の時の処理
-    if document.css('li').blank?
-      puts '[scraping] 店舗数: 0'
-      next
-    end
+    next if document.css('li').blank?
 
     document.css('li').each do |node|
       loc = node.at_css('button.store_bt_google_map')[:onclick]
@@ -36,41 +31,44 @@ def scraping_sega(game_title)
       lat = loc.scan(reg).first
       lon = loc.scan(reg).last
       shop_details_link = node.at_css('button.bt_details')[:onclick][/shop.*sid=\d*/]
-      detail_page_url = "https://location.am-all.net/alm/#{shop_details_link}"
+      name = node.css('span.store_name').text.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').gsub('．', '.').gsub('　', ' ')
 
-      shop = {  name: format_shop_name(node.css('span.store_name').text),
+      # 例外処理
+      name = 'ゲームパドックプラスワン' if name == 'GAME PADDOCK＋1'
+      name = '五島シティモール' if name == 'ファンタジーランド五島'
+      name = 'SOYUGameField熊谷' if name == 'SOYUGameFeild熊谷'
+      name = 'ソユーゲームフィールド御所野店' if name == 'SOYUGameField御所野店'
+      name = 'ラウンドワンスタジアム 福島店' if name == 'ラウンドワン福島店'
+      name = 'レイホウ・スポーツセンター' if name == '嶺宝スポーツセンター'
+      name = '（株）インターワールド' if name == 'インターワールド伊勢崎店'
+      name = 'ゲームイン・ヒューストン' if name == 'HOUSTON西川口店'
+      name = 'ランブルプラザ' if name == '池袋ゲーセンミカドINランブルプラザ'
+      name = 'ゲームフィールド イオンタウン弘前樋の口店' if name == 'ゲームフィールド弘前樋の口店'
+      name = '万代 多賀城店' if name == 'MS多賀城店'
+      place_id = 'ChIJSdd9rbHZGGARxCd25n3x7Ic' if name == 'キャッツアイ狭山店'
+      next if name == '宮西スタジアム２' # 閉店してる？
+
+      puts name
+      # デバッグ用
+      # next if node.css('span.store_name').text != '店舗名'
+
+      shop = {  name: name,
                 address: format_address(node.css('span.store_address').text),
-                prefecture_id: prefecture_id,
-                operation_time: nil,
+                prefecture: prefecture.name,
                 lat: lat,
                 lon: lon,
                 game: game_title,
-                detail_page_url: detail_page_url }
-      shops_all << shop
-    end
+                place_id: place_id }
 
-    shops_all.each do |shop|
-      # 既にデータベース登録されているか調べ登録されていれば戻り値で取得する
-      registered_shop = check_duplication(shop)
-
-      if registered_shop
-        # 既存データの品質が低い場合更新を行う
-        update_registered_shop(shop, registered_shop)
-        # GameMachineモデル作成(店舗とゲームを関連付けする)
-        register_relationship_shop_between_game(registered_shop.name, Game.find_by(title: shop[:game]))
-      else
-        # 店舗詳細ページから営業時間を取得
-        get_operation_time(shop)
-        # データベース登録用にフォーマットを整える
-        shop[:address] = shop[:address][/...??[都道府県](.*)/, 1]
-        # データベースに登録するデータを配列に格納
-        shops << shop
-      end
+      # Places APIを用いて店舗データ取得
+      shop = get_places_data shop
+      puts shop
       output_line
+      shops_all << shop if shop.present?
     end
 
-    if shops.present?
-      register_shop_data shops
-    end
+    # 以下DB登録処理
+    shops = get_need_to_register_shops(shops_all)
+    register_shop_data shops if shops.present?
   end
 end

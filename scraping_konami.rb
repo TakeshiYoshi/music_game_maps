@@ -2,7 +2,6 @@ require './scraping'
 
 def scraping_konami(game_key)
   # 変数初期化
-  sleep_time = 10
   shops = []
   game_title = {
     SDVX_VM: 'SOUND VOLTEX -Valkyrie model-',
@@ -24,31 +23,29 @@ def scraping_konami(game_key)
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    puts "#{prefecture.name}で#{game_title[game_key.to_sym]}が設置されている店舗のスクレイピングを開始します。"
+    start_message(prefecture.name, game_title[game_key.to_sym])
     prefecture_id = prefecture.id.to_s.rjust(2, '0')
     1.upto(999) do |i|
       url = "https://p.eagate.573.jp/game/facility/search/p/list.html?gkey=#{game_key}&paselif=false&pref=JP-#{prefecture_id}&finder=area&page=#{i}"
       page = URI.parse(url).open.read
       document = Nokogiri::HTML(page)
-      # サーバー負荷軽減のため5秒待機
-      sleep sleep_time
+      # サーバー負荷軽減のため待機
+      sleep $sleep_time
 
       # 店舗数0の時の処理
-      if document.css('div.cl_shop_bloc').blank?
-        puts '[scraping] 店舗数: 0'
-        break
-      end
+      break if document.css('div.cl_shop_bloc').blank?
 
       document.css('div.cl_shop_bloc').each do |node|
-        shop = {  name: format_shop_name(node['data-name']),
-                  address: format_address(node['data-address']),
+        shop = {  name: node['data-name'],
                   prefecture_id: prefecture.id,
-                  operation_time: node['data-operationtime'],
                   lat: node['data-latitude'],
                   lon: node['data-longitude'],
                   game: game_title[game_key.to_sym] }
+        # Places APIを用いてデータを整理する
+        shop = get_places_data shop
         shops << shop
       end
+
       puts "[scraping] #{shops.size}件目まで取得中..."
 
       # ループ停止判定チェック
@@ -59,5 +56,6 @@ def scraping_konami(game_key)
     end
   end
 
+  puts shops
   register_shop_data shops
 end
