@@ -7,7 +7,7 @@ ja:
       city: '市区町村'
       shop: '店舗'
       user_review: 'ユーザー投稿'
-      game_machine: '設置ゲーム'
+      game_machine: '設置筐体'
       playing_game: '遊んでいるゲーム'
       about_game: '投稿分類'
     attributes:
@@ -30,8 +30,11 @@ ja:
       shop:
         name: '店舗名'
         twitter_id: 'Twitter ID'
-        opening_time: '開店時間'
-        closing_time: '閉店時間'
+        opening_hours: '営業時間'
+        phone_number: '電話番号'
+        website: '公式サイト'
+        lat: '緯度'
+        lng: '経度'
         address: '住所'
       user_review:
         body: '本文'

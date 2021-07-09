@@ -1,0 +1,65 @@
+= render 'description', shop: @shop
+.main-content.d-flex
+  .col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
+    label.shop-label.rounded-pill ユーザー投稿された情報
+    .user-review-content.d-flex.align-items-center
+      input.only-playing-games#only-playing-games type="checkbox"
+      label.glass-text for="only-playing-games" 自分がプレーするゲームのみ表示する
+    div
+      label.shop-label.rounded-pill 画像付きの情報
+      .user-review-content.user-review-images.d-flex
+        .user-review-image
+        .user-review-image
+        .user-review-image
+        .user-review-image
+    div
+      label.shop-label.rounded-pill 情報一覧
+      .user-review-content.user-reviews
+        .review
+          .user-review-head.d-flex.align-items-center
+            = image_tag 'icon.jpeg', class: 'rounded-circle icon'
+            span.user-name.glass-text
+              | yskw
+            span.review-date.glass-text
+              | 2021-07-19
+          .user-review-about
+            .badge.p-0
+              .badge-content-no-data.d-flex.align-items-center.rounded-pill
+                .game-title-no-data.d-flex.align-items-center.justify-content-center
+                  | REFLEC BEAT
+          .user-review-body.glass-text
+            | REFLEC BEATはアンプなし。音量は普通。筐体はおそらくcolette筐体。PASELIが使用出来ません。
+
+        .review
+          .user-review-head.d-flex.align-items-center
+            = image_tag 'icon.jpeg', class: 'rounded-circle icon'
+            span.user-name.glass-text
+              | ぺんぺん
+            span.review-date.glass-text
+              | 2021-04-11
+          .user-review-about
+            .badge.p-0
+              .badge-content-no-data.d-flex.align-items-center.rounded-pill
+                .game-title-no-data.d-flex.align-items-center.justify-content-center
+                  | CHUNITHM
+          .user-review-body.glass-text
+            | チュウニズム3台あります！荷物入れがあります。向かいにmaimaiがありますがイヤホンすれば気にならないかなー
+
+        .review
+          .user-review-head.d-flex.align-items-center
+            = image_tag 'icon.jpeg', class: 'rounded-circle icon'
+            span.user-name.glass-text
+              | 太鼓ちゃん
+            span.review-date.glass-text
+              | 2021-01-27
+          .user-review-about
+            .badge.p-0
+              .badge-content-no-data.d-flex.align-items-center.rounded-pill
+                .game-title-no-data.d-flex.align-items-center.justify-content-center
+                  | シンクロニカ
+          .user-review-body.glass-text
+            | 太鼓の隣にシンクロニカが！namco以外ではあまり見ない筐体なのでとてもレアだと思います！オフラインで稼働しているようです。
+            .user-review-image.body-image
+
+  - if @shop.twitter_id
+    = render 'twitter', shop: @shop
