@@ -1,0 +1,4 @@
+= search_form_for q, url: root_path, class: 'd-flex search-form' do |f|
+  .input-group.search-field
+    = f.search_field :name_or_address_cont, class: 'form-control', placeholder: t('defaults.form.header_search_placeholder')
+    = f.button fa_icon('search'), class: 'btn btn-glass', type: :submit
