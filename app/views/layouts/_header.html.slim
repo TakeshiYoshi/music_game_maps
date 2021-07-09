@@ -7,15 +7,11 @@ header.glass.blur.d-flex.align-items-center
       h1.site-title = t('defaults.app_name')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
     button.btn.btn-glass.rounded-pill.filter-button = t 'defaults.filter'
-    form.d-flex.search-form
-      .input-group.search-field
-        input.form-control type="text" placeholder="#{t('defaults.form.header_search_placeholder')}"
-        button.btn.btn-glass
-          = fa_icon 'search'
+    = render 'layouts/search_form', q: @q
     .search-btn
       label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
         = fa_icon 'search'
     label for="nav-menu-check"
       = image_tag 'icon.jpeg', class: 'rounded-circle icon'
-= render 'layouts/search_menu'
+= render 'layouts/search_menu', q: @q
 = render 'layouts/user_menu'

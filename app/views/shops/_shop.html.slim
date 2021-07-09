@@ -10,4 +10,4 @@
             = shop.name
             span.label-hours.rounded-pill.align-items-center class="label-#{shop.opening_time?}"
               = t "defaults.#{shop.opening_time?}"
-      = render 'layouts/badges', shop: shop
+      = render 'shared/badges', shop: shop

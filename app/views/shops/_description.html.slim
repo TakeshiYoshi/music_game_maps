@@ -6,7 +6,7 @@ input.d-none#table-check type="checkbox"
 .col-12.glass.shop-description-container
   .game-machines
     label.shop-label.rounded-pill = GameMachine.model_name.human
-  = render 'layouts/badges', shop: shop
+  = render 'shared/badges', shop: shop
   .address.d-flex.align-items-center.flex-wrap
     label.shop-label.rounded-pill = Shop.human_attribute_name(:address)
     p.glass-text
