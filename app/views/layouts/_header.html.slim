@@ -6,7 +6,7 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'logo.png', class: 'logo'
       h1.site-title = t('defaults.app_name')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
-    button.btn.btn-glass.rounded-pill.filter-button = t 'defaults.filter'
+    button.btn.btn-glass.rounded-pill.filter-button data-bs-toggle="modal" data-bs-target="#filterModal" = t 'defaults.filter'
     = render 'layouts/search_form', q: @q
     .search-btn
       label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
@@ -15,3 +15,22 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'icon.jpeg', class: 'rounded-circle icon'
 = render 'layouts/search_menu', q: @q
 = render 'layouts/user_menu'
+.modal.fade#filterModal tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content.modal-glass.blur
+      .modal-header
+        h.modal-title 検索フィルター
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        = form_with url: filter_path, method: :post do |f|
+          .form-group
+            = f.label '検索エリア'
+            = f.collection_select :prefecture, Prefecture.all, :id, :name
+            = render 'layouts/cities', f: f
+          #app
+          .modal-footer
+            button.btn.btn-cancel.rounded-pill type="button" data-bs-dismiss="modal" クリア
+            = f.submit 'フィルター設定', class: 'btn btn-glass rounded-pill'
+        #app
+          p v-text="name"
+= javascript_pack_tag 'hello_vue'
