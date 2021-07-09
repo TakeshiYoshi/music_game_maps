@@ -1,0 +1,37 @@
+input.d-none#table-check type="checkbox"
+.col-12.shop-appearance-img-container.d-flex.align-content-start
+  .img-cover.d-flex.justify-content-end.align-items-end
+    p = shop.name
+  = image_tag 'appearance_img.png'
+.col-12.glass.shop-description-container
+  .game-machines
+    label.shop-label.rounded-pill = GameMachine.model_name.human
+  = render 'layouts/badges', shop: shop
+  .address.d-flex.align-items-center.flex-wrap
+    label.shop-label.rounded-pill = Shop.human_attribute_name(:address)
+    p.glass-text
+      = shop.address
+  - if shop.phone_number
+    .phone_number.d-flex.align-items-center.flex-wrap
+      label.shop-label.rounded-pill = Shop.human_attribute_name(:phone_number)
+      p.glass-text
+        = link_to shop.phone_number, 'tel:'
+  - if shop.website
+    .website.d-flex.align-items-center.flex-wrap
+      label.shop-label.rounded-pill = Shop.human_attribute_name(:website)
+      p.glass-text
+        = link_to shop.website.truncate(35), shop.website, target: :_blank, rel: 'nopener noreferrer'
+  - if shop.opening_hours
+    .opening_hours.d-flex.align-items-center.flex-wrap
+      label.shop-label.rounded-pill = Shop.human_attribute_name(:opening_hours)
+      label for="table-check"
+        span.today-opening-hours
+          = shop.opening_hours_text[Time.zone.now.wday].last
+        span.glass-text
+          = fa_icon 'caret-down', class: 'table-toggle'
+    table.opening_hours_table.text-center
+      tbody 
+        - shop.opening_hours_text.each do |text|
+          tr 
+            th = shop.day_of_week_convert_to_text_from_num text.first
+            th = text.last

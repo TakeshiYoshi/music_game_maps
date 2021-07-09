@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "font-awesome";
+@import "shop-detail";
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -101,6 +102,9 @@ a {
   color: white;
   text-shadow: 0 0 6px #0D3A40;
   margin: 0;
+  a {
+    color: white;
+  }
 }
 
 header {
@@ -119,19 +123,16 @@ header {
     color: $site-title;
     letter-spacing: 0.4rem;
     margin: 0;
-    transition: 0.5s;
   }
   .icon {
     width: 50px;
     border: 1px solid $gray-200;
-    transition: all 0.3s;
   }
   .filter-button {
     height: 38px;
     margin-right: 15px;
     padding: 0 20px;
     box-shadow: 0 0 6px 0 $field-color;
-    transition: all 0.3s;
   }
   .search-form {
     height: 38px;
@@ -244,6 +245,9 @@ header {
     .dropdown-text {
       color: white;
       text-shadow: 0 0 6px $black;
+      li {
+        white-space: nowrap;
+      }
     }
   }
 }
@@ -316,41 +320,42 @@ header {
     background: rgba($label-close, 0.5);
   }
 
-  .badge {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    .badge-content {
-      padding: 3px 3px 3px 15px;
-      background-color: rgba(black, 0.2);
-      .game-title { 
-        font-size: 1.1rem;
-        color: white;
-        margin-right: 7px;
-      }
-      .count-circle {
-        min-width: 24px;
-        height: 24px;
-        background-color: rgba(black, 0.3);
-        .game-count {
-          margin: 0 8px;
-          font-size: 1.1rem;
-          color: white;
-        }
-      }
+  &:hover {
+    background: rgba(white, 0.4);
+  }
+}
+
+.badge {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  .badge-content {
+    padding: 3px 3px 3px 15px;
+    background-color: rgba(black, 0.2);
+    .game-title { 
+      font-size: 1.1rem;
+      color: white;
+      margin-right: 7px;
     }
-    .badge-content-no-data {
-      padding: 3px 7px;
-      background-color: rgba(black, 0.2);
-      .game-title-no-data { 
-        height: 24px;
+    .count-circle {
+      min-width: 24px;
+      height: 24px;
+      background-color: rgba(black, 0.3);
+      .game-count {
+        margin: 0 8px;
         font-size: 1.1rem;
         color: white;
-        margin: 0 7px;
       }
     }
   }
-  &:hover {
-    background: rgba(white, 0.4);
+  .badge-content-no-data {
+    padding: 3px 7px;
+    background-color: rgba(black, 0.2);
+    .game-title-no-data { 
+      height: 24px;
+      font-size: 1.1rem;
+      color: white;
+      margin: 0 7px;
+    }
   }
 }
 
@@ -532,28 +537,29 @@ footer {
       font-size: 1.0rem;
       padding: 3px 10px;
     }
-    .badge {
-      margin-right: 5px;
-      margin-bottom: 5px;
-      .badge-content {
-        padding: 2px 2px 2px 13px;
-        .game-title { 
+  }
+
+  .badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    .badge-content {
+      padding: 2px 2px 2px 13px;
+      .game-title { 
+        font-size: 0.8rem;
+      }
+      .count-circle {
+        min-width: 22px;
+        height: 22px;
+        .game-count {
           font-size: 0.8rem;
-        }
-        .count-circle {
-          min-width: 22px;
-          height: 22px;
-          .game-count {
-            font-size: 0.8rem;
-          }
         }
       }
-      .badge-content-no-data {
-        padding: 2px 5px;
-        .game-title-no-data { 
-          height: 22px;
-          font-size: 0.8rem;
-        }
+    }
+    .badge-content-no-data {
+      padding: 2px 5px;
+      .game-title-no-data { 
+        height: 22px;
+        font-size: 0.8rem;
       }
     }
   }
