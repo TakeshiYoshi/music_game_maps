@@ -22,9 +22,7 @@ gem 'puma', '~> 4.1'
 gem 'active_decorator'
 
 # Assets
-gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
-gem 'bootstrap', '~> 5.0'
 gem 'font-awesome-rails'
 
 # UI/UX

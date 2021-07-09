@@ -1,10 +1,9 @@
-@import "bootstrap";
-@import "font-awesome";
-@import "shop-detail";
+@import '~bootstrap/scss/bootstrap';
+@import 'shop-detail';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
-  src: font-url('LEMONMILK-Bold');
+  src: url('../fonts/LEMONMILK-Bold.otf');
 }
 
 // 初期化
@@ -94,6 +93,10 @@ a {
   height: 40px;
 }
 
+.modal-dialog {
+  max-width: 700px;
+}
+
 .blur {
   backdrop-filter: blur(5px);
 }
@@ -113,7 +116,7 @@ header {
   position: sticky;
   transition: all 0.5s ease-in-out;
   top: 0;
-  z-index: 9999;
+  z-index: 10;
   .logo {
     height: $logo-height-size;
   }
@@ -166,7 +169,7 @@ header {
 .search-menu {
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 10;
   transition: all 0.5s ease-in-out;
   top: -200px;
   border-radius: 0 0 20px 20px;
@@ -397,6 +400,19 @@ footer {
   top: $logo-height-size + (($glass-padding + $glass-border-size) *2);
 }
 
+// フィルターモーダル
+.modal-glass {
+  width: 100%;
+  background: rgba(white, 0.8);
+  border: $glass-border-size solid rgba(white, 0.3);
+  padding: 5px 10px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  border-radius: 20px;
+}
+.modal-body button {
+  padding: 5px 20px;
+}
+
 // ページネーション
 .pagination {
   margin-top: 5px;
@@ -506,6 +522,10 @@ footer {
 
   .glass {
     padding: $glass-padding;
+  }
+
+  .modal-glass {
+    border-radius: 10px;
   }
 
   .user-menu {
