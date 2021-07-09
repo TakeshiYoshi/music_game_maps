@@ -6,7 +6,7 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'logo.png', class: 'logo'
       h1.site-title = t('defaults.app_name')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
-    button.btn.btn-glass.rounded-pill.filter-button FILTER
+    button.btn.btn-glass.rounded-pill.filter-button = t 'defaults.filter'
     form.d-flex.search-form
       .input-group.search-field
         input.form-control type="text" placeholder="#{t('defaults.form.header_search_placeholder')}"
