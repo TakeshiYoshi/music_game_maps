@@ -6,4 +6,7 @@ class Shop < ApplicationRecord
   has_many :games, through: :game_machines
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+
+  scope :in_prefecture, ->(prefecture_id) { where(prefecture_id: prefecture_id) }
+  scope :in_city, ->(city_id) { where(city_id: city_id) }
 end
