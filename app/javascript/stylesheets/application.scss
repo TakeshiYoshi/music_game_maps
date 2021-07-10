@@ -16,7 +16,7 @@ $label-close: #406b8f;
 $logo-height-size: 50px;
 $glass-padding: 10px;
 $glass-border-size: 1px;
-$theme: normal;
+$theme: shinkai;
 
 @if $theme == normal {
   $bg-start: #6ABBC4;
@@ -131,11 +131,17 @@ header {
     width: 50px;
     border: 1px solid $gray-200;
   }
-  .filter-button {
+  .filter-button, .filter-button-filtered {
     height: 38px;
     margin-right: 15px;
     padding: 0 20px;
     box-shadow: 0 0 6px 0 $field-color;
+  }
+  .filter-button-filtered {
+    box-shadow: 0 0 8px 0 darken($field-color, 30%) inset;
+  }
+  .filter-icon-button, .filter-icon-button-filtered {
+    display: none;
   }
   .search-form {
     height: 38px;
@@ -434,6 +440,41 @@ footer {
   }
 }
 
+// フィルター
+.modal-body, .modal-header {
+  padding: 10px;
+}
+
+.modal-footer {
+  border-top: $glass-border-size solid rgba(black, 0.3);
+  padding: 5px 0 0 0;
+  margin-top: 30px;
+}
+
+.select-container {
+  width: 35%;
+  height: 35px;
+  background: rgba(white, 0.8);
+  border: $glass-border-size solid rgba(black, 0.3);
+  padding: 5px 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  .filter-select {
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    opacity: 0.8;
+  }
+}
+
 // 以下iPad縦表示向け
 @include media-breakpoint-down(lg) {
   header .search-form > .search-field {
@@ -442,21 +483,24 @@ footer {
 }
 
 // 以下タブレット, スマホ向け
-
 @include media-breakpoint-down(md) {
   header {
-    .filter-button {
+    .filter-button, .filter-button-filtered {
+      display: none;
+    }
+
+    .filter-icon-button, .filter-icon-button-filtered {
+      display: block;
       width: 35px;
       height: 35px;
-      font-size: 0;
       padding: 0;
       margin-right: 8px;
-      &:before {
-        font-size: 0.9rem;
-        font-family: FontAwesome;
-        content: '\f0b0';
-      }
     }
+
+    .filter-icon-button-filtered {
+      box-shadow: 0 0 8px 0 darken($field-color, 30%) inset;
+    }
+
     .search-form {
       .search-field {
         width: 230px;
@@ -582,6 +626,10 @@ footer {
         font-size: 0.8rem;
       }
     }
+  }
+
+  .select-container {
+    width: 49%;
   }
 
   #nav-menu-check:checked ~ .user-menu-container > .user-menu {

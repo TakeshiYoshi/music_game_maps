@@ -26,12 +26,12 @@ input.d-none#table-check type="checkbox"
       label.shop-label.rounded-pill = Shop.human_attribute_name(:opening_hours)
       label for="table-check"
         span.today-opening-hours
-          = shop.opening_hours_text[Time.zone.now.wday].last
+          = shop.opening_hours_text.sort[Time.zone.now.wday].last
         span.glass-text
           = fa_icon 'caret-down', class: 'table-toggle'
     table.opening_hours_table.text-center
       tbody 
-        - shop.opening_hours_text.each do |text|
+        - shop.opening_hours_text.sort.each do |text|
           tr 
             th = shop.day_of_week_convert_to_text_from_num text.first
             th = text.last
