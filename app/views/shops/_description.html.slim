@@ -6,7 +6,7 @@ input.d-none#table-check type="checkbox"
 .col-12.glass.shop-description-container
   .game-machines
     label.shop-label.rounded-pill = GameMachine.model_name.human
-  = render 'layouts/badges', shop: shop
+  = render 'shared/badges', shop: shop
   .address.d-flex.align-items-center.flex-wrap
     label.shop-label.rounded-pill = Shop.human_attribute_name(:address)
     p.glass-text
@@ -26,12 +26,12 @@ input.d-none#table-check type="checkbox"
       label.shop-label.rounded-pill = Shop.human_attribute_name(:opening_hours)
       label for="table-check"
         span.today-opening-hours
-          = shop.opening_hours_text[Time.zone.now.wday].last
+          = shop.opening_hours_text.sort[Time.zone.now.wday].last
         span.glass-text
           = fa_icon 'caret-down', class: 'table-toggle'
     table.opening_hours_table.text-center
       tbody 
-        - shop.opening_hours_text.each do |text|
+        - shop.opening_hours_text.sort.each do |text|
           tr 
             th = shop.day_of_week_convert_to_text_from_num text.first
             th = text.last

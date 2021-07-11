@@ -61,8 +61,6 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
-    autoprefixer-rails (10.2.5.1)
-      execjs (> 0)
     bcrypt (3.1.16)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -73,10 +71,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
-    bootstrap (5.0.1)
-      autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 2.9.2, < 3)
-      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -99,7 +93,6 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
-    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -145,6 +138,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -177,7 +172,6 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.1)
       ast (~> 2.4.1)
-    popper_js (2.9.2)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -224,6 +218,10 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rainbow (3.0.0)
     rake (13.0.3)
+    ransack (2.4.2)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -264,16 +262,6 @@ GEM
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     seed-fu (2.3.9)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
@@ -341,7 +329,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.2)
-  bootstrap (~> 5.0)
   byebug
   capybara
   chronic
@@ -352,6 +339,7 @@ DEPENDENCIES
   html2slim
   jbuilder (~> 2.7)
   kaminari
+  launchy
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
   nokogiri
@@ -359,10 +347,10 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.7)
   rails-i18n
+  ransack
   rspec-rails
   rubocop (~> 1.17.0)
   rubocop-rails (~> 2.11)
-  sass-rails (>= 6)
   seed-fu
   slim-rails
   sorcery
