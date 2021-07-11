@@ -6,10 +6,8 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'logo.png', class: 'logo'
       h1.site-title = t('defaults.app_name')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
-    button.btn.btn-glass.rounded-pill data-bs-toggle="modal" data-bs-target="#filterModal" class="filter-button#{'-filtered' if filtered?}"
-      = t 'defaults.filter'
     button.btn.btn-glass.rounded-circle data-bs-toggle="modal" data-bs-target="#filterModal"  class="filter-icon-button#{'-filtered' if filtered?}"
-      = fa_icon 'filter'
+      = fa_icon 'sliders-h'
     = render 'layouts/search_form', q: @q
     .search-btn
       label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
@@ -18,30 +16,4 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'icon.jpeg', class: 'rounded-circle icon'
 = render 'layouts/search_menu', q: @q
 = render 'layouts/user_menu'
-.modal.fade#filterModal tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true"
-  .modal-dialog
-    .modal-content.modal-glass.blur
-      .modal-header
-        h.modal-title 検索フィルター
-        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
-      .modal-body
-        = form_with url: filter_path, method: :post, local: true do |f|
-          = f.label 'エリア指定'
-          #form-select
-          .modal-footer
-            = link_to 'クリア', filter_path, method: :delete, class: 'btn btn-cancel rounded-pill'
-            = f.submit 'フィルター設定', class: 'btn btn-glass rounded-pill'
-      .json-data
-        .d-none#pref data-pref="#{@prefectures.to_json}"
-        .d-none#city data-city="#{@cities.to_json}"
-        .d-none#filter data-filter="#{session.to_json}"
-javascript:
-  const pref = document.getElementById('pref');
-  const prefHash = JSON.parse(pref.getAttribute('data-pref'));
-  const city = document.getElementById('city');
-  const cityHash = JSON.parse(city.getAttribute('data-city'));
-  const filter = document.getElementById('filter');
-  const filterHash = JSON.parse(filter.getAttribute('data-filter'));
-
-= javascript_pack_tag 'form_select'
-= stylesheet_pack_tag 'form_select'
+= render 'layouts/filter_form'

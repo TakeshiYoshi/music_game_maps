@@ -1,0 +1,35 @@
+.modal.fade#filterModal tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content.modal-glass.blur
+      .modal-header
+        h.modal-title 検索フィルター
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        = form_with url: filter_path, method: :post, local: true do |f|
+          .form-group
+            = f.label '検索機種'
+            .game-labels
+              - Game.all.each do |game|
+                = f.check_box "games[#{game.id}]", id: "game_#{game.id}", class: 'game-check d-none', checked: "#{'checked' if game_filtered?(game.id)}"
+                label.game-label.rounded-pill for="game_#{game.id}"
+                  = game.title
+          .form-group
+            = f.label 'エリア指定'
+            #form-select
+          .modal-footer
+            = link_to 'クリア', filter_path, method: :delete, class: 'btn btn-cancel rounded-pill'
+            = f.submit 'フィルター設定', class: 'btn btn-glass rounded-pill'
+      .json-data
+        .d-none#pref data-pref="#{@prefectures.to_json}"
+        .d-none#city data-city="#{@cities.to_json}"
+        .d-none#filter data-filter="#{session.to_json}"
+javascript:
+  const pref = document.getElementById('pref');
+  const prefHash = JSON.parse(pref.getAttribute('data-pref'));
+  const city = document.getElementById('city');
+  const cityHash = JSON.parse(city.getAttribute('data-city'));
+  const filter = document.getElementById('filter');
+  const filterHash = JSON.parse(filter.getAttribute('data-filter'));
+
+= javascript_pack_tag 'form_select'
+= stylesheet_pack_tag 'form_select'

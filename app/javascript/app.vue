@@ -3,13 +3,11 @@
     <div class="d-flex align-items-center">
       <div class="select-container">
         <select class="filter-select" name="prefecture" id="prefecture" v-model="selectedPref" @change="getCities(selectedPref)">
-          <option value="">指定しない</option>
           <option v-for="prefecture in prefectures" :key="prefecture.name" :value="prefecture.id">{{prefecture.name}}</option>
         </select>
       </div>
       <div class="select-container">
         <select class="filter-select" name="city" id="city" v-model="selectedCity">
-          <option value="">指定しない</option>
           <option v-for="city in cities" :key="city.name" :value="city.id">{{city.name}}</option>
         </select>
       </div>
