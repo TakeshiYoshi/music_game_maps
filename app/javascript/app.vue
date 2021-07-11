@@ -12,6 +12,11 @@
         </select>
       </div>
     </div>
+    <div class="geo-checkbox">
+      <input type="checkbox" v-model="isGeoChecked" v-on:change="getGeolocation(isGeoChecked)">
+      <p>{{latitude}}</p>
+      <p>{{longitude}}</p>
+    </div>
   </div>
 </template>
 
@@ -30,7 +35,10 @@ export default {
       selectedPref: filterHash.prefecture_id,
       selectedCity: filterHash.city_id,
       prefectures: prefHash,
-      cities: cityHash
+      cities: cityHash,
+      isGeoChecked: false,
+      latitude: 0,
+      longitude: 0
     }
   },
   methods: {
@@ -42,6 +50,40 @@ export default {
         .then((response) => {
           this.cities = response.data
         })
+    },
+    getGeolocation: function (isGeoChecked) {
+      if(isGeoChecked) {
+        if (!navigator.geolocation) {
+          alert('現在地情報を取得できませんでした')
+          return
+        }
+        const options = {
+          enableHighAccuracy: false,
+          timeout: 5000,
+          maximumAge: 0
+        }
+        navigator.geolocation.getCurrentPosition(this.success, this.error, options)
+      }
+    },
+    success (position) {
+      this.latitude = position.coords.latitude
+      this.longitude = position.coords.longitude
+    },
+    error (error) {
+      switch (error.code) {
+        case 1: //PERMISSION_DENIED
+          alert('位置情報の利用が許可されていません')
+          break
+        case 2: //POSITION_UNAVAILABLE
+          alert('現在位置が取得できませんでした')
+          break
+        case 3: //TIMEOUT
+          alert('タイムアウトになりました')
+          break
+        default:
+          alert('現在位置が取得できませんでした')
+          break
+      }
     }
   }
 }
