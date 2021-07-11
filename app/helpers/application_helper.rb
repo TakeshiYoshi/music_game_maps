@@ -5,6 +5,17 @@ module ApplicationHelper
   end
 
   def filtered?
-    session[:prefecture_id].present? || session[:city_id].present?
+    session[:prefecture_id] || games_filtered?
+  end
+
+  def games_filtered?
+    Game.all.each do |game|
+      return true if game_filtered?(game.id)
+    end
+    false
+  end
+
+  def game_filtered?(game_id)
+    session.dig(:games, game_id.to_s) == '1'
   end
 end
