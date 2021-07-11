@@ -6,7 +6,7 @@ header.glass.blur.d-flex.align-items-center
       = image_tag 'logo.png', class: 'logo'
       h1.site-title = t('defaults.app_name')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
-    button.btn.btn-glass.rounded-circle data-bs-toggle="modal" data-bs-target="#filterModal"  class="filter-icon-button#{'-filtered' if filtered?}"
+    button#filter-button.btn.btn-glass.rounded-circle data-bs-toggle="modal" data-bs-target="#filterModal" class="filter-icon-button#{'-filtered' if filtered?}"
       = fa_icon 'sliders-h'
     = render 'layouts/search_form', q: @q
     .search-btn
