@@ -1,9 +1,5 @@
 div.search-menu.glass.blur.d-flex.align-items-center
-  form.d-flex.search-form
-    .input-group.search-field
-      input.form-control type="text" placeholder="#{t('defaults.form.header_search_placeholder')}"
-      button.btn.btn-glass
-        = fa_icon 'search'
+  = render 'layouts/search_form', q: q
   .cancel-btn
     label.btn.btn-cancel.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
       = fa_icon 'times'

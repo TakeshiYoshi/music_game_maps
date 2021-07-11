@@ -22,9 +22,7 @@ gem 'puma', '~> 4.1'
 gem 'active_decorator'
 
 # Assets
-gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
-gem 'bootstrap', '~> 5.0'
 gem 'font-awesome-rails'
 
 # UI/UX
@@ -32,6 +30,7 @@ gem 'rails-i18n'
 gem 'slim-rails'
 gem 'html2slim'
 gem 'kaminari'
+gem 'ransack'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
@@ -65,6 +64,7 @@ end
 group :test do
   gem 'capybara'
   gem 'webdrivers'
+  gem 'launchy'
 end
 
 group :development do
