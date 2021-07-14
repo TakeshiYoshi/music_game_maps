@@ -13,11 +13,11 @@
       </div>
     </div>
     <div class="geo-checkbox">
-      <input type="checkbox" id="geo-check" v-model="isGeoChecked" v-on:change="getGeolocation(isGeoChecked)">
+      <input type="checkbox" name="geo-check" id="geo-check" v-model="isGeoChecked" v-on:change="getGeolocation(isGeoChecked)">
       <label for="geo-check">現在位置周辺を検索する</label>
       <span class="geo-message" :hidden="!isGeoChecked">{{geoMessage}}</span>
-      <input type="hidden" name="latitude" :value="latitude">
-      <input type="hidden" name="longitude" :value="longitude">
+      <input hidden name="lat" id="lat" :value="latitude" :disabled="!isGeoChecked">
+      <input hidden name="lng" id="lng" :value="longitude" :disabled="!isGeoChecked">
     </div>
   </div>
 </template>
@@ -38,9 +38,9 @@ export default {
       selectedCity: filterHash.city_id,
       prefectures: prefHash,
       cities: cityHash,
-      isGeoChecked: false,
-      latitude: null,
-      longitude: null,
+      latitude: filterHash.lat,
+      longitude: filterHash.lng,
+      isGeoChecked: filterHash.lat == null ? false : true,
       geoMessage: ''
     }
   },

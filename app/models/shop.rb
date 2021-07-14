@@ -5,6 +5,11 @@ class Shop < ApplicationRecord
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
 
+  acts_as_mappable default_units: :kms,
+                   default_formula: :sphere,
+                   lat_column_name: :lat,
+                   lng_column_name: :lng
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   scope :in_prefecture, ->(prefecture_id) { where(prefecture_id: prefecture_id) }

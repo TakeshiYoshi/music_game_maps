@@ -15,6 +15,7 @@ class ShopsController < ApplicationController
     @shops_filter = @shops
     @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
     @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
+    @shops_filter = @shops_filter.within(2, origin: [session[:lat], session[:lng]]) if session[:lat]
     session[:games]&.each do |g|
       # g.first: Game.id
       # g.last: 0 => フィルターなし, 1 => フィルターあり
