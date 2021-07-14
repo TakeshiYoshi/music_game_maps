@@ -486,6 +486,19 @@ footer {
   }
 }
 
+.disabled {
+  background: $gray-300;
+}
+
+.geo-checkbox {
+  margin: 10px 0;
+}
+
+.geo-message {
+  color: $gray-600;
+  margin-left: 10px;
+}
+
 .game-label {
   color: $gray-600;
   display: inline-block;
