@@ -32,12 +32,15 @@ let zoomLevel_lng = Math.floor(Math.log(40075/lngDeltaKm) / Math.log(2));
 let zoomLevel = zoomLevel_lat > zoomLevel_lng ? zoomLevel_lng : zoomLevel_lat;
 
 
-// 以下MapTailer
-var map = L.map('map').setView([latCenter, lngCenter], zoomLevel);
-var gl = L.mapboxGL({
-  attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
-  style: 'https://api.maptiler.com/maps/bbda2532-9b67-4078-808d-55cd807daf1c/style.json?key=' + gon.map_tailer_key
-}).addTo(map);
+// 以下OpenStreetMap
+var map = L.map('map', {
+  center: [latCenter, lngCenter],
+  zoom: zoomLevel,
+});
+var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+});
+tileLayer.addTo(map);
 Object.keys(shopsLatAndLonObject).forEach(function (key) {
   var sampleIcon = L.divIcon({
     className: 'map-icon-container',
