@@ -519,6 +519,19 @@ footer {
   }
 }
 
+.map-icon-container {
+  .map-icon-text {
+    color: $gray-600;
+    font-size: 20px;
+    font-family: LEMONMILK-BOLD;
+    font-weight: '900';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .game-check:checked + label.game-label {
   color: white;
   background: $gray-600;

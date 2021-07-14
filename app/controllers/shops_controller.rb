@@ -4,6 +4,7 @@ class ShopsController < ApplicationController
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page])
+    gon.map_tailer_key = ENV['MAP_TAILER_KEY']
   end
 
   def show
