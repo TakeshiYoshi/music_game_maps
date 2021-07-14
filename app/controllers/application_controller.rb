@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def local_set
-    @prefectures = Prefecture.all.as_json only: %i[id name]
-    @cities = Prefecture.find(session[:prefecture_id]).cities.as_json(only: %i[id name]) if session[:prefecture_id]
+    @prefectures = Prefecture.all
+    @cities = Prefecture.find(session[:prefecture_id]).cities if session[:prefecture_id]
   end
 end

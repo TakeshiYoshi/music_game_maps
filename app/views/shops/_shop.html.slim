@@ -1,5 +1,6 @@
 = link_to shop_path(shop.id) do
   .col-12.glass.shop-card.d-flex.align-content-start
+    .adjust-position id="shop-#{shop.id}"
     = image_pack_tag 'appearance_img.png', class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
