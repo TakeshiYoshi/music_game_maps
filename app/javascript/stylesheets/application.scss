@@ -268,20 +268,20 @@ header {
 .map-container {
   border-radius: 20px;
   background-color: $gray-200;
-  height: 300px;
+  height: 500px;
   margin-bottom: 20px;
   box-shadow: 0 0 6px 0 rgba(black, 0.2);
-  p {
-    font-size: 8rem;
-    color: $gray-700;
-    letter-spacing: 0.4rem;
-  }
 }
 
 .shop-card {
+  position: relative;
   border-radius: 20px;
   margin-bottom: 10px;
   transition: all 0.3s;
+  .adjust-position {
+    position: absolute;
+    top: -80px;
+  }
   .shop-head {
     margin-bottom: 10px;
   }
@@ -508,6 +508,31 @@ footer {
   transition: all 0.3s;
 }
 
+// マップ
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 0;
+  iframe {
+    border-radius: 20px;
+  }
+}
+
+.map-icon-container {
+  .map-icon-text {
+    color: $gray-600;
+    font-size: 20px;
+    font-family: LEMONMILK-BOLD;
+    font-weight: '900';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .game-check:checked + label.game-label {
   color: white;
   background: $gray-600;
@@ -610,6 +635,9 @@ footer {
 
   .shop-card {
     border-radius: 10px;
+    .adjust-position {
+      top: -70px;
+    }
     .appearance_img {
       display: none;
     }
@@ -656,6 +684,13 @@ footer {
         height: 22px;
         font-size: 0.8rem;
       }
+    }
+  }
+
+  #map {
+    border-radius: 10px;
+    iframe {
+      border-radius: 10px;
     }
   }
 

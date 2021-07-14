@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   before_action :set_filter, only: %i[index]
+  before_action :set_shops_lat_and_lng, only: %i[index]
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page])
@@ -24,5 +25,9 @@ class ShopsController < ApplicationController
         @shops_filter = Shop.where(id: @shops_filter.includes(:games).map { |s| s.id if s.games.include?(game) }.compact)
       end
     end
+  end
+
+  def set_shops_lat_and_lng
+    @shops_lat_and_lng = @shops_filter.includes(:games).page(params[:page])
   end
 end
