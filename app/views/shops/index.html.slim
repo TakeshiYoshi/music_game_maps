@@ -1,7 +1,12 @@
 .col-12.map-container.d-flex.align-items-center.justify-content-center
-  p MAP
+  #map
+.d-none.json-data 
+  .d-none#shops-lat-and-lng data-shops-lat-and-lng="#{@shops_lat_and_lng.to_json only: %i[id lat lng]}"
 
 = render @shops_filter
 
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter
+
+= javascript_pack_tag 'map'
+script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['MAPS_API_KEY']}" async defer
