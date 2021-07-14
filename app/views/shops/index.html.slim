@@ -1,10 +1,8 @@
 .col-12.map-container.d-flex.align-items-center.justify-content-center
   #map
-.d-none.json-data 
-  .d-none#shops-lat-and-lng data-shops-lat-and-lng="#{@shops_lat_and_lng.to_json only: %i[id lat lng]}"
-
+  .d-none.json-data 
+    .d-none#shops-lat-and-lng data-shops-lat-and-lng="#{@shops_lat_and_lng.to_json only: %i[id lat lng]}"
 = render @shops_filter
-
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter
 
