@@ -16,8 +16,8 @@
       <input type="checkbox" name="geo-check" id="geo-check" v-model="isGeoChecked" v-on:change="getGeolocation(isGeoChecked)">
       <label for="geo-check">現在位置周辺を検索する</label>
       <span class="geo-message" :hidden="!isGeoChecked">{{geoMessage}}</span>
-      <input hidden name="lat" id="lat" :value="latitude" :disabled="!isGeoChecked">
-      <input hidden name="lng" id="lng" :value="longitude" :disabled="!isGeoChecked">
+      <input type="hidden" name="lat" id="lat" :value="latitude" :disabled="!isGeoChecked">
+      <input type="hidden" name="lng" id="lng" :value="longitude" :disabled="!isGeoChecked">
     </div>
   </div>
 </template>
