@@ -1,6 +1,5 @@
 import MapIconImage from '../images/map_icon.png'
 
-let map;
 let shopsLatAndLon = document.getElementById('shops-lat-and-lng');
 let shopsLatAndLonObject = JSON.parse(shopsLatAndLon.getAttribute('data-shops-lat-and-lng'));
 
@@ -32,7 +31,31 @@ let zoomLevel_lng = Math.floor(Math.log(40075/lngDeltaKm) / Math.log(2));
 // 緯度と経度のzoomLevelを比較し値が小さい方を採用する
 let zoomLevel = zoomLevel_lat > zoomLevel_lng ? zoomLevel_lng : zoomLevel_lat;
 
+
+// 以下MapTailer
+var map = L.map('map').setView([latCenter, lngCenter], zoomLevel);
+var gl = L.mapboxGL({
+  attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+  style: 'https://api.maptiler.com/maps/bbda2532-9b67-4078-808d-55cd807daf1c/style.json?key=' + gon.map_tailer_key
+}).addTo(map);
+Object.keys(shopsLatAndLonObject).forEach(function (key) {
+  var sampleIcon = L.divIcon({
+    className: 'map-icon-container',
+    html: '<a href="#shop-' + shopsLatAndLonObject[key].id + '">' +
+          '<img src="' + MapIconImage + '" style="width:50px; height:52.5px;">' +
+          '<span class="map-icon-text">' + (Number(key) + 1) + '</span>' +
+          '</a>',
+    iconSize: [50, 52.5],
+    iconAnchor: [25, 52.5],
+    popupAnchor: [0, -52.5],
+  });
+  var marker = L.marker([parseFloat(shopsLatAndLonObject[key].lat), parseFloat(shopsLatAndLonObject[key].lng)],{ icon: sampleIcon }).addTo(map);
+});
+
+// 以下GoogleMaps
+/*
 // Map作成
+let map;
 let marker = [];
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -67,3 +90,4 @@ function initMap() {
 window.onload = function () {
   initMap();
 }
+*/
