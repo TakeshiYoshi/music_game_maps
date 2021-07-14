@@ -8,5 +8,10 @@ ja:
     close: '営業時間外'
     no-data: 'NO DATA'
     filter: 'FILTER'
+    form_title: '検索フィルター'
+    label_game: '検索機種'
+    label_area: 'エリア指定'
+    clear: 'クリア'
+    filter_submit: 'フィルター設定'
     form:
       header_search_placeholder: 'フリーワード検索'

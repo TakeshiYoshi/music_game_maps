@@ -19,7 +19,7 @@ Rails:
   Enabled: true
 
 Metrics/AbcSize:
-  Max: 30
+  Max: 35
 
 Metrics/ClassLength:
   CountComments: false
@@ -34,6 +34,9 @@ Metrics/LineLength:
 Metrics/MethodLength:
   CountComments: false
   Max: 30
+
+Metrics/PerceivedComplexity:
+  Max: 9
 
 Naming/AccessorMethodName:
   Exclude:

@@ -42,6 +42,9 @@ gem 'sorcery'
 # Time
 gem 'chronic'
 
+# Geolocation
+gem 'geokit-rails'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
@@ -72,6 +75,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+end
+
+group :production do
+  gem 'unicorn'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

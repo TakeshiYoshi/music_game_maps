@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def filtered?
-    session[:prefecture_id] || games_filtered?
+    session[:prefecture_id] || games_filtered? || session[:lat]
   end
 
   def games_filtered?
