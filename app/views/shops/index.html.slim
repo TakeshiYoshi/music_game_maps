@@ -1,7 +1,15 @@
 .col-12.map-container.d-flex.align-items-center.justify-content-center
-  p MAP
-
+  #map
+  .d-none.json-data 
+    .d-none#shops-lat-and-lng data-shops-lat-and-lng="#{@shops_lat_and_lng.to_json only: %i[id lat lng]}"
 = render @shops_filter
-
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter
+
+script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"
+script src="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.js"
+script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"
+link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"
+link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css"
+= javascript_pack_tag 'map'
+//script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['MAPS_API_KEY']}" async defer

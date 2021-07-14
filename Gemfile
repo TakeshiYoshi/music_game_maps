@@ -6,6 +6,7 @@ ruby '2.7.3'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
 
 # Security
+gem 'gon'
 gem 'dotenv-rails'
 
 # Database

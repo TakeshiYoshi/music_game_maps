@@ -20,8 +20,8 @@
             = link_to t('defaults.clear'), filter_path, method: :delete, class: 'btn btn-cancel rounded-pill'
             = f.submit t('defaults.filter_submit'), class: 'btn btn-glass rounded-pill'
       .json-data
-        .d-none#pref data-pref="#{@prefectures.to_json}"
-        .d-none#city data-city="#{@cities.to_json}"
+        .d-none#pref data-pref="#{@prefectures.to_json only: %i[id name]}"
+        .d-none#city data-city="#{@cities.to_json only: %i[id name]}"
         .d-none#filter data-filter="#{session.to_json}"
 javascript:
   const pref = document.getElementById('pref');
