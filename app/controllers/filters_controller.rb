@@ -3,8 +3,8 @@ class FiltersController < ApplicationController
     session[:prefecture_id] = params[:prefecture]
     session[:city_id] = params[:city]
     session[:games] = params[:games]
-    session[:lat] = params[:latitude]
-    session[:lng] = params[:longitude]
+    session[:lat] = params[:lat]
+    session[:lng] = params[:lng]
     redirect_back(fallback_location: root_path)
   end
 
@@ -12,6 +12,8 @@ class FiltersController < ApplicationController
     session.delete :prefecture_id
     session.delete :city_id
     session.delete :games
+    session.delete :lat
+    session.delete :lng
     redirect_back(fallback_location: root_path)
   end
 

@@ -42,6 +42,9 @@ gem 'sorcery'
 # Time
 gem 'chronic'
 
+# Geolocation
+gem 'geokit-rails'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
