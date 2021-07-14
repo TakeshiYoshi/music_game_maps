@@ -31,7 +31,6 @@ let zoomLevel_lng = Math.floor(Math.log(40075/lngDeltaKm) / Math.log(2));
 // 緯度と経度のzoomLevelを比較し値が小さい方を採用する
 let zoomLevel = zoomLevel_lat > zoomLevel_lng ? zoomLevel_lng : zoomLevel_lat;
 
-
 // 以下OpenStreetMap
 var map = L.map('map', {
   center: [latCenter, lngCenter],
