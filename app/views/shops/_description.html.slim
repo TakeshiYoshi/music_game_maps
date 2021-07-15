@@ -2,7 +2,7 @@ input.d-none#table-check type="checkbox"
 .col-12.shop-appearance-img-container.d-flex.align-content-start
   .img-cover.d-flex.justify-content-end.align-items-end
     p = shop.name
-  = image_pack_tag 'appearance_img.png'
+  img src="#{shop.get_photo_url}"
 .col-12.glass.shop-description-container
   .game-machines
     label.shop-label.rounded-pill = GameMachine.model_name.human
