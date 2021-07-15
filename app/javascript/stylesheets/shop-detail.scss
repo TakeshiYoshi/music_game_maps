@@ -1,7 +1,7 @@
 .shop-appearance-img-container {
   position: relative;
   border-radius: 20px 20px 0 0;
-  height: 200px;
+  height: 400px;
   padding: 0;
   background: rgba(white, 0.3);
   border: 1 solid rgba(white, 0.3);
@@ -166,8 +166,9 @@
 @include media-breakpoint-down(sm) {
   .shop-appearance-img-container {
     border-radius: 10px 10px 0 0;
+    height: 200px;
     .img-cover {
-      background: linear-gradient(rgba(black, 0), rgba(black, 0) 70%,  rgba(black, 0.3) 90%, rgba(black, 0.4));
+      background: linear-gradient(rgba(black, 0), rgba(black, 0) 60%,  rgba(black, 0.8) 90%, rgba(black, 0.9));
       p {
         font-size: 1rem;
         margin: 0 10px 3px 0;
