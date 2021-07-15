@@ -108,7 +108,7 @@ module ShopDecorator
     if photo_url_update_at.nil? || Time.zone.now >= photo_url_update_at
       url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=#{photo_reference}&key=#{ENV['PLACES_API_KEY']}"
       redirect_url = Net::HTTP.get_response(URI.parse(url))['location']
-      Shop.find(id).update(photo_url: redirect_url, photo_url_update_at: Time.zone.now + 1.day)
+      Shop.find(id).update(photo_url: redirect_url, photo_url_update_at: Time.zone.now + 1.day) if redirect_url.present?
     end
     self.reload.photo_url
   end
