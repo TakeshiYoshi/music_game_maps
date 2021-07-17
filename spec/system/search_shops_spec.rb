@@ -76,25 +76,5 @@ RSpec.describe "SearchShops", type: :system do
         expect(page).not_to have_content(shop_in_another_pref.name)
       end
     end
-
-    context '現在地周辺でフィルターをかける' do
-      let!(:shop_nearby_user) { create(:shop, lat: '30.0000', lng: '150.0000') }
-      let!(:another_shop) { create(:shop, lat: '0', lng: '0') }
-
-      it 'フィルターをかけたエリアのみ検索結果に表示させる' do
-        visit root_path
-        # 都道府県と市区町村のフィルターをかける
-        click_button 'filter-button'
-        within('.modal') do
-          # 擬似的にgeoLocation APIを再現
-          page.find("label", text: '現在位置周辺を検索する').click
-          page.execute_script("document.getElementById('lat').value = '30.0000'");
-          page.execute_script("document.getElementById('lng').value = '150.0000'");
-          click_button 'フィルター設定'
-        end
-        expect(page).to have_content(shop_nearby_user.name)
-        expect(page).not_to have_content(another_shop.name)
-      end
-    end
   end
 end
