@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
   def set_variable_to_javascript
     gon.selectedPref = session[:prefecture_id]
     gon.selectedCity = session[:city_id]
+    gon.location = session[:location] if session[:location]
+    gon.selectedCity = session[:city_id]
     gon.prefectures = Prefecture.all.to_json only: %i[id name]
     gon.cities = Prefecture.find(gon.selectedPref).cities.to_json(only: %i[id name]) if gon.selectedPref
   end
