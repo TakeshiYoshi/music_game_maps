@@ -15,3 +15,6 @@ ja:
     filter_submit: 'フィルター設定'
     form:
       header_search_placeholder: 'フリーワード検索'
+    map_flash_message:
+      clear_near_shops_search: '周辺検索設定をクリアにしました'
+      near_shops_search: 'マップで表示している周囲の店舗を検索しました'

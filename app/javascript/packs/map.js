@@ -69,10 +69,12 @@ let addGeoLocationMarker = (location) => {
   let zoomLevel = calculateZoomLevel(latAryLocal, lngAryLocal);
   map.setView([latCenter, lngCenter], zoomLevel);
 };
+
 let getMapCenter = () => {
   let centerPosition = map.getCenter();
   return centerPosition;
 }
+
 window.globalFunction = {};
 window.getMapCenter = {};
 window.globalFunction.addGeoLocationMarker = addGeoLocationMarker;
@@ -110,42 +112,11 @@ function calculateZoomLevel(latAry, lngAry) {
   return zoomLevel;
 };
 
-// 以下GoogleMaps
-/*
-// Map作成
-let map;
-let marker = [];
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: latCenter, lng: lngCenter },
-    zoom: zoomLevel,
-  });
-  Object.keys(shopsLatAndLng).forEach(function (key) {
-    marker[key] = new google.maps.Marker({
-      position: {
-        lat: parseFloat(shopsLatAndLng[key].lat),
-        lng: parseFloat(shopsLatAndLng[key].lng)
-      },
-      icon: {
-        url: MapIconImage,
-        scaledSize: new google.maps.Size(50, 52.5)
-      },
-      label: {
-        text: String(Number(key) + 1),
-        fontSize: '20px',
-        fontWeight: '900',
-        fontFamily: "LEMONMILK-BOLD",
-        color: '#666666'
-      },
-      map: map
-    });
-    let url = '#shop-' + shopsLatAndLng[key].id;
-    google.maps.event.addListener(marker[key], 'click', (function(url){
-      return function(){ location.href = url; };
-    })(url));
-  });
+// 以下初期処理
+// window.onloadが何故か動かないため直書きしてます
+// 現在位置が取得されていたら現在地マーカーを表示する
+if(gon.location != null) {
+  own = L.marker(gon.location).addTo(map);
 }
-window.onload = function () {
-  initMap();
-}
-*/
+// 中心位置初期設定
+inputCenterPos();

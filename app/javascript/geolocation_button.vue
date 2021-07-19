@@ -1,9 +1,5 @@
 <template>
   <div id="geolocationButton">
-    <input class="d-none" type="checkbox" id="dialog-check" v-model="isDialogChecked">
-    <div class="map-message-dialog blur">
-      <p>{{geoMessage}}</p>
-    </div>
     <button class="update-geo-button" @click="getGeolocation()">
       <div class="icon-container" :class="{ 'icon-blue': isGeoChecked }">
         <i class="fas fa-crosshairs"></i>
@@ -13,10 +9,19 @@
 </template>
 
 <script>
+import Export from "./packs/map_flash_message"
+import axios from 'axios'
+
+// CSRFトークン作成
+axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
 export default {
   data: function () {
     return {
-      isGeoChecked: false,
+      isGeoChecked: gon.location,
       isDialogChecked: false,
       geoMessage: ''
     }
@@ -24,7 +29,7 @@ export default {
   methods: {
     getGeolocation: function() {
       if (!navigator.geolocation) {
-        this.setGeoMessage('現在位置が取得できませんでした')
+        Export.show_message('現在位置が取得できませんでした')
         return
       }
       const options = {
@@ -32,7 +37,7 @@ export default {
         timeout: 5000,
         maximumAge: 0
       }
-      this.setGeoMessage('現在位置情報を取得しています...')
+      Export.show_message('現在位置情報を取得しています...');
       navigator.geolocation.getCurrentPosition(this.success, this.error, options)
     },
     success: function(position) {
@@ -40,28 +45,32 @@ export default {
       this.longitude = position.coords.longitude
       this.isGeoChecked = true;
       window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
-      this.setGeoMessage('現在位置を取得しました')
+      // Rails側にセッションとして記録
+      axios
+        .post('/set_location', {
+        lat: this.latitude,
+        lng: this.longitude
+        })
+        .then((response) => {
+          this.cities = response.data
+        })
+      Export.show_message('現在位置を取得しました');
     },
     error: function(error) {
       switch (error.code) {
         case 1: // PERMISSION_DENIED
-          this.setGeoMessage('位置情報の利用が許可されていません')
+          Export.show_message('位置情報の利用が許可されていません')
           break
         case 2: // POSITION_UNAVAILABLE
-          this.setGeoMessage('現在位置が取得できませんでした')
+          Export.show_message('現在位置が取得できませんでした')
           break
         case 3: // TIMEOUT
-          this.setGeoMessage('タイムアウトになりました')
+          Export.show_message('タイムアウトになりました')
           break
         default:
-          this.setGeoMessage('現在位置が取得できませんでした')
+          Export.show_message('現在位置が取得できませんでした')
           break
       }
-    },
-    setGeoMessage: function(message) {
-      this.geoMessage = message;
-      this.isDialogChecked = true;
-      setTimeout( () => { this.isDialogChecked = false }, 3000 )
     }
   }
 }

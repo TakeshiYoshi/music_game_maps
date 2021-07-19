@@ -17,10 +17,10 @@ class FiltersController < ApplicationController
     redirect_to root_path
   end
 
-  def clear_location
+  def clear_near_shops_search
     session.delete :lat
     session.delete :lng
-    redirect_to root_path, notice: '周辺検索設定をクリアしました'
+    redirect_to root_path, notice: t('defaults.map_flash_message.clear_near_shops_search')
   end
 
   def cities_select
@@ -28,11 +28,15 @@ class FiltersController < ApplicationController
     render json: cities.all.to_json(only: %i[id name])
   end
 
-  def set_location
+  def near_shops_search
     session[:lat] = params[:lat]
     session[:lng] = params[:lng]
     session.delete :prefecture_id
     session.delete :city_id
-    redirect_to root_path
+    redirect_to root_path, notice: t('defaults.map_flash_message.near_shops_search')
+  end
+
+  def set_location
+    session[:location] = [params[:lat], params[:lng]]
   end
 end
