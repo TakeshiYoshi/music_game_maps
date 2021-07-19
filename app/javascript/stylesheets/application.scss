@@ -630,10 +630,19 @@ footer {
   transform: translate(-50%, 0%) rotateX(90deg);
   transition: all 0.3s;
   p {
+    font-size: 1rem;
     color: $gray-600;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
   }
+}
+
+.own-icon {
+  background: rgb(63, 135, 216);
+  border-radius: 15px;
+  border: solid 4px white;
+  box-shadow: 0 0 10px 0 rgba(black, 0.5);
 }
 
 #dialog-check:checked ~ .map-message-dialog {
@@ -801,6 +810,12 @@ footer {
 
   .select-container {
     width: 49%;
+  }
+
+  .map-message-dialog {
+    p {
+      font-size: 0.7rem;
+    }
   }
 
   #nav-menu-check:checked ~ .user-menu-container > .user-menu {
