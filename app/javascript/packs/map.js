@@ -58,7 +58,7 @@ let addGeoLocationMarker = (location) => {
     map.removeLayer(own);
   };
   // マーカーを生成
-  own = L.marker(location).addTo(map);
+  createOwnMaker(gon.location);
   // ビューを変更する
   let latAryLocal = latAry;
   let lngAryLocal = lngAry;
@@ -68,6 +68,17 @@ let addGeoLocationMarker = (location) => {
   let lngCenter = calculateCenter(lngAryLocal);
   let zoomLevel = calculateZoomLevel(latAryLocal, lngAryLocal);
   map.setView([latCenter, lngCenter], zoomLevel);
+};
+
+function createOwnMaker(location) {
+  // マーカーを生成
+  let mapIcon = L.divIcon({
+    className: 'own-icon',
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [0, -15],
+  });
+  own = L.marker(location,{ icon: mapIcon }).addTo(map);
 };
 
 let getMapCenter = () => {
@@ -116,7 +127,7 @@ function calculateZoomLevel(latAry, lngAry) {
 // window.onloadが何故か動かないため直書きしてます
 // 現在位置が取得されていたら現在地マーカーを表示する
 if(gon.location != null) {
-  own = L.marker(gon.location).addTo(map);
+  createOwnMaker(gon.location)
 }
 // 中心位置初期設定
 inputCenterPos();
