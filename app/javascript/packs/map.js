@@ -1,14 +1,13 @@
 import MapIconImage from '../images/map_icon.png'
 
-let shopsLatAndLon = document.getElementById('shops-lat-and-lng');
-let shopsLatAndLonObject = JSON.parse(shopsLatAndLon.getAttribute('data-shops-lat-and-lng'));
+let shopsLatAndLng = JSON.parse(gon.shops_lat_and_lng);
 
 // オブジェクトから緯度経度の配列を作成
 let latAry = [];
 let lngAry = [];
-Object.keys(shopsLatAndLonObject).forEach(function (key) {
-  latAry.push(parseFloat(shopsLatAndLonObject[key].lat));
-  lngAry.push(parseFloat(shopsLatAndLonObject[key].lng));
+Object.keys(shopsLatAndLng).forEach(function (key) {
+  latAry.push(parseFloat(shopsLatAndLng[key].lat));
+  lngAry.push(parseFloat(shopsLatAndLng[key].lng));
 });
 
 // Mapの中央座標を算出
@@ -28,10 +27,10 @@ let tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 });
 tileLayer.addTo(map);
-Object.keys(shopsLatAndLonObject).forEach(function (key) {
+Object.keys(shopsLatAndLng).forEach(function (key) {
   let mapIcon = L.divIcon({
     className: 'map-icon-container',
-    html: '<a href="#shop-' + shopsLatAndLonObject[key].id + '">' +
+    html: '<a href="#shop-' + shopsLatAndLng[key].id + '">' +
           '<img src="' + MapIconImage + '" style="width:50px; height:52.5px;">' +
           '<span class="map-icon-text">' + (Number(key) + 1) + '</span>' +
           '</a>',
@@ -39,7 +38,7 @@ Object.keys(shopsLatAndLonObject).forEach(function (key) {
     iconAnchor: [25, 52.5],
     popupAnchor: [0, -52.5],
   });
-  L.marker([parseFloat(shopsLatAndLonObject[key].lat), parseFloat(shopsLatAndLonObject[key].lng)],{ icon: mapIcon }).addTo(map);
+  L.marker([parseFloat(shopsLatAndLng[key].lat), parseFloat(shopsLatAndLng[key].lng)],{ icon: mapIcon }).addTo(map);
 });
 
 // マップが動いたら中心座標を出力
@@ -121,11 +120,11 @@ function initMap() {
     center: { lat: latCenter, lng: lngCenter },
     zoom: zoomLevel,
   });
-  Object.keys(shopsLatAndLonObject).forEach(function (key) {
+  Object.keys(shopsLatAndLng).forEach(function (key) {
     marker[key] = new google.maps.Marker({
       position: {
-        lat: parseFloat(shopsLatAndLonObject[key].lat),
-        lng: parseFloat(shopsLatAndLonObject[key].lng)
+        lat: parseFloat(shopsLatAndLng[key].lat),
+        lng: parseFloat(shopsLatAndLng[key].lng)
       },
       icon: {
         url: MapIconImage,
@@ -140,7 +139,7 @@ function initMap() {
       },
       map: map
     });
-    let url = '#shop-' + shopsLatAndLonObject[key].id;
+    let url = '#shop-' + shopsLatAndLng[key].id;
     google.maps.event.addListener(marker[key], 'click', (function(url){
       return function(){ location.href = url; };
     })(url));

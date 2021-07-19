@@ -28,6 +28,6 @@ class ShopsController < ApplicationController
   end
 
   def set_shops_lat_and_lng
-    @shops_lat_and_lng = @shops_filter.includes(:games).page(params[:page])
+    gon.shops_lat_and_lng = @shops_filter.includes(:games).page(params[:page]).to_json only: %i[id lat lng]
   end
 end

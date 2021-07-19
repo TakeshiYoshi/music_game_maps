@@ -27,11 +27,11 @@ axios.defaults.headers.common = {
 export default {
   data: function () {
     return {
-      selectedPref: filterHash.prefecture_id,
-      selectedCity: filterHash.city_id,
-      prefectures: prefHash,
-      cities: cityHash,
-      geoMessage: ''
+      selectedPref: gon.selectedPref,
+      selectedCity: gon.selectedCity,
+      prefectures: JSON.parse(gon.prefectures),
+      cities: gon.cities != null ? JSON.parse(gon.cities) : [],
+      geoMessage: '',
     }
   },
   methods: {
