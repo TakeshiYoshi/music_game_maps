@@ -6,8 +6,6 @@
     = link_to clear_location_path, method: :delete, class: 'clear-location-session' do
       .icon-container
         = fa_icon 'trash'
-  .d-none.json-data 
-    .d-none#shops-lat-and-lng data-shops-lat-and-lng="#{@shops_lat_and_lng.to_json only: %i[id lat lng]}"
 = render @shops_filter
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter

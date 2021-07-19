@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_search
-  before_action :local_set
+  before_action :set_variable_to_javascript
 
   private
 
@@ -13,8 +13,10 @@ class ApplicationController < ActionController::Base
     @shops = Shop.ransack(search_hash).result
   end
 
-  def local_set
-    @prefectures = Prefecture.all
-    @cities = Prefecture.find(session[:prefecture_id]).cities if session[:prefecture_id]
+  def set_variable_to_javascript
+    gon.selectedPref = session[:prefecture_id]
+    gon.selectedCity = session[:city_id]
+    gon.prefectures = Prefecture.all.to_json only: %i[id name]
+    gon.cities = Prefecture.find(gon.selectedPref).cities.to_json(only: %i[id name]) if gon.selectedPref
   end
 end
