@@ -1,13 +1,12 @@
 # OTOMAP | みんなで作る音ゲーマップ
 
-![site image](app/assets/images/site_image.png)
+![site image](app/javascript/images/site_image.png)
 
 ## サービス概要
 ゲームセンターを探している音ゲーマーが求めている音楽ゲーム筐体の設置店舗をマップ検索出来るサービスです。
 
-## 登場人物
-- エンドユーザー
-  - ゲームセンターで音楽ゲームをプレイする人
+## エンドユーザー
+- ゲームセンターで音楽ゲームをプレイする人
 
 ## ユーザが抱える課題
 1. 各音楽ゲーム公式サイトの設置店舗検索機能は検索結果がリスト表示でマップ一覧表示が出来ません。  
@@ -40,4 +39,4 @@ jubeatやREFLEC BEATでは筐体にイヤホンジャックが無いため、筐
 https://xd.adobe.com/view/4befa147-7997-4f29-8056-00eb881f1444-1ebc/grid
 
 ## ER図
-https://drive.google.com/file/d/1PYmvrzjo2Ce26POjbrVXHhdxw8cN7hnp/view
+https://drive.google.com/file/d/1P_FSH4hBaQocHciW_F3kSfudXvsTiQ_M/view
