@@ -1,6 +1,6 @@
 = form_with url: near_shops_search_path, method: :post, local: true do |f|
   = f.hidden_field :lat, id:"map-lat"
   = f.hidden_field :lng, id:"map-lng"
-  = f.button class: 'search-around-here-button' do 
+  = f.button class: 'search-around-here-button', id: 'search-near_shops_button' do 
     .icon-container class="#{ 'icon-blue' if session[:lat] }"
       = fa_icon 'search'
