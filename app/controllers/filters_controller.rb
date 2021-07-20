@@ -1,24 +1,42 @@
 class FiltersController < ApplicationController
   def create
+    if params[:prefecture]
+      session.delete :lat
+      session.delete :lng
+    end
     session[:prefecture_id] = params[:prefecture]
     session[:city_id] = params[:city]
     session[:games] = params[:games]
-    session[:lat] = params[:lat]
-    session[:lng] = params[:lng]
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path
   end
 
   def destroy
     session.delete :prefecture_id
     session.delete :city_id
     session.delete :games
+    redirect_to root_path
+  end
+
+  def clear_near_shops_search
     session.delete :lat
     session.delete :lng
-    redirect_back(fallback_location: root_path)
+    redirect_to root_path, notice: t('defaults.map_flash_message.clear_near_shops_search')
   end
 
   def cities_select
     cities = Prefecture.find_by(id: params[:id]).cities
     render json: cities.all.to_json(only: %i[id name])
+  end
+
+  def near_shops_search
+    session[:lat] = params[:lat]
+    session[:lng] = params[:lng]
+    session.delete :prefecture_id
+    session.delete :city_id
+    redirect_to root_path, notice: t('defaults.map_flash_message.near_shops_search')
+  end
+
+  def set_location
+    session[:location] = [params[:lat], params[:lng]]
   end
 end
