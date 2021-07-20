@@ -1,6 +1,6 @@
 <template>
   <div id="geolocationButton">
-    <button class="update-geo-button" @click="getGeolocation()">
+    <button class="update-geo-button" id="update-geo-button" @click="getGeolocation()">
       <div class="icon-container" :class="{ 'icon-blue': isGeoChecked }">
         <i class="fas fa-crosshairs"></i>
       </div>
