@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'shop-detail';
 @import 'signup';
+@import 'login';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -121,6 +122,16 @@ a {
   margin: 0;
   a {
     color: white;
+  }
+}
+
+.glass-link {
+  color: white;
+  text-shadow: 0 0 6px #0D3A40;
+  transition: all 0.3s;
+  &:hover {
+    color: white;
+    text-shadow: 0 0 3px rgba(white, 0.3);
   }
 }
 

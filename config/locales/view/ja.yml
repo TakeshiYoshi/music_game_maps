@@ -3,6 +3,7 @@ ja:
     app_name: 'OTOMAP'
     base_title: 'OTOMAP | みんなで作る音ゲーマップ'
     copyright: '© 2021 OTOMAP'
+    login: 'ログイン'
     logout: 'ログアウト'
     open: '営業中'
     close: '営業時間外'
@@ -17,6 +18,7 @@ ja:
     nickname_valid: '(1~30文字)'
     form:
       header_search_placeholder: 'フリーワード検索'
+      remember_me: 'ログイン状態を保持する'
     map_flash_message:
       clear_near_shops_search: '周辺検索設定をクリアにしました'
       near_shops_search: 'マップで表示している周囲の店舗を検索しました'
@@ -24,3 +26,8 @@ ja:
     new:
       title: '新規ユーザー登録'
       explain_playing_game: 'あなたがプレーしている機種を選択してください。'
+  user_sessions:
+    new:
+      title: 'ログイン'
+      users_new_link: '新規アカウントを作成'
+      forgot_password_link: 'パスワードを忘れた'
