@@ -7,10 +7,10 @@ new Vue({
     passwordError: '',
     passwordConfirmationError: '',
     nicknameError: '',
-    emailField: '',
-    passwordField: '',
-    passwordConfirmationField: '',
-    nicknameField: ''
+    emailField: document.getElementById('userEmail').value,
+    passwordField: document.getElementById('userPassword').value,
+    passwordConfirmationField: document.getElementById('userPasswordConfirmation').value,
+    nicknameField: document.getElementById('userNickname').value
   },
   methods: {
     emailValid: function() {
@@ -37,7 +37,7 @@ new Vue({
     },
     passwordValidCheck: function() {
       const passwordReg = /^(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d!?_\.$&%\-]{8,30}$/;
-      this.passwordError = passwordReg.test(this.passwordField) ? '' : 'パスワードを正しく入力してください。'
+      this.passwordError = passwordReg.test(this.passwordField) ? '' : '大文字, 小文字英数を含む8~30文字で入力してください。'
     },
     passwordConfirmationValidCheck: function() {
       this.passwordConfirmationError = this.passwordField == this.passwordConfirmationField ? '' : '同じパスワードを入力してください。'

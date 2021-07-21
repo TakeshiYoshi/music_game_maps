@@ -157,7 +157,12 @@ header {
     padding: 0;
     margin-right: 15px;
   }
-  .filter-icon-button {
+  .loggin-button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+  .filter-icon-button, .loggin-button {
     text-shadow: 0 0 6px #0D3A40;
     background: rgba(white, 0.3);
     border: $glass-border-size solid rgba(white, 0.3);
@@ -647,7 +652,7 @@ footer {
   padding: 0;
   border-radius: 10px;
   opacity: 0;
-  transform: translate(-50%, 0%) rotateX(90deg);
+  transform: translate(-50%, 0%);
   transition: all 0.3s;
   p {
     font-size: 1rem;
@@ -668,7 +673,7 @@ footer {
 #dialog-check:checked ~ .map-message-dialog {
   top: 10px;
   padding: 10px 15px;
-  transform: translate(-50%, 0%) rotateX(0deg);
+  transform: translate(-50%, 0%);
   opacity: 1;
 }
 
@@ -720,6 +725,11 @@ footer {
       width: 35px;
       height: 35px;
       margin-right: 8px;
+    }
+
+    .loggin-button {
+      width: 35px;
+      height: 35px;
     }
 
     .search-form {
