@@ -1,0 +1,9 @@
+- content_for(:title, t('.title'))
+.col-12.glass.login-container.d-flex.justify-content-center
+  .form-container.text-center
+    = render 'form'
+    .page-links.d-flex.justify-content-center
+      = link_to signup_path, class: 'glass-link'
+        = t '.users_new_link'
+      = link_to '#', class: 'glass-link'
+        = t '.forgot_password_link'
