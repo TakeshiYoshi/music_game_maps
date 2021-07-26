@@ -34,4 +34,23 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body).to have_content(login_url)
     end
   end
+
+  describe 'パスワードリセットメール' do
+    let(:user) { create(:user) }
+    let(:mail) { UserMailer.reset_password_email(user) }
+
+    before { user.generate_reset_password_token! }
+
+    it 'ユーザのemailにメールが送信されること' do
+      expect(mail.to).to eq [user.email]
+    end
+
+    it '件名が「パスワード再発行」であること' do
+      expect(mail.subject).to eq 'パスワード再発行'
+    end
+
+    it '本文にログインページのURLが含まれていること' do
+      expect(mail.body).to have_content(edit_password_reset_url(user.reset_password_token))
+    end
+  end
 end

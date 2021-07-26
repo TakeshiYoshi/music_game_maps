@@ -16,6 +16,7 @@ ja:
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
+    password_reset: 'パスワードを変更する'
     form:
       header_search_placeholder: 'フリーワード検索'
       remember_me: 'ログイン状態を保持する'
@@ -42,3 +43,12 @@ ja:
       danger: 'ログインに失敗しました'
     destroy:
       success: 'ログアウトしました'
+  password_resets:
+    new:
+      title: 'パスワード再発行'
+    create:
+      success: '入力されたアドレスに再発行用メールを送信しました。'
+    edit:
+      title: 'パスワード変更'
+    update:
+      success: 'パスワードの変更に成功しました。'
