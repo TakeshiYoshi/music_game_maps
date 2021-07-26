@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :set_search
   before_action :set_variable_to_javascript
 
+  add_flash_types :map, :success
+
   private
 
   def set_search
