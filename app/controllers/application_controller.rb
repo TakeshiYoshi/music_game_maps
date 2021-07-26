@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def not_authenticated
+    redirect_to login_url, danger: t('defaults.flash_message.login')
+  end
+
   def set_search
     search_hash = {}
     search_hash = params[:q].to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
