@@ -63,6 +63,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'faker'
+
+  # Email
+  gem 'letter_opener_web'
 end
 
 group :test do
