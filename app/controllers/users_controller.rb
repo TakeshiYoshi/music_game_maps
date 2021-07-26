@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       create_playing_games
-      redirect_to login_url
+      redirect_to login_url, success: t('.success')
     else
       render :new
     end

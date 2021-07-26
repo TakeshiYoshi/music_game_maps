@@ -1,0 +1,7 @@
+.flash-message 
+  input.d-none#flash-check type="checkbox"
+  .message-dialog.blur
+    - flash.each do |key, value|
+      p#flash-message calss="flash-text-#{key}"
+        = value
+= javascript_pack_tag 'flash_message'
