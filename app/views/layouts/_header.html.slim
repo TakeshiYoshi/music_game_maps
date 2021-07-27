@@ -16,7 +16,7 @@ header.glass.blur.d-flex.align-items-center
       label for="nav-menu-check"
         = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon'
     - else 
-      = link_to login_path, class: 'loggin_icon btn btn-glass rounded-circle loggin-button d-flex align-items-center justify-content-center'
+      = link_to login_path, class: 'login_icon btn btn-glass rounded-circle login-button d-flex align-items-center justify-content-center'
         = fa_icon 'sign-in-alt'
 = render 'layouts/search_menu', q: @q
 = render 'layouts/user_menu'
