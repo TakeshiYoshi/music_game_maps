@@ -46,6 +46,9 @@ gem 'chronic'
 # Geolocation
 gem 'geokit-rails'
 
+# AWS
+gem 'aws-sdk-rails', '~> 3'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
