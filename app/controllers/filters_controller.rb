@@ -20,7 +20,7 @@ class FiltersController < ApplicationController
   def clear_near_shops_search
     session.delete :lat
     session.delete :lng
-    redirect_to root_path, notice: t('defaults.map_flash_message.clear_near_shops_search')
+    redirect_to root_path, map: t('defaults.map_flash_message.clear_near_shops_search')
   end
 
   def cities_select
@@ -33,7 +33,7 @@ class FiltersController < ApplicationController
     session[:lng] = params[:lng]
     session.delete :prefecture_id
     session.delete :city_id
-    redirect_to root_path, notice: t('defaults.map_flash_message.near_shops_search')
+    redirect_to root_path, map: t('defaults.map_flash_message.near_shops_search')
   end
 
   def set_location

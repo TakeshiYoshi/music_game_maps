@@ -2,7 +2,13 @@ class ApplicationController < ActionController::Base
   before_action :set_search
   before_action :set_variable_to_javascript
 
+  add_flash_types :map, :success
+
   private
+
+  def not_authenticated
+    redirect_to login_url, danger: t('defaults.flash_message.login')
+  end
 
   def set_search
     search_hash = {}

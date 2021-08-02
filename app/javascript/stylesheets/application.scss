@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'shop-detail';
+@import 'signup';
+@import 'login';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -67,6 +69,19 @@ body {
   background: linear-gradient(135deg, $bg-start, $bg-end);
 }
 
+.footer-fixed {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
 a {
   text-decoration: none;
 }
@@ -110,6 +125,22 @@ a {
   }
 }
 
+.glass-link {
+  color: white;
+  text-shadow: 0 0 6px #0D3A40;
+  transition: all 0.3s;
+  &:hover {
+    color: white;
+    text-shadow: 0 0 3px rgba(white, 0.3);
+  }
+}
+
+.error-text {
+  color: rgb(194, 84, 84);
+  text-align: left;
+  font-weight: bold;
+}
+
 header {
   border-radius: 0 0 20px 20px;
   margin-bottom: 20px;
@@ -137,7 +168,12 @@ header {
     padding: 0;
     margin-right: 15px;
   }
-  .filter-icon-button {
+  .login-button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+  .filter-icon-button, .login-button {
     text-shadow: 0 0 6px #0D3A40;
     background: rgba(white, 0.3);
     border: $glass-border-size solid rgba(white, 0.3);
@@ -627,7 +663,7 @@ footer {
   padding: 0;
   border-radius: 10px;
   opacity: 0;
-  transform: translate(-50%, 0%) rotateX(90deg);
+  transform: translate(-50%, 0%);
   transition: all 0.3s;
   p {
     font-size: 1rem;
@@ -648,7 +684,69 @@ footer {
 #dialog-check:checked ~ .map-message-dialog {
   top: 10px;
   padding: 10px 15px;
-  transform: translate(-50%, 0%) rotateX(0deg);
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+// フォーム
+.glass-text-field {
+  width: 100%;
+  height: 36px;
+  padding: 10px;
+  border: 2px solid rgba(white, 0);
+  border-radius: 10px;
+  background: rgba(black, 0.2);
+  color: white;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  outline: none;
+  transition: all 0.3s;
+  &::placeholder {
+    color: rgba(white, 0.3);
+  }
+  &:hover, &:focus {
+    border: 2px solid rgba(rgb(176, 221, 241), 0.3);
+    box-shadow: 0 0 10px 0 rgba(white, 0.2);
+  }
+}
+
+.error-field {
+  box-shadow: 0 0 6px 0 rgba(red, 0.4);
+  border: 2px solid rgba(red, 0.2);
+  background: rgba(rgb(255, 110, 110), 0.2);
+  &:hover, &:focus {
+    border: 2px solid rgba(red, 0.2);
+    box-shadow: 0 0 6px 0 rgba(red, 0.4);
+  }
+}
+
+// フラッシュメッセージ
+.message-dialog {
+  background: rgba(white, 0.7);
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 10px 0 rgba(black, 0.7);
+  will-change: all;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  z-index: 100;
+  p {
+    font-size: 1rem;
+    color: $gray-600;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+  }
+}
+
+#flash-check:checked ~ .message-dialog {
+  top: 10px;
+  padding: 10px 15px;
+  transform: translate(-50%, 0%);
   opacity: 1;
 }
 
@@ -669,6 +767,11 @@ footer {
       width: 35px;
       height: 35px;
       margin-right: 8px;
+    }
+
+    .loggin-button {
+      width: 35px;
+      height: 35px;
     }
 
     .search-form {
@@ -812,7 +915,7 @@ footer {
     width: 49%;
   }
 
-  .map-message-dialog {
+  .map-message-dialog, .message-dialog {
     p {
       font-size: 0.7rem;
     }

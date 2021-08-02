@@ -1,0 +1,30 @@
+.form-container.text-center
+  .page-title
+    h1.page-title-text.glass-text
+      = t 'users.new.title'
+  - if user.errors.present?
+    - user.errors.full_messages.each do |message|
+      p.error-text.text-center = message
+  = form_with model: user, id: 'signup_form', class: 'signup-form', local: true do |f|
+    .form-group-signup
+      = f.text_field :email, id: 'userEmail', class: 'glass-text-field', 'v-model': "emailField", '@input': 'emailValid()', ':class': "emailError ? 'error-field' : ''", placeholder: User.human_attribute_name(:email)
+      p.error-text v-text='emailError'
+    .form-group-signup
+      = f.password_field :password, id: 'userPassword', class: 'glass-text-field', 'v-model': 'passwordField', '@input': 'passwordValid()', ':class': "passwordError ? 'error-field' : ''", autocomplete: 'off', placeholder: "#{User.human_attribute_name(:password) + t('defaults.password_valid')}"
+      p.error-text v-text='passwordError'
+    .form-group-signup
+      = f.password_field :password_confirmation, id: 'userPasswordConfirmation', class: 'glass-text-field', 'v-model': 'passwordConfirmationField', ':class': "passwordConfirmationError ? 'error-field' : ''", autocomplete: 'off', '@input': 'passwordConfirmationValid()', placeholder: User.human_attribute_name(:password_confirmation)
+      p.error-text v-text='passwordConfirmationError'
+    .form-group-signup
+      = f.text_field :nickname, id: 'userNickname', class: 'glass-text-field', 'v-model': 'nicknameField', '@input': 'nicknameValid()', ':class': "nicknameError ? 'error-field' : ''", placeholder: "#{User.human_attribute_name(:nickname) + t('defaults.nickname_valid')}"
+      p.error-text v-text='nicknameError'
+    .playing-games 
+      span.glass-text = t 'users.new.explain_playing_game'
+      .glass-game-labels
+        - Game.all.each do |game|
+          input.glass-game-check.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user"
+          label.glass-game-label.rounded-pill for="game_#{game.id}_user"
+            = game.title
+    = f.submit class: 'btn btn-glass rounded-pill px-4'
+
+= javascript_pack_tag 'signup'

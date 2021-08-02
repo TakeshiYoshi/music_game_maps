@@ -3,10 +3,7 @@
   #geolocation_button
   = render 'map_flash_message'
   = render 'near_shops_search_form'
-  - if session[:lat] 
-    = link_to clear_near_shops_search_path, method: :delete, class: 'clear-location-session', id: 'clear-location-session' do
-      .icon-container
-        = fa_icon 'trash'
+  = render 'clear_location_session_button'
 = render @shops_filter
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter

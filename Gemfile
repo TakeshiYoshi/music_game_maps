@@ -46,6 +46,9 @@ gem 'chronic'
 # Geolocation
 gem 'geokit-rails'
 
+# AWS
+gem 'aws-sdk-rails', '~> 3'
+
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
@@ -63,6 +66,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'faker'
+
+  # Email
+  gem 'letter_opener_web'
 end
 
 group :test do
