@@ -44,7 +44,6 @@ export default {
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
       this.isGeoChecked = true;
-      window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
       // Rails側にセッションとして記録
       axios
         .post('/set_location', {
@@ -53,8 +52,9 @@ export default {
         })
         .then((response) => {
           this.cities = response.data
+          window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
+          Export.show_message('現在位置を取得しました');
         })
-      Export.show_message('現在位置を取得しました');
     },
     error: function(error) {
       switch (error.code) {

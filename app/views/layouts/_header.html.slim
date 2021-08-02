@@ -12,8 +12,12 @@ header.glass.blur.d-flex.align-items-center
     .search-btn
       label.btn.btn-glass.rounded-circle.d-flex.align-items-center.justify-content-center for="search-btn-check"
         = fa_icon 'search'
-    label for="nav-menu-check"
-      = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon'
+    - if logged_in?
+      label for="nav-menu-check"
+        = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon'
+    - else 
+      = link_to login_path, class: 'login_icon btn btn-glass rounded-circle login-button d-flex align-items-center justify-content-center'
+        = fa_icon 'sign-in-alt'
 = render 'layouts/search_menu', q: @q
 = render 'layouts/user_menu'
 = render 'layouts/filter_form'

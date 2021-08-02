@@ -58,7 +58,7 @@ let addGeoLocationMarker = (location) => {
     map.removeLayer(own);
   };
   // マーカーを生成
-  createOwnMaker(gon.location);
+  createOwnMaker(location);
   // ビューを変更する
   let latAryLocal = latAry;
   let lngAryLocal = lngAry;

@@ -48,4 +48,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_controller.allow_forgery_protection = true
+
+  host = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = host
 end

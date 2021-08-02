@@ -8,7 +8,8 @@ html
     = csp_meta_tag
     = javascript_pack_tag 'application'
   body
-    .container-xl.px-0
+    .container-xl.px-0.footer-fixed
+      = render 'layouts/flash_message'
       = render 'layouts/header'
       = yield
       = render 'layouts/footer'

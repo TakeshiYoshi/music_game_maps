@@ -1,0 +1,4 @@
+- if session[:lat] 
+  = link_to clear_near_shops_search_path, method: :delete, class: 'clear-location-session', id: 'clear-location-session' do
+    .icon-container
+      = fa_icon 'trash'

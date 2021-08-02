@@ -69,6 +69,12 @@ RSpec.describe User, type: :model do
     expect(user.errors[:password]).to include('は8文字以上で入力してください')
   end
 
+  it 'パスワードは大文字, 小文字が含まれていること' do
+    user = build(:user, password: 'a'*8)
+    user.valid?
+    expect(user.errors[:password]).to include('は不正な値です')
+  end
+
   it 'パスワード再入力はパスワードと一致していること' do
     user = build(:user, password_confirmation: 'foobarfoobar')
     user.valid?
