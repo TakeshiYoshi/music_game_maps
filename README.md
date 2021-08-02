@@ -1,4 +1,4 @@
-# OTOMAP | みんなで作る音ゲーマップ
+# OTOMAP | 音楽ゲームに特化したゲームセンターマップ検索サービス
 
 ![site image](app/javascript/images/site_image.png)
 

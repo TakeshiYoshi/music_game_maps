@@ -1,7 +1,7 @@
 ja:
   defaults:
     app_name: 'OTOMAP'
-    base_title: 'OTOMAP | みんなで作る音ゲーマップ'
+    base_title: 'OTOMAP | 音楽ゲームに特化したゲームセンターマップ検索サービス'
     copyright: '© 2021 OTOMAP'
     login: 'ログイン'
     logout: 'ログアウト'
