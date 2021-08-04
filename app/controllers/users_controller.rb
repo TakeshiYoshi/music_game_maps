@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def activate
     @user = User.load_from_activation_token(params[:id])
     if @user
