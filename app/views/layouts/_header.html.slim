@@ -19,5 +19,5 @@ header.glass.blur.d-flex.align-items-center
       = link_to login_path, class: 'login_icon btn btn-glass rounded-circle login-button d-flex align-items-center justify-content-center'
         = fa_icon 'sign-in-alt'
 = render 'layouts/search_menu', q: @q
-= render 'layouts/user_menu'
+= render 'layouts/user_menu' if logged_in?
 = render 'layouts/filter_form'
