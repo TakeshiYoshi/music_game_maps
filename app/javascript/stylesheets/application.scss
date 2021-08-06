@@ -2,6 +2,7 @@
 @import 'shop-detail';
 @import 'signup';
 @import 'login';
+@import 'user_new';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -114,6 +115,10 @@ a {
 
 .blur {
   backdrop-filter: blur(5px);
+}
+
+.glass-round {
+  border-radius: 20px;
 }
 
 .glass-text {
@@ -839,6 +844,10 @@ footer {
 
   .glass {
     padding: $glass-padding;
+  }
+
+  .glass-round {
+    border-radius: 10px;
   }
 
   .modal-glass {

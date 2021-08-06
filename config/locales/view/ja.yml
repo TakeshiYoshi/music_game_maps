@@ -34,6 +34,7 @@ ja:
       success: 'アカウント有効化用のメールを送信しました。'
     show:
       title: "%{nickname}さんのプロフィール"
+      edit_profile: 'プロフィールを編集する'
     activate:
       success: 'アカウントが有効化されました。'
   user_sessions:
