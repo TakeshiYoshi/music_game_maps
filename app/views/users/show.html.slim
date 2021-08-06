@@ -1,3 +1,17 @@
 - content_for(:title, t('.title', nickname: @user.nickname))
-.col-12.glass.signup-container.d-flex.justify-content-center
-  h1 Users#show
+.col-12.glass.glass-round
+  .row.user-profile.d-flex.justify-content-center
+    .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
+      = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon', size: '100x100'
+    .col-md-10.col-sm-12
+      p.glass-text = @user.nickname
+      p.glass-text.mb-3 = @user.description
+
+      - if @user.games.present?
+        p.glass-text = PlayingGame.model_name.human
+        .glass-game-labels
+          - @user.games.each do |game|
+            label.glass-game-label.rounded-pill
+              = game.title
+    - if @user == current_user
+      = link_to t('.edit_profile'), '#', class: 'btn-glass edit-profile rounded-pill'
