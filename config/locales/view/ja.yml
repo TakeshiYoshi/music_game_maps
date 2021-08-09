@@ -37,6 +37,10 @@ ja:
       edit_profile: 'プロフィールを編集する'
     activate:
       success: 'アカウントが有効化されました。'
+    edit_profile:
+      title: 'プロフィール編集'
+    update_profile:
+      success: 'プロフィールを編集しました。'
   user_sessions:
     new:
       title: 'ログイン'

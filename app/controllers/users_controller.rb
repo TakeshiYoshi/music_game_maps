@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[show edit_profile update_profile]
   def new
     @user = User.new
   end
@@ -13,8 +14,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
+  def show; end
+
+  def edit_profile; end
+
+  def update_profile
+    if @user.update(user_params)
+      redirect_to @user, success: t('.success')
+    else
+      render :edit_profile
+    end
   end
 
   def activate
@@ -29,8 +38,12 @@ class UsersController < ApplicationController
 
   private
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname)
+    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description)
   end
 
   def create_playing_games

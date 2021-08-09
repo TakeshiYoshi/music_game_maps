@@ -1,0 +1,19 @@
+= form_with model: user, url: update_profile_user_path, method: :post, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center' do |f| 
+  .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
+    = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon', size: '100x100'
+  .col-md-10.col-sm-12
+    = render 'shared/error_messages', object: user
+    = f.text_field :nickname, id: 'userNickname', class: 'glass-text-field', 'v-model': "nicknameField", '@input': 'nicknameValid()', ':class': "nicknameError ? 'error-field' : ''", placeholder: User.human_attribute_name(:nickname)
+    p.error-text v-text='nicknameError'
+    = f.text_area :description, id: 'userDescription', rows: 5, class: 'glass-text-area', 'v-model': "descriptionField", '@input': 'descriptionValid()', ':class': "descriptionError ? 'error-field' : ''", placeholder: User.human_attribute_name(:description)
+    p.error-text v-text='descriptionError'
+
+    - if user.games.present?
+      p.glass-text = PlayingGame.model_name.human
+      .glass-game-labels
+        - user.games.each do |game|
+          label.glass-game-label.rounded-pill
+            = game.title
+  = f.submit class: 'btn btn-glass rounded-pill px-4 w-auto'
+
+= javascript_pack_tag 'edit_profile'

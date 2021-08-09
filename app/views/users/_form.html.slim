@@ -2,9 +2,7 @@
   .page-title
     h1.page-title-text.glass-text
       = t 'users.new.title'
-  - if user.errors.present?
-    - user.errors.full_messages.each do |message|
-      p.error-text.text-center = message
+  = render 'shared/error_messages', object: user
   = form_with model: user, id: 'signup_form', class: 'signup-form', local: true do |f|
     .form-group-signup
       = f.text_field :email, id: 'userEmail', class: 'glass-text-field', 'v-model': "emailField", '@input': 'emailValid()', ':class': "emailError ? 'error-field' : ''", placeholder: User.human_attribute_name(:email)
