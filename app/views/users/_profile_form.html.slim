@@ -8,11 +8,12 @@
     = f.text_area :description, id: 'userDescription', rows: 5, class: 'glass-text-area', 'v-model': "descriptionField", '@input': 'descriptionValid()', ':class': "descriptionError ? 'error-field' : ''", placeholder: User.human_attribute_name(:description)
     p.error-text v-text='descriptionError'
 
-    - if user.games.present?
-      p.glass-text = PlayingGame.model_name.human
+    .playing-games 
+      span.glass-text = t 'users.new.explain_playing_game'
       .glass-game-labels
-        - user.games.each do |game|
-          label.glass-game-label.rounded-pill
+        - Game.all.each do |game|
+          input.glass-game-check.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user" checked=(user.games.include?(game))
+          label.glass-game-label.rounded-pill for="game_#{game.id}_user"
             = game.title
   = f.submit class: 'btn btn-glass rounded-pill px-4 w-auto'
 
