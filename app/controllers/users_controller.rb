@@ -20,6 +20,8 @@ class UsersController < ApplicationController
 
   def update_profile
     if @user.update(user_params)
+      @user.games.destroy_all
+      create_playing_games
       redirect_to @user, success: t('.success')
     else
       render :edit_profile
