@@ -14,7 +14,7 @@ header.glass.blur.d-flex.align-items-center
         = fa_icon 'search'
     - if logged_in?
       label for="nav-menu-check"
-        = image_pack_tag 'icon.jpeg', class: 'rounded-circle icon'
+        = image_tag current_user.avatar.url, class: 'rounded-circle icon'
     - else 
       = link_to login_path, class: 'login_icon btn btn-glass rounded-circle login-button d-flex align-items-center justify-content-center'
         = fa_icon 'sign-in-alt'

@@ -32,6 +32,7 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'kaminari'
 gem 'ransack'
+gem 'carrierwave'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
