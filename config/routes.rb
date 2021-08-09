@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[create show] do
     member do
       get :activate
+      get :edit_profile
+      post :update_profile
     end
   end
   resources :password_resets, only: %i[new create update edit]
