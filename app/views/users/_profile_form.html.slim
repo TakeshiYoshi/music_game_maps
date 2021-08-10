@@ -1,7 +1,8 @@
 = form_with model: user, url: update_profile_user_path, method: :post, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center' do |f| 
   .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
     label.avatar-container.mb-4 for="avatar"
-      = image_tag user.avatar.url, id: 'avatarImg', class: 'rounded-circle icon', size: '100x100'
+      .profile-icon-container
+        = image_tag user.avatar.url, id: 'avatarImg', class: 'rounded-circle icon profile-icon'
       .avatar-cover.d-flex.justify-content-center.align-items-center
         = fa_icon 'file-upload'
     = f.file_field :avatar, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'avatar', class: 'd-none', '@change': 'imagePreview'

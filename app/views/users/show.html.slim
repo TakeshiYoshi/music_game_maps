@@ -2,9 +2,10 @@
 .col-12.glass.glass-round.py-4
   .row.user-profile.d-flex.justify-content-center
     .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
-      = image_tag @user.avatar.url, class: 'rounded-circle icon', size: '100x100'
+      .profile-icon-container
+        = image_tag @user.avatar.url, class: 'rounded-circle icon profile-icon', size: '100x100'
     .col-md-10.col-sm-12
-      p.glass-text.mb-2 = @user.nickname
+      p.glass-text.mb-2.nickname = @user.nickname
       .glass-text.mb-3
         = simple_format(@user.description)
 
