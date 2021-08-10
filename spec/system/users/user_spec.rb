@@ -1,60 +1,122 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザー登録", type: :system do
-  context '正しい情報を入力' do
-    it 'ユーザーの新規登録が完了すること' do
-      visit signup_path
-      expect {
-        fill_in 'userEmail', with: 'foo@bar.com'
-        fill_in 'userPassword', with: 'Foobarhogehoge'
-        fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
-        fill_in 'userNickname', with: 'FOOBAR'
-        click_button '登録する'
-      }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
-      expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-      expect(page.find('#flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
+RSpec.describe 'ユーザー', type: :system do
+  describe 'ユーザー登録' do
+    context '正しい情報を入力' do
+      it 'ユーザーの新規登録が完了すること' do
+        visit signup_path
+        expect {
+          fill_in 'userEmail', with: 'foo@bar.com'
+          fill_in 'userPassword', with: 'Foobarhogehoge'
+          fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
+          fill_in 'userNickname', with: 'FOOBAR'
+          click_button '登録する'
+        }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
+        expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
+      end
+
+      it 'PlayingGameモデルが作成されること' do
+        visit signup_path
+        expect {
+          fill_in 'userEmail', with: 'foo@bar.com'
+          fill_in 'userPassword', with: 'Foobarhogehoge'
+          fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
+          fill_in 'userNickname', with: 'FOOBAR'
+          page.first('label.glass-game-label').click
+          click_button '登録する'
+        }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
+      end
     end
 
-    it 'PlayingGameモデルが作成されること' do
-      visit signup_path
-      expect {
-        fill_in 'userEmail', with: 'foo@bar.com'
-        fill_in 'userPassword', with: 'Foobarhogehoge'
-        fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
-        fill_in 'userNickname', with: 'FOOBAR'
-        page.first('label.glass-game-label').click
-        click_button '登録する'
-      }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
+    context '誤った情報を入力' do
+      it 'ユーザーの新規作成がされないこと' do
+        visit signup_path
+        expect {
+          fill_in 'userEmail', with: 'worng'
+          page.first('label.glass-game-label').click
+          click_button '登録する'
+        }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
+        expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
+      end
+    end
+
+    context '新規作成したユーザーの有効化ページへアクセス' do
+      it 'ユーザーの有効化が完了すること' do
+        visit signup_path
+        expect {
+          fill_in 'userEmail', with: 'foo@bar.com'
+          fill_in 'userPassword', with: 'Foobarhogehoge'
+          fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
+          fill_in 'userNickname', with: 'FOOBAR'
+          click_button '登録する'
+        }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
+        user = User.last
+        visit activate_user_path(user.activation_token)
+        expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
+        expect(user.reload.activation_state).to eq('active'), 'ユーザーの有効化が完了していません'
+      end
     end
   end
 
-  context '誤った情報を入力' do
-    it 'ユーザーの新規作成がされないこと' do
-      visit signup_path
-      expect {
-        fill_in 'userEmail', with: 'worng'
-        page.first('label.glass-game-label').click
-        click_button '登録する'
-      }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
-      expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
+  describe 'ユーザープロフィール編集' do
+    let(:user) { create(:user) }
+    let(:another_user) { create(:user) }
+    before do
+      user.activate!
+      login user
     end
-  end
 
-  context '新規作成したユーザーの有効化ページへアクセス' do
-    it 'ユーザーの有効化が完了すること' do
-      visit signup_path
-      expect {
-        fill_in 'userEmail', with: 'foo@bar.com'
-        fill_in 'userPassword', with: 'Foobarhogehoge'
-        fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
-        fill_in 'userNickname', with: 'FOOBAR'
-        click_button '登録する'
-      }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
-      user = User.last
-      visit activate_user_path(user.activation_token)
-      expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-      expect(page.find('#flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
-      expect(user.reload.activation_state).to eq('active'), 'ユーザーの有効化が完了していません'
+    context 'ログインしたアカウント以外の編集ページにアクセスする' do
+      it '編集ページへのアクセスが出来ずにステータスが403エラーになること' do
+        get edit_profile_user_path(another_user)
+        expect(response.status).to eq(403), 'ステータスが403になっていません'
+      end
+    end
+
+    context '正しい情報を入力' do
+      it 'ユーザープロフィールの編集が成功すること(ニックネーム, 自己紹介)' do
+        visit edit_profile_user_path(user)
+        fill_in 'userNickname', with: 'hogefuga'
+        fill_in 'userDescription', with: 'おはよう！こんにちは！こんばんは！'
+        click_button '更新する'
+        expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page).to have_content('hogefuga'), 'ニックネームの編集が適応されていません。'
+        expect(page).to have_content('おはよう！こんにちは！こんばんは！'), '自己紹介の編集が適応されていません'
+      end
+
+      it 'ユーザープロフィールの編集が成功すること(プレー機種)' do
+        visit edit_profile_user_path(user)
+        expect {
+          page.first('label.glass-game-label').click
+          click_button '更新する'
+        }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
+        expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.all('label.glass-game-label').length).to eq(1), 'プレー機種の編集が適応されていません'
+      end
+
+      it 'ユーザープロフィールの編集が成功すること(アバター)' do
+        visit edit_profile_user_path(user)
+        attach_file 'avatar', 'spec/images/icon.png', make_visible: true
+        click_button '更新する'
+        expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+      end
+    end
+
+    context '誤った情報を入力' do
+      it 'ユーザープロフィールの編集が失敗すること' do
+        visit edit_profile_user_path(user)
+        fill_in 'userNickname', with: ''
+        fill_in 'userDescription', with: 'a'*301
+        click_button '更新する'
+        expect(current_path).to eq(update_profile_user_path(user)), '他のページへリダイレクトされています'
+        expect(page).to have_content('ニックネームを入力してください'), 'ニックネームに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('自己紹介は300文字以内で入力してください'), '自己紹介に関するエラーメッセージが表示されていません'
+      end
     end
   end
 end

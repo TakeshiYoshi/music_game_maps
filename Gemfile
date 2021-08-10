@@ -7,7 +7,6 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
 
 # Security
 gem 'gon'
-gem 'dotenv-rails'
 
 # Database
 gem 'mysql2', '>= 0.4.4'
@@ -32,6 +31,7 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'kaminari'
 gem 'ransack'
+gem 'carrierwave'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
@@ -39,6 +39,7 @@ gem 'turbolinks', '~> 5'
 
 # Authentication
 gem 'sorcery'
+gem 'pundit'
 
 # Time
 gem 'chronic'
@@ -48,6 +49,7 @@ gem 'geokit-rails'
 
 # AWS
 gem 'aws-sdk-rails', '~> 3'
+gem 'fog-aws'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

@@ -2,6 +2,8 @@
 @import 'shop-detail';
 @import 'signup';
 @import 'login';
+@import 'user_new';
+@import 'profile_form';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -114,6 +116,10 @@ a {
 
 .blur {
   backdrop-filter: blur(5px);
+}
+
+.glass-round {
+  border-radius: 20px;
 }
 
 .glass-text {
@@ -268,7 +274,7 @@ header {
   width: 100%;
   .user-menu {
     margin-top: 1px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     position: fixed;
     z-index: 1;
     top: -200px;
@@ -689,9 +695,8 @@ footer {
 }
 
 // フォーム
-.glass-text-field {
+@mixin glass-field {
   width: 100%;
-  height: 36px;
   padding: 10px;
   border: 2px solid rgba(white, 0);
   border-radius: 10px;
@@ -707,6 +712,15 @@ footer {
     border: 2px solid rgba(rgb(176, 221, 241), 0.3);
     box-shadow: 0 0 10px 0 rgba(white, 0.2);
   }
+}
+
+.glass-text-field {
+  @include glass-field;
+  height: 36px;
+}
+
+.glass-text-area {
+  @include glass-field;
 }
 
 .error-field {
@@ -839,6 +853,10 @@ footer {
 
   .glass {
     padding: $glass-padding;
+  }
+
+  .glass-round {
+    border-radius: 10px;
   }
 
   .modal-glass {

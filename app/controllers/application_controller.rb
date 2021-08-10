@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
+  class Forbidden < ActionController::ActionControllerError; end
+
+  class IpAddressRejected < ActionController::ActionControllerError; end
+
+  include Pundit
+  include ErrorHandlers unless Rails.env.development?
+
   before_action :set_search
   before_action :set_variable_to_javascript
 

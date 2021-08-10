@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
 
+  mount_uploader :avatar, AvatarUploader
+
   authenticates_with_sorcery!
 
   VALID_PASSWORD_REGEX = /(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d!?_.$&%\-]{8,30}/.freeze

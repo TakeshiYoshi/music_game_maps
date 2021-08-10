@@ -13,6 +13,7 @@ ja:
     label_game: '検索機種'
     label_area: 'エリア指定'
     clear: 'クリア'
+    mypage: 'マイページ'
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
@@ -31,8 +32,15 @@ ja:
       explain_playing_game: 'あなたがプレーしている機種を選択してください。'
     create:
       success: 'アカウント有効化用のメールを送信しました。'
+    show:
+      title: "%{nickname}さんのプロフィール"
+      edit_profile: 'プロフィールを編集する'
     activate:
       success: 'アカウントが有効化されました。'
+    edit_profile:
+      title: 'プロフィール編集'
+    update_profile:
+      success: 'プロフィールを編集しました。'
   user_sessions:
     new:
       title: 'ログイン'

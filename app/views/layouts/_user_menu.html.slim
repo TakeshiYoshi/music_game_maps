@@ -1,12 +1,9 @@
 .user-menu-container.d-flex.justify-content-end.flex-wrap
   .user-menu.glass.blur
     ul
-      li
-        = link_to '#', class: 'dropdown-text'
-          | マイページ
-      li
-        = link_to '#', class: 'dropdown-text'
-          | 設定
-      li
-        = link_to logout_path, method: :delete, class: 'dropdown-text'
-          = t('defaults.logout')
+      = link_to user_path(current_user), class: 'dropdown-text'
+        li = t('defaults.mypage')
+      = link_to '#', class: 'dropdown-text'
+        li 設定
+      = link_to logout_path, method: :delete, class: 'dropdown-text'
+        li = t('defaults.logout')

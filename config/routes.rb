@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root to: 'shops#index'
   resources :shops, only: %i[show]
   resource :filter, only: %i[create destroy]
-  resources :users, only: %i[create] do
+  resources :users, only: %i[create show] do
     member do
       get :activate
+      get :edit_profile
+      post :update_profile
     end
   end
   resources :password_resets, only: %i[new create update edit]
@@ -18,4 +20,6 @@ Rails.application.routes.draw do
   delete 'clear_near_shops_search', to: 'filters#clear_near_shops_search'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  get '*anithing', to: 'errors#routing_error'
 end
