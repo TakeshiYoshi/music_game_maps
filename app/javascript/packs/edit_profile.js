@@ -15,6 +15,11 @@ new Vue({
     },
     descriptionValid: function() {
       this.descriptionError ? false : this.descriptionValidCheck
+    },
+    imagePreview: function(e) {
+      const file = e.target.files[0];
+      const url = window.URL.createObjectURL(file);
+      document.getElementById('avatarImg').src = url;
     }
   },
   computed: {
