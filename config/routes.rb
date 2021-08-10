@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   delete 'clear_near_shops_search', to: 'filters#clear_near_shops_search'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  get '*anithing', to: 'errors#routing_error'
 end

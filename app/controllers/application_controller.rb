@@ -1,4 +1,10 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+  class Forbidden < ActionController::ActionControllerError; end
+
+  class IpAddressRejected < ActionController::ActionControllerError; end
+  include ErrorHandlers
+
   before_action :set_search
   before_action :set_variable_to_javascript
 
