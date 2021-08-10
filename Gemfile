@@ -40,6 +40,7 @@ gem 'turbolinks', '~> 5'
 
 # Authentication
 gem 'sorcery'
+gem 'pundit'
 
 # Time
 gem 'chronic'

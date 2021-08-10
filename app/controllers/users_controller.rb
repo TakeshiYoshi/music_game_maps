@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit_profile update_profile]
+
   def new
     @user = User.new
   end
@@ -16,9 +17,12 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def edit_profile; end
+  def edit_profile
+    authorize @user
+  end
 
   def update_profile
+    authorize @user
     if @user.update(user_params)
       @user.games.destroy_all
       create_playing_games
