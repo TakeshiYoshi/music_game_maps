@@ -69,7 +69,7 @@ RSpec.describe 'ユーザー', type: :system do
     end
 
     context 'ログインしたアカウント以外の編集ページにアクセスする' do
-      it 'ステータスが403エラーになること' do
+      it '編集ページへのアクセスが出来ずにステータスが403エラーになること' do
         get edit_profile_user_path(another_user)
         expect(response.status).to eq(403), 'ステータスが403になっていません'
       end
