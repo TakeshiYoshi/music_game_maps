@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'shops#index'
   resources :shops, only: %i[show]
   resource :filter, only: %i[create destroy]
-  resources :users, only: %i[create show] do
+  resources :users, only: %i[create show edit] do
     member do
       get :activate
       get :edit_profile

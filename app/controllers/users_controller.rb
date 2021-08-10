@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit_profile update_profile]
+  before_action :set_user, only: %i[show edit edit_profile update_profile]
 
   def new
     @user = User.new
@@ -16,6 +16,8 @@ class UsersController < ApplicationController
   end
 
   def show; end
+
+  def edit; end
 
   def edit_profile
     authorize @user
