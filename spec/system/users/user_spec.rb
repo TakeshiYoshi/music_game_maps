@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'ユーザー', type: :system do
+  let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
+  
   describe 'ユーザー登録' do
     context '正しい情報を入力' do
       it 'ユーザーの新規登録が完了すること' do
@@ -61,8 +64,6 @@ RSpec.describe 'ユーザー', type: :system do
   end
 
   describe 'ユーザープロフィール編集' do
-    let(:user) { create(:user) }
-    let(:another_user) { create(:user) }
     before do
       user.activate!
       login user
@@ -116,6 +117,62 @@ RSpec.describe 'ユーザー', type: :system do
         expect(current_path).to eq(update_profile_user_path(user)), '他のページへリダイレクトされています'
         expect(page).to have_content('ニックネームを入力してください'), 'ニックネームに関するエラーメッセージが表示されていません'
         expect(page).to have_content('自己紹介は300文字以内で入力してください'), '自己紹介に関するエラーメッセージが表示されていません'
+      end
+    end
+  end
+
+  describe 'ユーザー設定編集' do
+    before do
+      user.activate!
+      login user
+    end
+
+    context 'ログインしたアカウント以外の編集ページにアクセスする' do
+      it '編集ページへのアクセスが出来ずにステータスが403エラーになること' do
+        get edit_user_path(another_user)
+        expect(response.status).to eq(403), 'ステータスが403になっていません'
+      end
+    end
+
+    context '正しい情報を入力' do
+      it 'ユーザー設定の編集が成功すること' do
+        visit edit_user_path(user)
+        fill_in 'userEmail', with: 'hogefuga@fuga.com'
+        fill_in 'userPassword', with: 'Password1234'
+        fill_in 'userPasswordConfirmation', with: 'Password1234'
+        check 'user_anonymous'
+        click_button '更新する'
+        expect(current_path).to eq(edit_user_path(user)), 'ユーザー編集ページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('ユーザー設定の変更が完了しました。'), 'フラッシュメッセージが表示されてません'
+        user.reload
+        expect(user.email).to eq('hogefuga@fuga.com'), 'メールの編集が適応されていません。'
+        expect(user.anonymous).to eq(true), '匿名設定の編集が適応されていません'
+        # 再度ログインを行いパスワードが変更されたかチェックする
+        page.find('label[for=nav-menu-check]').click
+        sleep 1
+        click_on 'ログアウト'
+        visit login_path
+        fill_in 'email', with: user.email
+        fill_in 'password', with: 'Password1234'
+        click_button 'ログイン'
+        expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
+        expect(page.find('#flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
+      end
+    end
+
+    context '誤った情報を入力' do
+      it 'ユーザー設定の編集が失敗すること' do
+        visit edit_user_path(user)
+        fill_in 'userEmail', with: ''
+        fill_in 'userPassword', with: 'a'
+        click_button '更新する'
+        expect(current_path).to eq(user_path(user)), '他のページへリダイレクトされています'
+        expect(page).to have_content('メールアドレスを入力してください'), 'メールアドレスに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('メールアドレスは不正な値です'), 'メールアドレスに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('パスワードは8文字以上で入力してください'), 'パスワードに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('パスワードは不正な値です'), 'パスワードに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('パスワード再入力とパスワードの入力が一致しません'), 'パスワードに関するエラーメッセージが表示されていません'
+        expect(page).to have_content('パスワード再入力を入力してください'), 'パスワードに関するエラーメッセージが表示されていません'
       end
     end
   end
