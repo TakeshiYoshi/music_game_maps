@@ -4,6 +4,6 @@
       = link_to user_path(current_user), class: 'dropdown-text'
         li = t('defaults.mypage')
       = link_to edit_user_path(current_user), class: 'dropdown-text'
-        li 設定
+        li = t('defaults.setting')
       = link_to logout_path, method: :delete, class: 'dropdown-text'
         li = t('defaults.logout')

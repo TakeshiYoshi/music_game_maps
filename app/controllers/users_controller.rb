@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit edit_profile update_profile]
+  before_action :set_user, only: %i[show edit update edit_profile update_profile]
 
   def new
     @user = User.new
@@ -17,7 +17,18 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    authorize @user
+  end
+
+  def update
+    authorize @user
+    if @user.update(user_params)
+      redirect_to edit_user_url(@user), success: t('.success')
+    else
+      render :edit
+    end
+  end
 
   def edit_profile
     authorize @user
@@ -51,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar)
+    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar, :anonymous)
   end
 
   def create_playing_games

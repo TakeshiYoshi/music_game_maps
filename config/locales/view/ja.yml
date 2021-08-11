@@ -14,6 +14,7 @@ ja:
     label_area: 'エリア指定'
     clear: 'クリア'
     mypage: 'マイページ'
+    setting: '設定'
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
@@ -21,6 +22,7 @@ ja:
     form:
       header_search_placeholder: 'フリーワード検索'
       remember_me: 'ログイン状態を保持する'
+      anonymous: '匿名設定を有効にする'
     flash_message:
       login: 'ログインしてください。'
     map_flash_message:
@@ -35,6 +37,11 @@ ja:
     show:
       title: "%{nickname}さんのプロフィール"
       edit_profile: 'プロフィールを編集する'
+    edit:
+      title: 'ユーザー設定'
+      anonymous_exp: '匿名設定を有効にするとあなたが情報の投稿を行った際、アイコン, ニックネームが表示されなくなります。'
+    update:
+      success: 'ユーザー設定の変更が完了しました。'
     activate:
       success: 'アカウントが有効化されました。'
     edit_profile:

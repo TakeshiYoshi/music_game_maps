@@ -1,0 +1,23 @@
+.form-container.text-center
+  .page-title
+    h1.page-title-text.glass-text
+      = t 'users.edit.title'
+  = render 'shared/error_messages', object: user
+  = form_with model: user, id: 'signup_form', class: 'signup-form', local: true do |f|
+    .form-group-signup
+      = f.text_field :email, id: 'userEmail', class: 'glass-text-field', 'v-model': "emailField", '@input': 'emailValid()', ':class': "emailError ? 'error-field' : ''", placeholder: User.human_attribute_name(:email)
+      p.error-text v-text='emailError'
+    .form-group-signup
+      = f.password_field :password, id: 'userPassword', class: 'glass-text-field', 'v-model': 'passwordField', '@input': 'passwordValid()', ':class': "passwordError ? 'error-field' : ''", autocomplete: 'off', placeholder: "#{User.human_attribute_name(:password) + t('defaults.password_valid')}"
+      p.error-text v-text='passwordError'
+    .form-group-signup
+      = f.password_field :password_confirmation, id: 'userPasswordConfirmation', class: 'glass-text-field', 'v-model': 'passwordConfirmationField', ':class': "passwordConfirmationError ? 'error-field' : ''", autocomplete: 'off', '@input': 'passwordConfirmationValid()', placeholder: User.human_attribute_name(:password_confirmation)
+      p.error-text v-text='passwordConfirmationError'
+    .form-group-signup.mb-4
+      = f.check_box :anonymous
+      = f.label :anonymous, t('defaults.form.anonymous'), class: 'glass-text ms-2 mb-2'
+      p.glass-text.anonymous-explain
+        = t 'users.edit.anonymous_exp'
+    = f.submit class: 'btn btn-glass rounded-pill px-4'
+
+= javascript_pack_tag 'edit_form'
