@@ -76,5 +76,19 @@ RSpec.describe '店舗検索機能', type: :system do
         expect(page).not_to have_content(shop_in_another_pref.name), 'フィルターをかけたエリアにない店舗が表示されています'
       end
     end
+
+    context '検索件数を20に変更' do
+      before { create_list(:shop, 50) }
+
+      it '1ページに表示される検索件数が20件になること' do
+        visit root_path
+        click_button 'filter-button'
+        within('.modal') do
+          select '20', from: 'number_of_searches'
+          click_button 'フィルター設定'
+        end
+        expect(page.all('.shop-card').length).to eq(20), '1ページに表示される検索件数が20件になっていません'
+      end
+    end
   end
 end
