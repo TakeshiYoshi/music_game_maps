@@ -12,6 +12,7 @@ ja:
     form_title: '検索フィルター'
     label_game: '検索機種'
     label_area: 'エリア指定'
+    label_number_of_searches: '検索件数'
     clear: 'クリア'
     mypage: 'マイページ'
     setting: '設定'
