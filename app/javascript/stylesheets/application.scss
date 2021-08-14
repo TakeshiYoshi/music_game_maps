@@ -765,6 +765,11 @@ footer {
   opacity: 1;
 }
 
+// ページトップ
+.scroll-top {
+  width: 150px;
+}
+
 // 以下iPad縦表示向け
 @include media-breakpoint-down(lg) {
   header .search-form > .search-field {
@@ -947,4 +952,9 @@ footer {
   #search-btn-check:checked ~ .user-menu-container > .user-menu {
     top: -200px;
   }
+
+  // ページトップ
+  .scroll-top {
+    width: 100px;
+  } 
 }

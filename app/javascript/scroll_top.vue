@@ -1,8 +1,6 @@
 <template>
   <transition>
-    <div id="scrollTop" class="scroll-top glass glass-round blur" v-show="visible" @click="scrollTop">
-      SCROLL TOP
-    </div>
+    <img src="./images/page_top.png" class="scroll-top" v-show="visible" @click="scrollTop">
   </transition>
 </template>
 
