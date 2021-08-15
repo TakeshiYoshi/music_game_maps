@@ -27,7 +27,7 @@ input.d-none#table-check type="checkbox"
       label for="table-check"
         span.today-opening-hours
           - if shop.opening_time? == 'open'
-            = shop.opening_hours_text.sort[Time.zone.now.wday].last
+            = shop.today_text
           - else
             = t "defaults.#{shop.opening_time?}"
         span.glass-text

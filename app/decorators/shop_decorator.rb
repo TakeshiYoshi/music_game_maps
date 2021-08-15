@@ -61,6 +61,13 @@ module ShopDecorator
     ranges_text
   end
 
+  def today_text
+    ranges_text = opening_hours_text
+    range_text = ''
+    ranges_text.each { |data| range_text = data.last if data.first == Time.zone.now.wday }
+    range_text
+  end
+
   def day_of_week_convert_to_text_from_num(num)
     day_of_week = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日']
     day_of_week[num]
