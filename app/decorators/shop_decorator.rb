@@ -63,7 +63,7 @@ module ShopDecorator
 
   def today_text
     ranges_text = opening_hours_text
-    range_text = ''
+    range_text = '休業日'
     ranges_text.each { |data| range_text = data.last if data.first == Time.zone.now.wday }
     range_text
   end
