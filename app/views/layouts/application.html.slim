@@ -7,6 +7,7 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_pack_tag 'application'
+    = javascript_pack_tag 'set_theme'
   body
     .container-xl.px-0.footer-fixed
       = render 'layouts/flash_message'
@@ -14,3 +15,5 @@ html
       = yield
       = render 'layouts/footer'
       = render 'layouts/scroll_top'
+    input.d-none#bg-color-check type="checkbox"
+    .bg-color-changing

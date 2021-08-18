@@ -12,64 +12,46 @@
 }
 
 // 初期化
-$bg-start: #6ABBC4;
-$bg-end: #6E74BC;
-$site-title: #378892;
-$field-color: #326FFA;
-$label-open: #E26A9D;
-$label-close: #406b8f;
+:root {
+  --bg-start: #6ABBC4;
+  --bg-end: #6E74BC;
+  --bg-start-changing: #000000; // グラデーションアニメーション用
+  --bg-end-changing: #FFFFFF; // グラデーションアニメーション用
+  --site-title: #378892;
+  --field-color: #326FFA;
+  --field-color-light: #467DFA;
+  --label-open: 226, 106, 157;
+  --label-close: 64, 107, 143;
+}
+
 $logo-height-size: 50px;
 $glass-padding: 10px;
 $glass-border-size: 1px;
-$theme: normal;
-
-@if $theme == normal {
-  $bg-start: #6ABBC4;
-  $bg-end: #6E74BC;
-  $site-title: #378892;
-}
-@if $theme == dark {
-  $bg-start: #1B474D;
-  $bg-end: #370D62;
-  $site-title: #78BCC4;
-}
-@if $theme == dark-blue {
-  $bg-start: #001;
-  $bg-end: rgb(16, 16, 48);
-  $site-title: #BBF;
-  $field-color: #3d5796;
-  $label-open: #913f61;
-  $label-close: #375975;
-}
-@if $theme == yumekawa {
-  $bg-start: #c2afe6;
-  $bg-end: #bc6e9b;
-  $site-title: #6fb8d4;
-  $field-color: #30a2b6;
-  $label-open: #ee83af;
-  $label-close: #427299;
-}
-@if $theme == shinkai {
-  $bg-start: #0d355a;
-  $bg-end: #07202b;
-  $site-title: #bfc56e;
-}
-@if $theme == mono {
-  $bg-start: #000000;
-  $bg-end: #000000;
-  $site-title: #FFFFFF;
-  $field-color: #292929;
-  $label-open: #3b0b14;
-  $label-close: #0b253b;
-}
 
 html {
   min-height: 100%;
 }
 
 body {
+  position: relative;
   counter-reset: shop-counter;
-  background: linear-gradient(135deg, $bg-start, $bg-end);
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+}
+
+.bg-color-changing {
+  z-index: -100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--bg-start-changing), var(--bg-end-changing));
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+#bg-color-check:checked ~ .bg-color-changing {
+  opacity: 1;
 }
 
 .footer-fixed {
@@ -161,9 +143,10 @@ header {
   .site-title {
     font-size: 2.7rem;
     font-family: LEMONMILK-BOLD;
-    color: $site-title;
+    color: var(--site-title);
     letter-spacing: 0.4rem;
     margin: 0;
+    transition: all 0.3s;
   }
   .icon {
     width: 50px;
@@ -188,7 +171,8 @@ header {
   }
   .filter-icon-button-filtered {
     color: white;
-    background: $field-color;
+    background: var(--field-color);
+    transition: all 0.3s;
   }
   .search-form {
     height: 38px;
@@ -197,16 +181,16 @@ header {
       margin-right: 15px;
       transition: all 0.3s;
       input {
-        border: 2px solid $field-color;
+        border: 2px solid var(--field-color);
         border-radius: 19px 0 0 19px;
         padding-left: 19px;
-        box-shadow: 0 0 6px 0 $field-color;
+        box-shadow: 0 0 6px 0 var(--field-color);
         transition: all 0.3s;
       }
       .btn-glass {
         transition: all 0.3s;
         border-radius: 0 19px 19px 0;
-        box-shadow: 0 0 6px 0 $field-color;
+        box-shadow: 0 0 6px 0 var(--field-color);
         transition: all 0.3s;
         i {
           margin-right: 4px;
@@ -236,16 +220,16 @@ header {
       margin-right: 10px;
       transition: all 0.3s;
       input {
-        border: 2px solid $field-color;
+        border: 2px solid var(--field-color);
         border-radius: 19px 0 0 19px;
         padding-left: 19px;
-        box-shadow: 0 0 6px 0 $field-color;
+        box-shadow: 0 0 6px 0 var(--field-color);
         transition: all 0.3s;
       }
       button {
         transition: all 0.3s;
         border-radius: 0 19px 19px 0;
-        box-shadow: 0 0 6px 0 $field-color;
+        box-shadow: 0 0 6px 0 var(--field-color);
         transition: all 0.3s;
         i {
           margin-right: 4px;
@@ -278,7 +262,7 @@ header {
     transition: all 0.3s ease-in-out;
     position: fixed;
     z-index: 1;
-    top: -200px;
+    top: -240px;
     padding: 0;
     border-radius: 20px;
     ul {
@@ -367,13 +351,15 @@ header {
   }
 
   .label-open {
-    box-shadow: 0 0 3px 0 $label-open;
-    background: rgba($label-open, 0.5);
+    box-shadow: 0 0 3px 0 var(--label-open);
+    background: rgba(var(--label-open), 0.5);
+    transition: all 0.3s;
   }
 
   .label-close {
-    box-shadow: 0 0 3px 0 $label-close;
-    background: rgba($label-close, 0.5);
+    box-shadow: 0 0 3px 0 var(--label-close);
+    background: rgba(var(--label-close), 0.5);
+    transition: all 0.3s;
   }
 
   &:hover {
@@ -425,14 +411,15 @@ footer {
 
 .btn-glass {
   color: white;
-  background-color: $field-color;
-  border-color: $field-color;
-  box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+  background-color: var(--field-color);
+  border-color: var(--field-color);
+  box-shadow: 0 0 6px 0 var(--field-color-light);
+  transition: all 0.3s;
   &:hover {
     color: white;
-    background-color: lighten($field-color, 4%);
-    border-color: lighten($field-color, 4%);
-    box-shadow: 0 0 6px 0 lighten($field-color, 4%);
+    background-color: var(--field-color-light);
+    border-color: var(--field-color-light);
+    box-shadow: 0 0 6px 0  var(--field-color-light);
   }
 }
 
