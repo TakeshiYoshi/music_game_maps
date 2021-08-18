@@ -2,34 +2,41 @@
   <div id="editTheme">
     <div class="theme-container">
       <div class="d-flex" style="margin-bottom: 5px;">
-        <div class="theme-button normal" @click="changeTheme(normal)"></div>
-        <div class="theme-button dark" @click="changeTheme(dark)"></div>
-        <div class="theme-button dark-blue" @click="changeTheme(darkBlue)"></div>
+        <div class="theme-button normal" @click="updateTheme('normal')"></div>
+        <div class="theme-button dark" @click="updateTheme('dark')"></div>
+        <div class="theme-button dark-blue" @click="updateTheme('darkBlue')"></div>
       </div>
       <div class="d-flex">
-        <div class="theme-button shinkai" @click="changeTheme(shinkai)"></div>
-        <div class="theme-button yumekawa" @click="changeTheme(yumekawa)"></div>
-        <div class="theme-button mono" @click="changeTheme(mono)"></div>
+        <div class="theme-button shinkai" @click="updateTheme('shinkai')"></div>
+        <div class="theme-button yumekawa" @click="updateTheme('yumekawa')"></div>
+        <div class="theme-button mono" @click="updateTheme('mono')"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { color } from './packs/theme_color.js' 
+
+// CSRFトークン作成
+axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
+
 export default {
-  data: function () {
+  data: function() {
     return {
-      message: 'Hello world',
-      normal:   { '--bg-start': '#6ABBC4', '--bg-end': '#6E74BC', '--site-title': '#378892', '--field-color': '#326FFA', '--field-color-light': '#467DFA', '--label-open': '226, 106, 157', '--label-close': '64, 107, 143' },
-      dark:     { '--bg-start': '#1B474D', '--bg-end': '#370D62', '--site-title': '#78BCC4', '--field-color': '#326FFA', '--field-color-light': '#467DFA', '--label-open': '226, 106, 157', '--label-close': '64, 107, 143' },
-      darkBlue: { '--bg-start': '#000011', '--bg-end': '#101030', '--site-title': '#BBBBFF', '--field-color': '#3d5796', '--field-color-light': '#485e92', '--label-open': '145, 63, 97', '--label-close': '55, 89, 117' },
-      shinkai:  { '--bg-start': '#0D355A', '--bg-end': '#07202B', '--site-title': '#BFC56E', '--field-color': '#326FFA', '--field-color-light': '#467DFA', '--label-open': '226, 106, 157', '--label-close': '64, 107, 143' },
-      yumekawa: { '--bg-start': '#C2AFE6', '--bg-end': '#BC6E9B', '--site-title': '#6FB8D4', '--field-color': '#30A2B6', '--field-color-light': '#4AADBE', '--label-open': '238, 131, 175', '--label-close': '66, 114, 153' },
-      mono:     { '--bg-start': '#000000', '--bg-end': '#000000', '--site-title': '#FFFFFF', '--field-color': '#292929', '--field-color-light': '#363636', '--label-open': '59, 11, 20', '--label-close': '11, 37, 59' }
     }
   },
   methods: {
-    changeTheme: function(theme) {
+    updateTheme: function(themeName) {
+      this.changeTheme(themeName)
+      this.setTheme(themeName)
+    },
+    changeTheme: function(themeName) {
+      const theme = color[themeName]
       const root = document.documentElement;
       const check = document.getElementById('bg-color-check');
       for(const property in theme) {
@@ -53,6 +60,13 @@ export default {
           root.style.setProperty(property, theme[property]);
         }
       }
+    },
+    setTheme: function(themeName) {
+      // Rails側にセッションとして記録
+      axios
+        .post('/theme', {
+        theme: themeName
+        })
     }
   }
 }

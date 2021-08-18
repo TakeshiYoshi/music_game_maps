@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :password_resets, only: %i[new create update edit]
   resources :user_sessions, only: %i[create]
+  resource :theme, only: %i[create]
   get 'signup', to: 'users#new'
   get 'login', to: 'user_sessions#new'
   delete 'logout', to: 'user_sessions#destroy'
