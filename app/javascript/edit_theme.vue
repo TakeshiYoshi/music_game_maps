@@ -65,7 +65,9 @@ export default {
       // Rails側にセッションとして記録
       axios
         .post('/theme', {
-        theme: themeName
+          user: {
+            theme: themeName
+          }
         })
     }
   }

@@ -1,5 +1,12 @@
 class ThemesController < ApplicationController
   def create
-    session[:theme] = params[:theme]
+    user = current_user
+    user.update(user_params)
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:theme)
   end
 end
