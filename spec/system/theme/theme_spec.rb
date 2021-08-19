@@ -27,6 +27,7 @@ RSpec.describe "テーマ変更", type: :system do
       # rgb(27, 71, 77)  rgb(55, 13, 98)
       expect(page.find('body').native.css_value('background')).to have_content('rgb(27, 71, 77)'), 'テーマが変更されていません'
       expect(page.find('body').native.css_value('background')).to have_content('rgb(55, 13, 98)'), 'テーマが変更されていません'
+      expect(user.reload.theme).to eq('dark'), 'テーマが変更されていません'
     end
   end
 
@@ -41,6 +42,7 @@ RSpec.describe "テーマ変更", type: :system do
       visit root_path
       expect(page.find('body').native.css_value('background')).to have_content('rgb(27, 71, 77)'), 'テーマが変更されていません'
       expect(page.find('body').native.css_value('background')).to have_content('rgb(55, 13, 98)'), 'テーマが変更されていません'
+      expect(user.reload.theme).to eq('dark'), 'テーマが変更されていません'
     end
   end
 end
