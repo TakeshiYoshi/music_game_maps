@@ -1,0 +1,11 @@
+.user-review-form-container.my-4.px-md-4.py-md-4.glass.glass-round
+  = form_with model: user_review, url: shop_user_reviews_path(params[:id]), method: :post, local: true do |f|
+    = render 'shared/error_messages', object: user_review
+    = f.text_area :body, rows: 5, class: 'glass-text-area', placeholder: "#{UserReview.human_attribute_name(:body)}#{t('defaults.user_review_body_valid')}"
+    .user-review-content.user-review-images.d-flex.mb-3
+      .user-review-image
+      .user-review-image
+    p.glass-text.mb-3 = t('user_reviews.new.about_games_exp')
+    = render 'shared/form_parts/game_labels'
+    .text-center.mt-4
+      = f.submit t('defaults.post'), class: 'btn btn-glass rounded-pill px-5 w-auto btn-label-size'

@@ -65,6 +65,12 @@
   color: white;
 }
 
+.btn-label-size {
+  margin-right: 10px;
+  padding: 3px 15px;
+  font-size: 1rem;
+}
+
 .today-opening-hours {
   color: white;
   text-shadow: 0 0 6px #0D3A40;
@@ -158,8 +164,16 @@
   }
 }
 
+.user-review-form-container {
+  display: none;
+}
+
 #table-check:checked ~ .shop-description-container .table-toggle {
   transform: rotate(-180deg);
+}
+
+#user-review-form-check:checked ~ .user-review-form-container {
+  display: block;
 }
 
 // 以下スマホ向け
@@ -188,6 +202,12 @@
   }
 
   .shop-label {
+    margin-right: 5px;
+    padding: 2px 13px;
+    font-size: 0.8rem;
+  }
+
+  .btn-label-size {
     margin-right: 5px;
     padding: 2px 13px;
     font-size: 0.8rem;

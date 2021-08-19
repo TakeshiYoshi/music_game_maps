@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'shops#index'
-  resources :shops, only: %i[show]
+  resources :shops, only: %i[show] do
+    resources :user_reviews, only: %i[create]
+  end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update] do
     member do

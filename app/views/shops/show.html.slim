@@ -1,7 +1,15 @@
 = render 'description', shop: @shop
 .main-content.d-flex
   .col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
-    label.shop-label.rounded-pill ユーザー投稿された情報
+    input.d-none#user-review-form-check type="checkbox"
+    .d-flex
+      .col-6.d-flex.align-items-center
+        label.shop-label.rounded-pill
+          = t 'shops.show.user_review_label'
+      .col-6.d-flex.align-items-center.justify-content-end
+        label.btn.btn-glass.btn-label-size.rounded-pill for="user-review-form-check"
+          = t 'shops.show.user_review_btn'
+    = render 'user_reviews/form', user_review: @user_review
     .user-review-content.d-flex.align-items-center
       input.only-playing-games#only-playing-games type="checkbox"
       label.glass-text for="only-playing-games" 自分がプレーするゲームのみ表示する
