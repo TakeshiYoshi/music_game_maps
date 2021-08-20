@@ -1,0 +1,16 @@
+.review
+  .user-review-head.d-flex.align-items-center
+    = image_tag user_review.user.avatar.url, class: 'rounded-circle icon'
+    span.user-name.glass-text
+      = user_review.user.nickname
+    span.review-date.glass-text
+      = l user_review.created_at, format: :user_review
+  .user-review-about
+    - user_review.games.each do |game|
+      = render 'user_reviews/game_badge', game: game
+  .user-review-body.glass-text
+    = user_review.body
+  .d-flex
+    - user_review.images.each do |image|
+      .user-review-image.body-image
+        = image_tag image.url, class: 'review_image_thum'

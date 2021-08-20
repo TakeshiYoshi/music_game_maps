@@ -20,7 +20,7 @@ ja:
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
-    user_review_body_valid: '(1~65,536文字)'
+    user_review_body_valid: '(1~1,000文字)'
     password_reset: 'パスワードを変更する'
     form:
       header_search_placeholder: 'フリーワード検索'
@@ -73,6 +73,8 @@ ja:
   user_reviews:
     new:
       about_games_exp: '情報に関連する機種を選択してください。'
+    create:
+      success: '情報提供ありがとうございました！！'
   shops:
     show:
       user_review_label: 'ユーザー投稿された情報'

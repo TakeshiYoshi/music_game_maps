@@ -7,7 +7,7 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @shop = Shop.includes(:games).find(params[:id])
+    @shop = Shop.includes([:games, { user_reviews: :games }]).find(params[:id])
     @user_review = @shop.user_reviews.new
   end
 

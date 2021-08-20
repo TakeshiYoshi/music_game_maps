@@ -1,5 +1,5 @@
-= render 'description', shop: @shop
-.main-content.d-flex
+= render 'shops/description', shop: @shop
+.col-12.main-content.d-flex
   .col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
     input.d-none#user-review-form-check type="checkbox"
     .d-flex
@@ -10,7 +10,7 @@
         .col-6.d-flex.align-items-center.justify-content-end
           label.btn.btn-glass.btn-label-size.rounded-pill for="user-review-form-check"
             = t 'shops.show.user_review_btn'
-    = render 'user_reviews/form', user_review: @user_review if logged_in?
+    = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
     - if logged_in?
       .user-review-content.d-flex.align-items-center
         input.only-playing-games#only-playing-games type="checkbox"
@@ -25,51 +25,7 @@
     div
       label.shop-label.rounded-pill 情報一覧
       .user-review-content.user-reviews
-        .review
-          .user-review-head.d-flex.align-items-center
-            = image_pack_tag 'icon_default.png', class: 'rounded-circle icon'
-            span.user-name.glass-text
-              | yskw
-            span.review-date.glass-text
-              | 2021-07-19
-          .user-review-about
-            .badge.p-0
-              .badge-content-no-data.d-flex.align-items-center.rounded-pill
-                .game-title-no-data.d-flex.align-items-center.justify-content-center
-                  | REFLEC BEAT
-          .user-review-body.glass-text
-            | REFLEC BEATはアンプなし。音量は普通。筐体はおそらくcolette筐体。PASELIが使用出来ません。
-
-        .review
-          .user-review-head.d-flex.align-items-center
-            = image_pack_tag 'icon_default.png', class: 'rounded-circle icon'
-            span.user-name.glass-text
-              | ぺんぺん
-            span.review-date.glass-text
-              | 2021-04-11
-          .user-review-about
-            .badge.p-0
-              .badge-content-no-data.d-flex.align-items-center.rounded-pill
-                .game-title-no-data.d-flex.align-items-center.justify-content-center
-                  | CHUNITHM
-          .user-review-body.glass-text
-            | チュウニズム3台あります！荷物入れがあります。向かいにmaimaiがありますがイヤホンすれば気にならないかなー
-
-        .review
-          .user-review-head.d-flex.align-items-center
-            = image_pack_tag 'icon_default.png', class: 'rounded-circle icon'
-            span.user-name.glass-text
-              | 太鼓ちゃん
-            span.review-date.glass-text
-              | 2021-01-27
-          .user-review-about
-            .badge.p-0
-              .badge-content-no-data.d-flex.align-items-center.rounded-pill
-                .game-title-no-data.d-flex.align-items-center.justify-content-center
-                  | シンクロニカ
-          .user-review-body.glass-text
-            | 太鼓の隣にシンクロニカが！namco以外ではあまり見ない筐体なのでとてもレアだと思います！オフラインで稼働しているようです。
-            .user-review-image.body-image
+        = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
 
   - if @shop.twitter_id
-    = render 'twitter', shop: @shop
+    = render 'shops/twitter', shop: @shop

@@ -105,8 +105,8 @@
   background: white;
   border-radius: 10px;
   margin-right: 5px;
-  width: 125px;
-  height: 125px;
+  width: 150px;
+  height: 150px;
   box-shadow: 0 0 6px 0 rgba(white, 0.7);
   object-fit: cover;
 }
@@ -165,7 +165,20 @@
 }
 
 .user-review-form-container {
+  position: relative;
   display: none;
+}
+
+#user_review_form_adjust_position {
+  position: absolute;
+  top: -80px;
+}
+
+.review_image_thum {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #table-check:checked ~ .shop-description-container .table-toggle {
@@ -217,8 +230,8 @@
     background: white;
     border-radius: 10px;
     margin-right: 5px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .user-reviews {
@@ -248,5 +261,9 @@
     tr:last-child > th {
       padding-bottom: 6px;
     }
+  }
+
+  .user-review {
+    width: 100%;
   }
 }
