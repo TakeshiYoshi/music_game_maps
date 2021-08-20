@@ -1,8 +1,8 @@
 .review
   .user-review-head.d-flex.align-items-center
-    = image_tag user_review.user.avatar.url, class: 'rounded-circle icon'
+    = image_tag user_review.user.avatar_url_in_review, class: 'rounded-circle icon'
     span.user-name.glass-text
-      = user_review.user.nickname
+      = user_review.user.nickname_in_review
     span.review-date.glass-text
       = l user_review.created_at, format: :user_review
   .user-review-about

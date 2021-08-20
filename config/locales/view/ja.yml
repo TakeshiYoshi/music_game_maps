@@ -17,6 +17,7 @@ ja:
     mypage: 'マイページ'
     setting: '設定'
     post: '投稿する'
+    anonymous: '匿名'
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
