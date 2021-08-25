@@ -15,6 +15,7 @@ new Vue({
     },
     previewImages: function(e) {
       const images = e.target.files;
+      this.images = [];
       this.checkLength(images)
       for(const image of images) {
         this.images.push(window.URL.createObjectURL(image))

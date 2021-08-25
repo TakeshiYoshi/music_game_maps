@@ -2,6 +2,7 @@ class UserReviewsController < ApplicationController
   def create
     @shop = Shop.find(params[:shop_id])
     @user_review = @shop.user_reviews.new(user_review_params)
+    @user_review.images.slice!(4..-1)
     if @user_review.save
       create_about_games
       redirect_to shop_path(params[:shop_id]), success: t('.success')
