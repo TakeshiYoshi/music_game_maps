@@ -74,6 +74,7 @@ ja:
   user_reviews:
     new:
       about_games_exp: '情報に関連する機種を選択してください。'
+      upload_images: '画像を投稿する(最大4枚)'
     create:
       success: '情報提供ありがとうございました！！'
   shops:

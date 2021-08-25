@@ -5,9 +5,13 @@
     = f.hidden_field :user_id, value: current_user.id
     = f.text_area :body, id: 'userReviewBody', rows: 5, class: 'glass-text-area', 'v-model': "bodyField", '@input': 'bodyValid()', ':class': "bodyError ? 'error-field' : ''", placeholder: "#{UserReview.human_attribute_name(:body)}#{t('defaults.user_review_body_valid')}"
     p.error-text v-text='bodyError'
+    label.btn.btn-glass.btn-label-size.rounded-pill for="userReviewImages"
+      = t 'user_reviews.new.upload_images'
+    = f.file_field :images, accept: 'image/jpeg,image/jpg,image/gif,image/png', multiple: true, id: 'userReviewImages', class: 'd-none', '@change': 'previewImages'
     .user-review-content.user-review-images.d-flex.mb-3
-      .user-review-image
-      = f.file_field :images, accept: 'image/jpeg,image/jpg,image/gif,image/png', multiple: true, id: 'userReviewImages'
+      .user-review-image v-for='(image, index) in images' v-if='index < 4'
+        img.review_image_thum :src='image'
+    p.error-text v-text='imagesError'
     p.glass-text.mb-3 = t('user_reviews.new.about_games_exp')
     = render 'shared/form_parts/game_labels'
     .text-center.mt-4
