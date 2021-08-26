@@ -11,21 +11,26 @@
           label.btn.btn-glass.btn-label-size.rounded-pill for="user-review-form-check"
             = t 'shops.show.user_review_btn'
     = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
-    - if logged_in?
-      .user-review-content.d-flex.align-items-center
-        input.only-playing-games#only-playing-games type="checkbox"
-        label.glass-text for="only-playing-games" 自分がプレーするゲームのみ表示する
-    div
-      label.shop-label.rounded-pill 画像付きの情報
-      .user-review-content.user-review-images.d-flex
-        .user-review-image
-        .user-review-image
-        .user-review-image
-        .user-review-image
-    div
-      label.shop-label.rounded-pill 情報一覧
-      .user-review-content.user-reviews
-        = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
+    - if @shop.user_reviews.present?
+      - if logged_in?
+        .user-review-content.d-flex.align-items-center
+          input.only-playing-games#only-playing-games type="checkbox"
+          label.glass-text for="only-playing-games" 自分がプレーするゲームのみ表示する
+      div
+        label.shop-label.rounded-pill 画像付きの情報
+        .user-review-content.user-review-images.d-flex
+          .user-review-image
+          .user-review-image
+          .user-review-image
+          .user-review-image
+      div
+        label.shop-label.rounded-pill 情報一覧
+        .user-review-content.user-reviews
+          = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
+    - else 
+      .user-review-empty.mx-5.text-center
+        p.glass-text
+          = t 'shops.show.user_review_empty'
 
   - if @shop.twitter_id
     = render 'shops/twitter', shop: @shop
