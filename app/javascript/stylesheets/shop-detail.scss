@@ -111,37 +111,35 @@
   object-fit: cover;
 }
 
-.user-reviews {
-  .review {
-    margin-bottom: 15px;
-    .icon {
-      width: 40px;
-      border: 1px solid $gray-200;
-      margin-right: 10px;
-    }
-    .user-name {
-      margin-right: 10px;
-    }
-    .review-date {
-      opacity: 0.5;
-    }
-    .user-review-about {
-      margin-top: 5px;
-      .badge {
-        margin-right: 5px;
-        margin-bottom: 5px;
-        .badge-content-no-data {
-          padding: 2px 5px;
-          .game-title-no-data { 
-            height: 22px;
-            font-size: 0.8rem;
-          }
+.review {
+  margin-bottom: 15px;
+  .icon {
+    width: 40px;
+    border: 1px solid $gray-200;
+    margin-right: 10px;
+  }
+  .user-name {
+    margin-right: 10px;
+  }
+  .review-date {
+    opacity: 0.5;
+  }
+  .user-review-about {
+    margin-top: 5px;
+    .badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      .badge-content-no-data {
+        padding: 2px 5px;
+        .game-title-no-data { 
+          height: 22px;
+          font-size: 0.8rem;
         }
       }
     }
-    .body-image {
-      margin-top: 10px;
-    }
+  }
+  .body-image {
+    margin-top: 10px;
   }
 }
 
@@ -187,6 +185,57 @@
 
 #user-review-form-check:checked ~ .user-review-form-container {
   display: block;
+}
+
+// UserReviewModal
+#userReviewModal {
+  padding: 0 !important;
+}
+
+.modal-userReview {
+  max-width: 100% !important;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.modal-content-userReview {
+  position: relative;
+  height: 100%;
+  border-radius: 0;
+  background-color: rgba(black, 0.4);
+}
+
+.btn-close-userReview {
+  position: absolute;
+  color: white;
+  font-size: 1.4rem;
+  right: 10px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgba(white, 0.3);
+}
+
+.userReview-content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100px;
+  background-color: rgba(white, 0.2);
+  margin-bottom: 0 !important;
+  padding: 10px;
+}
+
+.userReview-image {
+  height: 100%;
+  img {
+    max-height: 100%;
+    width: auto;
+  }
 }
 
 // 以下スマホ向け

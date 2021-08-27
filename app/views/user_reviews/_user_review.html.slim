@@ -12,5 +12,5 @@
     = user_review.body
   .d-flex
     - user_review.images.each do |image|
-      .user-review-image.body-image
+      .user-review-image.body-image data-bs-toggle="modal" data-bs-target="#userReviewModal"
         = image_tag image.url, class: 'review_image_thum'
