@@ -27,6 +27,7 @@
         label.shop-label.rounded-pill 情報一覧
         .user-review-content.user-reviews
           = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
+          = javascript_pack_tag 'user_review'
     - else 
       .user-review-empty.mx-5.text-center
         p.glass-text
