@@ -5,6 +5,8 @@
       = user_review.user.nickname_in_review
     span.review-date.glass-text id="userReview-created-at-#{user_review.id}"
       = l user_review.created_at, format: :user_review
+    - if user_review.own?
+      = link_to t('defaults.destroy'), shop_user_review_path(user_review.shop, user_review), method: :delete, data: { confirm: t('defaults.destroy_message')}, class: 'btn btn-glass btn-label-size rounded-pill'
   .user-review-about
     - user_review.games.each do |game|
       = render 'user_reviews/game_badge', game: game

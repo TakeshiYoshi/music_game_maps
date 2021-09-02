@@ -17,6 +17,8 @@ ja:
     mypage: 'マイページ'
     setting: '設定'
     post: '投稿する'
+    destroy: '削除する'
+    destroy_message: '削除してもよろしいですか？'
     anonymous: '匿名'
     filter_submit: 'フィルター設定'
     password_valid: '(大文字, 小文字英数を含む8~30文字)'

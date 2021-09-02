@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'shops#index'
   resources :shops, only: %i[show] do
-    resources :user_reviews, only: %i[create]
+    resources :user_reviews, only: %i[create destroy]
   end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update] do

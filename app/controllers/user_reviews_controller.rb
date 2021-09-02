@@ -11,6 +11,12 @@ class UserReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    user_review = UserReview.find(params[:id])
+    user_review.destroy
+    redirect_back(fallback_location: shop_path(params[:shop_id]))
+  end
+
   private
 
   def user_review_params
