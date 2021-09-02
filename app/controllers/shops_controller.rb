@@ -8,7 +8,7 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.includes([:games, { user_reviews: :games }]).find(params[:id])
-    @user_review = @shop.user_reviews.new
+    @user_review = UserReview.new(shop_id: @shop.id) # テストが上手く動作しないため左記のような記述にしています
   end
 
   private

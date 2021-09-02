@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UserReviewDecorator
-  def own?
-    user == current_user
+  def own?(user)
+    self.user == user
   end
 end
