@@ -1,0 +1,20 @@
+.modal.fade#userReviewModal tabindex="-1" aria-labelledby="userReviewModalLabel" aria-hidden="true"
+  .modal-dialog.modal-userReview
+    .modal-content.blur.modal-content-userReview
+      .modal-body
+        .btn-close-userReview.d-flex.align-items-center.justify-content-center type="button" data-bs-dismiss="modal" aria-label="Close"
+          = fa_icon 'times'
+        .userReview-content.review.d-flex.align-items-center.justify-content-center
+          .container-xl
+            .user-review-head.d-flex.align-items-center.mb-2
+              img.rounded-circle.icon#userReviewIconPreview
+              span.user-name.glass-text#userReviewNicknamePreview
+                | 名前
+              span.review-date.glass-text#userReviewCreatedAtPreview
+                | 2999/99/99
+            .user-review-body.glass-text#userReviewBodyPreview
+              | 本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文
+        .images-container
+          #imageSwiper
+
+= javascript_pack_tag 'image_preview'

@@ -13,4 +13,4 @@
   .d-flex id="userReview-images-#{user_review.id}"
     - user_review.images.each_with_index do |image, index|
       .user-review-image.body-image data-bs-toggle="modal" data-bs-target="#userReviewModal" data-url="#{image.url}" id="#{user_review.id}" onclick="setInformationToPreview(this.id, #{index})"
-        = image_tag image.url, class: 'review_image_thum'
+        = image_tag image.url(:thumb), class: 'review_image_thum'
