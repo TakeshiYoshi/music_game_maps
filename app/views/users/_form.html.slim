@@ -18,11 +18,7 @@
       p.error-text v-text='nicknameError'
     .playing-games 
       span.glass-text = t 'users.new.explain_playing_game'
-      .glass-game-labels
-        - Game.all.each do |game|
-          input.glass-game-check.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user"
-          label.glass-game-label.rounded-pill for="game_#{game.id}_user"
-            = game.title
+      = render 'shared/form_parts/game_labels'
     = f.submit class: 'btn btn-glass rounded-pill px-4'
 
 = javascript_pack_tag 'signup'

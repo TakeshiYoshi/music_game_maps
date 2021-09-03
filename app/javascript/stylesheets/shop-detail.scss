@@ -65,6 +65,12 @@
   color: white;
 }
 
+.btn-label-size {
+  margin-right: 10px;
+  padding: 3px 15px;
+  font-size: 1rem;
+}
+
 .today-opening-hours {
   color: white;
   text-shadow: 0 0 6px #0D3A40;
@@ -99,43 +105,42 @@
   background: white;
   border-radius: 10px;
   margin-right: 5px;
-  width: 125px;
-  height: 125px;
+  width: 150px;
+  height: 150px;
   box-shadow: 0 0 6px 0 rgba(white, 0.7);
   object-fit: cover;
 }
 
-.user-reviews {
-  .review {
-    margin-bottom: 15px;
-    .icon {
-      width: 40px;
-      border: 1px solid $gray-200;
-      margin-right: 10px;
-    }
-    .user-name {
-      margin-right: 10px;
-    }
-    .review-date {
-      opacity: 0.5;
-    }
-    .user-review-about {
-      margin-top: 5px;
-      .badge {
-        margin-right: 5px;
-        margin-bottom: 5px;
-        .badge-content-no-data {
-          padding: 2px 5px;
-          .game-title-no-data { 
-            height: 22px;
-            font-size: 0.8rem;
-          }
+.review {
+  margin-bottom: 15px;
+  .icon {
+    width: 40px;
+    border: 1px solid $gray-200;
+    margin-right: 10px;
+  }
+  .user-name {
+    margin-right: 10px;
+  }
+  .review-date {
+    opacity: 0.5;
+    margin-right: 10px;
+  }
+  .user-review-about {
+    margin-top: 5px;
+    .badge {
+      margin-right: 5px;
+      margin-bottom: 5px;
+      .badge-content-no-data {
+        padding: 2px 5px;
+        .game-title-no-data { 
+          height: 22px;
+          font-size: 0.8rem;
         }
       }
     }
-    .body-image {
-      margin-top: 10px;
-    }
+  }
+  .body-image {
+    margin-top: 10px;
   }
 }
 
@@ -158,8 +163,109 @@
   }
 }
 
+.user-review-form-container {
+  position: relative;
+  display: none;
+}
+
+#user_review_form_adjust_position {
+  position: absolute;
+  top: -80px;
+}
+
+.review_image_thum {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #table-check:checked ~ .shop-description-container .table-toggle {
   transform: rotate(-180deg);
+}
+
+#user-review-form-check:checked ~ .user-review-form-container {
+  display: block;
+}
+
+// UserReviewModal
+#userReviewModal {
+  padding: 0 !important;
+}
+
+.modal-userReview {
+  max-width: 100% !important;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.modal-body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.modal-content-userReview {
+  position: relative;
+  height: 100%;
+  border-radius: 0;
+  background-color: rgba(black, 0.4);
+}
+
+.btn-close-userReview {
+  position: absolute;
+  color: white;
+  font-size: 1.4rem;
+  right: 10px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: rgba(white, 0.3);
+  z-index: 10;
+}
+
+.userReview-content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100px;
+  background-color: rgba(black, 0.4);
+  margin-bottom: 0 !important;
+  padding: 10px;
+  z-index: 20;
+}
+
+.userReview-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 99vh;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.images-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-container {
+  height: 100%;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    --swiper-navigation-color: white;
 }
 
 // 以下スマホ向け
@@ -193,12 +299,18 @@
     font-size: 0.8rem;
   }
 
+  .btn-label-size {
+    margin-right: 5px;
+    padding: 2px 13px;
+    font-size: 0.8rem;
+  }
+
   .user-review-image {
     background: white;
     border-radius: 10px;
     margin-right: 5px;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
 
   .user-reviews {
@@ -228,5 +340,9 @@
     tr:last-child > th {
       padding-bottom: 6px;
     }
+  }
+
+  .user-review {
+    width: 100%;
   }
 }

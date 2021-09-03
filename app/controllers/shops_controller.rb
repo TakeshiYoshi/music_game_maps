@@ -7,7 +7,8 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @shop = Shop.includes(:games).find(params[:id])
+    @shop = Shop.includes([:games, { user_reviews: :games }]).find(params[:id])
+    @user_review = UserReview.new(shop_id: @shop.id) # テストが上手く動作しないため左記のような記述にしています
   end
 
   private

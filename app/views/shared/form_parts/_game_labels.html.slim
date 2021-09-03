@@ -1,0 +1,5 @@
+.glass-game-labels
+  - Game.all.each do |game|
+    input.glass-game-check.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user"
+    label.glass-game-label.btn-label-size.rounded-pill for="game_#{game.id}_user"
+      = game.title

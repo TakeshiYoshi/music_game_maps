@@ -1,0 +1,18 @@
+.review id="userReivew-#{user_review.id}"
+  .user-review-head.d-flex.align-items-center id="userReview-icon-#{user_review.id}" data-url="#{user_review.user.avatar_url_in_review}"
+    = image_tag user_review.user.avatar_url_in_review, class: 'rounded-circle icon'
+    span.user-name.glass-text id="userReview-nickname-#{user_review.id}"
+      = user_review.user.nickname_in_review
+    span.review-date.glass-text id="userReview-created-at-#{user_review.id}"
+      = l user_review.created_at, format: :user_review
+    - if user_review.own?(current_user)
+      = link_to t('defaults.destroy'), shop_user_review_path(user_review.shop, user_review), method: :delete, data: { confirm: t('defaults.destroy_message')}, class: 'btn btn-glass btn-label-size rounded-pill'
+  .user-review-about
+    - user_review.games.each do |game|
+      = render 'user_reviews/game_badge', game: game
+  .user-review-body.glass-text id="userReview-body-#{user_review.id}"
+    = simple_format(user_review.body)
+  .d-flex id="userReview-images-#{user_review.id}"
+    - user_review.images.each_with_index do |image, index|
+      .user-review-image.body-image data-bs-toggle="modal" data-bs-target="#userReviewModal" data-url="#{image.url}" id="#{user_review.id}" onclick="setInformationToPreview(this.id, #{index})"
+        = image_tag image.url(:thumb), class: 'review_image_thum'
