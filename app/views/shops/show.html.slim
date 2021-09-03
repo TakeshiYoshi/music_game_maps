@@ -12,19 +12,7 @@
             = t 'shops.show.user_review_btn'
     = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
     - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
-      - if logged_in?
-        .user-review-content.d-flex.align-items-center
-          input.only-playing-games#only-playing-games type="checkbox"
-          label.glass-text for="only-playing-games" 自分がプレーするゲームのみ表示する
-      div
-        label.shop-label.rounded-pill 画像付きの情報
-        .user-review-content.user-review-images.d-flex
-          .user-review-image
-          .user-review-image
-          .user-review-image
-          .user-review-image
       #userReviews
-        label.shop-label.rounded-pill 情報一覧
         .user-review-content.user-reviews
           = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
           = javascript_pack_tag 'user_review'
