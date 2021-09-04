@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  test:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.7.3
+    steps:
+      - checkout
+      - run:
+          name: Test Command
+          command: ruby -v
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - test
