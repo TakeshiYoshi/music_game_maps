@@ -76,10 +76,11 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      - aws-cli/setup
       - add_ssh_keys
       - run:
           name: AWS設定
-          command: .circleci/deploy.sh
+          command: sh .circleci/deploy.sh
 
 workflows:
   version: 2
