@@ -76,7 +76,9 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys
-      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd /var/www/rails/music_game_maps'
+      - run:
+          name: SSH経由でデプロイ
+          command: ./shells/deploy.sh
 
 workflows:
   version: 2
