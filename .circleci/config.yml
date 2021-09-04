@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/mysql:5.7.34
@@ -30,7 +30,7 @@ jobs:
   test:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-node-browsers
         environment:
           RAILS_ENV: test
           DB_USERNAME: root
