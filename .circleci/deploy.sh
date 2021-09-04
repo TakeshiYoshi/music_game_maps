@@ -8,7 +8,7 @@ export AWS_DEFAULT_REGION="ap-northeast-1"
 export DEPLOY_USER=${USER_NAME}
 export HOST=${HOST_NAME}
 
-MY_SECURITY_GROUP="security_group_for_circleci"
+MY_SECURITY_GROUP="security_group_for_otomap"
 MY_IP=`curl -s ifconfig.me`
 
 trap "aws ec2 revoke-security-group-ingress --group-id $MY_SECURITY_GROUP --protocol tcp --port 22 --cidr $MY_IP/32" 0 1 2 3 15

@@ -18,6 +18,7 @@
           = javascript_pack_tag 'user_review'
     - else 
       .user-review-empty.mx-5.text-center
+        = image_pack_tag 'user_review_empty.png', class: 'user-review-empty-img'
         p.glass-text
           = t 'shops.show.user_review_empty'
 
