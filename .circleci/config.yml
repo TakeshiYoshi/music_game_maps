@@ -71,6 +71,7 @@ jobs:
           destination: test-screenshots
 
   deploy:
+    working_directory: ~/repo
     machine:
       image: circleci/classic:edge
     steps:
