@@ -75,7 +75,9 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - add_ssh_keys
+      - add_ssh_keys:
+          fingerprints:
+            - "41:96:49:dd:45:8f:4f:6b:ae:fd:a7:ec:be:c5:46:54"
       - run: ssh ${USER_NAME}@${HOST_NAME} 'touch hogehogetest.test'
 
 workflows:
