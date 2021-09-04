@@ -80,10 +80,10 @@ RSpec.describe 'マップ内機能', type: :system do
   context '現在位置表示ボタンをクリックする' do
     # RSpec上でgeolocation APIが動作しないためメッセージが表示されることのみ確認を行い
     # Vueが動作することのみテストしています。
-    it '「現在位置情報を取得しています...」と表示される' do
+    it '「位置情報の利用が許可されていません」と表示される' do
       visit root_path
       click_button 'update-geo-button'
-      expect(page.find('#map-flash-message')).to have_content('現在位置情報を取得しています...'), 'フラッシュメッセージが表示されてません'
+      expect(page.find('#map-flash-message')).to have_content('位置情報の利用が許可されていません'), 'フラッシュメッセージが表示されてません'
     end
   end
 end

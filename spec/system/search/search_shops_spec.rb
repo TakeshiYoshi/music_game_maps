@@ -42,7 +42,6 @@ RSpec.describe '店舗検索機能', type: :system do
           page.find(".game-label", text: 'GAME BEAT').click
           click_button 'フィルター設定'
         end
-        click_button 'filter-button'
         expect(page).to have_content(shop_include_filtered_game.name), 'フィルターをかけた機種が設置されている店舗が表示されていません'
         expect(page).not_to have_content(another_shop.name), 'フィルターをかけた機種が設置されていない店舗が表示されています'
       end

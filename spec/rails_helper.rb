@@ -65,4 +65,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include LoginMacros
   config.include ActiveSupport::Testing::TimeHelpers
+
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium_chrome_headless, screen_size: [1920, 1080]
+    end
+  end
 end
