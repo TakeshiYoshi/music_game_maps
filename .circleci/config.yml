@@ -79,6 +79,7 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
+      - aws-cli/install
       - add_ssh_keys
       - run:
           name: AWS設定
