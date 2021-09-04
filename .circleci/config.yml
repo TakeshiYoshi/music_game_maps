@@ -77,8 +77,8 @@ jobs:
       - checkout
       - add_ssh_keys
       - run:
-          name: SSH経由でデプロイ
-          command: ./shells/deploy.sh
+          name: AWS設定
+          command: ./deploy.sh
 
 workflows:
   version: 2
