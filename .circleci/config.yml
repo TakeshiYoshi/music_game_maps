@@ -79,7 +79,7 @@ jobs:
       - add_ssh_keys
       - run:
           name: AWS設定
-          command: ./deploy.sh
+          command: .circleci/deploy.sh
 
 workflows:
   version: 2
