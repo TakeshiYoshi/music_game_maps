@@ -63,6 +63,9 @@ jobs:
             bundle exec rake db:migrate
             bundle exec rake db:seed
       - run:
+          name: yarnインストール
+          command: yarn install
+      - run:
           name: RSpecを実行する
           command: bundle exec rspec
       - store_artifacts:
