@@ -59,9 +59,7 @@ jobs:
       - run:
           name: DBのセットアップをする
           command: |
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-            bundle exec rake db:seed RAILS_ENV=test
+            bundle exec rake db:schema:load
       - run:
           name: yarnインストール
           command: yarn install
