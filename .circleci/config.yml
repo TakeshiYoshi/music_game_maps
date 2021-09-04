@@ -65,6 +65,9 @@ jobs:
       - run:
           name: RSpecを実行する
           command: bundle exec rspec
+      - store_artifacts:
+          path: tmp/screenshots
+          destination: test-screenshots
 
 workflows:
   version: 2
