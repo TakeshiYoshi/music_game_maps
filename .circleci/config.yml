@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@1.3.2
+
 jobs:
   build:
     working_directory: ~/repo
@@ -76,7 +79,6 @@ jobs:
       image: circleci/classic:edge
     steps:
       - checkout
-      - aws-cli/setup
       - add_ssh_keys
       - run:
           name: AWS設定
