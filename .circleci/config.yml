@@ -1,18 +1,76 @@
 version: 2.1
 
 jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.7.3-stretch-node
+        environment:
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7.34
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
+    steps:
+      - checkout
+      - restore_cache:
+          name: bundle installの結果をrestoreする
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: bundle installを実行する
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          name: bundle installの結果をキャッシュする
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: database.ymlとdatabase.yml.ciを入れ替える
+          command: mv config/database.yml.ci config/database.yml
+
   test:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:2.7.3
+      - image: circleci/ruby:2.7.3-stretch-node
+        environment:
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7.34
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: music_game_maps_test
     steps:
       - checkout
+      - restore_cache:
+          name: bundle installの結果をrestoreする
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
-          name: Test Command
-          command: ruby -v
+          name: bundle installを実行する(bundle execコマンドを実行するために必要)
+          command: bundle install --path vendor/bundle
+      - run:
+          name: RuboCopを実行する
+          command: bundle exec rubocop
+      - run:
+          name: データベースの起動を待機
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: DBのセットアップをする
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rake db:seed
+      - run:
+          name: RSpecを実行する
+          command: bundle exec rspec
 
 workflows:
   version: 2
   workflows:
     jobs:
-      - test
+      - build
+      - test:
+          requires:
+            - build
