@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'ユーザー', type: :system do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
+  before { create_list(:game, 10) }
   
   describe 'ユーザー登録' do
     context '正しい情報を入力' do

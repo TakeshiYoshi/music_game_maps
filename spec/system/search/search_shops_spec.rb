@@ -48,16 +48,20 @@ RSpec.describe '店舗検索機能', type: :system do
     end
 
     context 'エリアでフィルターをかける' do
-      let!(:shop_in_pref_city) { create(:shop, prefecture: Prefecture.find_by(name: '京都府'), city: City.find_by(name: '京都市')) }
-      let!(:shop_in_another_pref) { create(:shop, prefecture: Prefecture.find_by(name: '大阪府')) }
-      let!(:shop_in_pref_another_city) { create(:shop, prefecture: Prefecture.find_by(name: '京都府'), city: City.find_by(name: '宇治市')) }
+      let!(:prefecture) { create(:prefecture, name: 'Prefecture') }
+      let!(:another_prefecture) { create(:prefecture, name: 'Another_Prefecture') }
+      let!(:city) { create(:city, name: 'City', prefecture: prefecture) }
+      let!(:another_city) { create(:city, name: 'Another_City', prefecture: prefecture) }
+      let!(:shop_in_pref_city) { create(:shop, prefecture: prefecture, city: city) }
+      let!(:shop_in_another_pref) { create(:shop, prefecture: another_prefecture) }
+      let!(:shop_in_pref_another_city) { create(:shop, prefecture: prefecture, city: another_city) }
 
       it 'フィルターをかけたエリアにある店舗のみ検索結果に表示される' do
         visit root_path
         # 都道府県のみフィルターをかける
         click_button 'filter-button'
         within('.modal') do
-          select '京都府', from: 'prefecture'
+          select 'Prefecture', from: 'prefecture'
           click_button 'フィルター設定'
         end
         expect(page).to have_content(shop_in_pref_city.name), 'フィルターをかけたエリアにある店舗が表示されていません'
@@ -66,8 +70,8 @@ RSpec.describe '店舗検索機能', type: :system do
         # 都道府県と市区町村のフィルターをかける
         click_button 'filter-button'
         within('.modal') do
-          select '京都府', from: 'prefecture'
-          select '京都市', from: 'city'
+          select 'Prefecture', from: 'prefecture'
+          select 'City', from: 'city'
           click_button 'フィルター設定'
         end
         expect(page).to have_content(shop_in_pref_city.name), 'フィルターをかけたエリアにある店舗が表示されていません'
