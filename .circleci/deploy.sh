@@ -13,4 +13,4 @@ MY_IP=`curl -s ifconfig.me`
 
 trap "aws ec2 revoke-security-group-ingress --group-id $MY_SECURITY_GROUP --protocol tcp --port 22 --cidr $MY_IP/32" 0 1 2 3 15
 aws ec2 authorize-security-group-ingress --group-id $MY_SECURITY_GROUP --protocol tcp --port 22 --cidr $MY_IP/32
-ssh $DEPLOY_USER@$HOST "cd /var/www/rails/music_game_maps"
+ssh -vvv $DEPLOY_USER@$HOST "cd /var/www/rails/music_game_maps"
