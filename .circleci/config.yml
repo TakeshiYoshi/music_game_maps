@@ -33,6 +33,8 @@ jobs:
       - image: circleci/ruby:2.7.3
         environment:
           RAILS_ENV: test
+          DB_USERNAME: root
+          DB_PASSWORD: ''
           DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7.34
         environment:
