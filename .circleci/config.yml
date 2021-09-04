@@ -26,9 +26,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: database.ymlとdatabase.yml.ciを入れ替える
-          command: mv config/database.yml.ci config/database.yml
 
   test:
     working_directory: ~/repo
