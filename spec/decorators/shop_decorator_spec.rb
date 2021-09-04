@@ -16,7 +16,7 @@ RSpec.describe ShopDecorator do
     describe 'opening_time?' do
       context '現在時刻が営業時間外' do
         it '文字列「close」が返される' do
-          travel_to('2021-7-26 8:00'.to_time) do
+          travel_to('2021-7-26 8:00'.in_time_zone) do
             expect(shop.opening_time?).to eq 'close'
           end
         end
@@ -24,7 +24,7 @@ RSpec.describe ShopDecorator do
 
       context '現在時刻が営業時間内' do
         it '文字列「open」が返される' do
-          travel_to('2021-7-26 10:00'.to_time) do
+          travel_to('2021-7-26 10:00'.in_time_zone) do
             expect(shop.opening_time?).to eq 'open'
           end
         end
@@ -58,7 +58,7 @@ RSpec.describe ShopDecorator do
 
       context '現在の曜日が月曜日の場合' do
         it '月曜日の営業時間の文字列「10:00 〜 翌04:00」が返される' do
-          travel_to('2021-7-26 10:00'.to_time) do
+          travel_to('2021-7-26 10:00'.in_time_zone) do
             expect(shop.today_text).to eq '10:00 〜 翌04:00'
           end
         end
@@ -78,7 +78,7 @@ RSpec.describe ShopDecorator do
 
         context '現在の曜日が月曜日の場合' do
           it '文字列「休業日」が返される' do
-            travel_to('2021-7-26 10:00'.to_time) do
+            travel_to('2021-7-26 10:00'.in_time_zone) do
               expect(shop_include_rest_day.today_text).to eq '休業日'
             end
           end
@@ -86,7 +86,7 @@ RSpec.describe ShopDecorator do
 
         context '現在の曜日が土曜日の場合' do
           it '土曜日の営業時間の文字列「12:00 〜 24:00」が返される' do
-            travel_to('2021-7-31 10:00'.to_time) do
+            travel_to('2021-7-31 10:00'.in_time_zone) do
               expect(shop_include_rest_day.today_text).to eq '12:00 〜 24:00'
             end
           end
@@ -97,7 +97,7 @@ RSpec.describe ShopDecorator do
     describe 'day_of_week_convert_to_text_from_num' do
       context '現在の曜日が月曜日の場合' do
         it '文字列「月曜日」が返される' do
-          travel_to('2021-7-26 10:00'.to_time) do
+          travel_to('2021-7-26 10:00'.in_time_zone) do
             expect(shop.day_of_week_convert_to_text_from_num(Time.zone.now.wday)).to eq '月曜日'
           end
         end

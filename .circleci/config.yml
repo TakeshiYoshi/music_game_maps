@@ -1,0 +1,101 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@1.3.2
+
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7.34
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_HOST: '%'
+    steps:
+      - checkout
+      - restore_cache:
+          name: bundle installの結果をrestoreする
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: bundle installを実行する
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          name: bundle installの結果をキャッシュする
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+  test:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.7.3-node-browsers
+        environment:
+          RAILS_ENV: test
+          DB_USERNAME: root
+          DB_PASSWORD: ''
+          DB_HOST: 127.0.0.1
+      - image: circleci/mysql:5.7.34
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: music_game_maps_test
+    steps:
+      - checkout
+      - restore_cache:
+          name: bundle installの結果をrestoreする
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: bundle installを実行する(bundle execコマンドを実行するために必要)
+          command: bundle install --path vendor/bundle
+      - run:
+          name: RuboCopを実行する
+          command: bundle exec rubocop
+      - run:
+          name: データベースの起動を待機
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
+      - run:
+          name: DBのセットアップをする
+          command: |
+            bundle exec rake db:schema:load
+      - run:
+          name: yarnインストール
+          command: yarn install
+      - run:
+          name: RSpecを実行する
+          command: bundle exec rspec
+      - store_artifacts:
+          path: tmp/screenshots
+          destination: test-screenshots
+
+  deploy:
+    working_directory: ~/repo
+    machine:
+      image: circleci/classic:edge
+    steps:
+      - checkout
+      - aws-cli/install
+      - add_ssh_keys
+      - run:
+          name: AWS設定
+          command: sh .circleci/deploy.sh
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+              branches:
+                  only: main

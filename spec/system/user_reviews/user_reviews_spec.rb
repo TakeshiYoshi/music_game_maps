@@ -52,6 +52,7 @@ RSpec.describe "UserReviews", type: :system do
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
           page.find(".glass-game-label", text: 'GAME BEAT').click
+          sleep 0.5
           click_button '投稿する'
         end
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
