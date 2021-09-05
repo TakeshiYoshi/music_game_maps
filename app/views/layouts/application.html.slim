@@ -8,6 +8,7 @@ html
     = csp_meta_tag
     = javascript_pack_tag 'application'
     = javascript_pack_tag 'set_theme'
+    = render 'layouts/analytics' if Rails.env.production?
   body
     .container-xl.px-0.footer-fixed
       = render 'layouts/flash_message'
