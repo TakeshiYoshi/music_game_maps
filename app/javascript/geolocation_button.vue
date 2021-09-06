@@ -1,6 +1,6 @@
 <template>
   <div id="geolocationButton">
-    <button class="update-geo-button" id="update-geo-button" @click="getGeolocation()">
+    <button class="update-geo-button" id="update-geo-button" @click="onGeoButton()">
       <div class="icon-container" :class="{ 'icon-blue': isGeoChecked }">
         <i class="fas fa-crosshairs"></i>
       </div>
@@ -27,6 +27,13 @@ export default {
     }
   },
   methods: {
+    onGeoButton: function() {
+      if (this.isGeoChecked) {
+        this.focusCurrentPosition();
+      } else {
+        this.getGeolocation();
+      }
+    },
     getGeolocation: function() {
       if (!navigator.geolocation) {
         Export.show_message('現在位置が取得できませんでした')
@@ -71,6 +78,9 @@ export default {
           Export.show_message('現在位置が取得できませんでした')
           break
       }
+    },
+    focusCurrentPosition: function() {
+      window.globalFunction.focusCurrentPosition(gon.location);
     }
   }
 }
