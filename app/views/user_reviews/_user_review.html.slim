@@ -1,8 +1,8 @@
 .review id="userReivew-#{user_review.id}"
   .user-review-head.d-flex.align-items-center id="userReview-icon-#{user_review.id}" data-url="#{user_review.user.avatar_url_in_review}"
     = image_tag user_review.user.avatar_url_in_review, class: 'rounded-circle icon'
-    span.user-name.glass-text id="userReview-nickname-#{user_review.id}"
-      = user_review.user.nickname_in_review
+    .user-name.glass-text
+      = link_to_if !user_review.user.anonymous?, user_review.user.nickname_in_review, user_path(user_review.user), id: "userReview-nickname-#{user_review.id}"
     span.review-date.glass-text id="userReview-created-at-#{user_review.id}"
       = l user_review.created_at, format: :user_review
     - if user_review.own?(current_user)

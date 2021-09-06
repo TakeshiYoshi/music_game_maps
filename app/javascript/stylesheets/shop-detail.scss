@@ -238,6 +238,12 @@
   z-index: 20;
 }
 
+.user-review-body {
+  p {
+    margin-bottom: 0;
+  }
+}
+
 .userReview-image {
   display: flex;
   align-items: center;
