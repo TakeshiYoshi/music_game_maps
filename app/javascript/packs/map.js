@@ -70,6 +70,10 @@ let addGeoLocationMarker = (location) => {
   map.setView([latCenter, lngCenter], zoomLevel);
 };
 
+let focusCurrentPosition = (location) => {
+  map.setView(location, 16);
+};
+
 function createOwnMaker(location) {
   // マーカーを生成
   let mapIcon = L.divIcon({
@@ -90,6 +94,7 @@ window.globalFunction = {};
 window.getMapCenter = {};
 window.globalFunction.addGeoLocationMarker = addGeoLocationMarker;
 window.globalFunction.getMapCenter = getMapCenter;
+window.globalFunction.focusCurrentPosition = focusCurrentPosition;
 
 function calculateDelta(ary) {
   const aryMax = function (a, b) { return Math.max(a, b); }
