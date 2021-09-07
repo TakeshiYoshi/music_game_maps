@@ -19,7 +19,7 @@ Rails:
   Enabled: true
 
 Metrics/AbcSize:
-  Max: 40
+  Max: 25
 
 Metrics/ClassLength:
   CountComments: false
