@@ -1,4 +1,4 @@
-require './scraping'
+require './lib/scraping/scraping'
 
 def scraping_namco(game_title)
   # 以下スクレイピング処理

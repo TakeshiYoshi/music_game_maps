@@ -1,7 +1,7 @@
-require './scraping_konami'
-require './scraping_sega'
-require './scraping_namco'
-require './scraping_taito'
+require './lib/scraping/scraping_konami'
+require './lib/scraping/scraping_sega'
+require './lib/scraping/scraping_namco'
+require './lib/scraping/scraping_taito'
 
 namespace :scraping do
   desc "スクレイピング処理"

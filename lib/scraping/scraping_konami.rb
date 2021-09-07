@@ -1,4 +1,4 @@
-require './scraping'
+require './lib/scraping/scraping'
 
 def scraping_konami(game_key)
   # 変数初期化
@@ -37,10 +37,11 @@ def scraping_konami(game_key)
 
       document.css('div.cl_shop_bloc').each do |node|
         shop = {  name: node['data-name'],
-                  prefecture_id: prefecture.id,
+                  prefecture: prefecture.name,
                   lat: node['data-latitude'],
                   lon: node['data-longitude'],
-                  game: game_title[game_key.to_sym] }
+                  game: game_title[game_key.to_sym],
+                  place_id: nil }
         # Places APIを用いてデータを整理する
         shop = get_places_data shop
         shops << shop

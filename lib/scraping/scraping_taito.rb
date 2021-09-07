@@ -1,4 +1,4 @@
-require './scraping'
+require './lib/scraping/scraping'
 require 'json'
 
 def scraping_taito(game_title)
