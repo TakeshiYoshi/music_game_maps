@@ -38,3 +38,6 @@ yarn-debug.log*
 
 # API_KEY
 .env
+
+# gem
+/vendor/bundle
