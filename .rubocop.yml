@@ -25,18 +25,12 @@ Metrics/ClassLength:
   CountComments: false
   Max: 300
 
-Metrics/CyclomaticComplexity:
-  Max: 30
-
 Metrics/LineLength:
   Enabled: false
 
 Metrics/MethodLength:
   CountComments: false
   Max: 30
-
-Metrics/PerceivedComplexity:
-  Max: 9
 
 Naming/AccessorMethodName:
   Exclude:
