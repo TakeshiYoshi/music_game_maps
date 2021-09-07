@@ -13,7 +13,7 @@ class ShopsController < ApplicationController
 
   private
 
-  def set_filter
+  def set_filter # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     @shops_filter = @shops
     @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
     @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]

@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     @shops = Shop.ransack(search_hash).result
   end
 
-  def set_variable_to_javascript
+  def set_variable_to_javascript # rubocop:disable Metrics/AbcSize
     gon.selectedPref = session[:prefecture_id]
     gon.selectedCity = session[:city_id]
     gon.location = session[:location] if session[:location]
