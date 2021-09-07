@@ -1,4 +1,4 @@
-require './scraping'
+require './lib/scraping/scraping'
 
 def scraping_sega(game_title)
   game_code = {
