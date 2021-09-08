@@ -16,6 +16,6 @@ module ApplicationHelper
   end
 
   def game_filtered?(game_id)
-    session.dig(:games, game_id.to_s) == '1'
+    session.dig(:games, game_id.to_s)
   end
 end
