@@ -40,6 +40,7 @@ export default {
   position: fixed;
   right: 10px;
   bottom: 10px;
+  transition: all 0.2s;
 }
 
 .v-enter-active {
@@ -47,7 +48,7 @@ export default {
 }
 
 .v-leave-active {
-  animation: slide-in 0.3s ease-in reverse;
+  opacity: 0;
 }
 
 @keyframes slide-in {
