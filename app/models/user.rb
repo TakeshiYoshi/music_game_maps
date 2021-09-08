@@ -19,9 +19,7 @@ class User < ApplicationRecord
   validates :anonymous, inclusion: { in: [true, false] }
 
   def create_playing_games(games_params)
-    return unless games_params
-
-    games_params.each do |game_id, _value|
+    games_params&.each do |game_id, _value|
       game = Game.find(game_id)
       playing_game = playing_games.build(game: game)
       playing_game.save!
