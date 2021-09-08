@@ -24,36 +24,38 @@ export default {
       isGeoChecked: gon.location,
       isDialogChecked: false,
       geoMessage: '',
-      latitude: '',
-      longitude: '',
-      intervalFunction: null
+      latitude: gon.location ? gon.location[0] : '',
+      longitude: gon.location ? gon.location[1] : '',
+      intervalFunction: null,
+      buttonMode: true
     }
   },
   mounted: function() {
-    // 現在位置の取得がオンになっていたら1分に1度現在地の更新を行う
+    this.buttonMode = false;
+    this.getGeolocation();
     if (this.isGeoChecked) {
-      this.intervalFunction = setInterval(this.updateLocation, 60000);
+      // 現在位置の取得がオンになっていたら５秒に1度現在地の更新を行う。
+      // 頻繁に更新をするためRails側でセッションは作成せず地図のマーカーの位置のみを変更する。
+      this.intervalFunction = setInterval(this.updateLocation, 5000);
     }
   },
   methods: {
     updateLocation: function() {
       if (this.isGeoChecked) {
+        this.buttonMode = false;
         this.getGeolocation();
       }
     },
     onGeoButton: function() {
+      this.buttonMode = true;
       this.getGeolocation();
       if (this.isGeoChecked) {
         // 2回目以降に現在地取得をする場合は現在地のズームを行う
         this.focusCurrentPosition();
-      } else {
-        if(this.latitude!='') {
-          // 初回の現在位置取得の場合は地図のズームを変更し全マーカーを表示する
-          window.globalFunction.focusAllMarker([this.latitude, this.longitude]);
-        }
       }
     },
     getGeolocation: function() {
+      // buttonMode: true=>現在位置取得ボタンを押した時の挙動
       if (!navigator.geolocation) {
         Export.show_message('現在位置が取得できませんでした')
         return
@@ -63,43 +65,50 @@ export default {
         timeout: 5000,
         maximumAge: 0
       }
-      Export.show_message('現在位置情報を取得しています...');
+      if(this.buttonMode) {
+        Export.show_message('現在位置情報を取得しています...');
+      }
       navigator.geolocation.getCurrentPosition(this.success, this.error, options)
     },
     success: function(position) {
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
-      this.isGeoChecked = true;
-      // Rails側にセッションとして記録
-      axios
-        .post('/set_location', {
-        lat: this.latitude,
-        lng: this.longitude
-        })
-        .then((response) => {
-          this.cities = response.data
-          window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
-          Export.show_message('現在位置を取得しました');
-        })
+      if(this.buttonMode) {
+        // Rails側にセッションとして記録
+        axios
+          .post('/set_location', {
+          lat: this.latitude,
+          lng: this.longitude
+          })
+        Export.show_message('現在位置を取得しました');
+      }
+      window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
+      if(!this.isGeoChecked) {
+        // 初回の現在位置取得の場合は地図のズームを変更し全マーカーを表示する
+        window.globalFunction.focusAllMarker([this.latitude, this.longitude]);
+        this.isGeoChecked = true;
+      }
     },
     error: function(error) {
-      switch (error.code) {
-        case 1: // PERMISSION_DENIED
-          Export.show_message('位置情報の利用が許可されていません')
-          break
-        case 2: // POSITION_UNAVAILABLE
-          Export.show_message('現在位置が取得できませんでした')
-          break
-        case 3: // TIMEOUT
-          Export.show_message('タイムアウトになりました')
-          break
-        default:
-          Export.show_message('現在位置が取得できませんでした')
-          break
+      if(this.buttonMode) {
+        switch (error.code) {
+          case 1: // PERMISSION_DENIED
+            Export.show_message('位置情報の利用が許可されていません')
+            break
+          case 2: // POSITION_UNAVAILABLE
+            Export.show_message('現在位置が取得できませんでした')
+            break
+          case 3: // TIMEOUT
+            Export.show_message('タイムアウトになりました')
+            break
+          default:
+            Export.show_message('現在位置が取得できませんでした')
+            break
+        }
       }
     },
     focusCurrentPosition: function() {
-      window.globalFunction.focusCurrentPosition(gon.location);
+      window.globalFunction.focusCurrentPosition([this.latitude, this.longitude]);
     }
   }
 }

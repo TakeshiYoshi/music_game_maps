@@ -88,6 +88,7 @@ function createOwnMaker(location) {
   own = L.marker(location,{ icon: mapIcon }).addTo(map);
 };
 
+
 let getMapCenter = () => {
   let centerPosition = map.getCenter();
   return centerPosition;
