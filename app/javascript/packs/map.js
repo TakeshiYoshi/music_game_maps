@@ -59,6 +59,9 @@ let addGeoLocationMarker = (location) => {
   };
   // マーカーを生成
   createOwnMaker(location);
+};
+
+let focusAllMarker = (location) => {
   // ビューを変更する
   let latAryLocal = latAry;
   let lngAryLocal = lngAry;
@@ -68,7 +71,8 @@ let addGeoLocationMarker = (location) => {
   let lngCenter = calculateCenter(lngAryLocal);
   let zoomLevel = calculateZoomLevel(latAryLocal, lngAryLocal);
   map.setView([latCenter, lngCenter], zoomLevel);
-};
+}
+
 
 let focusCurrentPosition = (location) => {
   map.setView(location, 16);
@@ -85,6 +89,7 @@ function createOwnMaker(location) {
   own = L.marker(location,{ icon: mapIcon }).addTo(map);
 };
 
+
 let getMapCenter = () => {
   let centerPosition = map.getCenter();
   return centerPosition;
@@ -93,6 +98,7 @@ let getMapCenter = () => {
 window.globalFunction = {};
 window.getMapCenter = {};
 window.globalFunction.addGeoLocationMarker = addGeoLocationMarker;
+window.globalFunction.focusAllMarker = focusAllMarker;
 window.globalFunction.getMapCenter = getMapCenter;
 window.globalFunction.focusCurrentPosition = focusCurrentPosition;
 
