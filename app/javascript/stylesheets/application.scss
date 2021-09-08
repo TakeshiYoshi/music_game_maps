@@ -5,6 +5,7 @@
 @import 'user_new';
 @import 'profile_form';
 @import 'edit_form';
+@import 'policy';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -54,10 +55,12 @@ body {
   opacity: 1;
 }
 
+// フッター
+
 .footer-fixed {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 60px;
+  padding-bottom: 90px;
   box-sizing: border-box;
 }
 
@@ -65,6 +68,9 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
+  .footer-content:not(:last-child) {
+    margin-right: 10px;
+  }
 }
 
 a {

@@ -1,4 +1,10 @@
-footer.glass.d-flex.align-items-center
-  .glass-text.copyright.col-6
+footer.glass.text-center.glass-text
+  .col-12.copyright
     = t('defaults.copyright')
-  .glass-text.col-6.text-end フィードバック
+  .col-12.d-flex.justify-content-center
+    .footer-content
+      = link_to t('policies.user_policy.title'), user_policy_path
+    .footer-content
+      = link_to 'プライバシーポリシー', privacy_policy_path
+    .footer-content
+      | フィードバック
