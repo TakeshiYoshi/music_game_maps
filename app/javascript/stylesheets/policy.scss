@@ -1,0 +1,18 @@
+.section {
+  p {
+    margin-left: 10px;
+  }
+}
+
+// 以下スマホ向け
+
+@include media-breakpoint-down(sm) {
+  .policy-header, .policy-footer {
+    p {
+      font-size: 0.8rem;
+    }
+  }
+  .section {
+    font-size: 0.8rem;
+  }
+}

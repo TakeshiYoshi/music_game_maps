@@ -3,8 +3,8 @@ footer.glass.text-center.glass-text
     = t('defaults.copyright')
   .col-12.d-flex.justify-content-center
     .footer-content
-      | 利用規約
+      = link_to t('policies.user_policy.title'), user_policy_path
     .footer-content
-      | プライバシーポリシー
+      = link_to 'プライバシーポリシー', privacy_policy_path
     .footer-content
       | フィードバック

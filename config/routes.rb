@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post 'near_shops_search', to: 'filters#near_shops_search'
   post 'set_location', to: 'filters#set_location'
   delete 'clear_near_shops_search', to: 'filters#clear_near_shops_search'
+  get 'user_policy', to: 'policies#user_policy'
+  get 'privacy_policy', to: 'policies#privacy_policy'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
