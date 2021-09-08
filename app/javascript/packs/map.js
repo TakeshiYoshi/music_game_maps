@@ -73,6 +73,7 @@ let focusAllMarker = (location) => {
   map.setView([latCenter, lngCenter], zoomLevel);
 }
 
+
 let focusCurrentPosition = (location) => {
   map.setView(location, 16);
 };

@@ -73,7 +73,7 @@ export default {
     success: function(position) {
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
-      if(this.buttonMode) {
+      if(this.buttonMode || !this.isGeoChecked) {
         // Rails側にセッションとして記録
         axios
           .post('/set_location', {
