@@ -23,15 +23,34 @@ export default {
     return {
       isGeoChecked: gon.location,
       isDialogChecked: false,
-      geoMessage: ''
+      geoMessage: '',
+      latitude: '',
+      longitude: '',
+      intervalFunction: null
+    }
+  },
+  mounted: function() {
+    // 現在位置の取得がオンになっていたら1分に1度現在地の更新を行う
+    if (this.isGeoChecked) {
+      this.intervalFunction = setInterval(this.updateLocation, 60000);
     }
   },
   methods: {
-    onGeoButton: function() {
+    updateLocation: function() {
       if (this.isGeoChecked) {
+        this.getGeolocation();
+      }
+    },
+    onGeoButton: function() {
+      this.getGeolocation();
+      if (this.isGeoChecked) {
+        // 2回目以降に現在地取得をする場合は現在地のズームを行う
         this.focusCurrentPosition();
       } else {
-        this.getGeolocation();
+        if(this.latitude!='') {
+          // 初回の現在位置取得の場合は地図のズームを変更し全マーカーを表示する
+          window.globalFunction.focusAllMarker([this.latitude, this.longitude]);
+        }
       }
     },
     getGeolocation: function() {
