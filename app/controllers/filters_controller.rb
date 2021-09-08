@@ -1,12 +1,13 @@
 class FiltersController < ApplicationController
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     if params[:prefecture]
       session.delete :lat
       session.delete :lng
     end
     session[:prefecture_id] = params[:prefecture]
     session[:city_id] = params[:city]
-    session[:games] = params[:games]
+    # string to boolean
+    session[:games] = params[:games].to_unsafe_hash.transform_values { |v| v == 'true' } if params[:games]
     session[:number_of_searches] = params[:number_of_searches]
     redirect_to root_path
   end

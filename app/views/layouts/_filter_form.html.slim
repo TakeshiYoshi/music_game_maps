@@ -10,7 +10,7 @@
             = f.label t('defaults.label_game')
             .game-labels
               - Game.all.each do |game|
-                = f.check_box "games[#{game.id}]", id: "game_#{game.id}", class: 'game-check d-none', checked: "#{'checked' if game_filtered?(game.id)}"
+                = f.check_box "games[#{game.id}]", { id: "game_#{game.id}", class: 'game-check d-none', checked: "#{'checked' if game_filtered?(game.id)}" }, true, false
                 label.game-label.rounded-pill for="game_#{game.id}"
                   = game.title
           .form-group

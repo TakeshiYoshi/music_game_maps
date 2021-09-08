@@ -13,19 +13,29 @@ class ShopsController < ApplicationController
 
   private
 
-  def set_filter # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+  def set_filter # rubocop:disable Metrics/CyclomaticComplexity
     @shops_filter = @shops
     @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
     @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
-    session[:games]&.each do |g|
-      # g.first: Game.id
-      # g.last: 0 => フィルターなし, 1 => フィルターあり
-      if g.last == '1'
-        game = Game.find(g.first.to_i)
+    session[:games]&.each do |game_id, should_filter|
+      if should_filter
+        game = Game.find(game_id)
         @shops_filter = Shop.where(id: @shops_filter.includes(:games).map { |s| s.id if s.games.include?(game) }.compact)
       end
     end
-    @shops_filter = @shops_filter.by_distance(origin: [session[:lat], session[:lng]]).limit(20) if session[:lat]
+    @shops_filter = sort_shops(@shops_filter)
+  end
+
+  def sort_shops(shops)
+    if session[:lat]
+      # 地図検索が有効の場合、指定地点周辺順にソート
+      shops.by_distance(origin: [session[:lat], session[:lng]])
+    elsif session[:location]
+      # 地図検索が無効で現在位置が有効の場合、現在位置に近い順でソート
+      shops.by_distance(origin: session[:location])
+    else
+      shops
+    end
   end
 
   def set_shops_lat_and_lng
