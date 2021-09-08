@@ -1,3 +1,4 @@
+- content_for(:title, @shop.name)
 = render 'shops/description', shop: @shop
 .col-12.main-content.d-flex
   .col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
