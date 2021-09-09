@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="tutorial-character">
-        <img src="./images/user_review_empty.png">
+        <img src="./images/tutorial_otomaru.png">
       </div>
       <div class="tutorial-message-box glass blur">
         <vue-typer class="glass-text tutorial-message" :text="message" :repeat="0" :pre-type-delay="1000" @typed="messageEvents"></vue-typer>
