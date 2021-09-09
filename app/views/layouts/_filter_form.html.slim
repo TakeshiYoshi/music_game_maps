@@ -3,7 +3,7 @@
     .modal-content.modal-glass.blur
       .modal-header
         h.modal-title = t 'defaults.form_title'
-        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+        button.btn-close#filter-close type="button" data-bs-dismiss="modal" aria-label="Close"
       .modal-body
         = form_with url: filter_path, method: :post, local: true do |f|
           .form-group
