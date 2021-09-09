@@ -39,6 +39,7 @@ class FiltersController < ApplicationController
   end
 
   def set_location
-    session[:location] = [params[:lat], params[:lng]]
+    cookies.permanent[:location_lat] = params[:lat]
+    cookies.permanent[:location_lng] = params[:lng]
   end
 end
