@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     gon.selectedCity = session[:city_id]
     gon.location = [cookies.permanent[:location_lat], cookies.permanent[:location_lng]] if cookies.permanent[:location_lat]
     gon.isTest = Rails.env.test?
+    gon.attend_tutorial = cookies.permanent[:attend_tutorial]
     gon.selectedCity = session[:city_id]
     gon.prefectures = Prefecture.all.to_json only: %i[id name]
     gon.cities = Prefecture.find(gon.selectedPref).cities.to_json(only: %i[id name]) if gon.selectedPref

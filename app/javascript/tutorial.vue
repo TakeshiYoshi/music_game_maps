@@ -46,7 +46,7 @@ export default {
     'vue-typer': VueTyper
   },
   mounted: function() {
-    if (gon.location) {
+    if (gon.attend_tutorial) {
       document.getElementById('tutorial').style.display = 'none';
     } else if (gon.isTest) {
       // テスト用

@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   before_action :set_filter, only: %i[index]
   before_action :set_shops_lat_and_lng, only: %i[index]
+  before_action :set_tutorial_cookie, only: %i[index]
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
@@ -40,5 +41,9 @@ class ShopsController < ApplicationController
 
   def set_shops_lat_and_lng
     gon.shops_lat_and_lng = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches]).to_json only: %i[id lat lng]
+  end
+
+  def set_tutorial_cookie
+    cookies.permanent[:attend_tutorial] = true unless cookies.permanent[:attend_tutorial]
   end
 end
