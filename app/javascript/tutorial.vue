@@ -37,7 +37,7 @@ import { VueTyper } from 'vue-typer'
 export default {
   data: function () {
     return {
-      template: { enter: ['ようこそOTOMAPへ！ぼくの名前はおとまる！OTOMAPの案内犬だよ！', 'これからOTOMAPの使い方について教えようと思うんだけど...', '聞きたいかい？'], no: ['OTOMAPを気に入ってくれるとうれしいな！またね！'], yes: ['ありがとう！それじゃあ早速説明していくね！'], map: ['このマップには検索結果の店舗がピンで表示されてるよ！'], geolocation: ['このボタンを押すと現在位置がマップ上に表示されるようになるよ！'], search_by_map: ['このボタンを押すとマップで表示している場所の周辺の店舗を検索できるよ！'], search_by_free_word: ['ここからフリーワード検索ができるよ！'], filter_button: ['このボタンを押すとフィルター設定画面が開くよ！'], filter_modal: ['これがフィルター設定画面だよ！', 'ゲーム機種や都道府県、市区町村でフィルターを設定できるよ！'], end: ['ひと通りの機能を紹介したよ！', 'それじゃあぼくはこのへんで...OTOMAPを楽しんでね！']},
+      template: { enter: ['OTOMAPへようこそ！ぼくの名前はおとまる！OTOMAPの案内犬だよ！', 'これからOTOMAPの使い方について話そうと思うんだけど...', '聞きたいかい？'], no: ['OTOMAPを気に入ってくれるとうれしいな！またね！'], yes: ['わかった！それじゃあ早速説明していくね！'], map: ['このマップには検索結果の場所がピンで表示されてるよ！'], geolocation: ['このボタンを押すと現在位置がマップ上に表示されるようになるよ！'], search_by_map: ['このボタンを押すと今マップで表示している場所の周辺を検索できるよ！'], search_by_free_word: ['ここからフリーワード検索ができるよ！'], filter_button: ['このボタンを押すとフィルター設定画面が開くよ！'], filter_modal: ['これがフィルター設定画面だよ！', 'ゲーム機種や都道府県、市区町村でフィルターを設定できるよ！'], end: ['ひと通りの機能を紹介したよ！', 'それじゃあぼくはこのへんで。またね！']},
       message: ' ',
       selectFlag: false,
     }
@@ -165,10 +165,8 @@ export default {
       setTimeout(() => {
         document.getElementById('tutorial-animation-start').checked = false;
       }, 1000)
-      // display: noneへ
-      setTimeout(() => {
-        document.getElementById('tutorial').style.display = 'none';
-      }, 4000)
+      // 現在位置情報から周辺店舗を検索するためリロード
+      location.reload();
     }
   }
 }
