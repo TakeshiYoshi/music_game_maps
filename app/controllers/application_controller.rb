@@ -29,7 +29,9 @@ class ApplicationController < ActionController::Base
   def set_variable_to_javascript # rubocop:disable Metrics/AbcSize
     gon.selectedPref = session[:prefecture_id]
     gon.selectedCity = session[:city_id]
-    gon.location = session[:location] if session[:location]
+    gon.location = [cookies.permanent[:location_lat], cookies.permanent[:location_lng]] if cookies.permanent[:location_lat]
+    gon.isTest = Rails.env.test?
+    gon.attend_tutorial = cookies.permanent[:attend_tutorial]
     gon.selectedCity = session[:city_id]
     gon.prefectures = Prefecture.all.to_json only: %i[id name]
     gon.cities = Prefecture.find(gon.selectedPref).cities.to_json(only: %i[id name]) if gon.selectedPref

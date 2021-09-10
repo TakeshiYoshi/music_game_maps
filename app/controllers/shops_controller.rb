@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   before_action :set_filter, only: %i[index]
   before_action :set_shops_lat_and_lng, only: %i[index]
+  before_action :set_tutorial_cookie, only: %i[index]
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
@@ -30,9 +31,9 @@ class ShopsController < ApplicationController
     if session[:lat]
       # 地図検索が有効の場合、指定地点周辺順にソート
       shops.by_distance(origin: [session[:lat], session[:lng]])
-    elsif session[:location]
+    elsif cookies.permanent[:location_lat]
       # 地図検索が無効で現在位置が有効の場合、現在位置に近い順でソート
-      shops.by_distance(origin: session[:location])
+      shops.by_distance(origin: [cookies.permanent[:location_lat], cookies.permanent[:location_lng]])
     else
       shops
     end
@@ -40,5 +41,9 @@ class ShopsController < ApplicationController
 
   def set_shops_lat_and_lng
     gon.shops_lat_and_lng = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches]).to_json only: %i[id lat lng]
+  end
+
+  def set_tutorial_cookie
+    cookies.permanent[:attend_tutorial] = true unless cookies.permanent[:attend_tutorial]
   end
 end
