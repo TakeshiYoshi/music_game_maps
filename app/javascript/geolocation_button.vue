@@ -86,8 +86,10 @@ export default {
               // ページリロードを実行
               location.reload();
             }
+            if(this.getMode == 'button') {
+              Export.show_message('現在位置を取得しました');
+            }
           })
-        Export.show_message('現在位置を取得しました');
       }
       window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
       if(!this.isGeoChecked) {
