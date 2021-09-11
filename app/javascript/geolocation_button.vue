@@ -27,11 +27,11 @@ export default {
       latitude: gon.location ? gon.location[0] : '',
       longitude: gon.location ? gon.location[1] : '',
       intervalFunction: null,
-      buttonMode: true
+      getMode: true
     }
   },
   mounted: function() {
-    this.buttonMode = false;
+    this.getMode = 'first';
     this.getGeolocation();
     if (this.isGeoChecked) {
       // 現在位置の取得がオンになっていたら５秒に1度現在地の更新を行う。
@@ -42,12 +42,12 @@ export default {
   methods: {
     updateLocation: function() {
       if (this.isGeoChecked) {
-        this.buttonMode = false;
+        this.getMode = 'auto';
         this.getGeolocation();
       }
     },
     onGeoButton: function() {
-      this.buttonMode = true;
+      this.getMode = 'button';
       this.getGeolocation();
       if (this.isGeoChecked) {
         // 2回目以降に現在地取得をする場合は現在地のズームを行う
@@ -55,7 +55,7 @@ export default {
       }
     },
     getGeolocation: function() {
-      // buttonMode: true=>現在位置取得ボタンを押した時の挙動
+      // getMode: button=>現在位置取得ボタンを押した時の挙動, atLoad=>画面ロード時の挙動
       if (!navigator.geolocation) {
         Export.show_message('現在位置が取得できませんでした')
         return
@@ -65,7 +65,7 @@ export default {
         timeout: 5000,
         maximumAge: 0
       }
-      if(this.buttonMode) {
+      if(this.getMode == 'button') {
         Export.show_message('現在位置情報を取得しています...');
       }
       navigator.geolocation.getCurrentPosition(this.success, this.error, options)
@@ -73,14 +73,23 @@ export default {
     success: function(position) {
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
-      if(this.buttonMode || !this.isGeoChecked) {
+      if(this.getMode == 'button' || this.getMode == 'first' || !this.isGeoChecked) {
         // Rails側にセッションとして記録
         axios
           .post('/set_location', {
           lat: this.latitude,
           lng: this.longitude
           })
-        Export.show_message('現在位置を取得しました');
+          .then(() => {
+            if(this.getMode == 'first' && !gon.isSearchByMapMode && this.isCloserThanBefore) {
+              // 現在位置の取得がオンかつマップ検索されていないかつ以前取得した位置情報と比べ1km以上離れている場合
+              // ページリロードを実行
+              location.reload();
+            }
+            if(this.getMode == 'button') {
+              Export.show_message('現在位置を取得しました');
+            }
+          })
       }
       window.globalFunction.addGeoLocationMarker([this.latitude, this.longitude]);
       if(!this.isGeoChecked) {
@@ -90,7 +99,7 @@ export default {
       }
     },
     error: function(error) {
-      if(this.buttonMode) {
+      if(this.getMode == 'button') {
         switch (error.code) {
           case 1: // PERMISSION_DENIED
             Export.show_message('位置情報の利用が許可されていません')
@@ -109,6 +118,12 @@ export default {
     },
     focusCurrentPosition: function() {
       window.globalFunction.focusCurrentPosition([this.latitude, this.longitude]);
+    }
+  },
+  computed: {
+    isCloserThanBefore: function() {
+      // 日本の場合経度は1度=約80kmであるがここでは1度約100kmとして計算
+      return Math.abs(gon.location[0] - this.latitude) >= 0.01 || Math.abs(gon.location[1] - this.longitude) >= 0.01
     }
   }
 }
