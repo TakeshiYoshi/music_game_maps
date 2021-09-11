@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
     gon.selectedPref = session[:prefecture_id]
     gon.selectedCity = session[:city_id]
     gon.location = [cookies.permanent[:location_lat], cookies.permanent[:location_lng]] if cookies.permanent[:location_lat]
+    gon.isSearchByMapMode = session[:lat].present?
     gon.isTest = Rails.env.test?
     gon.attend_tutorial = cookies.permanent[:attend_tutorial]
     gon.selectedCity = session[:city_id]

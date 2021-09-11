@@ -34,6 +34,10 @@ export default {
     this.buttonMode = false;
     this.getGeolocation();
     if (this.isGeoChecked) {
+      if (!gon.isSearchByMapMode && this.isCloserThanBefore) {
+        // 現在位置の取得がオンかつマップ検索されていないかつ以前取得した位置情報と比べ1km以上離れている場合ページリロードを実行
+        location.reload();
+      }
       // 現在位置の取得がオンになっていたら５秒に1度現在地の更新を行う。
       // 頻繁に更新をするためRails側でセッションは作成せず地図のマーカーの位置のみを変更する。
       this.intervalFunction = setInterval(this.updateLocation, 5000);
@@ -109,6 +113,11 @@ export default {
     },
     focusCurrentPosition: function() {
       window.globalFunction.focusCurrentPosition([this.latitude, this.longitude]);
+    }
+  },
+  computed: {
+    isCloserThanBefore: function() {
+      return Math.abs(gon.latitude - this.latitude) >= 0.01 || Math.abs(gon.longitude - this.longitude) >= 0.01
     }
   }
 }
