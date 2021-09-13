@@ -764,6 +764,12 @@ footer {
   width: 150px;
 }
 
+// お問い合わせページ
+.inquiry-image {
+  max-width: 300px;
+  height: auto;
+}
+
 // 以下iPad縦表示向け
 @include media-breakpoint-down(lg) {
   header .search-form > .search-field {
