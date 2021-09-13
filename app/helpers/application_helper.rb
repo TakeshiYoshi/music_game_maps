@@ -34,6 +34,10 @@ module ApplicationHelper
         url: request.original_url,
         image: asset_pack_url('media/images/ogp.png'),
         locale: 'ja_JP'
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: '@otomap_net'
       }
     }
   end
