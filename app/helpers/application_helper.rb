@@ -32,7 +32,7 @@ module ApplicationHelper
         description: t('defaults.meta.description'),
         type: 'website',
         url: request.original_url,
-        image: asset_pack_path('media/images/ogp.png'),
+        image: asset_pack_url('media/images/ogp.png'),
         locale: 'ja_JP'
       }
     }
