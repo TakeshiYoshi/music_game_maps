@@ -1,5 +1,12 @@
 ja:
   defaults:
+    meta:
+      site: 'OTOMAP'
+      separator: '|'
+      title: '音楽ゲームに特化したゲームセンターマップ検索サービス'
+      charset: 'utf-8'
+      description: 'OTOMAPは音楽ゲームに特化したゲームセンターマップ検索サービスです。'
+      keywords: '音楽ゲーム,音ゲー,マップ,マップ検索,OTOMAP,音ゲーマップ,ゲーセン,ゲームセンター'
     app_name: 'OTOMAP'
     base_title: 'OTOMAP | 音楽ゲームに特化したゲームセンターマップ検索サービス'
     copyright: '© 2021 OTOMAP'
