@@ -28,6 +28,7 @@ module ApplicationHelper
       ],
       og: {
         site_name: t('defaults.meta.site'),
+        title: t('defaults.meta.site'),
         description: t('defaults.meta.description'),
         type: 'website',
         url: request.original_url,
