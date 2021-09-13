@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   delete 'clear_near_shops_search', to: 'filters#clear_near_shops_search'
   get 'user_policy', to: 'policies#user_policy'
   get 'privacy_policy', to: 'policies#privacy_policy'
+  get 'inquiry', to: 'inquiries#inquiry'
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
