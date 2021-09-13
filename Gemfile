@@ -10,7 +10,6 @@ gem 'gon'
 
 # Database
 gem 'mysql2', '>= 0.4.4'
-gem 'nokogiri'
 
 # Application server
 gem 'puma', '~> 4.1'
@@ -25,7 +24,6 @@ gem 'font-awesome-rails'
 # UI/UX
 gem 'rails-i18n'
 gem 'slim-rails'
-gem 'html2slim'
 gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave'
@@ -37,9 +35,6 @@ gem 'turbolinks', '~> 5'
 # Authentication
 gem 'sorcery'
 gem 'pundit'
-
-# Time
-gem 'chronic'
 
 # Geolocation
 gem 'geokit-rails'
@@ -81,10 +76,16 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'html2slim'
 end
 
 group :production do
   gem 'unicorn'
+end
+
+group :development, :production do
+  # scraping
+  gem 'nokogiri'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
