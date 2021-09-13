@@ -27,6 +27,7 @@ gem 'slim-rails'
 gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave'
+gem 'meta-tags'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
