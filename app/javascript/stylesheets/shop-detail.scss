@@ -279,6 +279,12 @@
   height: auto;
 }
 
+@include media-breakpoint-down(lg) {
+  .twitter-content {
+    display: none;
+  }
+}
+
 // 以下スマホ向け
 @include media-breakpoint-down(sm) {
   .shop-appearance-img-container {
@@ -329,10 +335,6 @@
       width: 30px;
       margin-right: 5px;
     }
-  }
-
-  .twitter-content {
-    display: none;
   }
 
   #table-check:checked ~ .shop-description-container .opening_hours_table {

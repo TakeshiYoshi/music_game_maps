@@ -7,8 +7,8 @@ ja:
       charset: 'utf-8'
       description: 'OTOMAPは音楽ゲームに特化したゲームセンターマップ検索サービスです。'
       keywords: '音楽ゲーム,音ゲー,マップ,マップ検索,OTOMAP,音ゲーマップ,ゲーセン,ゲームセンター'
-    app_name: 'OTOMAP'
-    base_title: 'OTOMAP | 音楽ゲームに特化したゲームセンターマップ検索サービス'
+    site_title: 'OTOMAP'
+    twitter_id: 'otomap_net'
     copyright: '© 2021 OTOMAP'
     login: 'ログイン'
     logout: 'ログアウト'
@@ -92,6 +92,11 @@ ja:
       user_review_btn: 'この店舗の筐体情報を投稿'
       user_review_empty: 'まだ投稿がありません。本店舗の情報提供お待ちしています。'
       twitter_label: '店舗Twitter情報'
+  inquiries:
+    inquiry:
+      title: 'お問い合わせ'
+      greeting: 'いつもOTOMAPをご利用頂きありがとうございます。'
+      body: '本サービス内において、ご意見, ご要望, バグ報告等ございましたら下記TwitterアカウントのDMにてご報告頂けると助かります。'
   policies:
     user_policy:
       title: '利用規約'

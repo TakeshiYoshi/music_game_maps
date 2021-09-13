@@ -1,0 +1,9 @@
+- set_meta_tags title: t('.title')
+.col-12.glass.login-container.text-center
+  h1.glass-text = t '.title'
+  .glass-text.my-4
+    p.mb-2 = t '.greeting'
+    p.mb-2 = t '.body'
+    .image
+      = image_pack_tag 'tutorial_otomaru.png', class: 'inquiry-image'
+    = link_to "@#{t('defaults.twitter_id')}", "https://twitter.com/#{t('defaults.twitter_id')}", target: :_blank, rel: 'noopener noreferrer', class: 'btn btn-glass rounded-pill mt-3 px-4'

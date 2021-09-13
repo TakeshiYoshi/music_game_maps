@@ -4,7 +4,7 @@ header.glass.blur.d-flex.align-items-center
   .col-6.d-flex.align-items-center
     = link_to root_path, class: 'd-flex align-items-center'
       = image_pack_tag 'logo.png', class: 'logo'
-      h1.site-title = t('defaults.app_name')
+      h1.site-title = t('defaults.site_title')
   .col-6.text-end.d-flex.align-items-center.justify-content-end
     button#filter-button.btn.btn-glass.rounded-circle data-bs-toggle="modal" data-bs-target="#filterModal" class="filter-icon-button#{'-filtered' if filtered?}"
       = fa_icon 'sliders-h'
