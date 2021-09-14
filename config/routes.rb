@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :user_sessions, only: %i[create]
   resource :theme, only: %i[create]
   get 'signup', to: 'users#new'
+  get 'signup_with_twitter', to: 'users#new_with_twitter'
+  post 'create_users_with_twitter', to: 'users#create_with_twitter'
   get 'login', to: 'user_sessions#new'
   delete 'logout', to: 'user_sessions#destroy'
   post 'cities', to: 'filters#cities_select'
@@ -24,6 +26,9 @@ Rails.application.routes.draw do
   get 'user_policy', to: 'policies#user_policy'
   get 'privacy_policy', to: 'policies#privacy_policy'
   get 'inquiry', to: 'inquiries#inquiry'
+  post 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 

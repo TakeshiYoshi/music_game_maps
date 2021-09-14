@@ -45,8 +45,13 @@ ja:
     new:
       title: '新規ユーザー登録'
       explain_playing_game: 'あなたがプレーしている機種を選択してください。'
+      signup_with_twitter: 'Twitterアカウントで新規ユーザー登録する方はこちら'
+    new_with_twitter:
+      title: '新規ユーザー登録(Twitter連携)'
     create:
       success: 'アカウント有効化用のメールを送信しました。'
+    create_with_twitter:
+      success: 'アカウントの作成に成功しました。'
     show:
       title: "%{nickname}さんのプロフィール"
       edit_profile: 'プロフィールを編集する'
@@ -66,11 +71,15 @@ ja:
       title: 'ログイン'
       users_new_link: '新規アカウントを作成'
       forgot_password_link: 'パスワードを忘れた'
+      twitter_login: 'Twitterでログイン'
     create:
       success: 'ログインに成功しました'
       danger: 'ログインに失敗しました'
     destroy:
       success: 'ログアウトしました'
+  oauths:
+    callback:
+      success: 'ログインに成功しました'
   password_resets:
     new:
       title: 'パスワード再発行'

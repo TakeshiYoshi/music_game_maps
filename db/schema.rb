@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_19_155149) do
+ActiveRecord::Schema.define(version: 2021_09_13_175834) do
 
   create_table "about_games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_review_id", null: false
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2021_08_19_155149) do
     t.index ["game_id"], name: "index_about_games_on_game_id"
     t.index ["user_review_id", "game_id"], name: "index_about_games_on_user_review_id_and_game_id", unique: true
     t.index ["user_review_id"], name: "index_about_games_on_user_review_id"
+  end
+
+  create_table "authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
