@@ -5,7 +5,9 @@
   .d-flex.justify-content-center
     = render 'form'
   .twitter-login.mt-4
-    = link_to t('.twitter_login'), auth_at_provider_path(provider: :twitter), class: 'btn btn-glass rounded-pill px-4'
+    = link_to auth_at_provider_path(provider: :twitter), class: 'btn btn-glass rounded-pill px-4' do 
+      i.fab.fa-twitter 
+      span.twitter-login-text = t('.twitter_login')
   .page-links.d-flex.justify-content-center
     = link_to signup_path, class: 'glass-link'
       = t '.users_new_link'
