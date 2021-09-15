@@ -1,0 +1,6 @@
+- set_meta_tags title: t('.title')
+.col-12.glass.signup-container.text-center
+  h1.page-title-text.glass-text
+      = t '.title'
+  .d-flex.justify-content-center
+    = render 'form', user: @user, provider: :twitter, nickname: params[:nickname]

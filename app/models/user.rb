@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :user_reviews, dependent: :destroy
   has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
+  has_one :authentication, dependent: :destroy
+
+  accepts_nested_attributes_for :authentication
 
   mount_uploader :avatar, AvatarUploader
 
