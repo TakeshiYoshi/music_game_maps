@@ -117,7 +117,8 @@ Rails.application.config.sorcery.configure do |config|
   #
   config.twitter.key = Rails.application.credentials[:twitter][:key]
   config.twitter.secret = Rails.application.credentials[:twitter][:secret_key]
-  config.twitter.callback_url = 'http://localhost:3000/oauth/callback?provider=twitter'
+  config.twitter.callback_url = "http://localhost:3000/oauth/callback?provider=twitter" if Rails.env.development?
+  config.twitter.callback_url = "https://www.otomap.net/oauth/callback?provider=twitter" if Rails.env.production?
   config.twitter.user_info_mapping = { email: 'screen_name' }
   #
   # config.facebook.key = ""
