@@ -2,7 +2,6 @@ require './lib/scraping/scraping'
 
 def scraping_konami(game_key)
   # 変数初期化
-  shops = []
   game_title = {
     SDVX_VM: 'SOUND VOLTEX -Valkyrie model-',
     SDVX: 'SOUND VOLTEX',
@@ -23,6 +22,7 @@ def scraping_konami(game_key)
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
+    shops = []
     start_message(prefecture.name, game_title[game_key.to_sym])
     prefecture_id = prefecture.id.to_s.rjust(2, '0')
     1.upto(999) do |i|
@@ -36,12 +36,40 @@ def scraping_konami(game_key)
       break if document.css('div.cl_shop_bloc').blank?
 
       document.css('div.cl_shop_bloc').each do |node|
-        shop = {  name: node['data-name'],
+        name = node['data-name']
+        lat = node['data-latitude']
+        lng = node['data-longitude']
+
+        # 例外処理
+        name = 'Be-come 成沢店' if name == 'ビーカム成沢店'
+        name = 'モーリーファンタジーｆ 富士南' if name == 'モーリーファンタジーF･富士南'
+        name = 'アクト守山3番館' if name == 'エースレーン守山'
+        name = 'ブック245' if name == 'ブック245内 合栄産業'
+        name = '山形ファミリーボウル' if name == 'ゲームゾーントレジャー北町店'
+        name = 'スーパーアミューズメントスクエア アルゴ' if name == 'アルゴ'
+        name = 'アル・クリオ' if name == 'アルクリオ 3Fゲームコーナー'
+        name = 'ジョイジャングル あやぱに' if name == 'ゲームランドジョイジャングルinあやぱに'
+        name = 'ボウリング・リネア24' if name == 'ゲームファンタジア'
+        name = '遊ランド西御料店' if name == '遊ランド旭川店'
+        name = 'コープさっぽろ 貝塚店' if name == 'ハロータイトー釧路貝塚店'
+        if name == 'モーリーファンタジーf茨木'
+          name = 'モーリーファンタジーｆ 茨木店'
+          lat = 34.819273
+          lng = 135.5732645
+        end
+        place_id = 'ChIJzdZ63-DVVDURyOukhz0DiGU' if name == 'トップラン' && prefecture.id == 28
+        place_id = 'ChIJeUw55j8vC18Rei0CKiEyIxk' if name == 'キャッツアイ東苗穂店'
+        place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
+        place_id = 'ChIJj0N1Mwe-GGARAl14v3zSAQ0' if name == 'アミューズメントベネクス越谷店'
+        place_id = 'ChIJ_W8XoQUT5TQRG8vPiBMM9fA' if name == 'ゲームランドジョイジャングル美浜店'
+
+        shop = {  name: name,
+                  address: prefecture.name + node['data-address'],
                   prefecture: prefecture.name,
-                  lat: node['data-latitude'],
-                  lon: node['data-longitude'],
+                  lat: lat,
+                  lon: lng,
                   game: game_title[game_key.to_sym],
-                  place_id: nil }
+                  place_id: place_id }
         # Places APIを用いてデータを整理する
         shop = get_places_data shop
         shops << shop
@@ -55,8 +83,10 @@ def scraping_konami(game_key)
         break
       end
     end
+    puts shops
+    # 店舗情報の登録と登録した店舗の配列を取得
+    registered_shops = register_shop_data shops
+    # 撤去された店舗の筐体情報を削除
+    delete_game_machine(registered_shops, game_title[game_key.to_sym], prefecture.id)
   end
-
-  puts shops
-  register_shop_data shops
 end
