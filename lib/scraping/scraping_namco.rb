@@ -3,6 +3,7 @@ require './lib/scraping/scraping'
 def scraping_namco(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
+    next if prefecture.id < 23
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -37,6 +38,13 @@ def scraping_namco(game_title)
       name = 'フタバ図書 ソフトピア八本松店' if name == 'GIGA八本松'
       name = 'スポガ久留米 ボウリング' if name == 'バナナパーティー久留米'
       name = 'G-Stage 浜町店' if name == 'G-stage浜の町'
+      name = 'ゆめタウン丸亀 ビッグウェーブ' if name == 'BIG WAVE ゆめタウン丸亀'
+      name = 'アル・プラザ加賀' if name == 'ゲームパークMECHA加賀'
+      name = '豊崎ライフスタイルセンター TOMITON' if name == 'ゲームランドジョイジャングルinとみとん'
+      name = '第2鬼頭マンション' if name == 'チャレンジランド1号'
+      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
+      place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'HapipiLand東大宮'
+      place_id = 'ChIJ_W8XoQUT5TQRG8vPiBMM9fA' if name == 'ジョイジャングル美浜'
       next if name == 'HapipiLand阿見' # 閉店
 
       # デバッグ用
@@ -49,7 +57,7 @@ def scraping_namco(game_title)
                lon: nil,
                game: game_title,
                detail_page_url: shop_detail_link_list[n],
-               place_id: nil }
+               place_id: place_id }
       # 緯度経度情報を取得
       shop = get_lat_and_lon shop
       # Places APIを用いて店舗データ取得
@@ -59,8 +67,9 @@ def scraping_namco(game_title)
       shops_all << shop if shop.present?
     end
 
-    # 以下DB登録処理
-    shops = get_need_to_register_shops(shops_all)
-    register_shop_data shops if shops.present?
+    # 店舗情報の登録と登録した店舗の配列を取得
+    registered_shops = register_shop_data shops_all
+    # 撤去された店舗の筐体情報を削除
+    delete_game_machine(registered_shops, game_title, prefecture.id)
   end
 end

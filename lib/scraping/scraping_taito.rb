@@ -40,10 +40,9 @@ def scraping_taito(game_title)
       name = 'namcoイオンモール広島府中店' if name == 'ナムコランド広島店'
       name = 'タイトーFステーション モラージュ佐賀店' if name == 'ＴＦＳモラージュ佐賀'
       name = 'namco イオン具志川店' if name == 'ＮＡＭＣＯＬＡＮＤ具志川店'
+      name = 'レジャラン ビバホーム新習志野' if name == 'ビバホーム新習志野店２階'
+      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
       next if name == 'あうとばぁん' # 閉店中？
-
-      # デバッグ用
-      next if shop['TNAME'] != 'タイトーイオンモール札幌平岡店'
 
       shop = { name: name,
                address: address,
@@ -52,7 +51,7 @@ def scraping_taito(game_title)
                lon: lng,
                game: game_title,
                count: count,
-               place_id: nil }
+               place_id: place_id }
 
       # Places APIを用いて店舗データ取得
       shop = get_places_data shop
@@ -61,8 +60,9 @@ def scraping_taito(game_title)
       shops_all << shop if shop.present?
     end
 
-    # 以下DB登録処理
-    shops = get_need_to_register_shops(shops_all)
-    register_shop_data shops if shops.present?
+    # 店舗情報の登録と登録した店舗の配列を取得
+    registered_shops = register_shop_data shops_all
+    # 撤去された店舗の筐体情報を削除
+    delete_game_machine(registered_shops, game_title, prefecture.id)
   end
 end

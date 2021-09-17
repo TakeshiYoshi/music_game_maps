@@ -2,9 +2,10 @@ require 'nokogiri'
 require 'open-uri'
 
 # スクレイピングする際の待機時間
-$sleep_time = 10
+$sleep_time = 1
 
 def register_shop_data(shops)
+  registered_shops = []
   # Qiita記事参考: https://qiita.com/zakuroishikuro/items/066421bce820e3c73ce9
   city_reg = /((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|富山|野々市|大町|蒲郡|四日市|姫路|大和郡山|廿日市|下松|岩国|田川|大村)市|.+?郡(?:玉村|大町|.+?)[町村]|.+?[市区町村])/
   shops.each do |shop|
@@ -24,12 +25,38 @@ def register_shop_data(shops)
     # ゲームモデル取得
     game = Game.find_by(title: shop[:game])
 
+    # 例外処理
+    name = 'アピナ上越インター店' if name == '下門前１６６１'
+
     # デバッグ用ログ出力
     puts name
     puts address
     puts prefecture.name
     puts city.name
 
+    # 更新用
+    if shop[:place_id].present? && db_shop = Shop.find_by(place_id: shop[:place_id])
+      puts "\n*** DB上の店舗情報を更新します ***"
+      db_shop.update( name: name,
+                      twitter_id: nil,
+                      address: address,
+                      prefecture: prefecture,
+                      city: city,
+                      lat: shop[:lat],
+                      lng: shop[:lon],
+                      opening_hours: shop[:opening_hours],
+                      opening_hours_text: shop[:opening_hours_text],
+                      phone_number: shop[:phone_number],
+                      website: shop[:website],
+                      photo_reference: shop[:photo_reference],
+                      place_id: shop[:place_id])
+      # GameMachineモデル作成(店舗とゲームを関連付けする)
+      register_relationship_shop_between_game(name, game, shop[:count])
+      registered_shops << db_shop
+      next
+    end
+
+    # 新規保存用
     puts "\n*** 店舗情報をDBへ保存します ***"
     shop_model = Shop.new(name: name,
                           twitter_id: nil,
@@ -39,15 +66,19 @@ def register_shop_data(shops)
                           lat: shop[:lat],
                           lng: shop[:lon],
                           opening_hours: shop[:opening_hours],
+                          opening_hours_text: shop[:opening_hours_text],
                           phone_number: shop[:phone_number],
                           website: shop[:website],
                           photo_reference: shop[:photo_reference],
                           place_id: shop[:place_id])
     if shop_model.save
       puts "#{name}のShopモデルの作成に成功しました。shop_id: #{shop_model.id}"
+      registered_shops << shop_model
     else
       puts "#{name}のShopモデルの作成に失敗しました。"
       puts "[ERROR LOG] #{shop_model.errors.full_messages}"
+      already_shop = Shop.find_by(name: name)
+      registered_shops << already_shop
     end
 
     # GameMachineモデル作成(店舗とゲームを関連付けする)
@@ -55,6 +86,8 @@ def register_shop_data(shops)
 
     output_line
   end
+  # 戻り値は登録した店舗モデルの配列
+  registered_shops
 end
 
 def register_relationship_shop_between_game(shop_name, game, count)
@@ -74,7 +107,7 @@ def get_lat_and_lon(shop)
   page = URI.parse(url).open.read
   document = Nokogiri::HTML(page)
   # サーバー負荷軽減のため待機
-  sleep 10
+  sleep $sleep_time
 
   return if document.at_css('button#routesearch_btn').blank?
 
@@ -138,31 +171,47 @@ def get_places_data(shop)
         shop[:place_id] = data['place_id']
         name = data['name']
         address = data['formatted_address']
-        break if data['formatted_address'].include? shop[:address][/^\D*/]
+        break if shop[:address] && address.include?(shop[:address][/^\D*/])
       end
     end
+
+    # 例外処理
+    shop[:place_id] = 'ChIJ7QGJf5MIAWARvYFqYvRcfDs' if shop[:place_id] == 'ChIJ7QGJf5MIAWARIyL_A8FvNdI' # ラウンドワン京都河原町店
+    puts "place id: #{shop[:place_id]}"
   end
 
-  # API節約のためDB上にデータがあればここで終了させる
-  if Shop.find_by(name: name)
-    shop[:name] = name
-    return shop
-  end
   # 取得データがなければ終了する
   return nil if auto_data['status'] == 'ZERO_RESULTS'
+  # API節約のためDB上にデータがあればここで終了させる
+  if db_shop = Shop.find_by(name: name) && db_shop&.opening_hours_text.present?
+    shop[:name] = db_shop.name
+    shop[:address] = db_shop.address
+    shop[:lat] = db_shop.lat
+    shop[:lon] = db_shop.lng
+    shop[:place_id] = db_shop.place_id
+    shop[:opening_hours] = db_shop.opening_hours
+    shop[:opening_hours_text] = db_shop.opening_hours_text
+    shop[:phone_number] = db_shop.phone_number
+    shop[:website] = db_shop.website
+    shop[:photo_reference] = db_shop.photo_reference
+    return shop
+  end
   # PlaceDetailsを利用して店舗の詳細情報を入手する
   puts '店舗情報を取得します'
   place_detail_url = URI.encode "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
   page = URI.parse(place_detail_url).open.read
   data = JSON.parse(page)
 
-  # 取得した位置が緯度または経度が300m以上離れている場合は別店舗とみなしデータの使用をしない
-  if shop[:lat].present? && shop[:lon].present?
+  # 取得した位置が緯度または経度が1km以上離れている場合は別店舗とみなしデータの使用をしない
+  if shop[:lat].present? && shop[:lon].present? && !Shop.find_by(place_id: shop[:place_id])
     puts shop[:lat]
     puts shop[:lon]
     puts data['result']['geometry']['location']['lat']
     puts data['result']['geometry']['location']['lng']
-    return shop if (data['result']['geometry']['location']['lat'].to_f - shop[:lat].to_f).abs >= 0.003 || (data['result']['geometry']['location']['lng'].to_f - shop[:lon].to_f).abs >= 0.003
+    if (data['result']['geometry']['location']['lat'].to_f - shop[:lat].to_f).abs >= 0.01 || (data['result']['geometry']['location']['lng'].to_f - shop[:lon].to_f).abs >= 0.01
+      shop[:place_id] = nil
+      return shop
+    end
   end
 
   # データ格納
@@ -172,6 +221,7 @@ def get_places_data(shop)
   shop[:lat] = data['result']['geometry']['location']['lat']
   shop[:lon] = data['result']['geometry']['location']['lng']
   shop[:opening_hours] = data['result']['opening_hours']['periods'] if data['result']['opening_hours'].present?
+  shop[:opening_hours_text] = data['result']['opening_hours']['weekday_text'] if data['result']['opening_hours'].present?
   shop[:website] = data['result']['website']
   shop[:photo_reference] = data['result']['photos'][0]['photo_reference'] if data['result']['photos'].present?
 
@@ -190,59 +240,27 @@ def get_places_data(shop)
   shop
 end
 
-def update_db(i)
-  shops = []
-  shops = Shop.where(prefecture: Prefecture.find(i))
-
-  shops.each do |s|
-    shop = {  name: s.name,
-              lat: s.lat,
-              lon: s.lng,
-              place_id: s.place_id,
-              prefecture: s.prefecture.name,
-              city: s.city.name }
-    shop = get_places_data shop
-
-    next if shop.nil?
-    # 取得した位置が緯度または経度が300m以上離れている場合は別店舗とみなし更新をしない
-    next if ((s.lat.to_f - shop[:lat].to_f).abs >= 0.003 || (s.lng.to_f - shop[:lon].to_f).abs >= 0.003) && s.lat.present? && s.lng.present?
-
-    s.update( name: shop[:name],
-              address: shop[:address],
-              lat: shop[:lat],
-              lng: shop[:lon],
-              opening_hours: shop[:opening_hours],
-              phone_number: shop[:phone_number],
-              website: shop[:website],
-              photo_reference: shop[:photo_reference],
-              place_id: shop[:place_id])
-  end
-end
-
-def get_need_to_register_shops(shops_all)
-  # 変数初期化
-  shops = []
-
-  shops_all.each do |shop|
-    puts shop
-    # DBに同店舗が登録されているか確認
-    registered_shop = Shop.find_by(name: shop[:name])
-    registered_shop = Shop.find_by(address: shop[:address]) if registered_shop.nil?
-    registered_shop = Shop.find_by(address: format_address(shop[:address])) if registered_shop.nil?
-
-    if registered_shop
-      # GameMachineモデル作成(店舗とゲームを関連付けする)
-      register_relationship_shop_between_game(registered_shop.name, Game.find_by(title: shop[:game]), shop[:count])
-    else
-      # データベースに登録するデータを配列に格納
-      shops << shop
-    end
-    output_line
-  end
-
-  shops
-end
-
 def start_message(prefecture, game_title)
   puts "#{prefecture}で#{game_title}が設置されている店舗のスクレイピングを開始します。"
+end
+
+def delete_game_machine(registered_shops, game_title, prefecture_id)
+  game = Game.find_by(title: game_title)
+  old_db_shops = game.shops.where(prefecture_id: prefecture_id)
+  must_delete_shops = old_db_shops - registered_shops # 筐体情報を削除すべき店舗一覧
+  puts '撤去された筐体情報を削除します。'
+  puts "DB上の店舗数: #{old_db_shops.length}"
+  old_db_shops.each { |s| puts "#{s.name} #{s.id}" }
+  puts "登録された店舗数: #{registered_shops.length}"
+  registered_shops.each { |s| puts "#{s.name} #{s.id}" }
+  puts "撤去数: #{must_delete_shops.length}"
+  must_delete_shops.each do |shop|
+    puts shop.name
+    game_machine = shop.game_machines.find_by(game: game)
+    game_machine.destroy
+    if shop.game_machines.length == 0
+      puts '店舗が閉店しているか音ゲーが設置されていないため店舗情報そのものを削除します。'
+      shop.destroy
+    end
+  end
 end

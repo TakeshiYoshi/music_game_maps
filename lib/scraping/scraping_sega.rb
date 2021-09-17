@@ -45,7 +45,11 @@ def scraping_sega(game_title)
       name = 'ランブルプラザ' if name == '池袋ゲーセンミカドINランブルプラザ'
       name = 'ゲームフィールド イオンタウン弘前樋の口店' if name == 'ゲームフィールド弘前樋の口店'
       name = '万代 多賀城店' if name == 'MS多賀城店'
+      name = 'ゆめタウン丸亀 ビッグウェーブ' if name == 'ゆめタウン丸亀 ビック・ウェーブ'
       place_id = 'ChIJSdd9rbHZGGARxCd25n3x7Ic' if name == 'キャッツアイ狭山店'
+      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
+      place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'Hapipi Land 東大宮店'
+      name = 'レジャラン ビバホーム新習志野' if name == 'スーパービバホーム新習志野店2階'
       next if name == '宮西スタジアム２' # 閉店してる？
 
       puts name
@@ -67,8 +71,9 @@ def scraping_sega(game_title)
       shops_all << shop if shop.present?
     end
 
-    # 以下DB登録処理
-    shops = get_need_to_register_shops(shops_all)
-    register_shop_data shops if shops.present?
+    # 店舗情報の登録と登録した店舗の配列を取得
+    registered_shops = register_shop_data shops_all
+    # 撤去された店舗の筐体情報を削除
+    delete_game_machine(registered_shops, game_title, prefecture.id)
   end
 end

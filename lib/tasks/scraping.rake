@@ -62,8 +62,4 @@ namespace :scraping do
     scraping_namco '太鼓の達人'
     scraping_taito 'GROOVE COASTER'
   end
-
-  task update_db: :environment do
-    update_db i 
-  end
 end
