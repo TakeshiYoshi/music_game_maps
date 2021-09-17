@@ -27,6 +27,7 @@
         <div class="tutorial-select-button d-flex align-items-center justify-content-center glass blur glass-text" @click="selectedButton(true)">聞きたい！</div>
         <div class="tutorial-select-button d-flex align-items-center justify-content-center glass blur glass-text" @click="selectedButton(false)">大丈夫です</div>
       </div>
+      <button class="tutorial-close-button glass blur glass-text" @click="closeTutorial()">チュートリアルを終了する</button>
     </div>
   </div>
 </template>
