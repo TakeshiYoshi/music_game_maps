@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 # スクレイピングする際の待機時間
-$sleep_time = 1
+$sleep_time = 10
 
 def register_shop_data(shops)
   registered_shops = []

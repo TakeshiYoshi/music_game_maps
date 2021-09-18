@@ -3,7 +3,6 @@ require './lib/scraping/scraping'
 def scraping_namco(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    next if prefecture.id < 23
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -45,10 +44,8 @@ def scraping_namco(game_title)
       place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
       place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'HapipiLand東大宮'
       place_id = 'ChIJ_W8XoQUT5TQRG8vPiBMM9fA' if name == 'ジョイジャングル美浜'
+      place_id = 'ChIJJeX9o2CFGWAROFQy8wKe9ec' if name == 'スタジオプリモ沼津'
       next if name == 'HapipiLand阿見' # 閉店
-
-      # デバッグ用
-      # next if shop_name_list[n].text != '店舗名'
 
       shop = { name: name,
                address: address,
