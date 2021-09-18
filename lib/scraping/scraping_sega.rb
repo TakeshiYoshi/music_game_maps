@@ -52,6 +52,7 @@ def scraping_sega(game_title)
       place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'Hapipi Land 東大宮店'
       name = 'レジャラン ビバホーム新習志野' if name == 'スーパービバホーム新習志野店2階'
       place_id = 'ChIJJeX9o2CFGWAROFQy8wKe9ec' if name == 'スタジオプリモ沼津店'
+      place_id = 'ChIJZ9Et-SSRBGARxylUIapZvvk' if name == 'ムー大陸西尾シャオ店'
       next if name == '宮西スタジアム２' # 閉店してる？
 
       shop = {  name: name,
