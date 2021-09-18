@@ -10,6 +10,7 @@ def scraping_sega(game_title)
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
+    next if prefecture.id != 22
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -50,11 +51,9 @@ def scraping_sega(game_title)
       place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
       place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'Hapipi Land 東大宮店'
       name = 'レジャラン ビバホーム新習志野' if name == 'スーパービバホーム新習志野店2階'
+      place_id = 'ChIJJeX9o2CFGWAROFQy8wKe9ec' if name == 'スタジオプリモ沼津店'
+      place_id = 'ChIJZ9Et-SSRBGARxylUIapZvvk' if name == 'ムー大陸西尾シャオ店'
       next if name == '宮西スタジアム２' # 閉店してる？
-
-      puts name
-      # デバッグ用
-      # next if node.css('span.store_name').text != '店舗名'
 
       shop = {  name: name,
                 address: format_address(node.css('span.store_address').text),
