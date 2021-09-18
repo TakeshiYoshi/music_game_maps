@@ -27,7 +27,7 @@
         <div class="tutorial-select-button d-flex align-items-center justify-content-center glass blur glass-text" @click="selectedButton(true)">聞きたい！</div>
         <div class="tutorial-select-button d-flex align-items-center justify-content-center glass blur glass-text" @click="selectedButton(false)">大丈夫です</div>
       </div>
-      <button class="tutorial-close-button glass blur glass-text" @click="closeTutorial()">チュートリアルを終了する</button>
+      <button class="tutorial-close-button glass blur glass-text" id="tutorial-close-button" @click="closeTutorial()">チュートリアルを終了する</button>
     </div>
   </div>
 </template>
@@ -79,6 +79,7 @@ export default {
             top: 0,
             behavior: 'smooth'
           });
+          document.getElementById('tutorial-close-button').style.display = 'none';
           document.getElementById('tutorial-animation-about-map').checked = true;
           // マップ説明テキスト追加
           setTimeout(() => {
