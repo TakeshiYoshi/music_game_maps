@@ -771,6 +771,16 @@ footer {
   height: auto;
 }
 
+// プロフィール
+.profile-user-reviews {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.profile-user-review {
+  border-bottom: solid 1px rgba(white, 0.3);
+}
+
 // 以下iPad縦表示向け
 @include media-breakpoint-down(lg) {
   header .search-form > .search-field {
