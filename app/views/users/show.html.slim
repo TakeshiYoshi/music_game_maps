@@ -23,7 +23,8 @@
       = t '.user_reviews_label'
     span.glass-text
       = "#{t '.user_reviews_length'}#{@user_reviews.size}件"
-    p.glass-text.anonymous-explain
-      = t '.user_review_anonymous_exp'
+    - if @user.anonymous?
+      p.glass-text.anonymous-explain
+        = t '.user_review_anonymous_exp'
     ul.profile-user-reviews.mb-3
       = render partial: 'user_review', collection: @user_reviews.limit(5)
