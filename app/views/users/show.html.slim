@@ -17,7 +17,7 @@
               = game.title
     - if @user == current_user
       = link_to t('.edit_profile'), edit_profile_user_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
-- if current_user == @user || !@user.anonymous?
+- if current_user == @user || ( !@user.anonymous? && @user_reviews.present? )
   .col-12.glass.glass-round
     label.shop-label.rounded-pill.mb-2
       = t '.user_reviews_label'
