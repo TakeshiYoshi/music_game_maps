@@ -169,6 +169,15 @@ RSpec.describe 'ユーザー', type: :system do
       end
 
       context '匿名設定を無効にする' do
+        before { user.update(anonymous: false) }
+
+        context '自分自身のプロフィールを表示する' do
+          it '注意文「匿名設定が有効のためこの欄は他のユーザーには表示されません。」が表示されないこと' do
+            visit user_path(user)
+            expect(page).not_to have_content('匿名設定が有効のためこの欄は他のユーザーには表示されません。'), '注意文が表示されています'
+          end
+        end
+
         context '他のユーザーで自分のプロフィールを表示' do
           it 'ユーザー投稿に関する部分が表示されること' do
             login another_user
