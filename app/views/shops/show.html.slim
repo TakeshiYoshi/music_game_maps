@@ -9,7 +9,7 @@
           = t 'shops.show.user_review_label'
       - if logged_in?
         .col-6.d-flex.align-items-center.justify-content-end
-          label.btn.btn-glass.btn-label-size.rounded-pill for="user-review-form-check"
+          label.btn.btn-glass.btn-label-size.rounded-pill.user-review-form-button for="user-review-form-check"
             = t 'shops.show.user_review_btn'
     = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
     - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
