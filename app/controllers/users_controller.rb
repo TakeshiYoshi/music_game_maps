@@ -32,7 +32,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @user_reviews = @user.user_reviews.includes(:shop).order(created_at: :desc)
+  end
 
   def edit
     authorize @user

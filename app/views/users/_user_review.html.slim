@@ -1,0 +1,3 @@
+li.profile-user-review.py-2
+  = link_to shop_path(user_review.shop), class: 'glass-link' do
+    = "#{user_review.shop.name} (#{l user_review.created_at, format: :user_review})"

@@ -1,5 +1,5 @@
 - set_meta_tags title: t('.title', nickname: @user.nickname)
-.col-12.glass.glass-round.py-4
+.col-12.glass.glass-round.py-4.mb-3
   .row.user-profile.d-flex.justify-content-center
     .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
       .profile-icon-container
@@ -17,3 +17,11 @@
               = game.title
     - if @user == current_user
       = link_to t('.edit_profile'), edit_profile_user_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
+- unless @user.anonymous?
+  .col-12.glass.glass-round
+    label.shop-label.rounded-pill.mb-2
+      = t '.user_reviews_label'
+    span.glass-text
+      = "#{t '.user_reviews_length'}#{@user_reviews.size}件"
+    ul.profile-user-reviews.mb-3
+      = render partial: 'user_review', collection: @user_reviews.limit(5)

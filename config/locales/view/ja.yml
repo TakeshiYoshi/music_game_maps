@@ -55,6 +55,8 @@ ja:
     show:
       title: "%{nickname}さんのプロフィール"
       edit_profile: 'プロフィールを編集する'
+      user_reviews_label: '最近投稿した筐体情報'
+      user_reviews_length: '投稿した総件数：'
     edit:
       title: 'ユーザー設定'
       anonymous_exp: '匿名設定を有効にするとあなたが情報の投稿を行った際、アイコン, ニックネームが表示されなくなります。'
