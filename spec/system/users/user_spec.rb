@@ -179,10 +179,22 @@ RSpec.describe 'ユーザー', type: :system do
         end
 
         context '他のユーザーで自分のプロフィールを表示' do
+          let!(:user_review) { create(:user_review, user: user) }
+
           it 'ユーザー投稿に関する部分が表示されること' do
             login another_user
             visit user_path(user)
             expect(page).to have_content('最近投稿した筐体情報'), 'ユーザー投稿に関する部分が表示されていません'
+          end
+        end
+
+        context '投稿数が0の場合' do
+          it 'ユーザー投稿に関する部分が表示されないこと' do
+            # 匿名設定と表示をあわせるために投稿数が0の場合は非表示にする
+            user.user_reviews.destroy_all
+            login another_user
+            visit user_path(user)
+            expect(page).not_to have_content('最近投稿した筐体情報'), 'ユーザー投稿に関する部分が表示されています'
           end
         end
       end
