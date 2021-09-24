@@ -1,16 +1,4 @@
 class UserPolicy < ApplicationPolicy
-  def new?
-    true
-  end
-
-  def create?
-    true
-  end
-
-  def show?
-    true
-  end
-
   def edit?
     user == record
   end
@@ -25,9 +13,5 @@ class UserPolicy < ApplicationPolicy
 
   def update_profile?
     user == record
-  end
-
-  def activate
-    true
   end
 end

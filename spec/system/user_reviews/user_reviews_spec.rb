@@ -155,6 +155,7 @@ RSpec.describe "UserReviews", type: :system do
     end
 
     it 'ユーザーレビューの投稿主以外には削除ボタンが表示されないこと' do
+      logout user
       login another_user
       visit shop_path(shop)
       within('#userReviews') do
@@ -164,6 +165,7 @@ RSpec.describe "UserReviews", type: :system do
 
     context 'ユーザーレビューの投稿主以外が削除リクエストを送信する' do
       it 'ユーザーレビューが削除されないこと' do
+        logout user
         login another_user
         delete shop_user_review_path(shop, shop.user_reviews.last)
         visit shop_path(shop)
