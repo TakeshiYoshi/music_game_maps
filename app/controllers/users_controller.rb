@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update edit_profile update_profile]
+  before_action :set_user, only: %i[show edit update edit_profile update_profile destroy]
   before_action :require_params, only: %i[new_with_twitter]
 
   def new
@@ -72,6 +72,12 @@ class UsersController < ApplicationController
     else
       not_authenticated
     end
+  end
+
+  def destroy
+    authorize @user
+    @user.destroy
+    redirect_to root_url, success: t('.success')
   end
 
   private

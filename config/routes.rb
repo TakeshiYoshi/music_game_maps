@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :user_reviews, only: %i[create destroy]
   end
   resource :filter, only: %i[create destroy]
-  resources :users, only: %i[create show edit update] do
+  resources :users, only: %i[create show edit update destroy] do
     member do
       get :activate
       get :edit_profile

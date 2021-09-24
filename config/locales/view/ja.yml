@@ -61,6 +61,7 @@ ja:
     edit:
       title: 'ユーザー設定'
       anonymous_exp: '匿名設定を有効にするとあなたが情報の投稿を行った際、アイコン, ニックネームが表示されなくなります。'
+      destroy_confirm: 'アカウントが削除されると今まで投稿した情報も削除されます。よろしいですか？'
     update:
       success: 'ユーザー設定の変更が完了しました。'
     activate:
@@ -69,6 +70,8 @@ ja:
       title: 'プロフィール編集'
     update_profile:
       success: 'プロフィールを編集しました。'
+    destroy:
+      success: '今までご利用頂きましてありがとうございました。'
   user_sessions:
     new:
       title: 'ログイン'
