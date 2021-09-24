@@ -34,6 +34,14 @@ RSpec.describe "UserSessions", type: :system do
         expect(page.find('#flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
       end
     end
+
+    context 'ログイン状態でログインページにアクセス' do
+      it 'ルートページへリダイレクトすること' do
+        login user
+        visit login_path
+        expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
+      end
+    end
   end
 
   describe 'ヘッダー' do
