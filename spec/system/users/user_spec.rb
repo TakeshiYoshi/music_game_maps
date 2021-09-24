@@ -258,5 +258,18 @@ RSpec.describe 'ユーザー', type: :system do
         expect(page).to have_content('パスワード再入力を入力してください'), 'パスワードに関するエラーメッセージが表示されていません'
       end
     end
+
+    context '削除ボタンを押す' do
+      it 'ユーザーが削除されること' do
+        visit edit_user_path(user)
+        expect {
+          page.accept_confirm do
+            click_on 'アカウントを削除する'
+          end
+          expect(current_path).to eq(root_path), 'トップページへリダイレクトされていません'
+          expect(page.find('#flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
+        }.to change { User.count }.by(-1), 'アカウントが削除されていません'
+      end
+    end
   end
 end
