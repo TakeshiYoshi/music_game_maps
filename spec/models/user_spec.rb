@@ -80,4 +80,15 @@ RSpec.describe User, type: :model do
     user.valid?
     expect(user.errors[:password_confirmation]).to include('とパスワードの入力が一致しません')
   end
+
+  it 'パスワード再入力はパスワードと一致していること' do
+    user = build(:user, password_confirmation: 'foobarfoobar')
+    user.valid?
+    expect(user.errors[:password_confirmation]).to include('とパスワードの入力が一致しません')
+  end
+
+  it '役割(role)の初期値がgeneralであること' do
+    user = create(:user)
+    expect(user.role).to eq('general')
+  end
 end
