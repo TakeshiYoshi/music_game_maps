@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
+    = include_gon 
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'admin/application'
+  body
+    .app-container.app-theme-white.body-tabs-shadow.fixed-sidebar.fixed-header
+      = render 'admin/layouts/header'
+      .app-main
+        = render 'admin/layouts/side_menu'
+        = yield
