@@ -13,6 +13,7 @@ ja:
     attributes:
       user:
         id: 'ID'
+        avatar: 'アバター'
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード再入力'

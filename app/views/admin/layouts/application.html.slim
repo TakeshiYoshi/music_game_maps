@@ -3,11 +3,9 @@ html
   head
     meta charset="utf-8" /
     meta content="IE=edge" http-equiv="X-UA-Compatible" /
-    meta content="en" http-equiv="Content-Language" /
-    meta content=("text/html; charset=utf-8") http-equiv="Content-Type" /
     meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport" /
-    meta content=("This is an example dashboard created using build-in elements and components.") name="description" /
     meta content="no" name="msapplication-tap-highlight" /
+    = display_meta_tags admin_meta_tags
     = include_gon 
     = csrf_meta_tags
     = csp_meta_tag
@@ -20,5 +18,4 @@ html
         .app-main__outer
           .app-main__inner
             = yield
-    script src="http://maps.google.com/maps/api/js?sensor=true" 
     = javascript_pack_tag 'main'

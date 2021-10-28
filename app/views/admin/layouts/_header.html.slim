@@ -1,7 +1,7 @@
 .app-header.header-shadow
   .app-header__content
     .app-header-left
-      | OTOMAP DASHBOARD
+      = t 'defaults.meta.admin_site'
     .app-header-right
       .header-btn-lg.pr-0
         .widget-content.p-0
@@ -9,7 +9,7 @@
             .widget-content-left
               .btn-group
                 a.p-0.btn aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" 
-                  img.rounded-circle alt="" src="" width="42" /
+                  = image_tag current_user.avatar.url, class: 'rounded-circle', size: '42x42'
                   i.fa.fa-angle-down.ml-2.opacity-8
                 .dropdown-menu.dropdown-menu-right aria-hidden="true" role="menu" tabindex="-1" 
                   button.dropdown-item tabindex="0" type="button"  User Account

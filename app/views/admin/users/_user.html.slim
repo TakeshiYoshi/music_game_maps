@@ -17,5 +17,5 @@ tr
     div class="badge badge-#{user.admin? ? 'primary' : 'secondary'}"
       = user.role
   td
-    = link_to admin_user_path(user), class: 'badge badge-danger', method: :delete, data: { confirm: '削除しますか？' }
-      | 削除
+    - unless user.admin?
+      = link_to t('defaults.destroy'), admin_user_path(user), class: 'badge badge-danger', method: :delete, data: { confirm: t('defaults.destroy_message') }

@@ -41,4 +41,12 @@ module ApplicationHelper
       }
     }
   end
+
+  def admin_meta_tags
+    {
+      site: t('defaults.meta.admin_site'),
+      separator: t('defaults.meta.separator'),
+      reverse: true
+    }
+  end
 end

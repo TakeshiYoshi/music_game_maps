@@ -2,6 +2,7 @@ ja:
   defaults:
     meta:
       site: 'OTOMAP'
+      admin_site: 'OTOMAP(管理画面)'
       separator: '|'
       title: '音楽ゲームに特化したゲームセンターマップ検索サービス'
       charset: 'utf-8'
@@ -276,3 +277,19 @@ ja:
             item_1: '本ポリシーの内容は，法令その他本ポリシーに別段の定めのある事項を除いて，ユーザーに通知することなく，変更することができるものとします。'
             item_2: '本サービス側が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。'
         footer: '以上'
+  admin:
+    defaults:
+      side_menu:
+        dashboards: 'DASHBOARDS'
+        dashboard: 'Dashboard'
+        database: 'DATABASE'
+        users: 'Users'
+        shops: 'Shops'
+        user_reviews: 'UserReviews'
+    dashboards:
+      index:
+        title: 'ダッシュボード'
+    users:
+      index:
+        title: 'ユーザー一覧'
+        user_reviews_count: '投稿数'
