@@ -21,6 +21,8 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 300 }
   validates :anonymous, inclusion: { in: [true, false] }
 
+  enum role: { general: 0, admin: 1 }
+
   def create_playing_games(games_params)
     games_params&.each do |game_id, _value|
       game = Game.find(game_id)
