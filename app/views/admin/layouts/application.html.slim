@@ -1,14 +1,24 @@
 doctype html
 html
   head
-    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="en" http-equiv="Content-Language" /
+    meta content=("text/html; charset=utf-8") http-equiv="Content-Type" /
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport" /
+    meta content=("This is an example dashboard created using build-in elements and components.") name="description" /
+    meta content="no" name="msapplication-tap-highlight" /
     = include_gon 
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_pack_tag 'admin/application'
   body
-    .app-container.app-theme-white.body-tabs-shadow.fixed-sidebar.fixed-header
+    .app-container.app-theme-white.body-tabs-shadow.fixed-header
       = render 'admin/layouts/header'
       .app-main
         = render 'admin/layouts/side_menu'
-        = yield
+        .app-main__outer
+          .app-main__inner
+            = yield
+    script src="http://maps.google.com/maps/api/js?sensor=true" 
+    = javascript_pack_tag 'main'

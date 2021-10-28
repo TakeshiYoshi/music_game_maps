@@ -1,0 +1,19 @@
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      h5.card-title ユーザー一覧
+      table.mb-0.table.table-striped
+        thead
+          tr
+            th id
+            th アバター
+            th ニックネーム
+            th 投稿数
+            th 匿名設定
+            th テーマ
+            th 権限
+            th
+        tbody
+          = render @users
+.col-12.d-flex.justify-content-center
+  = paginate @users, views_prefix: 'admin'

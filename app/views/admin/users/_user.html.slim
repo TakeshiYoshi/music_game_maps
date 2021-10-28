@@ -1,0 +1,21 @@
+tr
+  th scope="row"
+    = user.id
+  td
+    = image_tag user.avatar.url, class: 'rounded-circle', size: '25x25'
+  td
+    = link_to user_path(user), target: :_blank, rel: 'noopener noreferrer'
+      = user.nickname
+  td
+    = user.user_reviews.length
+  td
+    div class="badge badge-#{user.anonymous? ? 'primary' : 'secondary'}"
+      = user.anonymous
+  td
+    = user.theme
+  td
+    div class="badge badge-#{user.admin? ? 'primary' : 'secondary'}"
+      = user.role
+  td
+    = link_to admin_user_path(user), class: 'badge badge-danger', method: :delete, data: { confirm: '削除しますか？' }
+      | 削除
