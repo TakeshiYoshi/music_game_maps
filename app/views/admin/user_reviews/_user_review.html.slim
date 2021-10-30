@@ -1,0 +1,11 @@
+tr
+  th scope="row"
+    = user_review.id
+  td
+    = link_to user_review.body.truncate(20), shop_path(user_review.shop), target: :_blank, rel: 'noopener noreferrer'
+  td
+    = link_to user_review.user.nickname, user_path(user_review.user), target: :_blank, rel: 'noopener noreferrer'
+  td
+    = link_to user_review.shop.name, admin_shop_path(user_review.shop), target: :_blank, rel: 'noopener noreferrer'
+  td
+    = link_to t('defaults.destroy'), admin_user_review_path(user_review), class: 'badge badge-danger', method: :delete, data: { confirm: t('defaults.destroy_message') }

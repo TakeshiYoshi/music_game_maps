@@ -304,3 +304,6 @@ ja:
         title: '店舗一覧'
       show:
         show_site: 'サイト上で確認する'
+    user_reviews:
+      index:
+        title: 'ユーザー投稿一覧'

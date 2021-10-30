@@ -1,0 +1,22 @@
+- set_meta_tags title: t('.title')
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      h5.card-title
+        = t '.title'
+      table.mb-0.table.table-striped
+        thead
+          tr
+            th
+              = UserReview.human_attribute_name(:id)
+            th
+              = UserReview.human_attribute_name(:body)
+            th
+              = User.model_name.human
+            th 
+              = Shop.human_attribute_name(:name)
+            th
+        tbody
+          = render @user_reviews
+.col-12.d-flex.justify-content-center
+  = paginate @user_reviews, views_prefix: 'admin'
