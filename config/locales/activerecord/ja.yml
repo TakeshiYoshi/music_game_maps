@@ -29,6 +29,7 @@ ja:
       city:
         name: '市区町村名'
       shop:
+        id: 'ID'
         name: '店舗名'
         twitter_id: 'Twitter ID'
         opening_hours: '営業時間'
@@ -37,6 +38,8 @@ ja:
         lat: '緯度'
         lng: '経度'
         address: '住所'
+        created_at: '作成日時'
+        updated_at: '更新日時'
       user_review:
         body: '本文'
       game_machine:

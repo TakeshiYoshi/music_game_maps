@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'dashboards#index'
     resources :users, only: %i[index destroy]
+    resources :shops, only: %i[index show edit update destroy]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

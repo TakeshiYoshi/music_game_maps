@@ -14,4 +14,14 @@ class Shop < ApplicationRecord
 
   scope :in_prefecture, ->(prefecture_id) { where(prefecture_id: prefecture_id) }
   scope :in_city, ->(city_id) { where(city_id: city_id) }
+
+  def create_game_machines(game_machines_params)
+    game_machines_params&.each do |game_id, count|
+      next if count.to_i.zero?
+
+      game = Game.find(game_id)
+      game_machine = game_machines.build(game: game, count: count)
+      game_machine.save!
+    end
+  end
 end

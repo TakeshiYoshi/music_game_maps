@@ -25,6 +25,9 @@ ja:
     mypage: 'マイページ'
     setting: '設定'
     post: '投稿する'
+    update_submit: '更新する'
+    detail: '詳細'
+    edit: '編集'
     destroy: '削除する'
     destroy_message: '削除してもよろしいですか？'
     anonymous: '匿名'
@@ -33,6 +36,9 @@ ja:
     nickname_valid: '(1~30文字)'
     user_review_body_valid: '(1~1,000文字)'
     password_reset: 'パスワードを変更する'
+    search: '検索'
+    no_count_info: '台数不明'
+    no_count: '設置なし'
     form:
       header_search_placeholder: 'フリーワード検索'
       remember_me: 'ログイン状態を保持する'
@@ -293,3 +299,8 @@ ja:
       index:
         title: 'ユーザー一覧'
         user_reviews_count: '投稿数'
+    shops:
+      index:
+        title: '店舗一覧'
+      show:
+        show_site: 'サイト上で確認する'
