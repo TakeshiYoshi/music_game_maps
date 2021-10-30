@@ -10,7 +10,6 @@ def scraping_sega(game_title)
 
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    next if prefecture.id != 22
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -34,28 +33,10 @@ def scraping_sega(game_title)
       shop_details_link = node.at_css('button.bt_details')[:onclick][/shop.*sid=\d*/]
       name = node.css('span.store_name').text.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').gsub('．', '.').gsub('　', ' ')
 
-      # 例外処理
-      name = 'ゲームパドックプラスワン' if name == 'GAME PADDOCK＋1'
-      name = '五島シティモール' if name == 'ファンタジーランド五島'
-      name = 'SOYUGameField熊谷' if name == 'SOYUGameFeild熊谷'
-      name = 'ソユーゲームフィールド御所野店' if name == 'SOYUGameField御所野店'
-      name = 'ラウンドワンスタジアム 福島店' if name == 'ラウンドワン福島店'
-      name = 'レイホウ・スポーツセンター' if name == '嶺宝スポーツセンター'
-      name = '（株）インターワールド' if name == 'インターワールド伊勢崎店'
-      name = 'ゲームイン・ヒューストン' if name == 'HOUSTON西川口店'
-      name = 'ランブルプラザ' if name == '池袋ゲーセンミカドINランブルプラザ'
-      name = 'ゲームフィールド イオンタウン弘前樋の口店' if name == 'ゲームフィールド弘前樋の口店'
-      name = '万代 多賀城店' if name == 'MS多賀城店'
-      name = 'ゆめタウン丸亀 ビッグウェーブ' if name == 'ゆめタウン丸亀 ビック・ウェーブ'
-      place_id = 'ChIJSdd9rbHZGGARxCd25n3x7Ic' if name == 'キャッツアイ狭山店'
-      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
-      place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'Hapipi Land 東大宮店'
-      name = 'レジャラン ビバホーム新習志野' if name == 'スーパービバホーム新習志野店2階'
-      place_id = 'ChIJJeX9o2CFGWAROFQy8wKe9ec' if name == 'スタジオプリモ沼津店'
-      place_id = 'ChIJZ9Et-SSRBGARxylUIapZvvk' if name == 'ムー大陸西尾シャオ店'
-      next if name == '宮西スタジアム２' # 閉店してる？
+      place_id = Shop.find_by(sega_name: name).place_id if Shop.find_by(sega_name: name)
 
       shop = {  name: name,
+                sega_name: name,
                 address: format_address(node.css('span.store_address').text),
                 prefecture: prefecture.name,
                 lat: lat,

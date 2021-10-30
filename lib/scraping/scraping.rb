@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 # スクレイピングする際の待機時間
-$sleep_time = 10
+$sleep_time = 0
 
 def register_shop_data(shops)
   registered_shops = []
@@ -50,6 +50,10 @@ def register_shop_data(shops)
                       website: shop[:website],
                       photo_reference: shop[:photo_reference],
                       place_id: shop[:place_id])
+      db_shop.update(konami_name: shop[:konami_name]) if shop[:konami_name]
+      db_shop.update(namco_name: shop[:namco_name]) if shop[:namco_name]
+      db_shop.update(taito_name: shop[:taito_name]) if shop[:taito_name]
+      db_shop.update(sega_name: shop[:sega_name]) if shop[:sega_name]
       # GameMachineモデル作成(店舗とゲームを関連付けする)
       register_relationship_shop_between_game(name, game, shop[:count])
       registered_shops << db_shop
@@ -183,7 +187,7 @@ def get_places_data(shop)
   # 取得データがなければ終了する
   return nil if auto_data['status'] == 'ZERO_RESULTS'
   # API節約のためDB上にデータがあればここで終了させる
-  if db_shop = Shop.find_by(name: name) && db_shop&.opening_hours_text.present?
+  if db_shop = Shop.find_by(name: name) || db_shop = Shop.find_by(place_id: shop[:place_id])
     shop[:name] = db_shop.name
     shop[:address] = db_shop.address
     shop[:lat] = db_shop.lat

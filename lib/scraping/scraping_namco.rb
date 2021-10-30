@@ -3,6 +3,7 @@ require './lib/scraping/scraping'
 def scraping_namco(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
+    next if prefecture.id != 12
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -28,26 +29,13 @@ def scraping_namco(game_title)
       name = shop_name_list[n].text
       address = shop_address_list[n]
 
+      place_id = Shop.find_by(namco_name: name).place_id if Shop.find_by(namco_name: name)
+
       # 例外処理
-      name = 'ギャラクシーゲート 星が浦' if name == 'GALAXY GATE 星が浦'
-      name = 'キッズパーク イオン岩見沢店' if name == 'キッズパーク イオン岩見沢'
-      name = 'MS仙台南店' if name == 'MS仙台南'
-      name = '万代 多賀城店' if name == 'MS多賀城'
-      name = 'Be-come 成沢店' if name == 'ビーカム成沢'
-      name = 'フタバ図書 ソフトピア八本松店' if name == 'GIGA八本松'
-      name = 'スポガ久留米 ボウリング' if name == 'バナナパーティー久留米'
-      name = 'G-Stage 浜町店' if name == 'G-stage浜の町'
-      name = 'ゆめタウン丸亀 ビッグウェーブ' if name == 'BIG WAVE ゆめタウン丸亀'
-      name = 'アル・プラザ加賀' if name == 'ゲームパークMECHA加賀'
-      name = '豊崎ライフスタイルセンター TOMITON' if name == 'ゲームランドジョイジャングルinとみとん'
-      name = '第2鬼頭マンション' if name == 'チャレンジランド1号'
-      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
-      place_id = 'ChIJh0MWGuXHGGARgjitTf569UI' if name == 'HapipiLand東大宮'
-      place_id = 'ChIJ_W8XoQUT5TQRG8vPiBMM9fA' if name == 'ジョイジャングル美浜'
-      place_id = 'ChIJJeX9o2CFGWAROFQy8wKe9ec' if name == 'スタジオプリモ沼津'
-      next if name == 'HapipiLand阿見' # 閉店
+      place_id = 'ChIJCzL4EkmcBGARQFYXDaHuSNQ' if name == 'イーグルボウル' && prefecture.id == 23
 
       shop = { name: name,
+               namco_name: name,
                address: address,
                prefecture: prefecture.name,
                lat: nil,

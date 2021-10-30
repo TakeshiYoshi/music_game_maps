@@ -39,31 +39,14 @@ def scraping_konami(game_key)
         name = node['data-name']
         lat = node['data-latitude']
         lng = node['data-longitude']
+        place_id = Shop.find_by(konami_name: name).place_id if Shop.find_by(konami_name: name)
 
         # 例外処理
-        name = 'Be-come 成沢店' if name == 'ビーカム成沢店'
-        name = 'モーリーファンタジーｆ 富士南' if name == 'モーリーファンタジーF･富士南'
-        name = 'アクト守山3番館' if name == 'エースレーン守山'
-        name = 'ブック245' if name == 'ブック245内 合栄産業'
-        name = '山形ファミリーボウル' if name == 'ゲームゾーントレジャー北町店'
-        name = 'スーパーアミューズメントスクエア アルゴ' if name == 'アルゴ'
-        name = 'アル・クリオ' if name == 'アルクリオ 3Fゲームコーナー'
-        name = 'ジョイジャングル あやぱに' if name == 'ゲームランドジョイジャングルinあやぱに'
-        name = 'ボウリング・リネア24' if name == 'ゲームファンタジア'
-        name = '遊ランド西御料店' if name == '遊ランド旭川店'
-        name = 'コープさっぽろ 貝塚店' if name == 'ハロータイトー釧路貝塚店'
-        if name == 'モーリーファンタジーf茨木'
-          name = 'モーリーファンタジーｆ 茨木店'
-          lat = 34.819273
-          lng = 135.5732645
-        end
         place_id = 'ChIJzdZ63-DVVDURyOukhz0DiGU' if name == 'トップラン' && prefecture.id == 28
-        place_id = 'ChIJeUw55j8vC18Rei0CKiEyIxk' if name == 'キャッツアイ東苗穂店'
-        place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
-        place_id = 'ChIJj0N1Mwe-GGARAl14v3zSAQ0' if name == 'アミューズメントベネクス越谷店'
-        place_id = 'ChIJ_W8XoQUT5TQRG8vPiBMM9fA' if name == 'ゲームランドジョイジャングル美浜店'
+        next if name == 'サイドセブン' # 開店準備中
 
         shop = {  name: name,
+                  konami_name: name,
                   address: prefecture.name + node['data-address'],
                   prefecture: prefecture.name,
                   lat: lat,

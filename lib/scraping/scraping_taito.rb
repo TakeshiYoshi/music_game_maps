@@ -4,6 +4,7 @@ require 'json'
 def scraping_taito(game_title)
   # 以下スクレイピング処理
   1.upto(47) do |n|
+    next if n != 47
     # 変数初期化
     shops_all = []
     shops = []
@@ -26,25 +27,10 @@ def scraping_taito(game_title)
       lng = shop['LNG']
       count = shop['CNT']
 
-      # 例外処理
-      name = 'タイトーステーションイオン札幌平岡店' if name == 'タイトーイオンモール札幌平岡店'
-      name = 'セガ龍ヶ崎' if name == 'セガワールド龍ヶ崎'
-      name = 'タイトーステーション 佐野新都市店' if name == 'タイトーイオンモール佐野新都市'
-      name = 'タイトーFステーションVAL小山店' if name == 'ＴＦＳ　ＶＡＬ小山店'
-      name = 'タイトー F ステーション ラザウォーク甲斐双葉店' if name == 'タイトーラザウォーク甲斐双葉店'
-      name = 'ハピピランド十日町店' if name == 'Ｈａｐｉｐｉ　Ｌａｎｄ十日町店'
-      name = 'タイトーFステーション イオンモール浜松市野店' if name == 'ＴＦＳイオンモール浜松市野店'
-      name = 'GAZA3Fゲームコーナー' if name == 'キッズインタイトーＧＡＺＡ店'
-      name = 'タイトーFステーション イオン近江八幡店' if name == 'Ｔ／Ｓ　イオン近江八幡店'
-      name = 'ゲームセンター GIGA ZONE 広島駅前店' if name == 'ギガゾーン広島駅前店'
-      name = 'namcoイオンモール広島府中店' if name == 'ナムコランド広島店'
-      name = 'タイトーFステーション モラージュ佐賀店' if name == 'ＴＦＳモラージュ佐賀'
-      name = 'namco イオン具志川店' if name == 'ＮＡＭＣＯＬＡＮＤ具志川店'
-      name = 'レジャラン ビバホーム新習志野' if name == 'ビバホーム新習志野店２階'
-      place_id = 'ChIJTR-vrwKTGGARzinfEL8pnHA' if name == 'セガ赤羽'
-      next if name == 'あうとばぁん' # 閉店中？
+      place_id = Shop.find_by(taito_name: name).place_id if Shop.find_by(taito_name: name)
 
       shop = { name: name,
+               taito_name: name,
                address: address,
                prefecture: prefecture.name,
                lat: lat,
