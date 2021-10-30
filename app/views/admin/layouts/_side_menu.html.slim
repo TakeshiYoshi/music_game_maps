@@ -1,0 +1,24 @@
+.app-sidebar.sidebar-shadow
+  .scrollbar-sidebar
+    .app-sidebar__inner
+      ul.vertical-nav-menu
+        li.app-sidebar__heading
+          = t 'admin.defaults.side_menu.dashboards'
+        li
+          = link_to admin_root_path, class: "#{'mm-active' if params[:controller] == 'admin/dashboards'}"
+            i.metismenu-icon.pe-7s-display2
+            = t 'admin.defaults.side_menu.dashboard'
+        li.app-sidebar__heading 
+          = t 'admin.defaults.side_menu.database'
+        li
+          = link_to admin_users_path, class: "#{'mm-active' if params[:controller] == 'admin/users'}"
+            i.metismenu-icon.pe-7s-server
+            = t 'admin.defaults.side_menu.users'
+        li
+          = link_to admin_shops_path, class: "#{'mm-active' if params[:controller] == 'admin/shops'}"
+            i.metismenu-icon.pe-7s-server
+            = t 'admin.defaults.side_menu.shops'
+        li
+          = link_to admin_user_reviews_path, class: "#{'mm-active' if params[:controller] == 'admin/user_reviews'}"
+            i.metismenu-icon.pe-7s-server
+            = t 'admin.defaults.side_menu.user_reviews'

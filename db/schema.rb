@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_023702) do
+ActiveRecord::Schema.define(version: 2021_10_30_095111) do
 
   create_table "about_games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_review_id", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_023702) do
   create_table "game_machines", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "shop_id", null: false
     t.bigint "game_id", null: false
-    t.integer "count", default: 0, null: false
+    t.integer "count", default: 99, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_game_machines_on_game_id"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_023702) do
     t.integer "access_count_to_reset_password_page", default: 0
     t.string "avatar"
     t.string "theme"
+    t.integer "role", default: 0, null: false
     t.index ["activation_token"], name: "index_users_on_activation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"

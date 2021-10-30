@@ -30,6 +30,13 @@ Rails.application.routes.draw do
   get 'oauth/callback', to: 'oauths#callback'
   get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
 
+  namespace :admin do
+    root 'dashboards#index'
+    resources :users, only: %i[index destroy]
+    resources :shops, only: %i[index show edit update destroy]
+    resources :user_reviews, only: %i[index destroy]
+  end
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   get '*anithing', to: 'errors#routing_error'

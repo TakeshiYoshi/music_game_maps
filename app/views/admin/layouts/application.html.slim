@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport" /
+    meta content="no" name="msapplication-tap-highlight" /
+    = display_meta_tags admin_meta_tags
+    = include_gon 
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'admin/application'
+  body
+    .app-container.app-theme-white.body-tabs-shadow.fixed-header
+      = render 'admin/layouts/header'
+      .app-main
+        = render 'admin/layouts/side_menu'
+        .app-main__outer
+          .app-main__inner
+            = yield
+    = javascript_pack_tag 'main'

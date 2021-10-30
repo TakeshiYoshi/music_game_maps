@@ -1,0 +1,28 @@
+- set_meta_tags title: t('.title')
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      h5.card-title
+        = t '.title'
+      table.mb-0.table.table-striped
+        thead
+          tr
+            th
+              = User.human_attribute_name(:id)
+            th
+              = User.human_attribute_name(:avatar)
+            th
+              = User.human_attribute_name(:nickname)
+            th 
+              = t '.user_reviews_count'
+            th
+              = User.human_attribute_name(:anonymous)
+            th 
+              = User.human_attribute_name(:theme)
+            th 
+              = User.human_attribute_name(:role)
+            th
+        tbody
+          = render @users
+.col-12.d-flex.justify-content-center
+  = paginate @users, views_prefix: 'admin'

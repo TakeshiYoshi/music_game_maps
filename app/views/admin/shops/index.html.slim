@@ -1,0 +1,29 @@
+- set_meta_tags title: t('.title')
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      = search_form_for @q, url: admin_shops_path, local: true, class: 'form-inline', id: 'shop_search_form' do |f|
+        = f.search_field :name_cont, class: 'form-control mr-2', placeholder: Shop.human_attribute_name(:name), style: 'width: 50%'
+        = f.select :prefecture_id_eq, options_for_select(Prefecture.all.map { |pref| [pref.name, pref.id] }, @q.prefecture_id_eq), { include_blank: true }, { class: 'form-control mr-2' }
+        = f.submit t('defaults.search'), class: 'btn btn-primary'
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      h5.card-title
+        = t '.title'
+      table.mb-0.table.table-striped
+        thead
+          tr
+            th
+              = Shop.human_attribute_name(:id)
+            th
+              = Shop.human_attribute_name(:name)
+            th
+              = Prefecture.human_attribute_name(:name)
+            th 
+              = City.human_attribute_name(:name)
+            th
+        tbody
+          = render @shops
+.col-12.d-flex.justify-content-center
+  = paginate @shops, views_prefix: 'admin'
