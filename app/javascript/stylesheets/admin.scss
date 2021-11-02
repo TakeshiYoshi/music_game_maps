@@ -126,3 +126,11 @@ table {
 .count-text {
   color: #495057;
 }
+
+.pagination a {
+  color: initial !important;
+}
+
+.page-item.active .page-link {
+  color: white !important;
+}
