@@ -1,11 +1,11 @@
-body {
+.admin-body {
   color: #495057;
   background-color: rgb(231, 231, 231);
   background: linear-gradient(135deg, rgb(231, 231, 231), rgb(231, 231, 231)) !important;
   font-size: 1rem;
 }
 
-header {
+.admin-header {
   position: fixed !important;
   top: 0px !important;
   z-index: 10 !important;
