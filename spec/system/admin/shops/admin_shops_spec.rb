@@ -24,7 +24,7 @@ RSpec.describe "Admin::Shops", type: :system do
       visit admin_shops_path
       expect {
         page.accept_confirm do
-          page.all('a.badge-danger').last.click
+          page.all('a.bg-danger').last.click
         end
         sleep 0.5
       }.to change { Shop.count }.by(-1), '店舗が削除されていません'
@@ -48,7 +48,7 @@ RSpec.describe "Admin::Shops", type: :system do
         expect(shop.address).to eq('hogehogeaddress1-2-3'), '住所の編集が適応されていません。'
         expect(shop.phone_number).to eq('0123-4567-89'), '電話番号の編集が適応されていません。'
         expect(shop.website).to eq('https://www.hogehoge.com/'), 'WebサイトURLの編集が適応されていません。'
-        expect(page.find('.badge-light')).to have_content('3'), 'ゲーム台数の編集が適応されていません。'
+        expect(page.find('.bg-light')).to have_content('3'), 'ゲーム台数の編集が適応されていません。'
       end
     end
   end

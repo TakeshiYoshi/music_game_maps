@@ -10,52 +10,52 @@
           = link_to t('defaults.edit'), edit_admin_shop_path(@shop), class: 'btn btn-success px-4 py-1'
       .divider
       .group.mt-3
-        .mb-2.mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+        .mb-2.mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
           = GameMachine.model_name.human
       - @shop.game_machines.each do |game_machine|
-        .mb-1.mr-1.badge.badge-pill.badge-secondary
+        .mb-1.mr-1.badge.rounded-pill.bg-secondary
           .d-flex.align-items-center style="height: 17px;"
             span.mx-2
               = game_machine.game.title
             - if game_machine.count_info_exist?
-              span.badge.badge-pill.badge-light
+              span.badge.rounded-pill.bg-light.count-text
                 = game_machine.count
       - if @shop.address.present?
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:address)
           = @shop.address
       - if @shop.phone_number.present?
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:phone_number)
           = @shop.phone_number
       - if @shop.website.present?
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:website)
           = link_to @shop.website, @shop.website, target: :_blank, rel: 'noopener noreferrer'
       - if @shop.lat.present?
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:lat)
           = @shop.lat
       - if @shop.lng.present?
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:lng)
           = @shop.lng
       .group.mt-3.d-flex.align-items-center
-        .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+        .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
           = Shop.human_attribute_name(:created_at)
         = @shop.created_at
       .group.mt-3.d-flex.align-items-center
-        .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+        .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
           = Shop.human_attribute_name(:updated_at)
         = @shop.updated_at
       - if @shop.opening_hours.present?
         .group.mt-3
-          .mb-2.mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mb-2.mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:opening_hours)
         table.mb-0.table.table-striped
           tbody

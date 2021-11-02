@@ -7,19 +7,19 @@
       table.mb-0.table.table-striped
         thead
           tr
-            th
+            th.text-center
               = User.human_attribute_name(:id)
-            th
+            th.text-center
               = User.human_attribute_name(:avatar)
             th
               = User.human_attribute_name(:nickname)
-            th 
+            th.text-center
               = t '.user_reviews_count'
-            th
+            th.text-center
               = User.human_attribute_name(:anonymous)
-            th 
+            th.text-center
               = User.human_attribute_name(:theme)
-            th 
+            th.text-center
               = User.human_attribute_name(:role)
             th
         tbody
