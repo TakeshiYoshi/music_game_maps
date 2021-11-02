@@ -9,13 +9,12 @@ html
     = include_gon 
     = csrf_meta_tags
     = csp_meta_tag
-    = javascript_pack_tag 'admin/application'
-  body
-    .app-container.app-theme-white.body-tabs-shadow.fixed-header
-      = render 'admin/layouts/header'
-      .app-main
+    = javascript_pack_tag 'application'
+  body.admin-body
+    = render 'admin/layouts/header'
+    .d-flex
+      .col-2.pt-4.side-menu
         = render 'admin/layouts/side_menu'
-        .app-main__outer
-          .app-main__inner
-            = yield
-    = javascript_pack_tag 'main'
+      .col-10.p-5
+        .admin-main-content
+          = yield

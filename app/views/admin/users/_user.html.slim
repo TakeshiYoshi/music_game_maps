@@ -1,21 +1,21 @@
 tr
-  th scope="row"
+  th.text-center scope="row"
     = user.id
-  td
+  td.text-center
     = image_tag user.avatar.url, class: 'rounded-circle', size: '25x25'
   td
     = link_to user_path(user), target: :_blank, rel: 'noopener noreferrer'
       = user.nickname
-  td
+  td.text-center
     = user.user_reviews.length
-  td
-    div class="badge badge-#{user.anonymous? ? 'primary' : 'secondary'}"
+  td.text-center
+    div class="badge bg-#{user.anonymous? ? 'primary' : 'secondary'}"
       = user.anonymous
-  td
+  td.text-center
     = user.theme
-  td
-    div class="badge badge-#{user.admin? ? 'primary' : 'secondary'}"
+  td.text-center
+    div class="badge bg-#{user.admin? ? 'primary' : 'secondary'}"
       = user.role
-  td
+  td.text-center
     - unless user.admin?
-      = link_to t('defaults.destroy'), admin_user_path(user), class: 'badge badge-danger', method: :delete, data: { confirm: t('defaults.destroy_message') }
+      = link_to t('defaults.destroy'), admin_user_path(user), class: 'badge bg-danger badge-link', method: :delete, data: { confirm: t('defaults.destroy_message') }

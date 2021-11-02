@@ -18,7 +18,7 @@ RSpec.describe "Admin::Users", type: :system do
     it '管理ユーザーは削除ボタンが表示されないこと' do
       visit admin_users_path
       # 管理ユーザーは1つのみのため削除ボタンの数は(ユーザー総数 - 1)になる
-      expect(page.all('a.badge-danger').length).to eq(User.count - 1), '全ユーザーの情報が表示されていません'
+      expect(page.all('a.bg-danger').length).to eq(User.count - 1), '全ユーザーの情報が表示されていません'
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe "Admin::Users", type: :system do
       visit admin_users_path
       expect {
         page.accept_confirm do
-          page.all('a.badge-danger').last.click
+          page.all('a.bg-danger').last.click
         end
         sleep 0.5
       }.to change { User.count }.by(-1), 'アカウントが削除されていません'

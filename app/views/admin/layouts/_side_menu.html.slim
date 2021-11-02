@@ -1,24 +1,22 @@
-.app-sidebar.sidebar-shadow
-  .scrollbar-sidebar
-    .app-sidebar__inner
-      ul.vertical-nav-menu
-        li.app-sidebar__heading
-          = t 'admin.defaults.side_menu.dashboards'
-        li
-          = link_to admin_root_path, class: "#{'mm-active' if params[:controller] == 'admin/dashboards'}"
-            i.metismenu-icon.pe-7s-display2
-            = t 'admin.defaults.side_menu.dashboard'
-        li.app-sidebar__heading 
-          = t 'admin.defaults.side_menu.database'
-        li
-          = link_to admin_users_path, class: "#{'mm-active' if params[:controller] == 'admin/users'}"
-            i.metismenu-icon.pe-7s-server
-            = t 'admin.defaults.side_menu.users'
-        li
-          = link_to admin_shops_path, class: "#{'mm-active' if params[:controller] == 'admin/shops'}"
-            i.metismenu-icon.pe-7s-server
-            = t 'admin.defaults.side_menu.shops'
-        li
-          = link_to admin_user_reviews_path, class: "#{'mm-active' if params[:controller] == 'admin/user_reviews'}"
-            i.metismenu-icon.pe-7s-server
-            = t 'admin.defaults.side_menu.user_reviews'
+.side-menu-content
+  ul.side-menu-items
+    li
+      = t 'admin.defaults.side_menu.dashboards'
+    li
+      = link_to admin_root_path, class: "#{'side-menu-item-active' if params[:controller] == 'admin/dashboards'}"
+        = fa_icon 'chalkboard', class: 'side-menu-icon'
+        = t 'admin.defaults.side_menu.dashboard'
+    li
+      = t 'admin.defaults.side_menu.database'
+    li
+      = link_to admin_users_path, class: "#{'side-menu-item-active' if params[:controller] == 'admin/users'}"
+        = fa_icon 'database', class: 'side-menu-icon'
+        = t 'admin.defaults.side_menu.users'
+    li
+      = link_to admin_shops_path, class: "#{'side-menu-item-active' if params[:controller] == 'admin/shops'}"
+        = fa_icon 'database', class: 'side-menu-icon'
+        = t 'admin.defaults.side_menu.shops'
+    li
+      = link_to admin_user_reviews_path, class: "#{'side-menu-item-active' if params[:controller] == 'admin/user_reviews'}"
+        = fa_icon 'database', class: 'side-menu-icon'
+        = t 'admin.defaults.side_menu.user_reviews'

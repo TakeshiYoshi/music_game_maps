@@ -1,0 +1,136 @@
+.admin-body {
+  color: #495057;
+  background-color: rgb(231, 231, 231);
+  background: linear-gradient(135deg, rgb(231, 231, 231), rgb(231, 231, 231)) !important;
+  font-size: 1rem;
+}
+
+.admin-header {
+  position: fixed !important;
+  top: 0px !important;
+  z-index: 10 !important;
+  background-color: white !important;
+  box-shadow: 0 0 6px rgba(black, 0.4) !important;
+  width: 100% !important;
+  height: 70px !important;
+  border-radius: 0px !important;
+}
+
+.header-content-start {
+  margin-left: 10px;
+}
+
+.side-menu {
+  z-index: 1;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(black, 0.2);
+  height: 100vh;
+}
+
+.side-menu-content {
+  margin-top: 70px;
+}
+
+.admin-main-content {
+  margin-top: 50px;
+}
+
+.side-menu-items {
+  width: 100%;
+  list-style: none;
+  padding: 0 5px;
+  margin: 0;
+  li {
+    width: 100%;
+    height: 40px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 2px 0;
+    padding-left: 10px;
+    a {
+      transition-duration: 0.3s;
+      color: #343a40;
+      text-decoration: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      padding-left: 30px;
+      &:hover {
+        color: #2742bd;
+        background-color: #e0f3ff;
+      }
+    }
+  }
+}
+
+.side-menu-item-active {
+  color: #2742bd;
+  background-color: #e0f3ff;
+}
+
+.side-menu-icon {
+  color: rgb(175, 173, 173);
+  margin-right: 10px;
+}
+
+.main-card {
+  box-shadow: 0 0 6px rgba(black, 0.2);
+  border-radius: 5px;
+}
+
+.card-title {
+  color: rgba(13,27,62,0.7);
+  font-weight: bold;
+}
+
+table {
+  color: #495057 !important;
+}
+
+.badge-link {
+  text-decoration: none;
+  &:hover {
+    color: white;
+  }
+}
+
+.bg-margin {
+  margin-right: 7px;
+}
+
+.search-field {
+  width: 50%;
+}
+
+.form-margin {
+  margin-right: 10px;
+}
+
+.mr-2 {
+  margin-right: 10px;
+}
+
+.mb-1 {
+  margin-bottom: 5px;
+}
+
+.mr-1 {
+  margin-right: 5px;
+}
+
+.count-text {
+  color: #495057;
+}
+
+.pagination a {
+  color: initial !important;
+}
+
+.page-item.active .page-link {
+  color: white !important;
+}

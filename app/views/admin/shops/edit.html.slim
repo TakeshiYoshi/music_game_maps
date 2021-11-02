@@ -11,27 +11,27 @@
           = f.submit t('defaults.update_submit'), class: 'btn btn-primary px-4 py-1'
         .divider
         .group.mt-3.mb-2.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = GameMachine.model_name.human
-          a data-toggle="collapse" href="#collapseGames" aria-expanded="false" aria-controls="collapseGames"
+          a data-bs-toggle="collapse" href="#collapseGames" role="button" aria-expanded="false" aria-controls="collapseGames"
             = t('defaults.edit')
         .games-form.collapse#collapseGames
           - Game.all.each do |game|
             .group.d-flex.align-items-center.mb-3
-              .mr-3.badge.badge-pill.badge-secondary
+              .mr-2.badge.rounded-pill.bg-secondary
                 .d-flex.align-items-center style="height: 17px;"
-                  span.mx-2 style="min-width: 200px;"
+                  span.mx-2 style="min-width: 220px;"
                     = game.title
-              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), @shop.game_machines.find_by(game: game)&.count), { class: 'form-control', style: 'width: 20%;' }
+              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), @shop.game_machines.find_by(game: game)&.count), { class: 'form-select', style: 'width: 15%;' }
         .group.mt-3.d-flex.align-items-center.flex-wrap
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:address)
           = f.text_field :address, class: 'form-control', style: 'width: 70%;'
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:phone_number)
           = f.text_field :phone_number, class: 'form-control', style: 'width: 70%;'
         .group.mt-3.d-flex.align-items-center
-          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 120px;"
+          .mr-2.btn.btn-dark.rounded-pill.px-4.py-1 style="min-width: 130px;"
             = Shop.human_attribute_name(:website)
           = f.text_field :website, class: 'form-control', style: 'width: 70%;'

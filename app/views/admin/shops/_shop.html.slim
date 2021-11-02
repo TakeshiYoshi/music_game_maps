@@ -1,14 +1,14 @@
 tr
-  th scope="row"
+  th.text-center scope="row"
     = shop.id
   td
     = link_to shop_path(shop), target: :_blank, rel: 'noopener noreferrer'
       = shop.name
-  td
+  td.text-center
     = shop.prefecture.name
-  td
+  td.text-center
     = shop.city.name
   td
-    = link_to t('defaults.detail'), admin_shop_path(shop), class: 'badge badge-primary mr-1'
-    = link_to t('defaults.edit'), edit_admin_shop_path(shop), class: 'badge badge-success mr-1'
-    = link_to t('defaults.destroy'), admin_shop_path(shop), class: 'badge badge-danger', method: :delete, data: { confirm: t('defaults.destroy_message') }
+    = link_to t('defaults.detail'), admin_shop_path(shop), class: 'badge bg-primary badge-link bg-margin'
+    = link_to t('defaults.edit'), edit_admin_shop_path(shop), class: 'badge bg-success badge-link bg-margin'
+    = link_to t('defaults.destroy'), admin_shop_path(shop), class: 'badge bg-danger badge-link', method: :delete, data: { confirm: t('defaults.destroy_message') }

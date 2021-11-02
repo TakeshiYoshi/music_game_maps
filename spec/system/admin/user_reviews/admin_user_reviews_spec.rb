@@ -21,7 +21,7 @@ RSpec.describe "Admin::UserReviews", type: :system do
       visit admin_user_reviews_path
       expect {
         page.accept_confirm do
-          page.all('a.badge-danger').last.click
+          page.all('a.bg-danger').last.click
         end
         sleep 0.5
       }.to change { UserReview.count }.by(-1), 'ユーザー投稿が削除されていません'
