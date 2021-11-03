@@ -1,0 +1,55 @@
+.col-12.glass.glass-text.glass-round
+  = form_with model: @shop, id: 'edit_shop_form', class: 'row d-flex justify-content-center py-2', local: true do |f|
+    .col-md-2.col-sm-12.d-flex.justify-content-center.mb-3
+      .image-content
+        = image_tag @shop.get_photo_url, class: 'edit-shop-image'
+        .shop-image-cover.d-flex.justify-content-center.align-items-center
+          = fa_icon 'file-upload'
+    .col-md-10.col-sm-12.px-3
+      .form-group
+        .form-field-group.d-flex.justify-content-center
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = Shop.human_attribute_name(:name)
+          = f.text_field :name, id: 'shopName', class: 'glass-text-field'
+        p.error-text
+      .form-group
+        .form-field-group.d-flex.justify-content-center
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = Shop.human_attribute_name(:address)
+          = f.text_field :address, id: 'shopAddress', class: 'glass-text-field'
+        p.error-text
+      .form-group
+        .form-field-group.d-flex.justify-content-center
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = Shop.human_attribute_name(:phone_number)
+          = f.text_field :phone_number, id: 'shopPhoneNumber', class: 'glass-text-field'
+        p.error-text
+      .form-group
+        .form-field-group.d-flex.justify-content-center
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = Shop.human_attribute_name(:website)
+          = f.text_field :website, id: 'shopWebsite', class: 'glass-text-field'
+        p.error-text
+      .form-group
+        .form-field-group.d-flex.justify-content-center
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = Shop.human_attribute_name(:twitter_id)
+          = f.text_field :twitter_id, id: 'shopTwitter', class: 'glass-text-field'
+        p.error-text
+      .form-group
+        .d-flex.align-items-center.mb-3
+          div.shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center style="width: 120px;"
+            = GameMachine.model_name.human
+          a.glass-link data-bs-toggle="collapse" href="#collapseGames" role="button" aria-expanded="false" aria-controls="collapseGames"
+            span.mr-1 = t('defaults.edit')
+            span = fa_icon 'caret-down'
+        .games-form.collapse#collapseGames
+          - Game.all.each do |game|
+            .edit-shop-game.group
+              .shop-label.rounded-pill.text-nowrap.d-flex.justify-content-center.align-items-center.mb-2
+                .d-flex.align-items-center style="height: 20px;"
+                  span.mx-2 style="min-width: 220px; font-size: 0.8rem;"
+                    = game.title
+              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), @shop.game_machines.find_by(game: game)&.count), { class: 'form-select shop-edit-select mb-2' }
+    .d-flex.justify-content-center.mt-3
+      = f.submit t('.apply_update'), class: 'btn btn-glass rounded-pill px-4 w-auto'

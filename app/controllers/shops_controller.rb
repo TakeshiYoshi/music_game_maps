@@ -2,15 +2,17 @@ class ShopsController < ApplicationController
   before_action :set_filter, only: %i[index]
   before_action :set_shops_lat_and_lng, only: %i[index]
   before_action :set_tutorial_cookie, only: %i[index]
+  before_action :set_shop, only: %i[show edit]
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
   end
 
   def show
-    @shop = Shop.includes([:games, { user_reviews: :games }]).find(params[:id])
     @user_review = UserReview.new(shop_id: @shop.id) # テストが上手く動作しないため左記のような記述にしています
   end
+
+  def edit; end
 
   private
 
@@ -45,5 +47,9 @@ class ShopsController < ApplicationController
 
   def set_tutorial_cookie
     cookies.permanent[:attend_tutorial] = true unless cookies.permanent[:attend_tutorial]
+  end
+
+  def set_shop
+    @shop = Shop.includes([:games, { user_reviews: :games }]).find(params[:id])
   end
 end

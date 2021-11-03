@@ -4,8 +4,11 @@ input.d-none#table-check type="checkbox"
     p = shop.name
   img src="#{shop.get_photo_url}"
 .col-12.glass.shop-description-container
-  .game-machines
-    label.shop-label.rounded-pill = GameMachine.model_name.human
+  .d-flex.justify-content-between.align-content-center
+    .game-machines
+      label.shop-label.rounded-pill = GameMachine.model_name.human
+    = link_to edit_shop_path(shop), class: 'btn btn-glass edit-shop-btn btn-label-size rounded-pill'
+      = t 'shops.show.edit_shop_btn'
   = render 'shared/badges', shop: shop
   .address.d-flex.align-items-center.flex-wrap
     label.shop-label.rounded-pill = Shop.human_attribute_name(:address)
