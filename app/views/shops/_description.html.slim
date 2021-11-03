@@ -36,5 +36,5 @@ input.d-none#table-check type="checkbox"
       tbody 
         - shop.opening_hours_text.sort.each do |text|
           tr 
-            th = shop.day_of_week_convert_to_text_from_num text.first
-            th = text.last
+            th.glass-text = shop.day_of_week_convert_to_text_from_num text.first
+            th.glass-text = text.last
