@@ -111,6 +111,7 @@ module ShopDecorator
   end
 
   def get_photo_url
+    return appearance_image.url if appearance_image?
     return asset_pack_path 'media/images/appearance_img.png' if photo_reference.nil? || games.size <= 2
     if photo_url_update_at.nil? || Time.zone.now >= photo_url_update_at
       url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=#{photo_reference}&key=#{Rails.application.credentials[:gcp][:places_api_key]}"

@@ -5,6 +5,8 @@ class Shop < ApplicationRecord
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
 
+  mount_uploader :appearance_image, ShopAppearanceImageUploader
+
   acts_as_mappable default_units: :kms,
                    default_formula: :sphere,
                    lat_column_name: :lat,
