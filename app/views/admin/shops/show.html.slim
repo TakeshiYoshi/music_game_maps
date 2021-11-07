@@ -18,7 +18,7 @@
             span.mx-2
               = game_machine.game.title
             - if game_machine.count_info_exist?
-              span.badge.rounded-pill.bg-light.count-text
+              span.badge.rounded-pill.bg-light.count-text.badge-count
                 = game_machine.count
       - if @shop.address.present?
         .group.mt-3.d-flex.align-items-center
