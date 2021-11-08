@@ -118,6 +118,8 @@ ja:
   shop_histories:
     new:
       apply_update: '情報の更新を申請する'
+    create:
+      success: '情報提供ありがとうございます。'
   inquiries:
     inquiry:
       title: 'お問い合わせ'

@@ -29,6 +29,6 @@ class Shop < ApplicationRecord
   end
 
   def game_machines_to_hash
-    game_machines.map { |game_machine| [game_machine.game.id, game_machine.count] }.to_h
+    game_machines.map { |game_machine| [game_machine.game.id.to_s, game_machine.count.to_s] }.to_h
   end
 end
