@@ -2,7 +2,11 @@ class ShopHistory < ApplicationRecord
   belongs_to :user
   belongs_to :shop
 
+  VALID_WEBSITE_REGEX = %r{\Ahttps?://[\w!?/+\-_~=;.,*&@#$%()'\[\]]+\z}.freeze
+
   mount_uploader :appearance_image, ShopHistoryAppearanceImageUploader
+
+  validates :website, format: { with: VALID_WEBSITE_REGEX }, allow_nil: true
 
   def format_model(games_params) # rubocop:disable Metrics/AbcSize
     self.name = nil if name == shop.name
