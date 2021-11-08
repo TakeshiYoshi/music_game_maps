@@ -1,8 +1,8 @@
 .col-12.glass.glass-text.glass-round
-  = form_with model: @shop, id: 'edit_shop_form', class: 'row d-flex justify-content-center py-2', local: true do |f|
+  = form_with model: [:shop, @shop_history], id: 'edit_shop_form', class: 'row d-flex justify-content-center py-2', local: true do |f|
     .col-md-2.col-sm-12.d-flex.justify-content-center.mb-3
       label.image-content for="appearanceImage"
-        = image_tag @shop.get_photo_url, class: 'edit-shop-image', id: 'shopImg'
+        = image_tag @shop_history.shop.get_photo_url, class: 'edit-shop-image', id: 'shopImg'
         .shop-image-cover.d-flex.justify-content-center.align-items-center
           = fa_icon 'file-upload'
       = f.file_field :appearance_image, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'appearanceImage', class: 'd-none', '@change': 'imagePreview'
@@ -45,7 +45,7 @@
                 .d-flex.align-items-center style="height: 20px;"
                   span.mx-2 style="min-width: 220px; font-size: 0.8rem;"
                     = game.title
-              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), @shop.game_machines.find_by(game: game)&.count), { class: 'form-select shop-edit-select mb-2' }
+              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), @shop_history.games[game.id.to_s]), { class: 'form-select shop-edit-select mb-2' }
     .d-flex.justify-content-center.mt-3
       = f.submit t('.apply_update'), class: 'btn btn-glass rounded-pill px-4 w-auto'
 

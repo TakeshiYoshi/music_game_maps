@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
   has_one :authentication, dependent: :destroy
+  has_many :shop_histories
 
   accepts_nested_attributes_for :authentication
 

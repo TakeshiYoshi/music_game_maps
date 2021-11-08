@@ -7,8 +7,8 @@ input.d-none#table-check type="checkbox"
   .d-flex.justify-content-between.align-content-center
     .game-machines
       label.shop-label.rounded-pill = GameMachine.model_name.human
-    = link_to edit_shop_path(shop), class: 'btn btn-glass edit-shop-btn btn-label-size rounded-pill'
-      = t 'shops.show.edit_shop_btn'
+    - if logged_in?
+      = link_to t('shops.show.edit_shop_btn'), new_shop_shop_history_path(shop), class: 'btn btn-glass edit-shop-btn btn-label-size rounded-pill'
   = render 'shared/badges', shop: shop
   .address.d-flex.align-items-center.flex-wrap
     label.shop-label.rounded-pill = Shop.human_attribute_name(:address)

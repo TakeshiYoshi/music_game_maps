@@ -4,6 +4,7 @@ class Shop < ApplicationRecord
   has_many :user_reviews, dependent: :destroy
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
+  has_many :shop_histories
 
   mount_uploader :appearance_image, ShopAppearanceImageUploader
 
@@ -25,5 +26,9 @@ class Shop < ApplicationRecord
       game_machine = game_machines.build(game: game, count: count)
       game_machine.save!
     end
+  end
+
+  def game_machines_to_hash
+    game_machines.map { |game_machine| [game_machine.game.id, game_machine.count] }.to_h
   end
 end
