@@ -31,4 +31,20 @@ class Shop < ApplicationRecord
   def game_machines_to_hash
     game_machines.map { |game_machine| [game_machine.game.id.to_s, game_machine.count.to_s] }.to_h
   end
+
+  def create_base_history
+    return if shop_histories.present?
+
+    shop_history = shop_histories.new(
+      name: name,
+      phone_number: phone_number,
+      website: website,
+      twitter_id: twitter_id,
+      games: game_machines_to_hash,
+      appearance_image: appearance_image,
+      status: :published,
+      user_id: User.admin.first.id
+    )
+    shop_history.save
+  end
 end

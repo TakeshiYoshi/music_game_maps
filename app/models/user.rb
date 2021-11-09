@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   enum role: { general: 0, admin: 1 }
 
+  scope :admin, -> { where(role: :admin) }
+
   def create_playing_games(games_params)
     games_params&.each do |game_id, _value|
       game = Game.find(game_id)

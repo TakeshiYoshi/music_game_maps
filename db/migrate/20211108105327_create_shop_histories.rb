@@ -3,7 +3,7 @@ class CreateShopHistories < ActiveRecord::Migration[6.0]
     create_table :shop_histories do |t|
       t.string :name
       t.string :phone_number
-      t.string :website
+      t.text :website
       t.string :twitter_id
       t.json :games
       t.references :user, null: false, foreign_key: true

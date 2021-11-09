@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2021_11_09_070032) do
   create_table "shop_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
-    t.string "website"
+    t.text "website"
     t.string "twitter_id"
     t.json "games"
     t.bigint "user_id", null: false
