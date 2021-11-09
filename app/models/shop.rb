@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
   has_many :user_reviews, dependent: :destroy
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
-  has_many :shop_histories
+  has_many :shop_histories, dependent: :destroy
 
   mount_uploader :appearance_image, ShopAppearanceImageUploader
 

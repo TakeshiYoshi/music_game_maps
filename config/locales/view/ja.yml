@@ -39,6 +39,10 @@ ja:
     search: '検索'
     no_count_info: '台数不明'
     no_count: '設置なし'
+    new: 'NEW'
+    right-arrow: '→'
+    bottom-arrow: '↓'
+    twitter_url: 'https://twitter.com/'
     form:
       header_search_placeholder: 'フリーワード検索'
       remember_me: 'ログイン状態を保持する'
@@ -298,6 +302,7 @@ ja:
         users: 'Users'
         shops: 'Shops'
         user_reviews: 'UserReviews'
+        shop_histories: 'ShopHistories'
     dashboards:
       index:
         title: 'ダッシュボード'
@@ -313,3 +318,8 @@ ja:
     user_reviews:
       index:
         title: 'ユーザー投稿一覧'
+    shop_histories:
+      index:
+        title: '店舗履歴一覧'
+        confirm: '承認する'
+        disconfirm: '承認しない'

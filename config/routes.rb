@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index destroy]
     resources :shops, only: %i[index show edit update destroy]
     resources :user_reviews, only: %i[index destroy]
+    resources :shop_histories, only: %i[index update destroy]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

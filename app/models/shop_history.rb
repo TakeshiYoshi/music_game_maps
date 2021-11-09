@@ -10,6 +10,8 @@ class ShopHistory < ApplicationRecord
 
   enum status: { draft: 0, published: 1 }
 
+  scope :draft, -> { where(status: :draft) }
+
   def format_model(games_params) # rubocop:disable Metrics/AbcSize
     self.name = nil if name == shop.name
     self.phone_number = nil if phone_number == shop.phone_number
