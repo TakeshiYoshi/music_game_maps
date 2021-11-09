@@ -8,6 +8,8 @@ class ShopHistory < ApplicationRecord
 
   validates :website, format: { with: VALID_WEBSITE_REGEX }, allow_nil: true
 
+  enum status: { draft: 0, published: 1 }
+
   def format_model(games_params) # rubocop:disable Metrics/AbcSize
     self.name = nil if name == shop.name
     self.phone_number = nil if phone_number == shop.phone_number
