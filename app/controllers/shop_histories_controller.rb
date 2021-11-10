@@ -32,6 +32,6 @@ class ShopHistoriesController < ApplicationController
   end
 
   def shop_history_params
-    params.require(:shop_history).permit(:name, :phone_number, :website, :twitter_id, :appearance_image, :user_id)
+    params.require(:shop_history).permit(:name, :phone_number, :website, :twitter_id, :appearance_image, :appearance_image_cache, :user_id)
   end
 end
