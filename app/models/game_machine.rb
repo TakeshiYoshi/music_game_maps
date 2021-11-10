@@ -4,4 +4,8 @@ class GameMachine < ApplicationRecord
 
   validates :count, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99 }
   validates :shop_id, uniqueness: { scope: :game_id }
+
+  def unknown_count?
+    count == 99
+  end
 end

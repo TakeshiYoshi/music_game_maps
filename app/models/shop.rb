@@ -47,4 +47,43 @@ class Shop < ApplicationRecord
     )
     shop_history.save
   end
+
+  def update_to_latest # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    return if shop_histories.count.zero?
+
+    # 履歴を積み上げていき最新の状態をハッシュで取得する
+    latest = {}
+    shop_histories.published.each do |shop_history|
+      items = { name: shop_history.name,
+                phone_number: shop_history.phone_number,
+                website: shop_history.website,
+                twitter_id: shop_history.twitter_id,
+                games: shop_history.games }
+      if shop_history.appearance_image.file&.file
+        items[:appearance_image] = File.open(shop_history.appearance_image.file.file)
+      end
+      items.each do |key, value|
+        next if value.nil?
+
+        latest[key] = value
+      end
+    end
+    # ハッシュ内でvalueがnilのものは削除する
+    # 店舗データに最新の状態を適応する
+    latest.reject { |_k, v| v.nil? }.each do |k, v|
+      # game_machinesは別途作成
+      next if %i[games appearance_image].include?(k)
+
+      self[k] = v
+    end
+    # game_machinesを作成する
+    game_machines.destroy_all
+    latest[:games].each do |game_id, count|
+      game_machines.create(game_id: game_id, count: count)
+    end
+    # appearance_imageにファイルをマウント
+    appearance_image.store!(latest[:appearance_image])
+    # データベース書き込み
+    save
+  end
 end
