@@ -41,9 +41,9 @@
             .admin-shop-twitter-id.mb-1
               .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
                 = Shop.human_attribute_name(:twitter_id)
-              = link_to shop_history.shop.twitter_id, t('defaults.twitter_url') + shop_history.shop.twitter_id, target: :_blank, rel: 'noopener noreferrer'
+              = link_to shop_history.shop.twitter_id.to_s, t('defaults.twitter_url') + shop_history.shop.twitter_id.to_s, target: :_blank, rel: 'noopener noreferrer'
               span.mx-2 = t 'defaults.right-arrow'
-              = link_to shop_history.twitter_id, t('defaults.twitter_url') + shop_history.twitter_id, target: :_blank, rel: 'noopener noreferrer'
+              = link_to shop_history.twitter_id.to_s, t('defaults.twitter_url') + shop_history.twitter_id.to_s, target: :_blank, rel: 'noopener noreferrer'
           - if shop_history.games
             .admin-shop-games.mb-1
               .label.mb-2

@@ -14,10 +14,10 @@ class ShopHistory < ApplicationRecord
   scope :published, -> { where(status: :published) }
 
   def format_model(games_params) # rubocop:disable Metrics/AbcSize
-    self.name = nil if name == shop.name
-    self.phone_number = nil if phone_number == shop.phone_number
-    self.website = nil if website == shop.website
-    self.twitter_id = nil if twitter_id == shop.twitter_id
+    self.name = nil if name == shop.name || name.blank?
+    self.phone_number = nil if phone_number == shop.phone_number || phone_number.blank?
+    self.website = nil if website == shop.website || website.blank?
+    self.twitter_id = nil if twitter_id == shop.twitter_id || twitter_id.blank?
     self.games = games_params.reject { |_k, v| v.to_i.zero? }
     self.games = nil if games == shop.game_machines_to_hash
   end
