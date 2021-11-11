@@ -13,7 +13,7 @@ class ShopHistory < ApplicationRecord
   scope :draft, -> { where(status: :draft) }
   scope :published, -> { where(status: :published) }
 
-  def format_model(games_params) # rubocop:disable Metrics/AbcSize
+  def format_model(games_params) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     self.name = nil if name == shop.name || name.blank?
     self.phone_number = nil if phone_number == shop.phone_number || phone_number.blank?
     self.website = nil if website == shop.website || website.blank?
