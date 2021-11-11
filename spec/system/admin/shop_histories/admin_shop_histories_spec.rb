@@ -15,7 +15,15 @@ RSpec.describe "Admin::ShopHistories", type: :system do
   context '未承認の店舗履歴がある場合' do
     it '管理画面サイドメニューに「NEW」バッジが表示されること' do
       visit admin_root_path
-      expect(page.all('.bg-success', text: 'NEW').length).to eq(1)
+      expect(page.all('.bg-success', text: 'NEW').length).to eq(1), '管理画面サイドメニューに「NEW」バッジが表示されていません'
+    end
+  end
+
+  context '未承認の店舗履歴がない場合' do
+    it '管理画面サイドメニューに「NEW」バッジが表示されないこと' do
+      shop.shop_histories.destroy_all
+      visit admin_root_path
+      expect(page.all('.bg-success', text: 'NEW').length).to be_zero, '管理画面サイドメニューに「NEW」バッジが表示されています'
     end
   end
 
