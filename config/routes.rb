@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'shops#index'
   resources :shops, only: %i[show] do
     resources :user_reviews, only: %i[create destroy]
+    resources :shop_histories, only: %i[new create]
   end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update destroy] do
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index destroy]
     resources :shops, only: %i[index show edit update destroy]
     resources :user_reviews, only: %i[index destroy]
+    resources :shop_histories, only: %i[index update destroy]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

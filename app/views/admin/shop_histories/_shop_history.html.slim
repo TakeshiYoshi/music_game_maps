@@ -1,0 +1,61 @@
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      .admin-shop-header.mb-2.d-flex.justify-content-between
+        .admin-shop-header-start.d-flex.
+          h5.card-title
+            = link_to shop_history.shop.name, shop_path(shop_history.shop), target: :_blank, rel: 'noopener noreferrer'
+          = link_to "(#{shop_history.user.nickname})", user_path(shop_history.user), class: 'admin-link'
+        .admin-shop-header-end
+          = link_to t('admin.shop_histories.index.disconfirm'), admin_shop_history_path(shop_history), method: :delete, class: 'btn btn-danger mr-2'
+          = link_to t('admin.shop_histories.index.confirm'), admin_shop_history_path(shop_history), method: :patch, class: 'btn btn-primary'
+      .admin-shop-body.d-flex
+        .admin-shop-image-container.text-center style="margin-right: 10px;"
+          = image_tag shop_history.shop.appearance_image.url, class: 'admin-shop-image'
+          - if shop_history.appearance_image.present?
+            .my-2 = t 'defaults.bottom-arrow'
+            = image_tag shop_history.appearance_image.url, class: 'admin-shop-image'
+        .admin-shop-data-container
+          - if shop_history.name
+            .admin-shop-name.mb-1
+              .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
+                = Shop.human_attribute_name(:name)
+              = shop_history.shop.name
+              span.mx-2 = t 'defaults.right-arrow'
+              = shop_history.name
+          - if shop_history.phone_number
+            .admin-shop-phone-number.mb-1
+              .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
+                = Shop.human_attribute_name(:phone_number)
+              = shop_history.shop.phone_number
+              span.mx-2 = t 'defaults.right-arrow'
+              = shop_history.phone_number
+          - if shop_history.website
+            .admin-shop-website.mb-1
+              .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
+                = Shop.human_attribute_name(:website)
+              = link_to shop_history.shop.website, shop_history.shop.website, target: :_blank, rel: 'noopener noreferrer'
+              span.mx-2 = t 'defaults.right-arrow'
+              = link_to shop_history.website, shop_history.website, target: :_blank, rel: 'noopener noreferrer'
+          - if shop_history.twitter_id
+            .admin-shop-twitter-id.mb-1
+              .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
+                = Shop.human_attribute_name(:twitter_id)
+              = link_to shop_history.shop.twitter_id.to_s, t('defaults.twitter_url') + shop_history.shop.twitter_id.to_s, target: :_blank, rel: 'noopener noreferrer'
+              span.mx-2 = t 'defaults.right-arrow'
+              = link_to shop_history.twitter_id.to_s, t('defaults.twitter_url') + shop_history.twitter_id.to_s, target: :_blank, rel: 'noopener noreferrer'
+          - if shop_history.games
+            .admin-shop-games.mb-1
+              .label.mb-2
+                .mr-2.btn.btn-dark.rounded-pill.px-4.py-0 style="min-width: 130px;"
+                  = GameMachine.model_name.human
+              - @games.each do |game|
+                - next unless shop_history.games[game.id.to_s]
+                .group.d-flex.align-items-center.mb-3
+                  .mr-2.badge.rounded-pill.bg-secondary
+                    .d-flex.align-items-center style="height: 17px;"
+                      span.mx-2 style="min-width: 220px;"
+                        = game.title
+                  = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), shop_history.shop.game_machines.find_by(game: game)&.count), { class: 'form-select', style: 'width: 150px;', disabled: true }
+                  span.mx-2 = t 'defaults.right-arrow'
+                  = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), shop_history.games[game.id.to_s]), { class: 'form-select', style: 'width: 150px;', disabled: true }

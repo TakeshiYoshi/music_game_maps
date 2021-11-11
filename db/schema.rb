@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_144914) do
+ActiveRecord::Schema.define(version: 2021_11_09_070032) do
 
   create_table "about_games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_review_id", null: false
@@ -74,6 +74,22 @@ ActiveRecord::Schema.define(version: 2021_10_30_144914) do
     t.index ["name"], name: "index_prefectures_on_name", unique: true
   end
 
+  create_table "shop_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "phone_number"
+    t.text "website"
+    t.string "twitter_id"
+    t.json "games"
+    t.bigint "user_id", null: false
+    t.bigint "shop_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "appearance_image"
+    t.integer "status", default: 0, null: false
+    t.index ["shop_id"], name: "index_shop_histories_on_shop_id"
+    t.index ["user_id"], name: "index_shop_histories_on_user_id"
+  end
+
   create_table "shops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "twitter_id"
@@ -96,6 +112,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_144914) do
     t.string "sega_name"
     t.string "namco_name"
     t.string "taito_name"
+    t.string "appearance_image"
     t.index ["city_id"], name: "index_shops_on_city_id"
     t.index ["name"], name: "index_shops_on_name", unique: true
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
@@ -146,6 +163,8 @@ ActiveRecord::Schema.define(version: 2021_10_30_144914) do
   add_foreign_key "game_machines", "shops"
   add_foreign_key "playing_games", "games"
   add_foreign_key "playing_games", "users"
+  add_foreign_key "shop_histories", "shops"
+  add_foreign_key "shop_histories", "users"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
   add_foreign_key "user_reviews", "shops"

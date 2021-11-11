@@ -19,4 +19,9 @@ RSpec.describe GameMachine, type: :model do
     game_machine.valid?
     expect(game_machine.errors[:count]).to include('は0以上の値にしてください')
   end
+
+  it 'count=99(台数不明と定義)の場合、unknown_count?メソッドがtrueを返す' do
+    game_machine = build(:game_machine, count: 99)
+    expect(game_machine.unknown_count?).to eq(true)
+  end
 end

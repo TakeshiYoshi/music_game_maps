@@ -39,6 +39,10 @@ ja:
     search: '検索'
     no_count_info: '台数不明'
     no_count: '設置なし'
+    new: 'NEW'
+    right-arrow: '→'
+    bottom-arrow: '↓'
+    twitter_url: 'https://twitter.com/'
     form:
       header_search_placeholder: 'フリーワード検索'
       remember_me: 'ログイン状態を保持する'
@@ -112,8 +116,16 @@ ja:
     show:
       user_review_label: 'ユーザー投稿された情報'
       user_review_btn: 'この店舗の筐体情報を投稿'
+      user_review_btn_signup: 'ユーザー登録して投稿する'
       user_review_empty: 'まだ投稿がありません。本店舗の情報提供お待ちしています。'
       twitter_label: '店舗Twitter情報'
+      edit_shop_btn: 'この店舗の情報を編集する'
+      edit_shop_btn_signup: 'ユーザー登録してこの店舗の情報を編集する'
+  shop_histories:
+    new:
+      apply_update: '情報の更新を申請する'
+    create:
+      success: '情報提供ありがとうございます。'
   inquiries:
     inquiry:
       title: 'お問い合わせ'
@@ -292,6 +304,7 @@ ja:
         users: 'Users'
         shops: 'Shops'
         user_reviews: 'UserReviews'
+        shop_histories: 'ShopHistories'
     dashboards:
       index:
         title: 'ダッシュボード'
@@ -307,3 +320,8 @@ ja:
     user_reviews:
       index:
         title: 'ユーザー投稿一覧'
+    shop_histories:
+      index:
+        title: '店舗履歴一覧'
+        confirm: '承認する'
+        disconfirm: '承認しない'

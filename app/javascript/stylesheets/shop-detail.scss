@@ -29,11 +29,16 @@
 }
 
 .shop-description-container {
+  position: relative;
   border-radius: 0 0 20px 20px;
   margin-bottom: 15px;
   & > div:nth-of-type(n+2) {
     margin: 10px 0;
   }
+}
+
+.edit-shop-btn {
+  margin-right: 10px;
 }
 
 .user-review {
@@ -365,5 +370,11 @@
 
   .user-review-empty-img {
     width: 250px;
+  }
+
+  .edit-shop-btn {
+    right: 15px;
+    font-size: 0.7rem;
+    height: 22px;
   }
 }

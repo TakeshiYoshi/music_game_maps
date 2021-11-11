@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :playing_games, dependent: :destroy
   has_many :games, through: :playing_games
   has_one :authentication, dependent: :destroy
+  has_many :shop_histories
 
   accepts_nested_attributes_for :authentication
 
@@ -22,6 +23,8 @@ class User < ApplicationRecord
   validates :anonymous, inclusion: { in: [true, false] }
 
   enum role: { general: 0, admin: 1 }
+
+  scope :admin, -> { where(role: :admin) }
 
   def create_playing_games(games_params)
     games_params&.each do |game_id, _value|

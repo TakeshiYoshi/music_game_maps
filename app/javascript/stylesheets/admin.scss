@@ -127,10 +127,28 @@ table {
   color: #495057;
 }
 
-.pagination a {
+.admin-pagination a {
   color: initial !important;
 }
 
 .page-item.active .page-link {
   color: white !important;
+}
+
+.badge-count {
+  margin: 0 !important;
+}
+
+.admin-shop-image {
+  width: 150px;
+  border-radius: 10px;
+}
+
+.admin-link {
+  font-size: 1rem;
+  color: #495057;
+  margin-left: 10px;
+  &:hover {
+    color: #495057;
+  }
 }

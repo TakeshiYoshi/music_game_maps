@@ -18,6 +18,13 @@ RSpec.describe "UserReviews", type: :system do
       end
     end
 
+    context '未ログイン状態' do
+      it 'ユーザー登録ボタンが表示されること' do
+        visit shop_path(shop)
+        expect(page).to have_content('ユーザー登録して投稿する'), 'ユーザー登録ボタンが表示されていません'
+      end
+    end
+
     context 'Userモデルの匿名設定を有効にする' do
       it '投稿されたユーザーレビューに投稿主の名前が表示されないこと' do
         user.update(anonymous: true)

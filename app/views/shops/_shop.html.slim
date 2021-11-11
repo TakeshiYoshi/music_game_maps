@@ -2,7 +2,7 @@
   .col-12.glass.shop-card.d-flex.align-content-start
     .adjust-position id="shop-#{shop.id}"
     .shop-img-container
-      img.appearance_img src="#{shop.get_photo_url}"
+      = image_tag shop.get_photo_url(size: :thumb), class: 'appearance_img'
     .shop-description.d-flex.flex-column.justify-content-start
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center

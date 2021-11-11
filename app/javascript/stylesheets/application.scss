@@ -9,6 +9,7 @@
 @import 'policy';
 @import 'tutorial';
 @import 'admin';
+@import 'edit_shop';
 
 @font-face {
   font-family: 'LEMONMILK-BOLD';
@@ -137,6 +138,7 @@ a {
   color: rgb(194, 84, 84);
   text-align: left;
   font-weight: bold;
+  text-shadow: initial !important;
 }
 
 header {

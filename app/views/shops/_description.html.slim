@@ -4,8 +4,13 @@ input.d-none#table-check type="checkbox"
     p = shop.name
   img src="#{shop.get_photo_url}"
 .col-12.glass.shop-description-container
-  .game-machines
-    label.shop-label.rounded-pill = GameMachine.model_name.human
+  .d-flex.justify-content-between.align-content-center
+    .game-machines
+      label.shop-label.rounded-pill = GameMachine.model_name.human
+    - if logged_in?
+      = link_to t('shops.show.edit_shop_btn'), new_shop_shop_history_path(shop), class: 'btn btn-glass edit-shop-btn btn-label-size rounded-pill'
+    - else 
+      = link_to t('shops.show.edit_shop_btn_signup'), signup_path, class: 'btn btn-glass edit-shop-btn btn-label-size rounded-pill'
   = render 'shared/badges', shop: shop
   .address.d-flex.align-items-center.flex-wrap
     label.shop-label.rounded-pill = Shop.human_attribute_name(:address)
@@ -36,5 +41,5 @@ input.d-none#table-check type="checkbox"
       tbody 
         - shop.opening_hours_text.sort.each do |text|
           tr 
-            th = shop.day_of_week_convert_to_text_from_num text.first
-            th = text.last
+            th.glass-text = shop.day_of_week_convert_to_text_from_num text.first
+            th.glass-text = text.last
