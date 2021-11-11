@@ -12,9 +12,9 @@ RSpec.describe "ShopHistories", type: :system do
 
   describe '店舗履歴の投稿' do
     context '未ログイン状態' do
-      it '店舗履歴投稿ボタンが非表示になること' do
+      it 'ユーザー登録ボタンが表示されること' do
         visit shop_path(shop)
-        expect(page).not_to have_content('この店舗の情報を編集する'), '舗履歴投稿ボタンが表示されています'
+        expect(page).to have_content('ユーザー登録してこの店舗の情報を編集する'), 'ユーザー登録ボタンが表示されていません'
       end
     end
 

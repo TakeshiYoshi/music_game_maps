@@ -7,10 +7,12 @@
       .col-6.d-flex.align-items-center
         label.shop-label.rounded-pill
           = t 'shops.show.user_review_label'
-      - if logged_in?
-        .col-6.d-flex.align-items-center.justify-content-end
+      .col-6.d-flex.align-items-center.justify-content-end
+        - if logged_in?
           label.btn.btn-glass.btn-label-size.rounded-pill.user-review-form-button for="user-review-form-check"
             = t 'shops.show.user_review_btn'
+        - else
+          = link_to t('shops.show.user_review_btn_signup'), signup_path, class: 'btn btn-glass btn-label-size rounded-pill user-review-form-button'
     = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
     - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
       #userReviews
