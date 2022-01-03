@@ -18,6 +18,7 @@ class ShopHistory < ApplicationRecord
     self.phone_number = nil if phone_number == shop.phone_number || phone_number.blank?
     self.website = nil if website == shop.website || website.blank?
     self.twitter_id = nil if twitter_id == shop.twitter_id || twitter_id.blank?
+    twitter_id.delete!('@') if twitter_id&.include?('@') # @が含まれる場合は削除する
     self.games = games_params.reject { |_k, v| v.to_i.zero? }
     self.games = nil if games == shop.game_machines_to_hash
   end
