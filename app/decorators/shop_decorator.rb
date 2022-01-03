@@ -120,4 +120,8 @@ module ShopDecorator
     end
     self.reload.photo_url
   end
+
+  def lastest_update_date
+    shop_histories.present? ? shop_histories.last.created_at : updated_at
+  end
 end

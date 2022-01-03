@@ -315,6 +315,9 @@ header {
   .shop-head {
     margin-bottom: 10px;
   }
+  .shop-footer {
+    margin-top: 10px;
+  }
   .shop-img-container {
     min-width: 160px;
     min-height: 120px;
@@ -890,6 +893,10 @@ footer {
 
   .shop-card {
     border-radius: 10px;
+    .shop-footer {
+      margin-top: 5px;
+      font-size: 0.7rem;
+    }
     .adjust-position {
       top: -70px;
     }
