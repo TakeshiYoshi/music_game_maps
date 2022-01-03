@@ -59,8 +59,12 @@ class Shop < ApplicationRecord
                 website: shop_history.website,
                 twitter_id: shop_history.twitter_id,
                 games: shop_history.games }
-      if shop_history.appearance_image.file&.file
-        items[:appearance_image] = File.open(shop_history.appearance_image.file.file)
+      if shop_history.appearance_image.present?
+        if Rails.env.development?
+          items[:appearance_image] = File.open(shop_history.appearance_image.file.file)
+        else
+          items[:appearance_image] = shop_history.appearance_image.url
+        end
       end
       items.each do |key, value|
         next if value.nil?
@@ -82,7 +86,11 @@ class Shop < ApplicationRecord
       game_machines.create(game_id: game_id, count: count)
     end
     # appearance_imageにファイルをマウント
-    appearance_image.store!(latest[:appearance_image])
+    if Rails.env.development?
+      appearance_image.store!(latest[:appearance_image])
+    else
+      self.remote_appearance_image_url = latest[:appearance_image]
+    end
     # データベース書き込み
     save
   end
