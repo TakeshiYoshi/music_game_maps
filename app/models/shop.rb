@@ -48,7 +48,7 @@ class Shop < ApplicationRecord
     shop_history.save
   end
 
-  def update_to_latest # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def update_to_latest # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
     return if shop_histories.count.zero?
 
     # 履歴を積み上げていき最新の状態をハッシュで取得する
@@ -59,8 +59,12 @@ class Shop < ApplicationRecord
                 website: shop_history.website,
                 twitter_id: shop_history.twitter_id,
                 games: shop_history.games }
-      if shop_history.appearance_image.file&.file
-        items[:appearance_image] = File.open(shop_history.appearance_image.file.file)
+      if shop_history.appearance_image.present?
+        items[:appearance_image] = if Rails.env.development?
+                                     File.open(shop_history.appearance_image.file.file)
+                                   else
+                                     shop_history.appearance_image.url
+                                   end
       end
       items.each do |key, value|
         next if value.nil?
@@ -82,7 +86,11 @@ class Shop < ApplicationRecord
       game_machines.create(game_id: game_id, count: count)
     end
     # appearance_imageにファイルをマウント
-    appearance_image.store!(latest[:appearance_image])
+    if Rails.env.development?
+      appearance_image.store!(latest[:appearance_image])
+    else
+      self.remote_appearance_image_url = latest[:appearance_image]
+    end
     # データベース書き込み
     save
   end
