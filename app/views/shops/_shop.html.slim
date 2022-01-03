@@ -3,7 +3,7 @@
     .adjust-position id="shop-#{shop.id}"
     .shop-img-container
       = image_tag shop.get_photo_url(size: :thumb), class: 'appearance_img'
-    .shop-description.d-flex.flex-column.justify-content-start
+    .shop-description.d-flex.flex-column.justify-content-start.flex-grow-1
       .shop-head.d-flex.align-items-start
         .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
           p.m-0
@@ -13,3 +13,5 @@
             span.label-hours.rounded-pill.align-items-center class="label-#{shop.opening_time?}"
               = t "defaults.#{shop.opening_time?}"
       = render 'shared/badges', shop: shop
+      .shop-footer.d-flex.align-items-start.justify-content-end.glass-text
+        = "#{t 'shops.show.lastest_update_date'}: #{l shop.shop_histories.last.created_at, format: :shop_history}"

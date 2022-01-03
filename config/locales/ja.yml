@@ -2,3 +2,4 @@ ja:
   time:
       formats:
         user_review: "%Y/%m/%d"
+        shop_history: "%Y/%m/%d %H:%M:%S"

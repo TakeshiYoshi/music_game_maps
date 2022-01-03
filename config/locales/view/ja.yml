@@ -121,6 +121,7 @@ ja:
       twitter_label: '店舗Twitter情報'
       edit_shop_btn: 'この店舗の情報を編集する'
       edit_shop_btn_signup: 'ユーザー登録してこの店舗の情報を編集する'
+      lastest_update_date: '最終更新日時'
   shop_histories:
     new:
       apply_update: '情報の更新を申請する'
