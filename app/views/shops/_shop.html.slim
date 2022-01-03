@@ -14,4 +14,4 @@
               = t "defaults.#{shop.opening_time?}"
       = render 'shared/badges', shop: shop
       .shop-footer.d-flex.align-items-start.justify-content-end.glass-text
-        = "#{t 'shops.show.lastest_update_date'}: #{l shop.shop_histories.last.created_at, format: :shop_history}"
+        = "#{t 'shops.show.lastest_update_date'}: #{l shop.lastest_update_date, format: :shop_history}"
