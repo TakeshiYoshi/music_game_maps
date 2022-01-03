@@ -26,6 +26,11 @@ input.d-none#table-check type="checkbox"
       label.shop-label.rounded-pill = Shop.human_attribute_name(:website)
       p.glass-text
         = link_to shop.website.truncate(35), shop.website, target: :_blank, rel: 'nopener noreferrer'
+  - if shop.twitter_id 
+    .twitter_id.d-flex.align-items-center.flex-wrap
+      label.shop-label.rounded-pill = Shop.human_attribute_name(:twitter_id)
+      p.glass-text
+        = link_to shop.twitter_id, "https://twitter.com/#{shop.twitter_id}", target: :_blank, rel: 'nopener noreferrer'
   - if shop.opening_hours
     .opening_hours.d-flex.align-items-center.flex-wrap
       label.shop-label.rounded-pill = Shop.human_attribute_name(:opening_hours)
