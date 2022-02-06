@@ -2,7 +2,8 @@ require './lib/scraping/scraping'
 
 def scraping_sega(game_title)
   game_code = {
-    CHUNITHM: 58,
+    # CHUNITHM: 58,
+    CHUNITHM: 109,
     maimai: 96,
     WACCA: 93,
     オンゲキ: 88
