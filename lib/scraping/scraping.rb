@@ -54,8 +54,22 @@ def register_shop_data(shops)
       db_shop.update(namco_name: shop[:namco_name]) if shop[:namco_name]
       db_shop.update(taito_name: shop[:taito_name]) if shop[:taito_name]
       db_shop.update(sega_name: shop[:sega_name]) if shop[:sega_name]
-      # GameMachineモデル作成(店舗とゲームを関連付けする)
-      register_relationship_shop_between_game(name, game, shop[:count])
+      # 履歴データ作成
+      shop[:count] ||= 99 # nilの場合は99(台数不明)を追加
+      games_hash =  db_shop.game_machines_to_hash
+      games_hash[game.id.to_s] = shop[:count] if shop[:count] != 99 && shop[:count].to_s != games_hash[game.id.to_s] # 取得した筐体情報を上書き
+      games_hash = {} if games_hash == db_shop.game_machines_to_hash # 筐体情報に更新がない場合はnil
+      shop_history = db_shop.shop_histories.build( user: User.admin.first,
+                                                   name: name,
+                                                   phone_number: shop[:phone_number],
+                                                   website: shop[:website],
+                                                   games: games_hash,
+                                                   status: :published)
+      shop_history.format_model(games_hash)
+      if shop_history.validate
+        shop_history.save
+        db_shop.update_to_latest
+      end
       registered_shops << db_shop
       next
     end
@@ -96,7 +110,7 @@ end
 
 def register_relationship_shop_between_game(shop_name, game, count)
   puts "\n*** 店舗に設置筐体情報を追加します ***"
-  count = 0 if count.nil?
+  count = 99 if count.nil? # 台数情報がない場合は99を格納
   game_machine = GameMachine.new(shop_id: Shop.find_by(name: shop_name).id, game_id: game.id, count: count)
   if game_machine.save
     puts "#{shop_name}に#{game.title}の設置情報を追加しました。game_machine_id: #{game_machine.id}"
@@ -187,7 +201,7 @@ def get_places_data(shop)
   # 取得データがなければ終了する
   return nil if auto_data['status'] == 'ZERO_RESULTS'
   # API節約のためDB上にデータがあればここで終了させる
-  if db_shop = Shop.find_by(name: name) || db_shop = Shop.find_by(place_id: shop[:place_id])
+  if (db_shop = Shop.where(prefecture: Prefecture.find_by(name: shop[:prefecture])).find_by(name: name)) || (shop[:place_id] && db_shop = Shop.find_by(place_id: shop[:place_id]))
     shop[:name] = db_shop.name
     shop[:address] = db_shop.address
     shop[:lat] = db_shop.lat
@@ -198,6 +212,7 @@ def get_places_data(shop)
     shop[:phone_number] = db_shop.phone_number
     shop[:website] = db_shop.website
     shop[:photo_reference] = db_shop.photo_reference
+    puts "DB上からデータを取得しました #{db_shop.name}"
     return shop
   end
   # PlaceDetailsを利用して店舗の詳細情報を入手する
@@ -260,8 +275,19 @@ def delete_game_machine(registered_shops, game_title, prefecture_id)
   puts "撤去数: #{must_delete_shops.length}"
   must_delete_shops.each do |shop|
     puts shop.name
-    game_machine = shop.game_machines.find_by(game: game)
-    game_machine.destroy
+    # game_machine = shop.game_machines.find_by(game: game)
+    # game_machine.destroy
+    # 店舗履歴を作成する
+    games_hash = shop.game_machines_to_hash
+    games_hash[game.id.to_s] = '0' # 取得した筐体情報を削除
+    shop_history = shop.shop_histories.build( user: User.admin.first,
+                                              games: games_hash,
+                                              status: :published)
+    shop_history.format_model(games_hash)
+    if shop_history.validate
+      shop_history.save
+      shop.update_to_latest
+    end
     if shop.game_machines.length == 0
       puts '店舗が閉店しているか音ゲーが設置されていないため店舗情報そのものを削除します。'
       shop.destroy

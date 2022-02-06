@@ -4,7 +4,6 @@ require 'json'
 def scraping_taito(game_title)
   # 以下スクレイピング処理
   1.upto(47) do |n|
-    next if n != 47
     # 変数初期化
     shops_all = []
     shops = []

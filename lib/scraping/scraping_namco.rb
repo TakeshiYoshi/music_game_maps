@@ -3,7 +3,6 @@ require './lib/scraping/scraping'
 def scraping_namco(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    next if prefecture.id != 12
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -29,10 +28,7 @@ def scraping_namco(game_title)
       name = shop_name_list[n].text
       address = shop_address_list[n]
 
-      place_id = Shop.find_by(namco_name: name).place_id if Shop.find_by(namco_name: name)
-
-      # 例外処理
-      place_id = 'ChIJCzL4EkmcBGARQFYXDaHuSNQ' if name == 'イーグルボウル' && prefecture.id == 23
+      place_id = Shop.find_by(namco_name: name).place_id if Shop.find_by(namco_name: name) && Shop.find_by(namco_name: name).prefecture == Prefecture.find(prefecture.id)
 
       shop = { name: name,
                namco_name: name,
@@ -44,7 +40,12 @@ def scraping_namco(game_title)
                detail_page_url: shop_detail_link_list[n],
                place_id: place_id }
       # 緯度経度情報を取得
-      shop = get_lat_and_lon shop
+      if db_shop = Shop.find_by(namco_name: name)
+        shop[:lat] = db_shop.lat.to_f
+        shop[:lng] = db_shop.lng.to_f
+      else
+        shop = get_lat_and_lon shop
+      end
       # Places APIを用いて店舗データ取得
       shop = get_places_data shop
       puts shop
