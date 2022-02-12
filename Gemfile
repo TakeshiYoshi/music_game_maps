@@ -12,7 +12,7 @@ gem 'gon'
 gem 'mysql2'
 
 # Application server
-gem 'puma', '~> 4.1'
+gem 'puma'
 
 # Decorator
 gem 'active_decorator'
@@ -80,10 +80,6 @@ group :development do
   gem 'spring'
   gem 'web-console'
   gem 'html2slim'
-end
-
-group :production do
-  gem 'unicorn'
 end
 
 group :development, :production do
