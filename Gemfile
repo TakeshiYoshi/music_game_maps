@@ -18,7 +18,7 @@ gem 'puma'
 gem 'active_decorator'
 
 # Assets
-gem 'webpacker', '~> 4.0'
+gem 'webpacker'
 gem 'font-awesome-rails'
 
 # UI/UX
