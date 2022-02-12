@@ -1,16 +1,16 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@1.3.2
+  aws-cli: cimg/aws-cli@1.3.2
 
 jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:3.1.0-node-browsers
+      - image: cimg/ruby:3.1.0-browsers
         environment:
           RAILS_ENV: test
-      - image: circleci/mysql:5.7.34
+      - image: cimg/mysql:5.7.34
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           MYSQL_ROOT_HOST: '%'
@@ -33,13 +33,13 @@ jobs:
   test:
     working_directory: ~/repo
     docker:
-      - image: circleci/ruby:3.1.0-node-browsers
+      - image: cimg/ruby:3.1.0-browsers
         environment:
           RAILS_ENV: test
           DB_USERNAME: root
           DB_PASSWORD: ''
           DB_HOST: 127.0.0.1
-      - image: circleci/mysql:5.7.34
+      - image: cimg/mysql:5.7.34
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           MYSQL_ROOT_PASSWORD: ''
@@ -76,7 +76,7 @@ jobs:
   deploy:
     working_directory: ~/repo
     machine:
-      image: circleci/classic:edge
+      image: cimg/classic:edge
     steps:
       - checkout
       - aws-cli/install
