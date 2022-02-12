@@ -979,3 +979,12 @@ footer {
     width: 100px;
   } 
 }
+
+// 
+@media screen and (max-width: 365px) {
+  header {
+    .site-title {
+      display: none;
+    }
+  }
+}
