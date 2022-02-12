@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_12_130318) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_12_141308) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_12_130318) do
     t.string "taito_name"
     t.string "appearance_image"
     t.string "andamiro_name"
+    t.string "tetote_name"
     t.index ["city_id"], name: "index_shops_on_city_id"
     t.index ["name"], name: "index_shops_on_name", unique: true
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
