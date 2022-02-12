@@ -44,7 +44,7 @@ gem 'geokit-rails'
 gem 'aws-sdk-rails', '~> 3'
 gem 'fog-aws'
 
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Debugger
@@ -54,8 +54,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
   # Code analyze
-  gem 'rubocop', '~> 1.17.0'
-  gem 'rubocop-rails', '~> 2.11'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 
   # Test
   gem 'factory_bot_rails'
@@ -76,7 +76,7 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console'
   gem 'html2slim'
 end
 
