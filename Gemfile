@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.1.0'
 
 gem 'rails', '~> 7.0', '>= 7.0.2.2'
 
@@ -48,6 +48,7 @@ gem 'bootsnap', require: false
 gem 'net-ssh'
 gem 'net-smtp'
 gem "sprockets-rails"
+gem 'psych', '~> 3.1'
 
 group :development, :test do
   # Debugger
