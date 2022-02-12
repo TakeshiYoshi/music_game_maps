@@ -51,9 +51,12 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
-          name: 'ChromeDriverをバックグラウンド起動する'
-          command: chromedriver
-          background: true
+          name: 'ChromeDriverをインストールする'
+          command: |
+            cd /tmp/
+            curl -O https://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip
+            unzip chromedriver_linux64.zip
+            mv chromedriver /usr/local/bin/
       - run:
           name: bundle installを実行する(bundle execコマンドを実行するために必要)
           command: bundle install --path vendor/bundle
