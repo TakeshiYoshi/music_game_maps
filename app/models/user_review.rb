@@ -11,7 +11,7 @@ class UserReview < ApplicationRecord
   def create_about_games(games_params)
     games_params&.each do |game_id, _value|
       game = Game.find(game_id)
-      about_game = about_games.build(game: game)
+      about_game = about_games.build(game:)
       about_game.save!
     end
   end
