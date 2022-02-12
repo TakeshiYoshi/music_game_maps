@@ -16,15 +16,15 @@ class Shop < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  scope :in_prefecture, ->(prefecture_id) { where(prefecture_id: prefecture_id) }
-  scope :in_city, ->(city_id) { where(city_id: city_id) }
+  scope :in_prefecture, ->(prefecture_id) { where(prefecture_id:) }
+  scope :in_city, ->(city_id) { where(city_id:) }
 
   def create_game_machines(game_machines_params)
     game_machines_params&.each do |game_id, count|
       next if count.to_i.zero?
 
       game = Game.find(game_id)
-      game_machine = game_machines.build(game: game, count: count)
+      game_machine = game_machines.build(game:, count:)
       game_machine.save!
     end
   end
@@ -37,12 +37,12 @@ class Shop < ApplicationRecord
     return if shop_histories.present?
 
     shop_history = shop_histories.new(
-      name: name,
-      phone_number: phone_number,
-      website: website,
-      twitter_id: twitter_id,
+      name:,
+      phone_number:,
+      website:,
+      twitter_id:,
       games: game_machines_to_hash,
-      appearance_image: appearance_image,
+      appearance_image:,
       status: :published,
       user_id: User.admin.first.id
     )
@@ -84,7 +84,7 @@ class Shop < ApplicationRecord
     # game_machinesを作成する
     game_machines.destroy_all
     latest[:games].each do |game_id, count|
-      game_machines.create(game_id: game_id, count: count)
+      game_machines.create(game_id:, count:)
     end
     # appearance_imageにファイルをマウント
     if Rails.env.development?

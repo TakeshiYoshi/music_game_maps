@@ -29,7 +29,7 @@ class User < ApplicationRecord
   def create_playing_games(games_params)
     games_params&.each do |game_id, _value|
       game = Game.find(game_id)
-      playing_game = playing_games.build(game: game)
+      playing_game = playing_games.build(game:)
       playing_game.save!
     end
   end
