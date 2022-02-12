@@ -17,7 +17,7 @@ RSpec.describe "UserSessions", type: :system do
       it 'エラーメッセージが表示されログインページにリダイレクトされる' do
         visit login_path
         fill_in 'email', with: user.email
-        fill_in 'password', with: 'wrong_pass'
+        fill_in 'password', with: 'wrong'
         click_button 'ログイン'
         expect(current_path).to eq(user_sessions_path), '別のページへリダイレクトされています'
         expect(page.find('#flash-message')).to have_content('ログインに失敗しました'), 'フラッシュメッセージが表示されてません'

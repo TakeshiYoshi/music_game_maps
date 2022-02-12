@@ -9,7 +9,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
 gem 'gon'
 
 # Database
-gem 'mysql2', '>= 0.4.4'
+gem 'mysql2'
 
 # Application server
 gem 'puma', '~> 4.1'
