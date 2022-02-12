@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
+gem 'rails', '~> 7.0', '>= 7.0.2.2'
 
 # Security
 gem 'gon'
@@ -47,6 +47,7 @@ gem 'fog-aws'
 gem 'bootsnap', require: false
 gem 'net-ssh'
 gem 'net-smtp'
+gem "sprockets-rails"
 
 group :development, :test do
   # Debugger
@@ -75,9 +76,8 @@ group :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.2'
+  gem 'listen'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
   gem 'html2slim'
 end
