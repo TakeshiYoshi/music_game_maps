@@ -51,12 +51,12 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
-        name: Upgrade chrome
-        command: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update
-          sudo apt-get --only-upgrade install google-chrome-stable=83.0.4103.116-1
+          name: Upgrade chrome
+          command: |
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update
+            sudo apt-get --only-upgrade install google-chrome-stable=83.0.4103.116-1
       - run:
           name: bundle installを実行する(bundle execコマンドを実行するために必要)
           command: bundle install --path vendor/bundle
