@@ -2,7 +2,7 @@ class ShopHistory < ApplicationRecord
   belongs_to :user
   belongs_to :shop
 
-  VALID_WEBSITE_REGEX = %r{\Ahttps?://[\w!?/+\-_~=;.,*&@#$%()'\[\]]+\z}.freeze
+  VALID_WEBSITE_REGEX = %r{\Ahttps?://[\w!?/+\-_~=;.,*&@#$%()'\[\]]+\z}
 
   mount_uploader :appearance_image, ShopHistoryAppearanceImageUploader
 

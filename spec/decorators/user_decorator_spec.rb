@@ -38,6 +38,6 @@ RSpec.describe UserDecorator do
 end
 
 # I18n.tメソッドを動作させるため
-def t(string, options={})
-  I18n.t(string, options)
+def t(string)
+  I18n.t(string)
 end
