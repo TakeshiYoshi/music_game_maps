@@ -57,7 +57,8 @@ def register_shop_data(shops)
       # 履歴データ作成
       shop[:count] ||= 99 # nilの場合は99(台数不明)を追加
       games_hash =  db_shop.game_machines_to_hash
-      games_hash[game.id.to_s] = shop[:count] if shop[:count] != 99 && shop[:count].to_s != games_hash[game.id.to_s] # 取得した筐体情報を上書き
+      games_hash[game.id.to_s] = shop[:count] if games_hash[game.id.to_s].nil? # 新しいゲームの場合
+      games_hash[game.id.to_s] = shop[:count] if shop[:count] != 99 && (shop[:count].to_s != games_hash[game.id.to_s]) # 取得した筐体情報を上書き
       games_hash = {} if games_hash == db_shop.game_machines_to_hash # 筐体情報に更新がない場合はnil
       shop_history = db_shop.shop_histories.build( user: User.admin.first,
                                                    name: name,
@@ -173,7 +174,7 @@ def get_places_data(shop)
   if shop[:place_id].blank?
     puts 'place idを取得します'
     # AutoCompleteを使用してplace_idを取得
-    auto_complete_url = URI.encode "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=#{shop[:name]}&types=establishment&location=#{shop[:lat]},#{shop[:lon]}&radius=1000&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
+    auto_complete_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=#{CGI.escape shop[:name]}&types=establishment&location=#{CGI.escape shop[:lat]},#{CGI.escape shop[:lon]}&radius=1000&language=ja&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
     auto_page = URI.parse(auto_complete_url).open.read
     auto_data = JSON.parse(auto_page)
     shop[:place_id] = auto_data['predictions'].first['place_id'] if auto_data['predictions'].present?
@@ -181,7 +182,7 @@ def get_places_data(shop)
     address = auto_data['predictions'].first['description'] if auto_data['predictions'].present?
     # 検索結果の件数が0の場合別のAPIから取得する
     if auto_data['status'] == 'ZERO_RESULTS' || !address.include?(shop[:prefecture])
-      auto_complete_url = URI.encode "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{shop[:name]} #{shop[:prefecture]}#{shop[:city]}&inputtype=textquery&fields=name,place_id,formatted_address&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
+      auto_complete_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{CGI.escape shop[:name]} #{CGI.escape shop[:prefecture]}#{CGI.escape shop[:city]}&inputtype=textquery&fields=name,place_id,formatted_address&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
       auto_page = URI.parse(auto_complete_url).open.read
       auto_data = JSON.parse(auto_page)
       # 候補が複数ある場合は住所を頼りにする
@@ -217,7 +218,7 @@ def get_places_data(shop)
   end
   # PlaceDetailsを利用して店舗の詳細情報を入手する
   puts '店舗情報を取得します'
-  place_detail_url = URI.encode "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
+  place_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{CGI.escape shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
   page = URI.parse(place_detail_url).open.read
   data = JSON.parse(page)
 

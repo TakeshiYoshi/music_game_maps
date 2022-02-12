@@ -2,6 +2,7 @@ require './lib/scraping/scraping_konami'
 require './lib/scraping/scraping_sega'
 require './lib/scraping/scraping_namco'
 require './lib/scraping/scraping_taito'
+require './lib/scraping/scraping_andamiro'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -37,6 +38,10 @@ namespace :scraping do
 
   task taito: :environment do
     scraping_taito 'GROOVE COASTER'
+  end
+
+  task andamiro: :environment do
+    scraping_andamiro 'CHRONO CIRCLE'
   end
 
   task all: :environment do
