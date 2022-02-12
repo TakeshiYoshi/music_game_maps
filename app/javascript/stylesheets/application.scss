@@ -979,3 +979,12 @@ footer {
     width: 100px;
   } 
 }
+
+// iPhone 5Sサイズ以下
+@media screen and (max-width: 365px) {
+  header {
+    .site-title {
+      display: none;
+    }
+  }
+}
