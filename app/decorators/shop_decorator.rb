@@ -6,7 +6,7 @@ module ShopDecorator
 
     time_ranges = opening_hours_data_convert_to_time_range
     time_ranges.each do |time_range|
-      return 'open' if time_range.include?(Time.zone.now) || time_range.include?(Time.zone.now + 1.week)
+      return 'open' if time_range.cover?(Time.zone.now) || time_range.cover?(Time.zone.now + 1.week)
     end
     'close'
   end

@@ -39,7 +39,7 @@ OTOMAPは音ゲーマーのゲームセンター探しをサポートするた�
 # 主な使用技術
 ## バックエンド
 - Ruby 3.0.0
-- Rails 6.0.3
+- Rails 7.0.2
 ## フロントエンド
 - Slim (HTML)
 - Sass/SCSS (CSS)
