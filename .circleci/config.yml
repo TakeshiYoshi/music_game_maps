@@ -10,7 +10,7 @@ jobs:
       - image: cimg/ruby:3.1.0-browsers
         environment:
           RAILS_ENV: test
-      - image: cimg/mysql:5.7.34
+      - image: circleci/mysql:5.7.34
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           MYSQL_ROOT_HOST: '%'
@@ -39,7 +39,7 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: ''
           DB_HOST: 127.0.0.1
-      - image: cimg/mysql:5.7.34
+      - image: circleci/mysql:5.7.34
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           MYSQL_ROOT_PASSWORD: ''
