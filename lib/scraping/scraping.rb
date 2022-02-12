@@ -54,6 +54,8 @@ def register_shop_data(shops)
       db_shop.update(namco_name: shop[:namco_name]) if shop[:namco_name]
       db_shop.update(taito_name: shop[:taito_name]) if shop[:taito_name]
       db_shop.update(sega_name: shop[:sega_name]) if shop[:sega_name]
+      db_shop.update(andamiro_name: shop[:andamiro_name]) if shop[:andamiro_name]
+      db_shop.update(tetote_name: shop[:tetote_name]) if shop[:tetote_name]
       # 履歴データ作成
       shop[:count] ||= 99 # nilの場合は99(台数不明)を追加
       games_hash =  db_shop.game_machines_to_hash
@@ -174,7 +176,7 @@ def get_places_data(shop)
   if shop[:place_id].blank?
     puts 'place idを取得します'
     # AutoCompleteを使用してplace_idを取得
-    auto_complete_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=#{CGI.escape shop[:name]}&types=establishment&location=#{CGI.escape shop[:lat]},#{CGI.escape shop[:lon]}&radius=1000&language=ja&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
+    auto_complete_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=#{CGI.escape shop[:name].to_s}&types=establishment&location=#{CGI.escape shop[:lat].to_s},#{CGI.escape shop[:lon].to_s}&radius=1000&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
     auto_page = URI.parse(auto_complete_url).open.read
     auto_data = JSON.parse(auto_page)
     shop[:place_id] = auto_data['predictions'].first['place_id'] if auto_data['predictions'].present?
@@ -182,7 +184,7 @@ def get_places_data(shop)
     address = auto_data['predictions'].first['description'] if auto_data['predictions'].present?
     # 検索結果の件数が0の場合別のAPIから取得する
     if auto_data['status'] == 'ZERO_RESULTS' || !address.include?(shop[:prefecture])
-      auto_complete_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{CGI.escape shop[:name]} #{CGI.escape shop[:prefecture]}#{CGI.escape shop[:city]}&inputtype=textquery&fields=name,place_id,formatted_address&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
+      auto_complete_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=#{CGI.escape shop[:name].to_s} #{CGI.escape shop[:prefecture].to_s}#{CGI.escape shop[:city].to_s}&inputtype=textquery&fields=name,place_id,formatted_address&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
       auto_page = URI.parse(auto_complete_url).open.read
       auto_data = JSON.parse(auto_page)
       # 候補が複数ある場合は住所を頼りにする
@@ -218,7 +220,7 @@ def get_places_data(shop)
   end
   # PlaceDetailsを利用して店舗の詳細情報を入手する
   puts '店舗情報を取得します'
-  place_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{CGI.escape shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{CGI.escape Rails.application.credentials[:gcp][:places_api_key]}"
+  place_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
   page = URI.parse(place_detail_url).open.read
   data = JSON.parse(page)
 
@@ -267,6 +269,38 @@ end
 def delete_game_machine(registered_shops, game_title, prefecture_id)
   game = Game.find_by(title: game_title)
   old_db_shops = game.shops.where(prefecture_id: prefecture_id)
+  must_delete_shops = old_db_shops - registered_shops # 筐体情報を削除すべき店舗一覧
+  puts '撤去された筐体情報を削除します。'
+  puts "DB上の店舗数: #{old_db_shops.length}"
+  old_db_shops.each { |s| puts "#{s.name} #{s.id}" }
+  puts "登録された店舗数: #{registered_shops.length}"
+  registered_shops.each { |s| puts "#{s.name} #{s.id}" }
+  puts "撤去数: #{must_delete_shops.length}"
+  must_delete_shops.each do |shop|
+    puts shop.name
+    # game_machine = shop.game_machines.find_by(game: game)
+    # game_machine.destroy
+    # 店舗履歴を作成する
+    games_hash = shop.game_machines_to_hash
+    games_hash[game.id.to_s] = '0' # 取得した筐体情報を削除
+    shop_history = shop.shop_histories.build( user: User.admin.first,
+                                              games: games_hash,
+                                              status: :published)
+    shop_history.format_model(games_hash)
+    if shop_history.validate
+      shop_history.save
+      shop.update_to_latest
+    end
+    if shop.game_machines.length == 0
+      puts '店舗が閉店しているか音ゲーが設置されていないため店舗情報そのものを削除します。'
+      shop.destroy
+    end
+  end
+end
+
+def delete_game_machine_tetote(registered_shops, game_title)
+  game = Game.find_by(title: game_title)
+  old_db_shops = game.shops
   must_delete_shops = old_db_shops - registered_shops # 筐体情報を削除すべき店舗一覧
   puts '撤去された筐体情報を削除します。'
   puts "DB上の店舗数: #{old_db_shops.length}"

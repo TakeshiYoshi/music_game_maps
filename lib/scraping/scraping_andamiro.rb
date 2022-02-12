@@ -4,9 +4,7 @@ require 'json'
 def scraping_andamiro(game_title)
   # 以下スクレイピング処理
   1.upto(47) do |n|
-    puts '----------------------------'
     # 変数初期化
-    shops_all = []
     shops = []
 
     url = "https://chrono-circle.com/page/location.php?lat=0&lon=^&region=#{n}&name="

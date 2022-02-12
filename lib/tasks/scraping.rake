@@ -3,6 +3,7 @@ require './lib/scraping/scraping_sega'
 require './lib/scraping/scraping_namco'
 require './lib/scraping/scraping_taito'
 require './lib/scraping/scraping_andamiro'
+require './lib/scraping/scraping_tetote'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -44,6 +45,10 @@ namespace :scraping do
     scraping_andamiro 'CHRONO CIRCLE'
   end
 
+  task tetote: :environment do
+    scraping_tetote 'テトテコネクト'
+  end
+
   task all: :environment do
     scraping_konami 'SDVX_VM'
     scraping_konami 'SDVX'
@@ -66,5 +71,7 @@ namespace :scraping do
     scraping_sega 'オンゲキ'
     scraping_namco '太鼓の達人'
     scraping_taito 'GROOVE COASTER'
+    scraping_andamiro 'CHRONO CIRCLE'
+    scraping_tetote 'テトテコネクト'
   end
 end
