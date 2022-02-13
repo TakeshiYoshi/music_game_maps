@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave'
 gem 'meta-tags'
+gem "view_component", require: "view_component/engine"
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
@@ -82,6 +83,7 @@ group :development do
   gem 'web-console'
   gem 'html2slim'
   gem 'rack-mini-profiler', require: false
+  gem 'bullet'
 end
 
 group :development, :production do

@@ -1,0 +1,4 @@
+  - if shop.send(attribute)
+    .d-flex.align-items-center.flex-wrap class="#{attribute}"
+      = render Shared::LabelComponent.new(name: Shop.human_attribute_name(attribute))
+      = description_content
