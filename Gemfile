@@ -73,6 +73,7 @@ group :test do
   gem 'capybara'
   gem 'webdrivers'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -80,6 +81,7 @@ group :development do
   gem 'spring'
   gem 'web-console'
   gem 'html2slim'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :production do

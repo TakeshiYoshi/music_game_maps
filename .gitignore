@@ -41,3 +41,6 @@ yarn-debug.log*
 
 # gem
 /vendor/bundle
+
+# simplecov
+coverage/
