@@ -137,6 +137,7 @@ GEM
     debug_inspector (1.1.0)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    docile (1.4.0)
     erubi (1.10.0)
     excon (0.91.0)
     factory_bot (6.2.0)
@@ -276,7 +277,6 @@ GEM
       digest
       net-protocol
       timeout
-    net-ssh (6.1.0)
     nio4r (2.5.8)
     nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
@@ -305,6 +305,8 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-mini-profiler (2.3.3)
+      rack (>= 1.2.0)
     rack-proxy (0.7.2)
       rack
     rack-test (1.1.0)
@@ -377,7 +379,7 @@ GEM
       rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.15.1)
+    rubocop-ast (1.15.2)
       parser (>= 3.0.1.1)
     rubocop-rails (2.13.2)
       activesupport (>= 4.2.0)
@@ -393,6 +395,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    simplecov (0.21.2)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.3)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -472,23 +480,24 @@ DEPENDENCIES
   listen
   meta-tags
   mysql2
-  net-smtp
-  net-ssh
   nokogiri
   pry-byebug
   psych (~> 3.1)
   puma
   pundit
+  rack-mini-profiler
   rails (~> 7.0, >= 7.0.2.2)
   rails-i18n
   ransack
   rspec-rails
   rubocop
   rubocop-rails
+  simplecov
   slim-rails
   sorcery
   spring
   sprockets-rails
+  thor
   turbolinks (~> 5)
   tzinfo-data
   web-console
@@ -499,4 +508,4 @@ RUBY VERSION
    ruby 3.1.0p0
 
 BUNDLED WITH
-   2.2.19
+   2.3.3

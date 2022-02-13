@@ -45,10 +45,9 @@ gem 'aws-sdk-rails', '~> 3'
 gem 'fog-aws'
 
 gem 'bootsnap', require: false
-gem 'net-ssh'
-gem 'net-smtp'
 gem "sprockets-rails"
 gem 'psych', '~> 3.1'
+gem 'thor'
 
 group :development, :test do
   # Debugger
@@ -74,6 +73,7 @@ group :test do
   gem 'capybara'
   gem 'webdrivers'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -81,6 +81,7 @@ group :development do
   gem 'spring'
   gem 'web-console'
   gem 'html2slim'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :production do
