@@ -45,10 +45,9 @@ gem 'aws-sdk-rails', '~> 3'
 gem 'fog-aws'
 
 gem 'bootsnap', require: false
-gem 'net-ssh'
-gem 'net-smtp'
 gem "sprockets-rails"
 gem 'psych', '~> 3.1'
+gem 'thor'
 
 group :development, :test do
   # Debugger
