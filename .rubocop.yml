@@ -56,3 +56,6 @@ Style/WhileUntilModifier:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false

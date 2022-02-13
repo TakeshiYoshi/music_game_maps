@@ -5,7 +5,7 @@
   = render 'map_flash_message'
   = render 'near_shops_search_form'
   = render 'clear_location_session_button'
-= render @shops_filter
+= render ShopComponent.with_collection(@shops_filter)
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter
 

@@ -1,18 +1,17 @@
 - set_meta_tags title: @shop.name
-= render 'shops/description', shop: @shop
+= render Shop::DescriptionComponent.new(shop: @shop)
 .col-12.main-content.d-flex
   .col-sm-12.col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
     input.d-none#user-review-form-check type="checkbox"
     .d-flex
       .col-6.d-flex.align-items-center
-        label.shop-label.rounded-pill
-          = t 'shops.show.user_review_label'
+        = render Shared::LabelComponent.new(name: t('shops.show.user_review_label'))
       .col-6.d-flex.align-items-center.justify-content-end
         - if logged_in?
           label.btn.btn-glass.btn-label-size.rounded-pill.user-review-form-button for="user-review-form-check"
             = t 'shops.show.user_review_btn'
         - else
-          = link_to t('shops.show.user_review_btn_signup'), signup_path, class: 'btn btn-glass btn-label-size rounded-pill user-review-form-button'
+          = render Shared::PrimaryButtonComponent.new(text: t('shops.show.user_review_btn_signup'), href: signup_path, class: 'user-review-form-button')
     = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
     - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
       #userReviews
@@ -26,6 +25,6 @@
           = t 'shops.show.user_review_empty'
 
   - if @shop.twitter_id
-    = render 'shops/twitter', shop: @shop
+    = render Shop::TwitterComponent.new(twitter_id: @shop.twitter_id)
 
 = render 'user_reviews/image_preview'

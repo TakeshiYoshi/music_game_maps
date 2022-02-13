@@ -12,6 +12,7 @@
             = shop.name
             span.label-hours.rounded-pill.align-items-center class="label-#{shop.opening_time?}"
               = t "defaults.#{shop.opening_time?}"
-      = render 'shared/badges', shop: shop
+      .badges.d-flex.align-items-center.flex-wrap
+        = render Shop::BadgeComponent.with_collection(shop.game_machines)
       .shop-footer.d-flex.align-items-start.justify-content-end.glass-text
         = "#{t 'shops.show.lastest_update_date'}: #{l shop.lastest_update_date, format: :shop_history}"

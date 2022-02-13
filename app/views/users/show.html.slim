@@ -19,8 +19,7 @@
       = link_to t('.edit_profile'), edit_profile_user_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
 - if current_user == @user || ( !@user.anonymous? && @user_reviews.present? )
   .col-12.glass.glass-round
-    label.shop-label.rounded-pill.mb-2
-      = t '.user_reviews_label'
+    = render Shared::LabelComponent.new(name: t('.user_reviews_label'), class: 'mb-2')
     span.glass-text
       = "#{t '.user_reviews_length'}#{@user_reviews.size}件"
     - if @user.anonymous?
