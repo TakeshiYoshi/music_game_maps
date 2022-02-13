@@ -47,7 +47,7 @@ gem 'fog-aws'
 
 gem 'bootsnap', require: false
 gem "sprockets-rails"
-gem 'psych', '~> 3.1'
+gem 'psych', '~> 4.0'
 gem 'thor'
 
 group :development, :test do
