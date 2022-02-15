@@ -1,10 +1,9 @@
 class UserReviewsController < ApplicationController
   def create
     @shop = Shop.find(params[:shop_id])
-    @user_review = @shop.user_reviews.new(user_review_params)
-    format_images! @user_review
-    if @user_review.save
-      @user_review.create_about_games(params[:games])
+    @user_review_form = UserReviewForm.new(user_review_form_params)
+    @user_review_form.games = params[:games]
+    if @user_review_form.save
       redirect_to shop_path(params[:shop_id]), success: t('.success')
     else
       render 'shops/show'
@@ -20,12 +19,7 @@ class UserReviewsController < ApplicationController
 
   private
 
-  def user_review_params
-    params.require(:user_review).permit(:body, :user_id, { images: [] })
-  end
-
-  def format_images!(user_review)
-    # 5枚以上写真が投稿された際は切り捨てる
-    user_review.images.slice!(4..-1)
+  def user_review_form_params
+    params.require(:user_review_form).permit(:body, :user_id, :shop_id, { images: [] })
   end
 end

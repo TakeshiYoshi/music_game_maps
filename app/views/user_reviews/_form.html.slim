@@ -1,8 +1,9 @@
 .user-review-form-container.my-4.px-md-4.py-md-4.glass.glass-round
   #user_review_form_adjust_position
-  = form_with model: user_review, url: shop_user_reviews_path(shop.id), method: :post, id: 'userReviewForm', local: true do |f|
-    = render 'shared/error_messages', object: user_review
+  = form_with model: user_review_form, url: shop_user_reviews_path(shop.id), method: :post, id: 'userReviewForm', local: true do |f|
+    = render 'shared/error_messages', object: user_review_form
     = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :shop_id, value: shop.id
     = f.text_area :body, id: 'userReviewBody', rows: 5, class: 'glass-text-area', 'v-model': "bodyField", '@input': 'bodyValid()', ':class': "bodyError ? 'error-field' : ''", placeholder: "#{UserReview.human_attribute_name(:body)}#{t('defaults.user_review_body_valid')}"
     p.error-text v-text='bodyError'
     label.btn.btn-glass.btn-label-size.rounded-pill for="userReviewImages"

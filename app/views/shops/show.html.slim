@@ -12,7 +12,7 @@
             = t 'shops.show.user_review_btn'
         - else
           = render Shared::PrimaryButtonComponent.new(text: t('shops.show.user_review_btn_signup'), href: signup_path, class: 'user-review-form-button')
-    = render 'user_reviews/form', user_review: @user_review, shop: @shop if logged_in?
+    = render 'user_reviews/form', user_review_form: @user_review_form, shop: @shop if logged_in?
     - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
       #userReviews
         .user-review-content.user-reviews
