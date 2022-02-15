@@ -8,11 +8,5 @@ class UserReview < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 1000 }
 
-  def create_about_games(games_params)
-    games_params&.each do |game_id, _value|
-      game = Game.find(game_id)
-      about_game = about_games.build(game:)
-      about_game.save!
-    end
-  end
+  MAX_IMAGE_COUNT = 4
 end

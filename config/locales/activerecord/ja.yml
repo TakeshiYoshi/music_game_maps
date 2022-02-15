@@ -44,8 +44,14 @@ ja:
         name: '店舗名'
         twitter_id: 'Twitter ID'
         phone_number: '電話番号'
-        website: 'URL' 
+        website: 'URL'
       user_review:
         body: '本文'
       game_machine:
         count: '設置台数'
+  activemodel:
+    models:
+      user_review_form: 'ユーザー投稿'
+    attributes:
+      user_review_form:
+        body: '本文'

@@ -9,7 +9,7 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @user_review = UserReview.new(shop_id: @shop.id) # テストが上手く動作しないため左記のような記述にしています
+    @user_review_form = UserReviewForm.new
   end
 
   def edit; end
