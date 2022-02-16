@@ -3,4 +3,4 @@
   h1.page-title-text.glass-text
       = t '.title'
   .d-flex.justify-content-center
-    = render 'form', user: @user, provider: :twitter, nickname: params[:nickname]
+    = render 'form', user_form: @user_form, provider: :twitter, nickname: params[:nickname]

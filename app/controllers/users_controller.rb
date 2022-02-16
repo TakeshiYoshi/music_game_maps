@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include CryptableUid
+
   before_action :set_user, only: %i[show edit update edit_profile update_profile destroy]
   before_action :require_params, only: %i[new_with_twitter]
 
@@ -17,15 +19,14 @@ class UsersController < ApplicationController
   end
 
   def new_with_twitter
-    @user = User.new
+    @user_form = UserForm.new
   end
 
   def create_with_twitter
-    @user = User.new(user_params)
-    @user.build_authentication(provider: params[:provider], uid: decrypt_uid(params[:uid]))
-    if @user.save
-      @user.create_playing_games(params[:games])
-      @user.activate!
+    @user_form = UserForm.new(user_form_params)
+    @user_form.games = params[:games]
+    @user_form.build_authentication(provider: params[:provider], uid: decrypt_uid(params[:uid]))
+    if @user_form.save
       redirect_to login_url, success: t('.success')
     else
       render :new_with_twitter
@@ -96,13 +97,5 @@ class UsersController < ApplicationController
 
   def require_params
     redirect_to root_path unless params[:provider] && params[:uid]
-  end
-
-  def decrypt_uid(encrypted)
-    len = ActiveSupport::MessageEncryptor.key_len
-    salt = Rails.application.credentials[:twitter][:uid_salt]
-    secret = Rails.application.key_generator.generate_key(salt, len)
-    crypt = ActiveSupport::MessageEncryptor.new(secret)
-    crypt.decrypt_and_verify(encrypted)
   end
 end
