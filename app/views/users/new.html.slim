@@ -6,4 +6,4 @@
     ins
       = link_to t('.signup_with_twitter'), auth_at_provider_path(provider: :twitter), class: 'glass-link'
   .d-flex.justify-content-center
-    = render 'form', user: @user, provider: nil
+    = render 'form', user_form: @user_form, provider: nil

@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   before_action :require_params, only: %i[new_with_twitter]
 
   def new
-    @user = User.new
+    @user_form = UserForm.new
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      @user.create_playing_games(params[:games])
+    @user_form = UserForm.new(user_form_params)
+    @user_form.games = params[:games]
+    if @user_form.save
       redirect_to login_url, success: t('.success')
     else
       render :new
@@ -88,6 +88,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar, :anonymous).to_h
+  end
+
+  def user_form_params
+    params.require(:user_form).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar, :anonymous)
   end
 
   def require_params
