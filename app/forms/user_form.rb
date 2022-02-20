@@ -26,7 +26,7 @@ class UserForm
   def save
     @user = User.new(email: email&.downcase, password:, password_confirmation:, nickname:)
     @user.build_authentication(provider: @provider, uid: @uid) if oauth_sigup?
-    games&.each_key { |game_id| @user.playing_games.build(game_id:) } if games.present?
+    build_playing_games(games:)
 
     return false if invalid?
 
@@ -50,5 +50,11 @@ class UserForm
 
   def oauth_sigup?
     @provider && @uid
+  end
+
+  def build_playing_games(games:)
+    return if games.present?
+
+    games&.each_key { |game_id| @user.playing_games.build(game_id:) }
   end
 end
