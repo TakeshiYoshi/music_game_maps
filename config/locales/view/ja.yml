@@ -83,6 +83,11 @@ ja:
       success: 'プロフィールを編集しました。'
     destroy:
       success: '今までご利用頂きましてありがとうございました。'
+    profiles:
+      edit:
+        title: 'プロフィール編集'
+      update:
+        success: 'プロフィールを編集しました。'
   user_sessions:
     new:
       title: 'ログイン'
