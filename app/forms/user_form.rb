@@ -53,7 +53,7 @@ class UserForm
   end
 
   def build_playing_games(games:)
-    return unless games.present?
+    return if games.blank?
 
     games&.each_key { |game_id| @user.playing_games.build(game_id:) }
   end
