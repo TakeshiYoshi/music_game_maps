@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include CryptableUid
 
-  before_action :set_user, only: %i[show edit update edit_profile update_profile destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :require_params, only: %i[new_with_twitter]
 
   def new
@@ -50,21 +50,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit_profile
-    authorize @user
-  end
-
-  def update_profile
-    authorize @user
-    if @user.update(user_params)
-      @user.games.destroy_all
-      @user.create_playing_games(params[:games])
-      redirect_to @user, success: t('.success')
-    else
-      render :edit_profile
-    end
-  end
-
   def activate
     @user = User.load_from_activation_token(params[:id])
     if @user
@@ -88,7 +73,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar, :anonymous).to_h
+    params.require(:user).permit(:email, :password, :password_confirmation, :anonymous).to_h
   end
 
   def user_form_params

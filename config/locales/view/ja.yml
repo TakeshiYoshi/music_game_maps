@@ -77,10 +77,6 @@ ja:
       success: 'ユーザー設定の変更が完了しました。'
     activate:
       success: 'アカウントが有効化されました。'
-    edit_profile:
-      title: 'プロフィール編集'
-    update_profile:
-      success: 'プロフィールを編集しました。'
     destroy:
       success: '今までご利用頂きましてありがとうございました。'
     profiles:

@@ -16,7 +16,7 @@
             label.glass-game-label.rounded-pill
               = game.title
     - if @user == current_user
-      = link_to t('.edit_profile'), edit_profile_user_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
+      = link_to t('.edit_profile'), edit_user_profile_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
 - if current_user == @user || ( !@user.anonymous? && @user_reviews.present? )
   .col-12.glass.glass-round
     = render Shared::LabelComponent.new(name: t('.user_reviews_label'), class: 'mb-2')
