@@ -9,8 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user_form = UserForm.new(user_form_params)
-    @user_form.games = params[:games]
+    @user_form = UserForm.new(user_form_params, games: params[:games])
     if @user_form.save
       redirect_to login_url, success: t('.success')
     else
@@ -23,9 +22,7 @@ class UsersController < ApplicationController
   end
 
   def create_with_twitter
-    @user_form = UserForm.new(user_form_params)
-    @user_form.games = params[:games]
-    @user_form.build_authentication(provider: params[:provider], uid: decrypt_uid(params[:uid]))
+    @user_form = UserForm.new(user_form_params, games: params[:games], provider: params[:provider], uid: decrypt_uid(params[:uid]))
     if @user_form.save
       redirect_to login_url, success: t('.success')
     else

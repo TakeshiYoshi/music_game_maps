@@ -45,6 +45,18 @@ RSpec.describe 'Users', type: :system do
       end
     end
 
+    context '既に登録されているemailを入力' do
+      it 'ユーザーの新規作成がされないこと' do
+        visit signup_path
+        expect {
+          fill_in 'userEmail', with: user.email
+          page.first('label.glass-game-label').click
+          click_button '登録する'
+        }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
+        expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
+      end
+    end
+
     context '新規作成したユーザーの有効化ページへアクセス' do
       it 'ユーザーの有効化が完了すること' do
         visit signup_path
