@@ -51,7 +51,18 @@ ja:
         count: '設置台数'
   activemodel:
     models:
+      user_form: 'ユーザー'
       user_review_form: 'ユーザー投稿'
     attributes:
       user_review_form:
         body: '本文'
+      user_form:
+        id: 'ID'
+        avatar: 'アバター'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード再入力'
+        nickname: 'ニックネーム'
+        description: '自己紹介'
+        anonymous: '匿名設定'
+        created_at: '登録日'
