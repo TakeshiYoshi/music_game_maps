@@ -1,4 +1,4 @@
-= form_with model: user, url: update_profile_user_path, method: :post, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center' do |f| 
+= form_with model: profile_form, url: user_profile_path(user), scope: :profile_form, method: :patch, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center' do |f| 
   .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
     label.avatar-container.mb-4 for="avatar"
       .profile-icon-container
@@ -7,7 +7,7 @@
         = fa_icon 'file-upload'
     = f.file_field :avatar, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'avatar', class: 'd-none', '@change': 'imagePreview'
   .col-md-10.col-sm-12
-    = render 'shared/error_messages', object: user
+    = render 'shared/error_messages', object: profile_form
     = f.text_field :nickname, id: 'userNickname', class: 'glass-text-field', 'v-model': "nicknameField", '@input': 'nicknameValid()', ':class': "nicknameError ? 'error-field' : ''", placeholder: User.human_attribute_name(:nickname)
     p.error-text v-text='nicknameError'
     = f.text_area :description, id: 'userDescription', rows: 5, class: 'glass-text-area', 'v-model': "descriptionField", '@input': 'descriptionValid()', ':class': "descriptionError ? 'error-field' : ''", placeholder: User.human_attribute_name(:description)

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include CryptableUid
 
-  before_action :set_user, only: %i[show edit update edit_profile update_profile destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :require_params, only: %i[new_with_twitter]
 
   def new
@@ -9,8 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user_form = UserForm.new(user_form_params)
-    @user_form.games = params[:games]
+    @user_form = UserForm.new(user_form_params, games: params[:games])
     if @user_form.save
       redirect_to login_url, success: t('.success')
     else
@@ -23,9 +22,7 @@ class UsersController < ApplicationController
   end
 
   def create_with_twitter
-    @user_form = UserForm.new(user_form_params)
-    @user_form.games = params[:games]
-    @user_form.build_authentication(provider: params[:provider], uid: decrypt_uid(params[:uid]))
+    @user_form = UserForm.new(user_form_params, games: params[:games], provider: params[:provider], uid: decrypt_uid(params[:uid]))
     if @user_form.save
       redirect_to login_url, success: t('.success')
     else
@@ -47,21 +44,6 @@ class UsersController < ApplicationController
       redirect_to edit_user_url(@user), success: t('.success')
     else
       render :edit
-    end
-  end
-
-  def edit_profile
-    authorize @user
-  end
-
-  def update_profile
-    authorize @user
-    if @user.update(user_params)
-      @user.games.destroy_all
-      @user.create_playing_games(params[:games])
-      redirect_to @user, success: t('.success')
-    else
-      render :edit_profile
     end
   end
 
@@ -88,7 +70,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :nickname, :description, :avatar, :anonymous).to_h
+    params.require(:user).permit(:email, :password, :password_confirmation, :anonymous).to_h
   end
 
   def user_form_params

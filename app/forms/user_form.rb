@@ -1,13 +1,7 @@
 class UserForm
   include ActiveModel::Model
-  include ActiveModel::Attributes
 
-  attribute :email
-  attribute :password
-  attribute :password_confirmation
-  attribute :nickname
-  attribute :provider
-  attribute :uid
+  attr_accessor :games, :email, :password, :password_confirmation, :nickname, :provider, :uid, :anonymous
 
   VALID_PASSWORD_REGEX = /(?=.*?[a-z])(?=.*?[A-Z])[a-zA-Z\d!?_.$&%\-]{8,30}/
   validates :password, length: { in: 8..30 }, format: { with: VALID_PASSWORD_REGEX }
@@ -19,33 +13,44 @@ class UserForm
     validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
     validate :validate_email_on_duplication
   end
-  validates :nickname, presence: true, length: { maximum: 30 }
 
-  attr_accessor :games
+  delegate :persisted?, to: :user
+
+  def initialize(attributes = nil, user: User.new, games: nil, provider: nil, uid: nil)
+    @user = user
+    @games = games
+    @provider = provider
+    @uid = uid
+    attributes ||= default_attributes
+    super(attributes)
+  end
 
   def save
-    @user = User.new(email: email&.downcase, password:, password_confirmation:, nickname:)
-    @user.build_authentication(provider: @provider, uid: @uid) if oauth_sigup?
+    user.build_authentication(provider:, uid:) if oauth_sigup?
     build_playing_games(games:)
 
     return false if invalid?
 
-    @user.save!
+    user.update!(email: email&.downcase, password:, password_confirmation:, nickname:)
 
-    @user.activate! if oauth_sigup?
+    user.activate! if oauth_sigup?
 
     true
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
-  def build_authentication(provider:, uid:)
-    @provider = provider
-    @uid = uid
+  def to_model
+    user
   end
 
   private
 
+  attr_reader :user
+
   def validate_email_on_duplication
     errors.add(:email, :taken, value: email) if User.exists?(email: email&.downcase)
+    false
   end
 
   def oauth_sigup?
@@ -55,6 +60,13 @@ class UserForm
   def build_playing_games(games:)
     return if games.blank?
 
-    games&.each_key { |game_id| @user.playing_games.build(game_id:) }
+    games&.each_key { |game_id| user.playing_games.build(game_id:) }
+  end
+
+  def default_attributes
+    {
+      email: user.email,
+      anonymous: user.anonymous
+    }
   end
 end

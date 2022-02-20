@@ -66,3 +66,7 @@ ja:
         description: '自己紹介'
         anonymous: '匿名設定'
         created_at: '登録日'
+      user/profile_form:
+        nickname: 'ニックネーム'
+        description: '自己紹介'
+        avatar: 'アバター'

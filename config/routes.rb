@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update destroy] do
+    scope module: :users do
+      resource :profile, only: %i[edit update]
+    end
+
     member do
       get :activate
-      get :edit_profile
-      post :update_profile
     end
   end
   resources :password_resets, only: %i[new create update edit]
