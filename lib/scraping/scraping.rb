@@ -56,6 +56,7 @@ def register_shop_data(shops)
       db_shop.update(sega_name: shop[:sega_name]) if shop[:sega_name]
       db_shop.update(andamiro_name: shop[:andamiro_name]) if shop[:andamiro_name]
       db_shop.update(tetote_name: shop[:tetote_name]) if shop[:tetote_name]
+      db_shop.update(takara_name: shop[:takara_name]) if shop[:takara_name]
       # 履歴データ作成
       shop[:count] ||= 99 # nilの場合は99(台数不明)を追加
       games_hash =  db_shop.game_machines_to_hash
@@ -221,6 +222,7 @@ def get_places_data(shop)
   # PlaceDetailsを利用して店舗の詳細情報を入手する
   puts '店舗情報を取得します'
   place_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
+  puts place_detail_url
   page = URI.parse(place_detail_url).open.read
   data = JSON.parse(page)
 
@@ -248,6 +250,7 @@ def get_places_data(shop)
   shop[:photo_reference] = data['result']['photos'][0]['photo_reference'] if data['result']['photos'].present?
 
   # 例外処理
+  shop[:address] = '東京都武蔵野市吉祥寺本町1-11-5' if data['result']['formatted_address'] == '日本、〒180-0004 Tokyo, Musashino, Kichijoji Honcho, 1 Chome−11, 6Fコピス吉祥寺 1 Chome-1-11-5 吉祥寺本町 Musashino-shi Tōkyō-to 180-0004'
   shop[:address] = '愛知県岡崎市戸崎町大道西-20' if data['result']['formatted_address'] == 'Daidonishi-２０ Tosakicho, Okazaki, Aichi 444-0840 日本'
   shop[:address] = '北海道岩見沢市大和4条8-1' if data['result']['formatted_address'] == '8 Chome-１ Yamato 4 Jo, Iwamizawa, Hokkaido 063-0854 日本'
   shop[:address] = '宮城県登米市南方町新島前-46' if data['result']['formatted_address'] == 'Shinshimamae-４６ Minamikatamachi, Tome, Miyagi 987-0404 日本'

@@ -20,11 +20,11 @@ class ShopsController < ApplicationController
     @shops_filter = @shops
     @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
     @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
-    session[:games]&.each do |game_id, should_filter|
-      if should_filter
-        game = Game.find(game_id)
-        @shops_filter = Shop.where(id: @shops_filter.includes(:games).map { |s| s.id if s.games.include?(game) }.compact)
-      end
+    if session[:games]
+      select_games = session[:games].select do |game_id, should_filter|
+        should_filter
+      end.keys.map { |id| id.to_i }
+      @shops_filter = @shops_filter.joins(:games).merge(Game.where(id: select_games))
     end
     @shops_filter = sort_shops(@shops_filter)
   end

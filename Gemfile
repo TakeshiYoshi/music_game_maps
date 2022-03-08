@@ -28,7 +28,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave'
 gem 'meta-tags'
-gem "view_component", require: "view_component/engine"
+gem "view_component"
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
