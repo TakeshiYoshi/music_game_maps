@@ -4,6 +4,7 @@ require './lib/scraping/scraping_namco'
 require './lib/scraping/scraping_taito'
 require './lib/scraping/scraping_andamiro'
 require './lib/scraping/scraping_tetote'
+require './lib/scraping/scraping_takara'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -49,6 +50,10 @@ namespace :scraping do
     scraping_tetote 'テトテコネクト'
   end
 
+  task takara: :environment do
+    scraping_takara 'ワッチャプリマジ！'
+  end
+
   task all: :environment do
     scraping_konami 'SDVX_VM'
     scraping_konami 'SDVX'
@@ -73,5 +78,6 @@ namespace :scraping do
     scraping_taito 'GROOVE COASTER'
     scraping_andamiro 'CHRONO CIRCLE'
     scraping_tetote 'テトテコネクト'
+    scraping_takara 'ワッチャプリマジ！'
   end
 end
