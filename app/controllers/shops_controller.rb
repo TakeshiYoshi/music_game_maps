@@ -16,14 +16,14 @@ class ShopsController < ApplicationController
 
   private
 
-  def set_filter # rubocop:disable Metrics/CyclomaticComplexity
+  def set_filter
     @shops_filter = @shops
     @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
     @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
     if session[:games]
-      select_games = session[:games].select do |game_id, should_filter|
+      select_games = session[:games].select do |_game_id, should_filter|
         should_filter
-      end.keys.map { |id| id.to_i }
+      end.keys.map(&:to_i)
       @shops_filter = @shops_filter.joins(:games).merge(Game.where(id: select_games))
     end
     @shops_filter = sort_shops(@shops_filter)
