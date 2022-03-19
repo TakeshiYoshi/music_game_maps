@@ -1,5 +1,3 @@
-.map-flash-message 
-  input.d-none#dialog-check type="checkbox"
-  .map-message-dialog.blur
-    p#map-flash-message
-      = flash[:map] if flash[:map]
+.map-flash-message
+  .map-message-dialog.blur data-controller="flash-message"
+    = flash[:map] if flash[:map]

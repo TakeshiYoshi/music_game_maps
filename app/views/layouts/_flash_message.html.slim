@@ -1,0 +1,5 @@
+.flash-message
+  .message-dialog.blur data-controller="flash-message"
+    - flash.each do |key, value|
+      - if key != 'map'
+        = value
