@@ -5,6 +5,7 @@ require './lib/scraping/scraping_taito'
 require './lib/scraping/scraping_andamiro'
 require './lib/scraping/scraping_tetote'
 require './lib/scraping/scraping_takara'
+require './lib/scraping/scraping_bandai'
 
 namespace :scraping do
   desc "スクレイピング処理"
@@ -52,6 +53,10 @@ namespace :scraping do
 
   task takara: :environment do
     scraping_takara 'ワッチャプリマジ！'
+  end
+
+  task bandai: :environment do
+    scraping_bandai 'アイカツプラネット！'
   end
 
   task all: :environment do
