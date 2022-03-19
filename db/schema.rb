@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_19_141507) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_19_142523) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_19_141507) do
     t.bigint "station_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "distance"
     t.index ["shop_id", "station_id"], name: "index_shop_stations_on_shop_id_and_station_id", unique: true
     t.index ["shop_id"], name: "index_shop_stations_on_shop_id"
     t.index ["station_id"], name: "index_shop_stations_on_station_id"
