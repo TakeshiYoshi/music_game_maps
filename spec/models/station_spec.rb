@@ -6,11 +6,4 @@ RSpec.describe Station, type: :model do
     station.valid?
     expect(station.errors[:name]).to include('を入力してください')
   end
-
-  it '駅名は一意であること' do
-    station = create(:station)
-    another_station = build(:station, name: station.name)
-    another_station.valid?
-    expect(another_station.errors[:name]).to include('はすでに存在します')
-  end
 end

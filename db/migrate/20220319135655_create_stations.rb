@@ -8,7 +8,5 @@ class CreateStations < ActiveRecord::Migration[7.0]
       t.references :line, null: false, foren_key: true
       t.timestamps
     end
-
-    add_index :stations, :name, unique: true
   end
 end
