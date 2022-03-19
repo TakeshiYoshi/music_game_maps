@@ -63,7 +63,7 @@ RSpec.describe "UserReviews", type: :system do
           click_button '投稿する'
         end
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
         within('#userReviews') do
           expect(page).to have_content(user.nickname), 'ユーザー投稿された内容が表示されていません(ユーザー名)'
           expect(page).to have_content('本文本文本文'), 'ユーザー投稿された内容が表示されていません(本文)'
@@ -114,7 +114,7 @@ RSpec.describe "UserReviews", type: :system do
           click_button '投稿する'
         end
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
         within('#userReviews') do
           expect(page.all('.user-review-image').length).to eq(1), 'ユーザー投稿に画像が添付されていません'
         end
@@ -133,7 +133,7 @@ RSpec.describe "UserReviews", type: :system do
           click_button '投稿する'
         end
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
         within('#userReviews') do
           expect(page.all('.user-review-image').length).to eq(4), 'ユーザー投稿に正しい枚数の画像が添付されていません'
         end

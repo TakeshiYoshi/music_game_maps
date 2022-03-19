@@ -17,7 +17,7 @@ RSpec.describe 'Users', type: :system do
           click_button '登録する'
         }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
         expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
       end
 
       it 'PlayingGameモデルが作成されること' do
@@ -70,7 +70,7 @@ RSpec.describe 'Users', type: :system do
         user = User.last
         visit activate_user_path(user.activation_token)
         expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
         expect(user.reload.activation_state).to eq('active'), 'ユーザーの有効化が完了していません'
       end
     end
@@ -98,7 +98,7 @@ RSpec.describe 'Users', type: :system do
         check 'user_anonymous'
         click_button '更新する'
         expect(current_path).to eq(edit_user_path(user)), 'ユーザー編集ページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ユーザー設定の変更が完了しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ユーザー設定の変更が完了しました。'), 'フラッシュメッセージが表示されてません'
         user.reload
         expect(user.email).to eq('hogefuga@fuga.com'), 'メールの編集が適応されていません。'
         expect(user.anonymous).to eq(true), '匿名設定の編集が適応されていません'
@@ -111,7 +111,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'password', with: 'Password1234'
         click_button 'ログイン'
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe 'Users', type: :system do
             click_on 'アカウントを削除する'
           end
           expect(current_path).to eq(root_path), 'トップページへリダイレクトされていません'
-          expect(page.find('#flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
+          expect(page.find('.flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
         }.to change { User.count }.by(-1), 'アカウントが削除されていません'
       end
     end

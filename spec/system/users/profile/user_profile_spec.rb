@@ -24,7 +24,7 @@ RSpec.describe 'Users::Profile', type: :system do
         fill_in 'userDescription', with: 'おはよう！こんにちは！こんばんは！'
         click_button '更新する'
         expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
         expect(page).to have_content('hogefuga'), 'ニックネームの編集が適応されていません。'
         expect(page).to have_content('おはよう！こんにちは！こんばんは！'), '自己紹介の編集が適応されていません'
       end
@@ -36,7 +36,7 @@ RSpec.describe 'Users::Profile', type: :system do
           click_button '更新する'
         }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
         expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
         expect(page.all('label.glass-game-label').length).to eq(1), 'プレー機種の編集が適応されていません'
       end
 
@@ -45,7 +45,7 @@ RSpec.describe 'Users::Profile', type: :system do
         attach_file 'avatar', 'spec/images/icon.png', make_visible: true
         click_button '更新する'
         expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
       end
     end
 
