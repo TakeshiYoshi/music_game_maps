@@ -3,7 +3,6 @@ require './lib/scraping/scraping'
 def scraping_takara(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    next if prefecture.id < 39
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -30,7 +29,7 @@ def scraping_takara(game_title)
       name = shop["Name"]
       address = "#{prefecture.name}#{shop["Address"]}"
 
-      place_id = Shop.find_by(namco_name: name).place_id if Shop.find_by(namco_name: name) && Shop.find_by(namco_name: name).prefecture == Prefecture.find(prefecture.id)
+      place_id = Shop.find_by(takara_name: name).place_id if Shop.find_by(takara_name: name) && Shop.find_by(takara_name: name).prefecture == Prefecture.find(prefecture.id)
 
       next if name == "namcoアルプラザ鹿島店"
       next if name == "アミパラ加古川"
@@ -39,7 +38,7 @@ def scraping_takara(game_title)
       next if name == "アミュージアム高松"
 
       shop = { name: name,
-               namco_name: name,
+               takara_name: name,
                address: address,
                prefecture: prefecture.name,
                lat: nil,
@@ -47,7 +46,7 @@ def scraping_takara(game_title)
                game: game_title,
                place_id: place_id }
       # 緯度経度情報を取得
-      if db_shop = Shop.find_by(namco_name: name)
+      if db_shop = Shop.find_by(takara_name: name)
         shop[:lat] = db_shop.lat.to_f
         shop[:lng] = db_shop.lng.to_f
       end

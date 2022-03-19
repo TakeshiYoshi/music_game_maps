@@ -57,6 +57,7 @@ def register_shop_data(shops)
       db_shop.update(andamiro_name: shop[:andamiro_name]) if shop[:andamiro_name]
       db_shop.update(tetote_name: shop[:tetote_name]) if shop[:tetote_name]
       db_shop.update(takara_name: shop[:takara_name]) if shop[:takara_name]
+      db_shop.update(bandai_name: shop[:bandai_name]) if shop[:bandai_name]
       # 履歴データ作成
       shop[:count] ||= 99 # nilの場合は99(台数不明)を追加
       games_hash =  db_shop.game_machines_to_hash
