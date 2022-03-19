@@ -11,7 +11,7 @@ html
     = render 'layouts/analytics' if Rails.env.production?
   body
     .container-xl.px-0.footer-fixed
-      = render 'layouts/flash_message'
+      = render ::Layouts::FlashMessageComponent.new(flash:)
       = render 'layouts/header'
       = yield
       = render 'layouts/footer'
