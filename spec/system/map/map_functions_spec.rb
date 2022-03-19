@@ -66,14 +66,14 @@ RSpec.describe 'マップ内機能', type: :system do
     it '検索後、「マップで表示している周囲の店舗を検索しました」とメッセージが表示される' do
       visit root_path
       click_button 'search-near_shops_button'
-      expect(page.find('#map-flash-message')).to have_content('マップで表示している周囲の店舗を検索しました'), 'フラッシュメッセージが表示されてません'
+      expect(page.find('.map-flash-message')).to have_content('マップで表示している周囲の店舗を検索しました'), 'フラッシュメッセージが表示されてません'
     end
 
     it '検索クリア後、「周辺検索設定をクリアにしました」とメッセージが表示される' do
       visit root_path
       click_button 'search-near_shops_button'
       click_link 'clear-location-session'
-      expect(page.find('#map-flash-message')).to have_content('周辺検索設定をクリアにしました'), 'フラッシュメッセージが表示されてません'
+      expect(page.find('.map-flash-message')).to have_content('周辺検索設定をクリアにしました'), 'フラッシュメッセージが表示されてません'
     end
   end
 
@@ -83,7 +83,7 @@ RSpec.describe 'マップ内機能', type: :system do
     it '「位置情報の利用が許可されていません」と表示される' do
       visit root_path
       click_button 'update-geo-button'
-      expect(page.find('#map-flash-message')).to have_content('位置情報の利用が許可されていません'), 'フラッシュメッセージが表示されてません'
+      expect(page.find('.map-flash-message')).to have_content('位置情報の利用が許可されていません'), 'フラッシュメッセージが表示されてません'
     end
   end
 end

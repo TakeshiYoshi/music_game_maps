@@ -9,7 +9,7 @@ RSpec.describe "UserSessions", type: :system do
       it '正常にログインが完了する' do
         login user
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -20,7 +20,7 @@ RSpec.describe "UserSessions", type: :system do
         fill_in 'password', with: 'wrong'
         click_button 'ログイン'
         expect(current_path).to eq(user_sessions_path), '別のページへリダイレクトされています'
-        expect(page.find('#flash-message')).to have_content('ログインに失敗しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに失敗しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -31,7 +31,7 @@ RSpec.describe "UserSessions", type: :system do
         sleep 1
         click_on 'ログアウト'
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
       end
     end
 

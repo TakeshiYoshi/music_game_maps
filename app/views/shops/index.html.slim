@@ -2,7 +2,7 @@
 .col-12.map-container.d-flex.align-items-center.justify-content-center
   #map
   #geolocation_button
-  = render 'map_flash_message'
+  = render ::Layouts::MapFlashMessageComponent.new(flash:)
   = render 'near_shops_search_form'
   = render 'clear_location_session_button'
 = render ShopComponent.with_collection(@shops_filter)
@@ -19,6 +19,5 @@ link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3
 link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css"
 = javascript_pack_tag 'map'
 = javascript_pack_tag 'geolocation'
-= javascript_pack_tag 'map_flash_message'
 = javascript_pack_tag 'scroll_top'
 = javascript_pack_tag 'tutorial'

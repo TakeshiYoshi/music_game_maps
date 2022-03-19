@@ -674,13 +674,16 @@ footer {
   opacity: 0;
   transform: translate(-50%, 0%);
   transition: all 0.3s;
-  p {
-    font-size: 1rem;
-    color: $gray-600;
-    padding: 0;
-    margin: 0;
-    white-space: nowrap;
-  }
+  font-size: 1rem;
+  color: $gray-600;
+  white-space: nowrap;
+}
+
+.map-message-dialog.display {
+  top: 10px;
+  padding: 10px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
 }
 
 .own-icon {
@@ -688,13 +691,6 @@ footer {
   border-radius: 15px;
   border: solid 4px white;
   box-shadow: 0 0 10px 0 rgba(black, 0.5);
-}
-
-#dialog-check:checked ~ .map-message-dialog {
-  top: 10px;
-  padding: 10px 15px;
-  transform: translate(-50%, 0%);
-  opacity: 1;
 }
 
 // フォーム
@@ -751,16 +747,12 @@ footer {
   transform: translate(-50%, 0%);
   transition: all 0.3s;
   z-index: 100;
-  p {
-    font-size: 1rem;
-    color: $gray-600;
-    padding: 0;
-    margin: 0;
-    white-space: nowrap;
-  }
+  font-size: 1rem;
+  color: $gray-600;
+  white-space: nowrap;
 }
 
-#flash-check:checked ~ .message-dialog {
+.message-dialog.display {
   top: 10px;
   padding: 10px 15px;
   transform: translate(-50%, 0%);
