@@ -18,3 +18,6 @@ application.register("scroll-top", ScrollTopController)
 
 import EditThemeController from "./edit_theme_controller.js"
 application.register("edit-theme", EditThemeController)
+
+import EditProfileFormController from "./edit_profile_form_controller.js"
+application.register("edit-profile-form", EditProfileFormController)

@@ -1,5 +1,5 @@
 .form-container.text-center
-  = form_with url: user_sessions_path, method: :post, class: 'login-form', local: true do |f|
+  = form_with url: user_sessions_path, method: :post, class: 'login-form', local: true, data: { turbo: false } do |f|
     .form-group-login
       = f.text_field :email, class: 'glass-text-field', placeholder: User.human_attribute_name(:email)
     .form-group-login

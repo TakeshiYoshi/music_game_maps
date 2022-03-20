@@ -327,3 +327,4 @@ ja:
         title: '店舗履歴一覧'
         confirm: '承認する'
         disconfirm: '承認しない'
+        no_data: '未承認の店舗履歴がありません'

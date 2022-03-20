@@ -43,6 +43,7 @@ RSpec.describe "Admin::ShopHistories", type: :system do
     it '承認された店舗履歴のstatusがpublishedになること' do
       visit admin_shop_histories_path
       click_on '承認する'
+      has_css?('p', text: '未承認の店舗履歴がありません')
       shop_history.reload
       expect(shop_history.status).to eq('published'), '承認された店舗履歴のstatusがpublishedになっていません'
     end
@@ -50,12 +51,14 @@ RSpec.describe "Admin::ShopHistories", type: :system do
     it '承認された店舗履歴が一覧画面に表示されないこと' do
       visit admin_shop_histories_path
       click_on '承認する'
+      has_css?('p', text: '未承認の店舗履歴がありません')
       expect(page.all('.main-card').length).to be_zero, '承認された店舗履歴が一覧画面に表示されています'
     end
 
     it '承認された店舗履歴の内容がShopモデルに反映されること' do
       visit admin_shop_histories_path
       click_on '承認する'
+      has_css?('p', text: '未承認の店舗履歴がありません')
       shop.reload
       expect(shop.website).to eq('http://hoge.com'), '承認された店舗履歴の内容がShopモデルに反映されていません'
     end
@@ -66,6 +69,7 @@ RSpec.describe "Admin::ShopHistories", type: :system do
       expect {
         visit admin_shop_histories_path
         click_on '承認しない'
+        has_css?('p', text: '未承認の店舗履歴がありません')
       }.to change { ShopHistory.count }.by(-1), '未承認の店舗履歴が削除されていません'
     end
   end

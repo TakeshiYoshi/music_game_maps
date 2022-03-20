@@ -1,6 +1,6 @@
 .form-container.text-center
   = render 'shared/error_messages', object: user
-  = form_with model: user, id: 'signup_form', class: 'signup-form', local: true do |f|
+  = form_with model: user, id: 'signup_form', class: 'signup-form', local: true, data: { turbo: false } do |f|
     - unless user.authentication
       .form-group-signup
         = f.text_field :email, id: 'userEmail', class: 'glass-text-field', 'v-model': "emailField", '@input': 'emailValid()', ':class': "emailError ? 'error-field' : ''", placeholder: User.human_attribute_name(:email)

@@ -5,4 +5,4 @@
   .d-flex.justify-content-center
     = render 'edit_form', user: @user
   .mt-4.mb-2
-    = link_to 'アカウントを削除する', user_path(@user), class: 'btn btn-glass rounded-pill px-4', method: :delete, data: { confirm: t('.destroy_confirm') }
+    = link_to 'アカウントを削除する', user_path(@user), class: 'btn btn-glass rounded-pill px-4', method: :delete, data: { confirm: t('.destroy_confirm'), turbo: false }

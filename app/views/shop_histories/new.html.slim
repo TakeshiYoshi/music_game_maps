@@ -1,6 +1,6 @@
 .col-12.glass.glass-text.glass-round
   = render 'shared/error_messages', object: @shop_history
-  = form_with model: [:shop, @shop_history], id: 'edit_shop_form', class: 'row d-flex justify-content-center py-2', local: true do |f|
+  = form_with model: [:shop, @shop_history], id: 'edit_shop_form', class: 'row d-flex justify-content-center py-2', local: true, data: { turbo: false } do |f|
     .col-md-2.col-sm-12.d-flex.justify-content-center.mb-3
       label.image-content for="appearanceImage"
         = image_tag @shop_history.appearance_image.url, class: 'edit-shop-image', id: 'shopImg'

@@ -1,6 +1,6 @@
 .user-review-form-container.my-4.px-md-4.py-md-4.glass.glass-round
   #user_review_form_adjust_position
-  = form_with model: user_review_form, url: shop_user_reviews_path(shop.id), method: :post, id: 'userReviewForm', local: true do |f|
+  = form_with model: user_review_form, url: shop_user_reviews_path(shop.id), method: :post, id: 'userReviewForm', local: true, data: { turbo: false } do |f|
     = render 'shared/error_messages', object: user_review_form
     = f.hidden_field :user_id, value: current_user.id
     = f.hidden_field :shop_id, value: shop.id

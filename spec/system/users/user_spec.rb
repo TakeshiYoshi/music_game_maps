@@ -106,6 +106,7 @@ RSpec.describe 'Users', type: :system do
         page.find('label[for=nav-menu-check]').click
         sleep 1
         click_on 'ログアウト'
+        expect(page.find('.flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
         visit login_path
         fill_in 'email', with: user.email
         fill_in 'password', with: 'Password1234'
@@ -138,6 +139,7 @@ RSpec.describe 'Users', type: :system do
           page.accept_confirm do
             click_on 'アカウントを削除する'
           end
+          has_css?('.flash-message', text: '今までご利用頂きましてありがとうございました。')
           expect(current_path).to eq(root_path), 'トップページへリダイレクトされていません'
           expect(page.find('.flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
         }.to change { User.count }.by(-1), 'アカウントが削除されていません'
