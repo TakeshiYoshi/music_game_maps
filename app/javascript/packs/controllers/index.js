@@ -9,3 +9,6 @@ application.register("flash-message", FlashMessageController)
 
 import MapUpdateController from "./map_update_controller.js"
 application.register("map-update", MapUpdateController)
+
+import GeolocationController from "./geolocation_controller.js"
+application.register("geolocation", GeolocationController)
