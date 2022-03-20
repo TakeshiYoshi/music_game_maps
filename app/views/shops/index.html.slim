@@ -9,10 +9,8 @@
   = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
 = turbo_frame_tag 'shops' do
   = render ShopComponent.with_collection(@shops_filter)
-  / .col-12.d-flex.align-items-center.justify-content-center
-    / = paginate @shops_filter
 
-#scrollTop
+= render ::Shared::ScrollTopComponent.new
 #tutorial
 
 script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"
@@ -21,5 +19,4 @@ script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"
 link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css"
 = javascript_pack_tag 'map'
-= javascript_pack_tag 'scroll_top'
 = javascript_pack_tag 'tutorial'
