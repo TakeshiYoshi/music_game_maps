@@ -23,7 +23,8 @@ class FiltersController < ApplicationController
     session.delete :lat
     session.delete :lng
     @shops = sort_shops(@shops).includes(:games).page(params[:page]).per(session[:number_of_searches])
-    @shops_json = @shops.to_json only: %i[lat lng]
+    set_filter
+    @shops_filter_json = @shops_filter.to_json only: %i[lat lng]
     flash.now[:map] = t('defaults.map_flash_message.clear_near_shops_search')
   end
 
@@ -38,7 +39,8 @@ class FiltersController < ApplicationController
     session.delete :prefecture_id
     session.delete :city_id
     @shops = sort_shops(@shops).includes(:games).page(params[:page]).per(session[:number_of_searches])
-    @shops_json = @shops.to_json only: %i[lat lng]
+    set_filter
+    @shops_filter_json = @shops_filter.to_json only: %i[lat lng]
     flash.now[:map] = t('defaults.map_flash_message.near_shops_search')
   end
 
@@ -48,6 +50,19 @@ class FiltersController < ApplicationController
   end
 
   private
+
+  def set_filter
+    @shops_filter = @shops
+    @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
+    @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
+    if session[:games]
+      select_games = session[:games].select do |_game_id, should_filter|
+        should_filter
+      end.keys.map(&:to_i)
+      @shops_filter = @shops_filter.joins(:games).merge(Game.where(id: select_games))
+    end
+    @shops_filter = sort_shops(@shops_filter)
+  end
 
   def sort_shops(shops)
     if session[:lat]
