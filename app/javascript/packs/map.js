@@ -35,9 +35,19 @@ map.on('move', function (e) {
 
 // マップピンの再生成
 const rePutMapIcons = (shopsJson) => {
+  resetShopsData();
   setShopsData(shopsJson);
   removeMarkers(mapIcons);
   putMapIcons(shopsJson);
+  focusMarkers(latAry, lngAry);
+}
+
+// マップピン全表示
+function focusMarkers(latAry, lngAry) {
+  let latCenter = calculateCenter(latAry);
+  let lngCenter = calculateCenter(lngAry);
+  let zoomLevel = calculateZoomLevel(latAry, lngAry);
+  map.setView([latCenter, lngCenter], zoomLevel);
 }
 
 // マップピンを生成
@@ -63,6 +73,12 @@ function removeMarkers(markers) {
   markers.map((marker) => {
     map.removeLayer(marker)
   })
+}
+
+// 緯度経度の配列を初期化
+function resetShopsData() {
+  latAry = [];
+  lngAry = [];
 }
 
 // 緯度経度の配列を作成
@@ -94,12 +110,8 @@ let focusAllMarker = (location) => {
   let lngAryLocal = lngAry;
   latAryLocal.push(location[0]);
   lngAryLocal.push(location[1]);
-  let latCenter = calculateCenter(latAryLocal);
-  let lngCenter = calculateCenter(lngAryLocal);
-  let zoomLevel = calculateZoomLevel(latAryLocal, lngAryLocal);
-  map.setView([latCenter, lngCenter], zoomLevel);
+  focusMarkers(latAryLocal, lngAryLocal);
 }
-
 
 let focusCurrentPosition = (location) => {
   map.setView(location, 16);
