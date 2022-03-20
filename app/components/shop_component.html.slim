@@ -1,4 +1,4 @@
-= link_to shop_path(shop.id) do
+= link_to shop_path(shop.id), 'data-turbo-frame': '_top' do
   .col-12.glass.shop-card.d-flex.align-content-start
     .adjust-position id="shop-#{shop.id}"
     .shop-img-container

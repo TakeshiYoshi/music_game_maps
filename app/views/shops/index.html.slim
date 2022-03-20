@@ -7,10 +7,10 @@
     - if session[:lat] 
       = render ::Shops::ClearLocationSessionButtonComponent.new
     = render 'near_shops_search_form'
-= turbo_frame_tag 'shopsFrame' do
+= turbo_frame_tag 'shops' do
   = render ShopComponent.with_collection(@shops_filter)
-.col-12.d-flex.align-items-center.justify-content-center
-  = paginate @shops_filter
+  / .col-12.d-flex.align-items-center.justify-content-center
+    / = paginate @shops_filter
 
 #scrollTop
 #tutorial

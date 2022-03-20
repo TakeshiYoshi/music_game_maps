@@ -1,6 +1,8 @@
-= turbo_stream.update 'shopsFrame' do
-  = turbo_frame_tag 'shopsFrame' do
+= turbo_stream.update 'shops' do
+  = turbo_frame_tag 'shops' do
     = render ::ShopComponent.with_collection(@shops)
+    .col-12.d-flex.align-items-center.justify-content-center
+      = paginate @shops
   = tag.div data: { controller: 'map-update', shops_data: @shops_json }
 
 = turbo_stream.update 'mapAcitonsFrame' do 
