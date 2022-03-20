@@ -3,7 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="scroll-top"
 export default class extends Controller {
   initialize() {
-    window.addEventListener("scroll", this.handleScroll);
+    if (document.getElementsByClassName('scroll-top').length > 0) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
   }
 
   scrollTop() {
