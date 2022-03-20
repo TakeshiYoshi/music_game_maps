@@ -1,6 +1,6 @@
 - set_meta_tags reverse: false
 .col-12.map-container.d-flex.align-items-center.justify-content-center
-  #map
+  #map data-shops="#{@shops_filter_json}"
   = turbo_frame_tag 'mapAcitonsFrame' do
     = render ::Layouts::MapFlashMessageComponent.new(flash:)
     - if session[:lat] 
