@@ -22,7 +22,9 @@ class FiltersController < ApplicationController
   def clear_near_shops_search
     session.delete :lat
     session.delete :lng
-    redirect_to root_path, map: t('defaults.map_flash_message.clear_near_shops_search')
+    @shops = sort_shops(@shops).includes(:games).page(params[:page]).per(session[:number_of_searches])
+    @shops_json = @shops.to_json only: %i[lat lng]
+    flash.now[:map] = t('defaults.map_flash_message.clear_near_shops_search')
   end
 
   def cities_select
@@ -30,7 +32,7 @@ class FiltersController < ApplicationController
     render json: cities.all.to_json(only: %i[id name])
   end
 
-  def near_shops_search
+  def near_shops_search # rubocop:disable Metrics/AbcSize
     session[:lat] = params[:lat]
     session[:lng] = params[:lng]
     session.delete :prefecture_id
@@ -46,19 +48,6 @@ class FiltersController < ApplicationController
   end
 
   private
-
-  def set_filter
-    @shops_filter = @shops
-    @shops_filter = @shops_filter.in_prefecture(session[:prefecture_id]) if session[:prefecture_id]
-    @shops_filter = @shops_filter.in_city(session[:city_id]) if session[:city_id]
-    if session[:games]
-      select_games = session[:games].select do |_game_id, should_filter|
-        should_filter
-      end.keys.map(&:to_i)
-      @shops_filter = @shops_filter.joins(:games).merge(Game.where(id: select_games))
-    end
-    @shops_filter = sort_shops(@shops_filter)
-  end
 
   def sort_shops(shops)
     if session[:lat]

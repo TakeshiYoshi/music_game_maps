@@ -2,9 +2,11 @@
 .col-12.map-container.d-flex.align-items-center.justify-content-center
   #map
   #geolocation_button
-  = render ::Layouts::MapFlashMessageComponent.new(flash:)
-  = render 'clear_location_session_button'
-  = render 'near_shops_search_form'
+  = turbo_frame_tag 'mapAcitonsFrame' do
+    = render ::Layouts::MapFlashMessageComponent.new(flash:)
+    - if session[:lat] 
+      = render ::Shops::ClearLocationSessionButtonComponent.new
+    = render 'near_shops_search_form'
 = turbo_frame_tag 'shopsFrame' do
   = render ShopComponent.with_collection(@shops_filter)
 .col-12.d-flex.align-items-center.justify-content-center
