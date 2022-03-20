@@ -865,6 +865,48 @@ footer {
   }
 }
 
+// テーマ変更
+.theme-container {
+  margin: 10px 10px 0 10px;
+  border-top: 1px solid rgb(199, 199, 199);
+  padding: 10px 10px 0 10px;
+}
+
+.theme-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(white, 0.8);
+  border-radius: 15px;
+}
+
+.theme-button:not(:last-child) {
+  margin-right: 5px;
+}
+
+.normal {
+  background-color: #6ABBC4;
+}
+
+.dark {
+  background-color: #1B474D;
+}
+
+.darkBlue {
+  background-color: #BBBBFF;
+}
+
+.shinkai {
+  background-color: #BFC56E;
+}
+
+.yumekawa {
+  background-color: #BC6E9B;
+}
+
+.mono {
+  background-color: #000000;
+}
+
 // 以下スマホ向け
 
 @include media-breakpoint-down(sm) {

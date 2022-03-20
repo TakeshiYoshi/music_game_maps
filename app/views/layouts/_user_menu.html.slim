@@ -7,6 +7,4 @@
         li = t('defaults.setting')
       = link_to logout_path, method: :delete, class: 'dropdown-text'
         li = t('defaults.logout')
-      #editTheme
-
-= javascript_pack_tag 'edit_theme'
+      = render ::Layouts::EditThemeComponent.new

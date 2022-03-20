@@ -15,3 +15,6 @@ application.register("geolocation", GeolocationController)
 
 import ScrollTopController from "./scroll_top_controller.js"
 application.register("scroll-top", ScrollTopController)
+
+import EditThemeController from "./edit_theme_controller.js"
+application.register("edit-theme", EditThemeController)
