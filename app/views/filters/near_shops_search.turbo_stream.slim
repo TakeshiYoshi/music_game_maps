@@ -1,0 +1,4 @@
+= turbo_stream.update 'shopsFrame' do
+  = turbo_frame_tag 'shopsFrame' do
+    = render ::ShopComponent.with_collection(@shops)
+  = tag.div data: { controller: 'map-update', shops_data: @shops_json }

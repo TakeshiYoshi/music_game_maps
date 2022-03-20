@@ -5,7 +5,8 @@
   = render ::Layouts::MapFlashMessageComponent.new(flash:)
   = render 'near_shops_search_form'
   = render 'clear_location_session_button'
-= render ShopComponent.with_collection(@shops_filter)
+= turbo_frame_tag 'shopsFrame' do
+  = render ShopComponent.with_collection(@shops_filter)
 .col-12.d-flex.align-items-center.justify-content-center
   = paginate @shops_filter
 
