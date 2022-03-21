@@ -128,78 +128,78 @@ a {
   text-shadow: initial !important;
 }
 
-header {
-  border-radius: 0 0 20px 20px;
-  margin-bottom: 20px;
-  position: sticky;
-  transition: all 0.5s ease-in-out;
-  top: 0;
-  z-index: 10;
-  .logo {
-    height: $logo-height-size;
-  }
-  .site-title {
-    font-size: 2.7rem;
-    font-family: LEMONMILK-BOLD;
-    color: var(--site-title);
-    letter-spacing: 0.4rem;
-    margin: 0;
-    transition: all 0.3s;
-  }
-  .icon {
-    width: 50px;
-    border: 1px solid $gray-200;
-  }
-  .filter-icon-button, .filter-icon-button-filtered {
-    width: 38px;
-    height: 38px;
-    padding: 0;
-    margin-right: 15px;
-  }
-  .login-button {
-    width: 38px;
-    height: 38px;
-    padding: 0;
-  }
-  .filter-icon-button, .login-button {
-    text-shadow: 0 0 6px #0D3A40;
-    background: rgba(white, 0.3);
-    border: $glass-border-size solid rgba(white, 0.3);
-    box-shadow: 0 0 6px 0 rgba(black, 0.2);
-  }
-  .filter-icon-button-filtered {
-    color: white;
-    background: var(--field-color);
-    transition: all 0.3s;
-  }
-  .search-form {
-    height: 38px;
-    .search-field {
-      width: 320px;
-      margin-right: 15px;
-      transition: all 0.3s;
-      input {
-        border: 2px solid var(--field-color);
-        border-radius: 19px 0 0 19px;
-        padding-left: 19px;
-        box-shadow: 0 0 6px 0 var(--field-color);
-        transition: all 0.3s;
-      }
-      .btn-glass {
-        transition: all 0.3s;
-        border-radius: 0 19px 19px 0;
-        box-shadow: 0 0 6px 0 var(--field-color);
-        transition: all 0.3s;
-        i {
-          margin-right: 4px;
-        }
-      } 
-    }
-  }
-  .search-btn {
-    display: none;
-  }
-}
+// header {
+//   border-radius: 0 0 20px 20px;
+//   margin-bottom: 20px;
+//   position: sticky;
+//   transition: all 0.5s ease-in-out;
+//   top: 0;
+//   z-index: 10;
+//   .logo {
+//     height: $logo-height-size;
+//   }
+//   .site-title {
+//     font-size: 2.7rem;
+//     font-family: LEMONMILK-BOLD;
+//     color: var(--site-title);
+//     letter-spacing: 0.4rem;
+//     margin: 0;
+//     transition: all 0.3s;
+//   }
+//   .icon {
+//     width: 50px;
+//     border: 1px solid $gray-200;
+//   }
+//   .filter-icon-button, .filter-icon-button-filtered {
+//     width: 38px;
+//     height: 38px;
+//     padding: 0;
+//     margin-right: 15px;
+//   }
+//   .login-button {
+//     width: 38px;
+//     height: 38px;
+//     padding: 0;
+//   }
+//   .filter-icon-button, .login-button {
+//     text-shadow: 0 0 6px #0D3A40;
+//     background: rgba(white, 0.3);
+//     border: $glass-border-size solid rgba(white, 0.3);
+//     box-shadow: 0 0 6px 0 rgba(black, 0.2);
+//   }
+//   .filter-icon-button-filtered {
+//     color: white;
+//     background: var(--field-color);
+//     transition: all 0.3s;
+//   }
+//   .search-form {
+//     height: 38px;
+//     .search-field {
+//       width: 320px;
+//       margin-right: 15px;
+//       transition: all 0.3s;
+//       input {
+//         border: 2px solid var(--field-color);
+//         border-radius: 19px 0 0 19px;
+//         padding-left: 19px;
+//         box-shadow: 0 0 6px 0 var(--field-color);
+//         transition: all 0.3s;
+//       }
+//       .btn-glass {
+//         transition: all 0.3s;
+//         border-radius: 0 19px 19px 0;
+//         box-shadow: 0 0 6px 0 var(--field-color);
+//         transition: all 0.3s;
+//         i {
+//           margin-right: 4px;
+//         }
+//       } 
+//     }
+//   }
+//   .search-btn {
+//     display: none;
+//   }
+// }
 
 .search-menu {
   position: fixed;
@@ -775,41 +775,41 @@ footer {
 
 // 以下タブレット, スマホ向け
 @include media-breakpoint-down(md) {
-  header {
-    .filter-button, .filter-button-filtered {
-      display: none;
-    }
-    .filter-icon-button, .filter-icon-button-filtered {
-      width: 35px;
-      height: 35px;
-      margin-right: 8px;
-    }
+  // header {
+  //   .filter-button, .filter-button-filtered {
+  //     display: none;
+  //   }
+  //   .filter-icon-button, .filter-icon-button-filtered {
+  //     width: 35px;
+  //     height: 35px;
+  //     margin-right: 8px;
+  //   }
 
-    .loggin-button {
-      width: 35px;
-      height: 35px;
-    }
+  //   .loggin-button {
+  //     width: 35px;
+  //     height: 35px;
+  //   }
 
-    .search-form {
-      .search-field {
-        width: 230px;
-        display: none;
-      }
-    }
+  //   .search-form {
+  //     .search-field {
+  //       width: 230px;
+  //       display: none;
+  //     }
+  //   }
     
-    .search-btn {
-      display: block;
-      pointer-events: auto;
-      label {
-        width: 35px;
-        height: 35px;
-        padding: 0;
-        margin-right: 8px;
-        font-size: 0.9rem;
-        transition: all 0.3s;
-      }
-    }
-  }
+  //   .search-btn {
+  //     display: block;
+  //     pointer-events: auto;
+  //     label {
+  //       width: 35px;
+  //       height: 35px;
+  //       padding: 0;
+  //       margin-right: 8px;
+  //       font-size: 0.9rem;
+  //       transition: all 0.3s;
+  //     }
+  //   }
+  // }
 
   .search-menu {
     border-radius: 0 0 10px 10px;
@@ -898,19 +898,19 @@ footer {
 @include media-breakpoint-down(sm) {
   $logo-height-size: 36px;
 
-  header {
-    border-radius: 0 0 10px 10px;
-    .logo {
-      height: $logo-height-size;
-    }
-    .site-title {
-      font-size: 1.8rem;
-      letter-spacing: 0.2rem;
-    }
-    .icon {
-      width: 35px;
-    }
-  }
+  // header {
+  //   border-radius: 0 0 10px 10px;
+  //   .logo {
+  //     height: $logo-height-size;
+  //   }
+  //   .site-title {
+  //     font-size: 1.8rem;
+  //     letter-spacing: 0.2rem;
+  //   }
+  //   .icon {
+  //     width: 35px;
+  //   }
+  // }
 
   footer {
     border-radius: 10px 10px 0 0;
@@ -1027,10 +1027,10 @@ footer {
 }
 
 // iPhone 5Sサイズ以下
-@media screen and (max-width: 365px) {
-  header {
-    .site-title {
-      display: none;
-    }
-  }
-}
+// @media screen and (max-width: 365px) {
+//   header {
+//     .site-title {
+//       display: none;
+//     }
+//   }
+// }
