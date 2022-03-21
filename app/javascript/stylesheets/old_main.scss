@@ -1,0 +1,1036 @@
+@font-face {
+  font-family: 'LEMONMILK-BOLD';
+  src: url('../fonts/LEMONMILK-Bold.otf');
+}
+
+// 初期化
+:root {
+  --bg-start: #6ABBC4;
+  --bg-end: #6E74BC;
+  --bg-start-changing: #000000; // グラデーションアニメーション用
+  --bg-end-changing: #FFFFFF; // グラデーションアニメーション用
+  --site-title: #378892;
+  --field-color: #326FFA;
+  --field-color-light: #467DFA;
+  --label-open: 226, 106, 157;
+  --label-close: 64, 107, 143;
+}
+
+$logo-height-size: 50px;
+$glass-padding: 10px;
+$glass-border-size: 1px;
+
+html {
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  counter-reset: shop-counter;
+  //background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+}
+
+.bg-color-changing {
+  z-index: -100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--bg-start-changing), var(--bg-end-changing));
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+#bg-color-check:checked ~ .bg-color-changing {
+  opacity: 1;
+}
+
+// フッター
+
+.footer-fixed {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 90px;
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  .footer-content:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.glass {
+  background: rgba(white, 0.3);
+  border: $glass-border-size solid rgba(white, 0.3);
+  padding: $glass-padding 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+}
+
+.dropdown-glass {
+  background: rgba(black, 0.1);
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  will-change: all;
+}
+
+.glass-paginate {
+  background: rgba(white, 0.3);
+  border: $glass-border-size solid rgba(white, 0.3);
+  padding: 12px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  height: 40px;
+}
+
+.modal-dialog {
+  max-width: 700px;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+}
+
+.glass-round {
+  border-radius: 20px;
+}
+
+.glass-text {
+  color: white;
+  text-shadow: 0 0 6px #0D3A40;
+  margin: 0;
+  a {
+    color: white;
+  }
+}
+
+.glass-link {
+  color: white;
+  text-shadow: 0 0 6px #0D3A40;
+  transition: all 0.3s;
+  &:hover {
+    color: white;
+    text-shadow: 0 0 3px rgba(white, 0.3);
+  }
+}
+
+.error-text {
+  color: rgb(194, 84, 84);
+  text-align: left;
+  font-weight: bold;
+  text-shadow: initial !important;
+}
+
+header {
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 20px;
+  position: sticky;
+  transition: all 0.5s ease-in-out;
+  top: 0;
+  z-index: 10;
+  .logo {
+    height: $logo-height-size;
+  }
+  .site-title {
+    font-size: 2.7rem;
+    font-family: LEMONMILK-BOLD;
+    color: var(--site-title);
+    letter-spacing: 0.4rem;
+    margin: 0;
+    transition: all 0.3s;
+  }
+  .icon {
+    width: 50px;
+    border: 1px solid $gray-200;
+  }
+  .filter-icon-button, .filter-icon-button-filtered {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    margin-right: 15px;
+  }
+  .login-button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+  .filter-icon-button, .login-button {
+    text-shadow: 0 0 6px #0D3A40;
+    background: rgba(white, 0.3);
+    border: $glass-border-size solid rgba(white, 0.3);
+    box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  }
+  .filter-icon-button-filtered {
+    color: white;
+    background: var(--field-color);
+    transition: all 0.3s;
+  }
+  .search-form {
+    height: 38px;
+    .search-field {
+      width: 320px;
+      margin-right: 15px;
+      transition: all 0.3s;
+      input {
+        border: 2px solid var(--field-color);
+        border-radius: 19px 0 0 19px;
+        padding-left: 19px;
+        box-shadow: 0 0 6px 0 var(--field-color);
+        transition: all 0.3s;
+      }
+      .btn-glass {
+        transition: all 0.3s;
+        border-radius: 0 19px 19px 0;
+        box-shadow: 0 0 6px 0 var(--field-color);
+        transition: all 0.3s;
+        i {
+          margin-right: 4px;
+        }
+      } 
+    }
+  }
+  .search-btn {
+    display: none;
+  }
+}
+
+.search-menu {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+  top: -200px;
+  border-radius: 0 0 20px 20px;
+  padding: 25px auto;
+  margin: 0;
+  width: 100%;
+  .search-form {
+    width: 100%;
+    .search-field {
+      width: 100%;
+      margin-right: 10px;
+      transition: all 0.3s;
+      input {
+        border: 2px solid var(--field-color);
+        border-radius: 19px 0 0 19px;
+        padding-left: 19px;
+        box-shadow: 0 0 6px 0 var(--field-color);
+        transition: all 0.3s;
+      }
+      button {
+        transition: all 0.3s;
+        border-radius: 0 19px 19px 0;
+        box-shadow: 0 0 6px 0 var(--field-color);
+        transition: all 0.3s;
+        i {
+          margin-right: 4px;
+        }
+      } 
+    }
+  }
+  .cancel-btn {
+    display: block;
+    pointer-events: auto;
+    label {
+      width: 35px;
+      height: 35px;
+      padding: 0;
+      margin-right: 0;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+  }
+}
+
+.container-xl {
+  position: relative;
+}
+
+.user-menu-container {
+  width: 100%;
+  .user-menu {
+    margin-top: 1px;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    z-index: 1;
+    top: -240px;
+    padding: 0;
+    border-radius: 20px;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+      li {
+        padding: 0 10px;
+        text-align: center;
+        margin: 3px 0;
+        padding: 5px 25px;
+        transition: all 0.3s;
+        &:hover {
+          border-radius: 20px;
+          text-shadow: 0 0 0 black;
+          background-color: rgba(black, 0.3);
+        }
+      }
+    }
+    .dropdown-text {
+      color: white;
+      text-shadow: 0 0 6px $black;
+      li {
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.shop-card {
+  position: relative;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+  .adjust-position {
+    position: absolute;
+    top: -80px;
+  }
+  .shop-head {
+    margin-bottom: 10px;
+  }
+  .shop-footer {
+    margin-top: 10px;
+  }
+  .shop-img-container {
+    min-width: 160px;
+    min-height: 120px;
+    width: 160px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0 rgba(white, 0.7);
+    margin-right: 20px;
+    .appearance_img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .ordered-list {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    background-color: rgba(black, 0.2);
+    margin-right: 10px;
+    p {
+      font-size: 1.4rem;
+      color: white;
+      &:before {
+        counter-increment: shop-counter;
+        content: counter(shop-counter);
+      }
+    }
+  }
+  .shop-name {
+    font-size: 1.4rem;
+    margin-right: 20px;
+    margin-top: 4px;
+  }
+  .label-hours {
+    display: inline-block;
+    font-size: 1.2rem;
+    text-shadow: 0 0 0 white;
+    padding: 2px 20px;
+    margin-left: 5px;
+    backdrop-filter: brightness(105%);
+    color: white;
+  }
+
+  .label-open {
+    box-shadow: 0 0 3px 0 var(--label-open);
+    background: rgba(var(--label-open), 0.5);
+    transition: all 0.3s;
+  }
+
+  .label-close {
+    box-shadow: 0 0 3px 0 var(--label-close);
+    background: rgba(var(--label-close), 0.5);
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    background: rgba(white, 0.4);
+  }
+}
+
+.badge {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  .badge-content {
+    padding: 3px 3px 3px 15px;
+    background-color: rgba(black, 0.2);
+    .game-title { 
+      font-size: 1.1rem;
+      color: white;
+      margin-right: 7px;
+    }
+    .count-circle {
+      min-width: 24px;
+      height: 24px;
+      background-color: rgba(black, 0.3);
+      .game-count {
+        margin: 0 8px;
+        font-size: 1.1rem;
+        color: white;
+      }
+    }
+  }
+  .badge-content-no-data {
+    padding: 3px 7px;
+    background-color: rgba(black, 0.2);
+    .game-title-no-data { 
+      height: 24px;
+      font-size: 1.1rem;
+      color: white;
+      margin: 0 7px;
+    }
+  }
+}
+
+footer {
+  border-radius: 20px 20px 0 0;
+  margin-top: 20px;
+  .copyright {
+    font-family: LEMONMILK-BOLD;
+  }
+}
+
+.btn-glass {
+  color: white;
+  background-color: var(--field-color);
+  border-color: var(--field-color);
+  box-shadow: 0 0 6px 0 var(--field-color-light);
+  transition: all 0.3s;
+  &:hover {
+    color: white;
+    background-color: var(--field-color-light);
+    border-color: var(--field-color-light);
+    box-shadow: 0 0 6px 0  var(--field-color-light);
+  }
+}
+
+.btn-cancel {
+  color: white;
+  background-color: $gray-600;
+  border-color: $gray-600;
+  box-shadow: 0 0 6px 0 lighten($gray-600, 4%);
+  &:hover {
+    color: white;
+    background-color: lighten($gray-600, 4%);
+    border-color: lighten($gray-600, 4%);
+    box-shadow: 0 0 6px 0 lighten($gray-600, 4%);
+  }
+}
+
+#nav-menu-check:checked ~ .user-menu-container > .user-menu {
+  top: $logo-height-size + (($glass-padding + $glass-border-size) *2);
+}
+
+// フィルターモーダル
+.modal-glass {
+  width: 100%;
+  background: rgba(white, 0.8);
+  border: $glass-border-size solid rgba(white, 0.3);
+  padding: 5px 10px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  border-radius: 20px;
+}
+.modal-body button {
+  padding: 5px 20px;
+}
+
+// ページネーション
+.pagination {
+  margin-top: 5px;
+  color: white;
+  a {
+    color: white ;
+    &:hover {
+      background: rgba(white, 0.4);
+    }
+  }
+  span:first-child, span:first-child > a {
+    border-radius: 10px 0 0 10px;
+  }
+  span:last-child, span:last-child > a {
+    border-radius: 0 10px 10px 0;
+  }
+  span.glass-paginate {
+    background: rgba(white, 0.15);
+  }
+}
+
+// フィルター
+.modal-body, .modal-header {
+  padding: 10px;
+}
+
+.modal-body {
+  padding-top: 0;
+  .modal-footer {
+    border-top: $glass-border-size solid rgba(black, 0.3);
+    padding: 5px 0 0 0;
+  }
+  .form-group {
+    & > label {
+      margin-bottom: 5px;
+    }
+    margin: 10px 0;
+  }
+}
+
+.select-container {
+  width: 35%;
+  height: 35px;
+  background: rgba(white, 0.8);
+  border: $glass-border-size solid rgba(black, 0.3);
+  padding: 5px 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  border-radius: 20px;
+  margin-right: 10px;
+  .filter-select {
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    opacity: 0.8;
+  }
+}
+
+.disabled {
+  background: $gray-300;
+}
+
+.geo-checkbox {
+  margin: 10px 0;
+}
+
+.geo-message {
+  color: $gray-600;
+  margin-left: 10px;
+}
+
+.game-label {
+  color: $gray-600;
+  display: inline-block;
+  padding: 5px 15px;
+  border: 1px solid $gray-600;
+  margin: 0 5px 5px 0;
+  transition: all 0.3s;
+}
+
+// マップ
+.map-container {
+  border-radius: 20px;
+  background-color: $gray-200;
+  height: 500px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 0;
+  iframe {
+    border-radius: 20px;
+  }
+}
+
+.map-icon-container {
+  .map-icon-text {
+    color: $gray-600;
+    font-size: 20px;
+    font-family: LEMONMILK-BOLD;
+    font-weight: '900';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.game-check:checked + label.game-label {
+  color: white;
+  background: $gray-600;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.update-geo-button {
+  width: 35px;
+  height: 35px;
+  background: white;
+  color: $gray-800;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border: solid 1px $gray-600;
+  margin: 0 0 10px 10px;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  &:hover {
+    color: $gray-600;
+  }
+}
+
+.search-around-here-button {
+  width: 35px;
+  height: 35px;
+  background: white;
+  color: $gray-800;
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+  border: solid 1px $gray-600;
+  margin: 0 0 10px 10px;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  &:hover {
+    color: $gray-600;
+  }
+}
+
+.clear-location-session {
+  width: 35px;
+  height: 35px;
+  background: white;
+  color: $gray-800;
+  position: absolute;
+  left: 0;
+  bottom: 80px;
+  border: solid 1px $gray-600;
+  margin: 0 0 10px 10px;
+  padding: 0;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: all 0.3s;
+  &:hover {
+    color: $gray-600;
+  }
+}
+
+.icon-blue {
+  color:rgb(54, 125, 206);
+}
+
+.map-message-dialog {
+  background: rgba(white, 0.7);
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 10px 0 rgba(black, 0.7);
+  will-change: all;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  font-size: 1rem;
+  color: $gray-600;
+  white-space: nowrap;
+}
+
+.map-message-dialog.display {
+  top: 10px;
+  padding: 10px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+.own-icon {
+  background: rgb(63, 135, 216);
+  border-radius: 15px;
+  border: solid 4px white;
+  box-shadow: 0 0 10px 0 rgba(black, 0.5);
+}
+
+// フォーム
+@mixin glass-field {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid rgba(white, 0);
+  border-radius: 10px;
+  background: rgba(black, 0.2);
+  color: white;
+  box-shadow: 0 0 6px 0 rgba(black, 0.2);
+  outline: none;
+  transition: all 0.3s;
+  &::placeholder {
+    color: rgba(white, 0.3);
+  }
+  &:hover, &:focus {
+    border: 2px solid rgba(rgb(176, 221, 241), 0.3);
+    box-shadow: 0 0 10px 0 rgba(white, 0.2);
+  }
+}
+
+.glass-text-field {
+  @include glass-field;
+  height: 36px;
+}
+
+.glass-text-area {
+  @include glass-field;
+}
+
+.error-field {
+  box-shadow: 0 0 6px 0 rgba(red, 0.4);
+  border: 2px solid rgba(red, 0.2);
+  background: rgba(rgb(255, 110, 110), 0.2);
+  &:hover, &:focus {
+    border: 2px solid rgba(red, 0.2);
+    box-shadow: 0 0 6px 0 rgba(red, 0.4);
+  }
+}
+
+// フラッシュメッセージ
+.message-dialog {
+  background: rgba(white, 0.7);
+  border: 1px solid rgba(white, 0.3);
+  box-shadow: 0 0 10px 0 rgba(black, 0.7);
+  will-change: all;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  z-index: 100;
+  font-size: 1rem;
+  color: $gray-600;
+  white-space: nowrap;
+}
+
+.message-dialog.display {
+  top: 10px;
+  padding: 10px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+// ページトップ
+.scroll-top {
+  width: 150px;
+}
+
+// お問い合わせページ
+.inquiry-image {
+  max-width: 300px;
+  height: auto;
+}
+
+// プロフィール
+.profile-user-reviews {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.profile-user-review {
+  border-bottom: solid 1px rgba(white, 0.3);
+}
+
+// 以下iPad縦表示向け
+@include media-breakpoint-down(lg) {
+  header .search-form > .search-field {
+    width: 230px;
+  }
+}
+
+// 以下タブレット, スマホ向け
+@include media-breakpoint-down(md) {
+  header {
+    .filter-button, .filter-button-filtered {
+      display: none;
+    }
+    .filter-icon-button, .filter-icon-button-filtered {
+      width: 35px;
+      height: 35px;
+      margin-right: 8px;
+    }
+
+    .loggin-button {
+      width: 35px;
+      height: 35px;
+    }
+
+    .search-form {
+      .search-field {
+        width: 230px;
+        display: none;
+      }
+    }
+    
+    .search-btn {
+      display: block;
+      pointer-events: auto;
+      label {
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        margin-right: 8px;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  .search-menu {
+    border-radius: 0 0 10px 10px;
+  }
+
+  #search-btn-check:checked ~ .search-menu {
+    top: 0;
+  }
+  #search-btn-check:checked ~ .user-menu-container > .user-menu {
+    top: -200px;
+  }
+  #search-btn-check:checked ~ header {
+    opacity: 0;
+  }
+}
+
+.scroll-top {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  transition: all 0.2s;
+  z-index: 999;
+  display: none;
+  cursor: pointer;
+}
+
+.scroll-top.visible {
+  display: block;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+}
+
+@keyframes fade-in {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+// テーマ変更
+.theme-container {
+  margin: 10px 10px 0 10px;
+  border-top: 1px solid rgb(199, 199, 199);
+  padding: 10px 10px 0 10px;
+}
+
+.theme-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(white, 0.8);
+  border-radius: 15px;
+}
+
+.theme-button:not(:last-child) {
+  margin-right: 5px;
+}
+
+.normal {
+  background-color: #6ABBC4;
+}
+
+.dark {
+  background-color: #1B474D;
+}
+
+.darkBlue {
+  background-color: #BBBBFF;
+}
+
+.shinkai {
+  background-color: #BFC56E;
+}
+
+.yumekawa {
+  background-color: #BC6E9B;
+}
+
+.mono {
+  background-color: #000000;
+}
+
+// 以下スマホ向け
+
+@include media-breakpoint-down(sm) {
+  $logo-height-size: 36px;
+
+  header {
+    border-radius: 0 0 10px 10px;
+    .logo {
+      height: $logo-height-size;
+    }
+    .site-title {
+      font-size: 1.8rem;
+      letter-spacing: 0.2rem;
+    }
+    .icon {
+      width: 35px;
+    }
+  }
+
+  footer {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .map-container {
+    border-radius: 10px;
+  }
+
+  .glass {
+    padding: $glass-padding;
+  }
+
+  .glass-round {
+    border-radius: 10px;
+  }
+
+  .modal-glass {
+    border-radius: 10px;
+  }
+
+  .user-menu {
+    border-radius: 10px;
+    padding: 0;
+  }
+
+  .shop-card {
+    border-radius: 10px;
+    .shop-footer {
+      margin-top: 5px;
+      font-size: 0.7rem;
+    }
+    .adjust-position {
+      top: -70px;
+    }
+    .appearance_img, .shop-img-container {
+      display: none;
+    }
+    .ordered-list {
+      width: 25px;
+      height: 25px;
+      min-width: 25px;
+      min-height: 25px;
+      margin-right: 10px;
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    .shop-name {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      margin-top: 0;
+    }
+    .label-hours {
+      font-size: 1.0rem;
+      padding: 3px 10px;
+    }
+  }
+
+  .badge {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    .badge-content {
+      padding: 2px 2px 2px 13px;
+      .game-title { 
+        font-size: 0.8rem;
+      }
+      .count-circle {
+        min-width: 22px;
+        height: 22px;
+        .game-count {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .badge-content-no-data {
+      padding: 2px 5px;
+      .game-title-no-data { 
+        height: 22px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  #map {
+    border-radius: 10px;
+    iframe {
+      border-radius: 10px;
+    }
+  }
+
+  .select-container {
+    width: 49%;
+  }
+
+  .map-message-dialog, .message-dialog {
+    p {
+      font-size: 0.7rem;
+    }
+  }
+
+  #nav-menu-check:checked ~ .user-menu-container > .user-menu {
+    top: $logo-height-size + (($glass-padding + $glass-border-size + 0.5) *2);
+  }
+
+  #search-btn-check:checked ~ .user-menu-container > .user-menu {
+    top: -200px;
+  }
+
+  // ページトップ
+  .scroll-top {
+    width: 100px;
+  } 
+}
+
+// iPhone 5Sサイズ以下
+@media screen and (max-width: 365px) {
+  header {
+    .site-title {
+      display: none;
+    }
+  }
+}
