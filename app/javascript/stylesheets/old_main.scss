@@ -540,25 +540,25 @@ footer {
 }
 
 // マップ
-.map-container {
-  border-radius: 20px;
-  background-color: $gray-200;
-  height: 500px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 6px 0 rgba(black, 0.2);
-  position: relative;
-}
+// .map-container {
+//   border-radius: 20px;
+//   background-color: $gray-200;
+//   height: 500px;
+//   margin-bottom: 20px;
+//   box-shadow: 0 0 6px 0 rgba(black, 0.2);
+//   position: relative;
+// }
 
-#map {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  z-index: 0;
-  iframe {
-    border-radius: 20px;
-  }
-}
+// #map {
+//   width: 100%;
+//   height: 100%;
+//   border-radius: 20px;
+//   overflow: hidden;
+//   z-index: 0;
+//   iframe {
+//     border-radius: 20px;
+//   }
+// }
 
 .map-icon-container {
   .map-icon-text {
@@ -916,9 +916,9 @@ footer {
     border-radius: 10px 10px 0 0;
   }
 
-  .map-container {
-    border-radius: 10px;
-  }
+  // .map-container {
+  //   border-radius: 10px;
+  // }
 
   .glass {
     padding: $glass-padding;
@@ -995,12 +995,12 @@ footer {
     }
   }
 
-  #map {
-    border-radius: 10px;
-    iframe {
-      border-radius: 10px;
-    }
-  }
+  // #map {
+  //   border-radius: 10px;
+  //   iframe {
+  //     border-radius: 10px;
+  //   }
+  // }
 
   .select-container {
     width: 49%;
