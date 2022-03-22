@@ -1,4 +1,4 @@
-li.m-shopCard
+li.m-shopCard data-target-marker="shop-marker-#{shop.id}"
   = link_to shop_path(shop.id), data: { turbo: false }, name: "shop-#{@shop.id}" do
     .m-shopCard__item
       - if shop.opening_time? == 'open'

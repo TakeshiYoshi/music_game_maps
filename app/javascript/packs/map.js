@@ -1,4 +1,5 @@
-import MapIconImage from '../images/map_icon.png'
+import MapIconImage from '../images/map_icon.png';
+import MapIconGrayImage from '../images/map_icon_gray.png';
 
 let latAry = [];
 let lngAry = [];
@@ -28,6 +29,15 @@ tileLayer.addTo(map);
 
 putMapIcons(shopsLatAndLng);
 
+// 営業時間外の店舗は灰色表示
+Array.from(document.getElementsByClassName('m-shopCard')).map((shop) => {
+  const isClosed = shop.getElementsByClassName('m-shopCard__label').length === 0;
+
+  if (isClosed) {
+    document.getElementById(shop.dataset.targetMarker).src = MapIconGrayImage;
+  }
+})
+
 // マップが動いたら中心座標を出力
 map.on('move', function (e) {
   inputCenterPos();
@@ -55,10 +65,11 @@ function putMapIcons(shopsJson) {
   shopsJson.map((shopJson, index) => {
     let mapIcon = L.divIcon({
       className: 'map-icon-container',
-      html: '<a href="#shop-' + shopJson.id + '">' +
-        '<img src="' + MapIconImage + '" style="width:50px; height:52.5px;">' +
-        '<span class="map-icon-text">' + (Number(index) + 1) + '</span>' +
-        '</a>',
+      html: `
+        <a href="#shop-${shopJson.id}">
+          <img src="${MapIconImage}" style="width:50px; height:52.5px;" id="shop-marker-${shopJson.id}" />
+          <span class="map-icon-text">${Number(index) + 1}</span>
+        </a>`,
       iconSize: [50, 52.5],
       iconAnchor: [25, 52.5],
       popupAnchor: [0, -52.5],
