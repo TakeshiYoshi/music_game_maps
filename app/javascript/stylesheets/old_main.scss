@@ -55,14 +55,14 @@ body {
   box-sizing: border-box;
 }
 
-footer {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  .footer-content:not(:last-child) {
-    margin-right: 10px;
-  }
-}
+// footer {
+//   width: 100%;
+//   position: absolute;
+//   bottom: 0;
+//   .footer-content:not(:last-child) {
+//     margin-right: 10px;
+//   }
+// }
 
 a {
   text-decoration: none;
@@ -402,13 +402,13 @@ a {
   }
 }
 
-footer {
-  border-radius: 20px 20px 0 0;
-  margin-top: 20px;
-  .copyright {
-    font-family: LEMONMILK-BOLD;
-  }
-}
+// footer {
+//   border-radius: 20px 20px 0 0;
+//   margin-top: 20px;
+//   .copyright {
+//     font-family: LEMONMILK-BOLD;
+//   }
+// }
 
 .btn-glass {
   color: white;
@@ -912,9 +912,9 @@ footer {
   //   }
   // }
 
-  footer {
-    border-radius: 10px 10px 0 0;
-  }
+  // footer {
+  //   border-radius: 10px 10px 0 0;
+  // }
 
   // .map-container {
   //   border-radius: 10px;

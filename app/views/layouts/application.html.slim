@@ -15,6 +15,6 @@ html
       = render ::Layouts::HeaderComponent.new
       = render ::Layouts::UserMenuComponent.new(current_user:)
       = yield
-      = render 'layouts/footer'
+      = render ::Layouts::FooterComponent.new
     input.d-none#bg-color-check type="checkbox"
     .bg-color-changing

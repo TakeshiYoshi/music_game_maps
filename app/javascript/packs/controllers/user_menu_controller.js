@@ -16,7 +16,6 @@ export default class extends Controller {
       });
     } else {
       this.buttonNode.classList.add('opened');
-      console.log(this.listsNode);
       Array.from(this.listsNode).map((list) => {
         list.classList.add('opened');
       });

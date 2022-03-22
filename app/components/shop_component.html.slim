@@ -1,5 +1,5 @@
 li.m-shopCard
-  = link_to shop_path(shop.id), 'data-turbo-frame': '_top' do
+  = link_to shop_path(shop.id), data: { turbo: false } do
     .m-shopCard__item
       - if shop.opening_time? == 'open'
         .m-shopCard__label
