@@ -5,7 +5,7 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: %i[show edit]
 
   def index
-    @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
+    @shops_filter = @shops_filter.includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
   end
 
   def show

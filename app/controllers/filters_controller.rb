@@ -22,7 +22,7 @@ class FiltersController < ApplicationController
   def clear_near_shops_search
     session.delete :lat
     session.delete :lng
-    @shops = sort_shops(@shops).includes(:games).page(params[:page]).per(session[:number_of_searches])
+    @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     set_filter
     flash.now[:map] = t('defaults.map_flash_message.clear_near_shops_search')
   end
@@ -37,7 +37,7 @@ class FiltersController < ApplicationController
     session[:lng] = params[:lng]
     session.delete :prefecture_id
     session.delete :city_id
-    @shops = sort_shops(@shops).includes(:games).page(params[:page]).per(session[:number_of_searches])
+    @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     set_filter
     flash.now[:map] = t('defaults.map_flash_message.near_shops_search')
   end
