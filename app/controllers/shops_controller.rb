@@ -6,7 +6,6 @@ class ShopsController < ApplicationController
 
   def index
     @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
-    @shops_filter_json = @shops_filter.to_json only: %i[lat lng]
   end
 
   def show

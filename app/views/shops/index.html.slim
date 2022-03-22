@@ -5,7 +5,7 @@
     .map-menu-icon
       = fa_icon 'caret-down'
   .col-12.map-container
-    #map data-shops="#{@shops_filter_json}"
+    #map
     = turbo_frame_tag 'mapAcitonsFrame' do
       = render ::Layouts::MapFlashMessageComponent.new(flash:)
       - if session[:lat] 
@@ -16,6 +16,7 @@
   = turbo_frame_tag 'shops' do
     ul.m-shopCard__list
       = render ShopComponent.with_collection(@shops_filter)
+    #shopData data-shops="#{@shops_filter.to_json only: %i[id lat lng]}"
 .col-4
 
 = render ::Shared::ScrollTopComponent.new

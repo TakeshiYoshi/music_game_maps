@@ -5,6 +5,10 @@ body {
   counter-reset: shop-counter;
 }
 
+.logo-base-color {
+  fill: black;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -114,4 +118,27 @@ footer {
 
 .map-menu-icon {
   margin-left: 10px;
+}
+
+/* ダークモード時の色 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $GRAY0;
+  }
+
+  .logo-base-color {
+    fill: white;
+  }
+
+  footer {
+    color: $WHITE0;
+  
+    a {
+      color: $WHITE0;
+  
+      &:hover {
+        color: $WHITE2;
+      }
+    }
+  }
 }

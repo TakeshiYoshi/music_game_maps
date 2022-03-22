@@ -3,7 +3,7 @@ import MapIconImage from '../images/map_icon.png'
 let latAry = [];
 let lngAry = [];
 let mapIcons = [];
-let shopsLatAndLng = JSON.parse(document.getElementById('map').dataset.shops);
+let shopsLatAndLng = JSON.parse(document.getElementById('shopData').dataset.shops);
 
 // 店舗の緯度経度情報取得
 setShopsData(shopsLatAndLng);
