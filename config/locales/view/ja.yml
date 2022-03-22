@@ -1,14 +1,14 @@
 ja:
   defaults:
     meta:
-      site: 'OTOMAP'
-      admin_site: 'OTOMAP(管理画面)'
+      site: 'オトマップ'
+      admin_site: 'オトマップ(管理画面)'
       separator: '|'
       title: '音楽ゲームに特化したゲームセンターマップ検索サービス'
       charset: 'utf-8'
-      description: 'OTOMAPは音楽ゲームに特化したゲームセンターマップ検索サービスです。'
-      keywords: '音楽ゲーム,音ゲー,マップ,マップ検索,OTOMAP,音ゲーマップ,ゲーセン,ゲームセンター'
-    site_title: 'OTOMAP'
+      description: 'オトマップは音楽ゲームに特化したゲームセンターマップ検索サービスです。'
+      keywords: '音楽ゲーム,音ゲー,マップ,マップ検索,オトマップ,音ゲーマップ,ゲーセン,ゲームセンター'
+    site_title: 'オトマップ'
     twitter_id: 'otomap_net'
     copyright: '© 2021'
     login: 'ログイン'
@@ -131,7 +131,7 @@ ja:
   inquiries:
     inquiry:
       title: 'お問い合わせ'
-      greeting: 'いつもOTOMAPをご利用頂きありがとうございます。'
+      greeting: 'いつもオトマップをご利用頂きありがとうございます。'
       body: '本サービス内において、ご意見, ご要望, バグ報告等ございましたら下記TwitterアカウントのDMにてご報告頂けると助かります。'
   policies:
     user_policy:
