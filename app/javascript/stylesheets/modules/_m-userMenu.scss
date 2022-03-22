@@ -1,0 +1,135 @@
+.m-userMenu__button {
+  width: 50px;
+  height: 50px;
+  background-color: $THEME;
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  transition: 0.3s;
+  z-index: 1000;
+
+  &:hover {
+    background-color: lighten($THEME, 10%);
+  }
+
+  &-container {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .m-userMenu__button-line-1,
+  .m-userMenu__button-line-2,
+  .m-userMenu__button-line-3 {
+    position: absolute;
+    background-color: $WHITE0;
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    right: 10px;
+    transition: 0.3s;
+  }
+  
+  &-line-1 {
+    top: 14px;
+  }
+
+  &-line-2 {
+    top: 23px;
+  }
+
+  &-line-3 {
+    top: 32px;
+  }
+
+  .m-userMenu__body {
+    width: 100%;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: $FONT-SIZE-MD;
+      font-weight: $FONT-WEIGHT-NORMAL;
+    }
+  }
+}
+
+.m-userMenu__header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
+.m-userMenu__list-item {
+  color: $WHITE0;
+  display: none;
+
+  &:hover {
+    color: $WHITE0;
+  }
+
+  li {
+    transition: 0.3s;
+    padding: 5px;
+    text-align: center;
+    transform: rotateY(90deg);
+    margin-left: 100px;
+
+    &:hover {
+      background-color: lighten($THEME, 10%);
+    }
+  }
+
+  &:nth-child(1) li {
+    transition-delay: 0ms;
+  }
+
+  &:nth-child(2) li {
+    transition-delay: 50ms;
+  }
+
+  &:nth-child(3) li {
+    transition-delay: 100ms;
+  }
+}
+
+.m-userMenu__list-item.opened {
+  display: list-item;
+}
+
+.m-userMenu__list-item.opened-animation {
+  li {
+    transform: rotateY(0);
+    margin-left: 0;
+  }
+}
+
+.m-userMenu__button.opened {
+  width: 200px;
+  height: 170px;
+
+  &:hover {
+    background-color: $THEME;
+  }
+
+  .m-userMenu__button-line-1 {
+    top: 23px;
+    transform: rotate(135deg);
+  }
+
+  .m-userMenu__button-line-2 {
+    top: 23px;
+    opacity: 0;
+  }
+
+  .m-userMenu__button-line-3 {
+    top: 23px;
+    transform: rotate(-135deg);
+  }
+}

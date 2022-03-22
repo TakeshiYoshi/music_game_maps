@@ -1,14 +1,22 @@
 - set_meta_tags reverse: false
-.col-12.map-container.d-flex.align-items-center.justify-content-center
-  #map data-shops="#{@shops_filter_json}"
-  = turbo_frame_tag 'mapAcitonsFrame' do
-    = render ::Layouts::MapFlashMessageComponent.new(flash:)
-    - if session[:lat] 
-      = render ::Shops::ClearLocationSessionButtonComponent.new
-    = render 'near_shops_search_form'
-  = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
-= turbo_frame_tag 'shops' do
-  = render ShopComponent.with_collection(@shops_filter)
+.col-12.map-wrapper 
+  .map-menu
+    | MAP MENU
+    .map-menu-icon
+      = fa_icon 'caret-down'
+  .col-12.map-container
+    #map data-shops="#{@shops_filter_json}"
+    = turbo_frame_tag 'mapAcitonsFrame' do
+      = render ::Layouts::MapFlashMessageComponent.new(flash:)
+      - if session[:lat] 
+        = render ::Shops::ClearLocationSessionButtonComponent.new
+      = render 'near_shops_search_form'
+    = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
+.col-sm-12.col-md-12.col-lg-9
+  = turbo_frame_tag 'shops' do
+    ul.m-shopCard__list
+      = render ShopComponent.with_collection(@shops_filter)
+.col-4
 
 = render ::Shared::ScrollTopComponent.new
 #tutorial

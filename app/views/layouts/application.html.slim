@@ -13,6 +13,7 @@ html
     .container-xl.px-0.footer-fixed
       = render ::Layouts::FlashMessageComponent.new(flash:)
       = render ::Layouts::HeaderComponent.new
+      = render ::Layouts::UserMenuComponent.new(current_user:)
       = yield
       = render 'layouts/footer'
     input.d-none#bg-color-check type="checkbox"

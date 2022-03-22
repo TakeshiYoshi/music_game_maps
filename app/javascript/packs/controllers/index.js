@@ -21,3 +21,6 @@ application.register("edit-theme", EditThemeController)
 
 import EditProfileFormController from "./edit_profile_form_controller.js"
 application.register("edit-profile-form", EditProfileFormController)
+
+import UserMenuController from "./user_menu_controller.js"
+application.register("user-menu", UserMenuController)

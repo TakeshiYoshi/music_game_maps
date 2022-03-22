@@ -1,0 +1,32 @@
+.m-badge {
+  font-size: $FONT-SIZE-SM;
+  font-weight: $FONT-WEIGHT-MEDIUM;
+  color: $GRAY0;
+  padding: 0;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+
+  &__badge {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    border-radius: 12px;
+    border: solid 0.5px $GRAY0;
+  }
+
+  &__badge-name {
+    padding: 0 0 0 10px;
+    margin: 0 5px 0 0;
+  }
+
+  &__badge-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    border: solid 0.5px $GRAY0;
+    margin: 0 2px 0 0;
+  }
+}

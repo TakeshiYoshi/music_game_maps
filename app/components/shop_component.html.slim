@@ -1,18 +1,36 @@
-= link_to shop_path(shop.id), 'data-turbo-frame': '_top' do
-  .col-12.glass.shop-card.d-flex.align-content-start
-    .adjust-position id="shop-#{shop.id}"
-    .shop-img-container
-      = image_tag shop.get_photo_url(size: :thumb), class: 'appearance_img'
-    .shop-description.d-flex.flex-column.justify-content-start.flex-grow-1
-      .shop-head.d-flex.align-items-start
-        .ordered-list.rounded-circle.d-flex.align-items-center.justify-content-center
-          p.m-0
-        .shop-name-wrapper.d-flex.flex-wrap
-          h2.glass-text.shop-name
+li.m-shopCard
+  = link_to shop_path(shop.id), 'data-turbo-frame': '_top' do
+    .m-shopCard__item
+      - if shop.opening_time? == 'open'
+        .m-shopCard__label
+        .m-shopCard__label-text
+          | 営業中
+      .m-shopCard__container
+        .m-shopCard__appearance-img
+          = image_tag shop.get_photo_url(size: :thumb)
+        .m-shopCard__description
+          h2.m-shopCard__shop-name
             = shop.name
-            span.label-hours.rounded-pill.align-items-center class="label-#{shop.opening_time?}"
-              = t "defaults.#{shop.opening_time?}"
-      .badges.d-flex.align-items-center.flex-wrap
-        = render Shop::BadgeComponent.with_collection(shop.game_machines)
-      .shop-footer.d-flex.align-items-start.justify-content-end.glass-text
-        = "#{t 'shops.show.lastest_update_date'}: #{l shop.lastest_update_date, format: :shop_history}"
+          .m-shopCard__badge-container 
+            = render ::Shop::BadgeComponent.with_collection(shop.game_machines)
+          .m-shopCard__information-container
+            table.m-shopCard__information
+              tbody 
+                tr 
+                  th 所在地
+                  td = shop.address
+                tr 
+                  th 最寄り駅
+                  td
+                    - shop.shop_stations.each do |shop_station|
+                      .m-shopCard__information-station
+                        span = shop_station.station.line.name
+                        span = shop_station.station.name
+                        span = shop_station.distance
+                tr
+                  th 営業時間
+                  td = shop.today_text if shop.opening_hours.present?
+                tr
+                  th 最終更新日
+                  td = l shop.lastest_update_date, format: :shop_history
+      .m-shopCard__hover-light

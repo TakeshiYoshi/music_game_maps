@@ -1,6 +1,7 @@
 = turbo_stream.update 'shops' do
   = turbo_frame_tag 'shops' do
-    = render ::ShopComponent.with_collection(@shops_filter)
+    ul.m-shopCard__list
+      = render ::ShopComponent.with_collection(@shops_filter)
   = tag.div data: { controller: 'map-update', shops_data: @shops_filter_json }
 
 = turbo_stream.update 'mapAcitonsFrame' do 
