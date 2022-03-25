@@ -1,0 +1,12 @@
+= form_with model: filter_form, url: filter_path, scope: :filter, method: :post, data: { controller: 'map-form' } do |f|
+      div
+        = f.label :number_of_searches
+      div
+        = f.select :number_of_searches, options_for_select([[10, 10], [20, 20], [30, 30]], selected: session[:number_of_searches]), {}, data: { action: 'map-form#submit' }
+      div
+        - games.each do |game|
+          = f.check_box "games[#{game.id}]", { id: "game_#{game.id}", checked: "#{'checked' if helpers.game_filtered?(game.id)}", data: { action: 'map-form#submit' } }, true, false
+          = f.label game.title, for: "game_#{game.id}"
+      div
+        = f.submit id: 'mapMenuSubmitButton', style: 'display: none;'
+        = link_to t('defaults.clear'), filter_path, method: :delete

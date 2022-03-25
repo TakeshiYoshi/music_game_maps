@@ -4,6 +4,8 @@
     | MAP MENU
     .map-menu-icon
       = fa_icon 'caret-down'
+    = turbo_frame_tag 'mapFormFrame' do
+      = render ::Shops::MapFormComponent.new(filter_form: @filter_form)
   .col-12.map-container
     #map
     = turbo_frame_tag 'mapAcitonsFrame' do

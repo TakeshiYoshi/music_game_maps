@@ -24,3 +24,6 @@ application.register("edit-profile-form", EditProfileFormController)
 
 import UserMenuController from "./user_menu_controller.js"
 application.register("user-menu", UserMenuController)
+
+import MapFormController from "./map_form_controller.js"
+application.register("map-form", MapFormController)
