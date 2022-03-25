@@ -42,11 +42,18 @@ footer {
   width: 100%;
   height: 60px;
   z-index: 9999;
-  margin-top: 30px;
   border-top: solid 1px $GRAY1;
   font-size: $FONT-SIZE-MD;
   color: $GRAY0;
   font-weight: $FONT-WEIGHT-NORMAL;
+
+  .copyright-container {
+    display: flex;
+  }
+
+  .footer-links {
+    display: flex;
+  }
 
   a {
     color: $GRAY0;
@@ -76,7 +83,7 @@ footer {
 .footer-fixed {
   min-height: 100vh;
   position: relative;
-  padding-bottom: 90px;
+  padding-bottom: 70px;
   box-sizing: border-box;
 }
 
@@ -139,6 +146,24 @@ footer {
       &:hover {
         color: $WHITE2;
       }
+    }
+  }
+}
+
+// スマホ向け
+@include media-breakpoint-down(sm) {
+  footer {
+    display: block;
+
+    .copyright-container {
+      align-items: center;
+      justify-content: center;
+      margin: 5px 0;
+    }
+
+    .footer-links {
+      align-items: center;
+      justify-content: center;
     }
   }
 }
