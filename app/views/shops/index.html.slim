@@ -11,6 +11,7 @@
   .col-12.map-container
     #map
     = turbo_frame_tag 'mapAcitonsFrame' do
+      = render ::Shops::LoadingComponent.new
       = render ::Layouts::MapFlashMessageComponent.new(flash:)
       - if session[:lat] 
         = render ::Shops::ClearLocationSessionButtonComponent.new

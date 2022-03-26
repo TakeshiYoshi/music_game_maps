@@ -17,7 +17,6 @@ export default class extends Controller {
 
   handleScroll() {
     const thisNode = document.getElementsByClassName('m-scrollTop')[0];
-    console.log(thisNode);
     let html = window.document.documentElement;
     let scrollBottomY = html.scrollHeight - html.clientHeight - window.scrollY;
 
