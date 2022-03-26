@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="scroll-top"
 export default class extends Controller {
   initialize() {
-    if (document.getElementsByClassName('scroll-top').length !== 0) {
+    if (document.getElementsByClassName('m-scrollTop').length !== 0) {
       window.addEventListener("scroll", this.handleScroll);
     }
   }
@@ -16,10 +16,10 @@ export default class extends Controller {
   }
 
   handleScroll() {
-    const thisNode = document.getElementsByClassName('scroll-top')[0];
+    const thisNode = document.getElementsByClassName('m-scrollTop')[0];
+    console.log(thisNode);
     let html = window.document.documentElement;
-    let scrollBottomY =
-      html.scrollHeight - html.clientHeight - window.scrollY;
+    let scrollBottomY = html.scrollHeight - html.clientHeight - window.scrollY;
 
     if (window.scrollY > 200 && scrollBottomY > 60) {
       thisNode.classList.add('visible')

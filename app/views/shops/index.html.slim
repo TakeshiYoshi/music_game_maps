@@ -1,11 +1,13 @@
 - set_meta_tags reverse: false
 .col-12.map-wrapper 
   .map-menu
-    | MAP MENU
-    .map-menu-icon
-      = fa_icon 'caret-down'
-    = turbo_frame_tag 'mapFormFrame' do
-      = render ::Shops::MapFormComponent.new(filter_form: @filter_form)
+    a.map-menu-btn href="#mapMenuCollapse" data-bs-toggle="collapse"
+      | MAP MENU
+      .map-menu-icon
+        = fa_icon 'caret-down'
+    .collapse#mapMenuCollapse
+      = turbo_frame_tag 'mapFormFrame' do
+        = render ::Shops::MapFormComponent.new(filter_form: @filter_form)
   .col-12.map-container
     #map
     = turbo_frame_tag 'mapAcitonsFrame' do

@@ -9,6 +9,14 @@ body {
   fill: black;
 }
 
+.main-logo {
+  width: 250px;
+}
+
+.footer-logo {
+  width: 100px;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -108,18 +116,23 @@ footer {
 .map-menu {
   background-color: $THEME;
   width: 100%;
-  height: 305px;
+  font-size: $FONT-SIZE-MD;
+  color: $WHITE0;
+}
+
+.map-menu-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: $FONT-SIZE-MD;
-  color: $WHITE0;
   font-weight: $FONT-WEIGHT-BOLD;
+  color: $WHITE0;
+  padding: 0;
   transition: 0.3s;
-  cursor: pointer;
+  
   &:hover {
-    //height: 45px;
-    background-color: lighten($THEME, 10%);
+    padding: 0 0 10px 0;
+    font-weight: $FONT-WEIGHT-BOLD;
+    color: $WHITE0;
   }
 }
 
@@ -152,6 +165,10 @@ footer {
 
 // スマホ向け
 @include media-breakpoint-down(sm) {
+  .main-logo {
+    width: 220px;
+  }
+
   footer {
     display: block;
 
@@ -164,6 +181,32 @@ footer {
     .footer-links {
       align-items: center;
       justify-content: center;
+    }
+  }
+
+  .map-menu-btn {
+    &:hover {
+      padding: 0;
+      font-weight: $FONT-WEIGHT-BOLD;
+      color: $WHITE0;
+    }
+  }
+}
+
+// iPhone 5Sサイズ以下
+@media screen and (max-width: 365px) {
+  header {
+    justify-content: start;
+    margin-left: 10px;
+  }
+
+  .main-logo {
+    width: 200px;
+  }
+
+  footer {
+    .footer-links {
+      font-size: $FONT-SIZE-XS;
     }
   }
 }

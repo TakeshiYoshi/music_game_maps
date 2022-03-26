@@ -13,11 +13,11 @@ class FilterForm
     hash[:number_of_searches] = number_of_searches
 
     # ゲーム機種追加
-    if games.present?
-      hash[:games] = games.transform_values { |v| v == 'true' }
-    else
-      hash[:games] = {}
-    end
+    hash[:games] = if games.present?
+                     games.transform_values { |v| v == 'true' }
+                   else
+                     {}
+                   end
 
     hash
   end

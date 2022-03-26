@@ -832,12 +832,10 @@ a {
   bottom: 10px;
   transition: all 0.2s;
   z-index: 999;
-  display: none;
   cursor: pointer;
 }
 
 .scroll-top.visible {
-  display: block;
   animation-name: fade-in;
   animation-duration: 0.2s;
 }

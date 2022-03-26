@@ -103,6 +103,6 @@ class Shop < ApplicationRecord
   end
 
   def set_games_info
-    update(games_info: games_array.map { |a| a.to_s }.to_s)
+    update(games_info: games_array.map(&:to_s).to_s)
   end
 end

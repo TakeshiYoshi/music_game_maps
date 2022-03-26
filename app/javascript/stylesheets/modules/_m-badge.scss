@@ -14,6 +14,11 @@
     border: solid 0.5px $GRAY0;
   }
 
+  &__badge.target {
+    background-color: $GRAY1;
+    color: $GRAY2;
+  }
+
   &__badge-name {
     padding: 0 0 0 10px;
     margin: 0 5px 0 0;
@@ -28,5 +33,10 @@
     border-radius: 10px;
     border: solid 0.5px $GRAY0;
     margin: 0 2px 0 0;
+  }
+
+  &__badge-count.target {
+    background-color: $WHITE1;
+    color: $GRAY0;
   }
 }

@@ -1,5 +1,5 @@
 class FiltersController < ApplicationController
-  def create # rubocop:disable Metrics/AbcSize
+  def create
     @filter_form = FilterForm.new(filter_form_params)
     @filter_form.session_hash.each do |k, v|
       session[k] = v
@@ -7,16 +7,16 @@ class FiltersController < ApplicationController
     end
     @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     set_filter
-#    if params[:prefecture]
-#      session.delete :lat
-#      session.delete :lng
-#    end
-#    session[:prefecture_id] = params[:prefecture]
-#    session[:city_id] = params[:city]
-#    # string to boolean
-#    session[:games] = params[:games].to_unsafe_hash.transform_values { |v| v == 'true' } if params[:games]
-#    session[:number_of_searches] = params[:number_of_searches]
-#    redirect_to root_path
+    #    if params[:prefecture]
+    #      session.delete :lat
+    #      session.delete :lng
+    #    end
+    #    session[:prefecture_id] = params[:prefecture]
+    #    session[:city_id] = params[:city]
+    #    # string to boolean
+    #    session[:games] = params[:games].to_unsafe_hash.transform_values { |v| v == 'true' } if params[:games]
+    #    session[:number_of_searches] = params[:number_of_searches]
+    #    redirect_to root_path
   end
 
   def destroy

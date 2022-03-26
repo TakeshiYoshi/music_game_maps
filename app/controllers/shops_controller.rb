@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
 
   def index
     @shops_filter = @shops_filter.includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
-    @@filter_form = FilterForm.new
+    @filter_form = FilterForm.new
   end
 
   def show
