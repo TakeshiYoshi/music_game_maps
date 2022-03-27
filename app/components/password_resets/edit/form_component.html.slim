@@ -1,0 +1,14 @@
+.page-title
+  h1.basic-title
+    = t 'password_resets.edit.title'
+= form_with model: user, url: password_reset_path(token), method: :patch, id: 'password_reset_form', class: 'mt-4', local: true, data: { turbo: false } do |f|
+  = render 'shared/error_messages', object: user
+  .form-group
+    = f.password_field :password, id: 'userPassword', class: 'basic-text-field', 'v-model': 'passwordField', '@input': 'passwordValid()', ':class': "passwordError ? 'basic-error-field' : ''", autocomplete: 'off', placeholder: "#{User.human_attribute_name(:password) + t('defaults.password_valid')}"
+    p.basic-error-text v-text='passwordError'
+  .form-group
+    = f.password_field :password_confirmation, id: 'userPasswordConfirmation', class: 'basic-text-field', 'v-model': 'passwordConfirmationField', ':class': "passwordConfirmationError ? 'basic-error-field' : ''", autocomplete: 'off', '@input': 'passwordConfirmationValid()', placeholder: User.human_attribute_name(:password_confirmation)
+    p.basic-error-text v-text='passwordConfirmationError'
+  = f.submit t('defaults.password_reset'), class: 'btn-basic'
+
+= javascript_pack_tag 'password_reset'
