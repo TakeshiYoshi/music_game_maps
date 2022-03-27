@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shop::TwitterComponent < ViewComponent::Base
+class Shops::TwitterComponent < ViewComponent::Base
   def initialize(twitter_id:)
     @twitter_id = twitter_id
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shop::DescriptionListComponent < ViewComponent::Base
+class Shops::DescriptionListComponent < ViewComponent::Base
   renders_one :description_content
 
   def initialize(shop:, attribute:)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shop::DescriptionComponent < ViewComponent::Base
+class Shops::DescriptionComponent < ViewComponent::Base
   def initialize(shop:)
     @shop = shop
   end

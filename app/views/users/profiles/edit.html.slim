@@ -1,3 +1,3 @@
 - set_meta_tags title: t('.title')
-.col-12.glass.glass-round.py-4
-    = render 'form', profile_form: @profile_form, user: @user
+.col-12.basic-box.py-4
+  = render ::Users::Profiles::FormComponent.new(user: @user, profile_form: @profile_form)

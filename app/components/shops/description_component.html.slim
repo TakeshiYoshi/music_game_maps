@@ -6,30 +6,30 @@ input.d-none#table-check type="checkbox"
 .col-12.glass.shop-description-container
   .d-flex.justify-content-between.align-content-center
     .game-machines
-      = render Shared::LabelComponent.new(name: GameMachine.model_name.human)
+      = render ::Shared::LabelComponent.new(name: GameMachine.model_name.human)
     - if helpers.logged_in?
-      = render Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn'), href: new_shop_shop_history_path(shop), class: 'edit-shop-btn')
+      = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn'), href: new_shop_shop_history_path(shop), class: 'edit-shop-btn')
     - else 
-      = render Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'edit-shop-btn')
+      = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'edit-shop-btn')
   .badges.d-flex.align-items-center.flex-wrap
-    = render Shop::BadgeComponent.with_collection(shop.game_machines)
-  = render Shop::DescriptionListComponent.new(shop: shop, attribute: :address) do |c|
+    = render ::Shops::BadgeComponent.with_collection(shop.game_machines)
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :address) do |c|
     - c.description_content
       p.glass-text
         = shop.address
-  = render Shop::DescriptionListComponent.new(shop: shop, attribute: :phone_number) do |c|
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :phone_number) do |c|
     - c.description_content
       p.glass-text
         = link_to shop.phone_number, 'tel:'
-  = render Shop::DescriptionListComponent.new(shop: shop, attribute: :website) do |c|
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :website) do |c|
     - c.description_content
       p.glass-text
         = link_to shop.website.truncate(35), shop.website, target: :_blank, rel: 'nopener noreferrer'
-  = render Shop::DescriptionListComponent.new(shop: shop, attribute: :twitter_id) do |c|
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :twitter_id) do |c|
     - c.description_content
       p.glass-text
         = link_to shop.twitter_id, "https://twitter.com/#{shop.twitter_id}", target: :_blank, rel: 'nopener noreferrer'
-  = render Shop::DescriptionListComponent.new(shop: shop, attribute: :opening_hours) do |c|
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :opening_hours) do |c|
     - c.description_content
       label for="table-check"
         span.today-opening-hours

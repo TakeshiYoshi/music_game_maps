@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Shop::BadgeComponent, type: :component do
+RSpec.describe Shops::BadgeComponent, type: :component do
   let(:game) { create(:game, title: 'GAME BEAT') }
   let(:shop) { create(:shop) }
   let(:game_machine) { create(:game_machine, game:, shop:) }

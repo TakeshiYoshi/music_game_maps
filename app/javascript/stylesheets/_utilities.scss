@@ -16,6 +16,22 @@
   color: $GRAY0;
 }
 
+.basic-link {
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+
+  &:hover {
+    color: lighten($GRAY0, 20%);
+  }
+}
+
+.basic-explanation {
+  font-size: $FONT-SIZE-SM;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY1;
+}
+
 .basic-text-field {
   font-size: $FONT-SIZE-MD;
   font-weight: $FONT-WEIGHT-NORMAL;

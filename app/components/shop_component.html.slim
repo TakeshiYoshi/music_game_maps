@@ -12,7 +12,7 @@ li.m-shopCard data-target-marker="shop-marker-#{shop.id}"
           h2.m-shopCard__shop-name
             = shop.name
           .m-shopCard__badge-container 
-            = render ::Shop::BadgeComponent.with_collection(shop.game_machines)
+            = render ::Shops::BadgeComponent.with_collection(shop.game_machines)
           .m-shopCard__information-container
             table.m-shopCard__information
               tbody 

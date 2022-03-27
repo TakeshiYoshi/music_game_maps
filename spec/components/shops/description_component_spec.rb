@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Shop::DescriptionComponent, type: :component do
+RSpec.describe Shops::DescriptionComponent, type: :component do
   let(:shop) { create(:shop) }
   subject(:component) { described_class.new(shop:) }
 

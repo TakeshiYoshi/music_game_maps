@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Shop::BadgeComponent < ViewComponent::Base
+class Shops::BadgeComponent < ViewComponent::Base
   with_collection_parameter :game_machine
 
   def initialize(game_machine:)
