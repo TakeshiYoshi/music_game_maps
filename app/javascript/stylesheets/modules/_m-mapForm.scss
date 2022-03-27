@@ -1,0 +1,78 @@
+.m-mapForm {
+  font-size: $FONT-SIZE-MD;
+  color: $WHITE0;
+  padding: 10px;
+
+  &__number-of-searches {
+    margin-bottom: 10px;
+
+    &-header {
+      font-weight: $FONT-WEIGHT-BOLD;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+
+    &-select {
+      color: $WHITE0;
+      border: solid 1px $WHITE0;
+      padding: 2px 15px;
+      margin: 0 5px 5px 0;
+      background-color: $THEME;
+      outline: none;
+      transition: 0.3s;
+    }
+  }
+
+  &__games {
+    margin-bottom: 10px;
+
+    &-header {
+      font-weight: $FONT-WEIGHT-BOLD;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+
+    &-checkbox {
+      display: none;
+    }
+
+    &-label {
+      border: solid 1px $WHITE0;
+      padding: 2px 15px;
+      margin: 0 5px 5px 0;
+      background-color: $THEME;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: lighten($THEME, 20%);
+      }
+    }
+
+    input:checked + label {
+      border: solid 1px darken($WHITE0, 20%);
+      color: darken($WHITE0, 10%);
+      background-color: darken($THEME, 20%);
+    }
+  }
+
+  &__buttons {
+    margin-bottom: 10px;
+
+    &-submit {
+      display: none;
+    }
+
+    &-clear {
+      border: solid 1px $WHITE0;
+      padding: 2px 15px;
+      background-color: $WHITE0;
+      color: $THEME;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: lighten($THEME, 10%);
+        color: $WHITE0;
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+=tag.div class: 'm-userMenu__button', data: { controller: 'user-menu' }
+  .m-userMenu__button-container data-action="click->user-menu#toggle"
+    .m-userMenu__button-line-1
+    .m-userMenu__button-line-2
+    .m-userMenu__button-line-3
+
+  .m-userMenu__header
+  .m-userMenu__body
+      ul 
+        - if helpers.logged_in?
+          = link_to user_path(current_user), class: 'm-userMenu__list-item', data: { turbo: false }
+            li = t('defaults.mypage')
+          = link_to edit_user_path(current_user), class: 'm-userMenu__list-item', data: { turbo: false }
+            li = t('defaults.setting')
+          = link_to logout_path, method: :delete, class: 'm-userMenu__list-item', data: { turbo: false }
+            li = t('defaults.logout')
+        - else 
+          = link_to login_path, class: 'm-userMenu__list-item', data: { turbo: false }
+            li = t('defaults.login')

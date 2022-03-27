@@ -7,8 +7,8 @@
             = link_to shop_history.shop.name, shop_path(shop_history.shop), target: :_blank, rel: 'noopener noreferrer'
           = link_to "(#{shop_history.user.nickname})", user_path(shop_history.user), class: 'admin-link'
         .admin-shop-header-end
-          = link_to t('admin.shop_histories.index.disconfirm'), admin_shop_history_path(shop_history), method: :delete, class: 'btn btn-danger mr-2'
-          = link_to t('admin.shop_histories.index.confirm'), admin_shop_history_path(shop_history), method: :patch, class: 'btn btn-primary'
+          = link_to t('admin.shop_histories.index.disconfirm'), admin_shop_history_path(shop_history), method: :delete, class: 'btn btn-danger mr-2', local: true, data: { turbo: false }
+          = link_to t('admin.shop_histories.index.confirm'), admin_shop_history_path(shop_history), method: :patch, class: 'btn btn-primary', local: true, data: { turbo: false }
       .admin-shop-body.d-flex
         .admin-shop-image-container.text-center style="margin-right: 10px;"
           = image_tag shop_history.shop.appearance_image.url, class: 'admin-shop-image'

@@ -1,8 +1,10 @@
-.badge.p-0
-  .d-flex.align-items-center.rounded-pill class="badge-content#{'-no-data' if game_machine.unknown_count?}"
-    div class="game-title#{'-no-data d-flex align-items-center justify-content-center' if game_machine.unknown_count?}"
+.m-badge
+  = tag.div class: badge_classes
+    p.m-badge__badge-name
       = game_machine.game.title
-    - unless game_machine.unknown_count?
-      .count-circle.rounded-pill.d-flex.align-items-center.justify-content-center
-        .game-count
-          = game_machine.count
+    - if game_machine.unknown_count?
+      // スタイル調整のため
+      = tag.div style: 'margin-left: 5px;'
+    - else
+      = tag.div class: count_classes
+        = game_machine.count

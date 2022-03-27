@@ -97,4 +97,12 @@ class Shop < ApplicationRecord
     # データベース書き込み
     save
   end
+
+  def games_array
+    games.map(&:id)
+  end
+
+  def set_games_info
+    update(games_info: games_array.map(&:to_s).to_s)
+  end
 end

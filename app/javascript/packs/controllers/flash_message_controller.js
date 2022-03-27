@@ -7,6 +7,10 @@ export default class extends Controller {
       return false
     }
 
+    this.animation();
+  }
+
+  animation() {
     // フェードインアニメーション
     this.element.classList.add('display');
     // 5秒でフェードアウトアニメーション

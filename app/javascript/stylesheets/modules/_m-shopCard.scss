@@ -1,0 +1,170 @@
+.m-shopCard {
+  list-style: none;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    background-color: $WHITE1;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+    margin-bottom: 20px;
+    transition: 0.3s;
+    position: relative;
+  }
+
+  &__label {
+    top: 0;
+    left: 0;
+    border-bottom: 5em solid transparent;
+    border-left: 5em solid $THEME;
+    position: absolute;
+    z-index: 100;
+  }
+  
+  &__label-text {
+    display: block;
+    top: 13px;
+    transform: rotate(-45deg);
+    font-size: $FONT-SIZE-LG;
+    font-weight: $FONT-WEIGHT-BOLD;
+    color: white;
+    left: 0;
+    position: absolute;
+    z-index: 101;
+  }
+
+  &:hover {
+    .m-shopCard__hover-light {
+      opacity: 0.2;
+    }
+  }
+
+  &__hover-light {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: start;
+  }
+
+  &__appearance-img {
+    min-width: 260px;
+    min-height: 200px;
+    width: 260px;
+    height: 200px;
+    margin-right: 20px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__description {
+    flex: 1;
+  }
+
+  &__shop-name {
+    font-size: $FONT-SIZE-LG;
+    color: $GRAY0;
+    font-weight: $FONT-WEIGHT-BOLD;
+    margin-bottom: 10px;
+    &:before {
+      counter-increment: shop-counter;
+      content: counter(shop-counter) ".";
+      margin-right: 5px;
+    }
+  }
+
+  &__badge-container {
+    margin-bottom: 5px;
+  }
+
+  &__information {
+    font-size: $FONT-SIZE-SM;
+    color: $GRAY0;
+    background-color: $WHITE1;
+    border-collapse:  collapse;
+    border: solid 1px $GRAY0;
+    width: 100%;
+
+    th {
+      vertical-align: top;
+      background-color: $GRAY2;
+      padding: 5px 10px;
+      border: solid 1px $GRAY0;
+      width: 100px;
+    }
+
+    td {
+      padding: 5px 10px;
+      border: solid 1px $GRAY0;
+    }
+  }
+
+  &__information-station {
+    :not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}
+
+// スマホ向け
+@include media-breakpoint-down(sm) {
+  .m-shopCard {
+    &__item {
+      padding: 0;
+    }
+
+    &__container {
+      display: block;
+    }
+
+
+    &__description {
+      padding: 10px;
+    }
+
+    &__appearance-img {
+      min-width: 100%;
+      min-height: 100px;
+      width: 100%;
+      height: 100px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__label {
+      border-bottom: 4em solid transparent;
+      border-left: 4em solid $THEME;
+      position: absolute;
+      z-index: 100;
+    }
+
+    &__label-text {
+      display: block;
+      top: 13px;
+      transform: rotate(-45deg);
+      font-size: $FONT-SIZE-MD;
+      font-weight: $FONT-WEIGHT-BOLD;
+      color: white;
+      left: 0;
+      position: absolute;
+      z-index: 101;
+    }
+  }
+}

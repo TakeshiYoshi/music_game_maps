@@ -10,4 +10,20 @@ class Shop::BadgeComponent < ViewComponent::Base
   private
 
   attr_reader :game_machine
+
+  def badge_classes
+    classes = ['m-badge__badge']
+
+    classes << 'target' if session[:games]&.keys&.include?(game_machine.game.id.to_s)
+
+    classes
+  end
+
+  def count_classes
+    classes = ['m-badge__badge-count']
+
+    classes << 'target' if session[:games]&.keys&.include?(game_machine.game.id.to_s)
+
+    classes
+  end
 end

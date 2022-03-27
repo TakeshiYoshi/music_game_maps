@@ -99,7 +99,7 @@ RSpec.describe 'Users::Profile', type: :system do
       end
 
       context '他のユーザーで自分のプロフィールを表示' do
-        it 'ユーザー投稿に関する部分が表示されないこと' do
+        it 'ユーザー投稿に関する部分が表示されないこと' do
           logout user
           login another_user
           visit user_path(user)

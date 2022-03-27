@@ -1,4 +1,7 @@
 - set_meta_tags title: t('.title')
-= render @shop_histories
-.col-12.d-flex.justify-content-center
-  = paginate @shop_histories, views_prefix: 'admin'
+- if @shop_histories.present?
+  = render @shop_histories
+  .col-12.d-flex.justify-content-center
+    = paginate @shop_histories, views_prefix: 'admin'
+- else 
+  p = t '.no_data'

@@ -1,0 +1,9 @@
+footer 
+  .copyright-container
+    span = t('defaults.copyright')
+    .footer-logo-container
+      = render ::Shared::LogoComponent.new(theme_color: '#FF8524', class: 'footer-logo')
+  .footer-links
+    = link_to t('policies.user_policy.title'), user_policy_path, data: { turbo: false }
+    = link_to t('policies.privacy_policy.title'), privacy_policy_path, data: { turbo: false }
+    = link_to t('inquiries.inquiry.title'), inquiry_path, data: { turbo: false }

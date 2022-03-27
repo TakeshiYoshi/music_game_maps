@@ -2,7 +2,7 @@
 .col-12
   .main-card.mb-3.card
     .card-body
-      = form_with model: [:admin, @shop], local: true do |f|
+      = form_with model: [:admin, @shop], local: true, data: { turbo: false } do |f|
         .error-message.text-danger
           = render 'shared/error_messages', object: @shop
         .d-flex.justify-content-between.align-items-center
