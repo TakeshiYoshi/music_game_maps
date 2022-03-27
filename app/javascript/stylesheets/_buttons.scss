@@ -7,6 +7,8 @@
   font-weight: $FONT-WEIGHT-BOLD;
   box-shadow: 0 0 10px rgba($SHADOW0, 0.3);
   margin-top: 0;
+  border: none;
+  outline: none;
 
   &:hover {
     color: $WHITE0;

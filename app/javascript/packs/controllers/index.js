@@ -27,3 +27,6 @@ application.register("user-menu", UserMenuController)
 
 import MapFormController from "./map_form_controller.js"
 application.register("map-form", MapFormController)
+
+import TippyController from "./tippy_controller.js"
+application.register("tippy", TippyController)

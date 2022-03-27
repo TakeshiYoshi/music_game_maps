@@ -3,3 +3,50 @@
   padding: 10px;
   box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
 }
+
+.basic-title {
+  font-size: $FONT-SIZE-XL;
+  font-weight: $FONT-WEIGHT-BOLD;
+  color: $GRAY0;
+}
+
+.basic-text {
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+}
+
+.basic-text-field {
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  width: 100%;
+  padding: 5px 10px;
+  border: solid 1px $GRAY0;
+  outline: none;
+
+  &::placeholder {
+    color: rgba($GRAY0, 0.3);
+  }
+}
+
+.basic-error-field {
+  border: solid 1px $ERROR1;
+  background: rgba($ERROR0, 0.2);
+}
+
+.basic-error-text {
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-BOLD;
+  color: $ERROR0;
+  text-align: left;
+  height: 20px;
+}
+
+.basic-valid-error-text {
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-BOLD;
+  color: $ERROR0;
+  text-align: center;
+  margin-bottom: 3px;
+}
