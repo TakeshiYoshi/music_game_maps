@@ -1,0 +1,10 @@
+.form-container.text-center
+  = form_with url: user_sessions_path, method: :post, class: 'login-form', local: true, data: { turbo: false } do |f|
+    .form-group
+      = f.text_field :email, class: 'basic-text-field', placeholder: User.human_attribute_name(:email)
+    .form-group
+      = f.password_field :password, class: 'basic-text-field', placeholder: User.human_attribute_name(:password)
+    .form-group.d-flex.justify-content-center.align-items-center
+      = f.check_box :remember
+      = f.label :remember, t('defaults.form.remember_me'), class: 'basic-text ms-2'
+    = f.submit t('defaults.login'), class: 'btn-basic'
