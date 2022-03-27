@@ -147,7 +147,6 @@ footer {
   transition: 0.3s;
   
   &:hover {
-    padding: 0 0 10px 0;
     font-weight: $FONT-WEIGHT-BOLD;
     color: $WHITE0;
   }
@@ -155,6 +154,56 @@ footer {
 
 .map-menu-icon {
   margin-left: 10px;
+}
+
+// フラッシュメッセージ
+.message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  z-index: 99999;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.message-dialog.display {
+  top: 10px;
+  padding: 5px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+.map-message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.map-message-dialog.display {
+  top: 5px;
+  padding: 5px 20px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
 }
 
 /* ダークモード時の色 */

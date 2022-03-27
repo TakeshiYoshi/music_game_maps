@@ -30,3 +30,6 @@ application.register("map-form", MapFormController)
 
 import TippyController from "./tippy_controller.js"
 application.register("tippy", TippyController)
+
+import DisplayLoaderController from "./display_loader_controller.js"
+application.register("display-loader", DisplayLoaderController)
