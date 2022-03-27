@@ -1,6 +1,6 @@
 - set_meta_tags title: @shop.name
 = render ::Shops::DescriptionComponent.new(shop: @shop)
-.col-12.main-content.d-flex
+.col-12.d-flex
   .col-sm-12.col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
     input.d-none#user-review-form-check type="checkbox"
     .d-flex

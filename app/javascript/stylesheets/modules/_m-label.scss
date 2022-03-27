@@ -3,7 +3,26 @@
   margin-right: 10px;
   padding: 3px 15px;
   background-color: $GRAY1;
-  font-size: 1rem;
-  color: white;
+  font-size: $FONT-SIZE-MD;
+  color: $WHITE0;
   border-radius: 5px;
+}
+
+.btn-label-size {
+  padding: 3px 15px !important;
+  font-size: $FONT-SIZE-MD !important;
+}
+
+// スマホ用
+@include media-breakpoint-down(sm) {
+  .m-label {
+    padding: 2px 10px;
+    font-size: $FONT-SIZE-SM;
+    color: $WHITE0;
+  }
+  
+  .btn-label-size {
+    padding: 2px 10px !important;
+    font-size: $FONT-SIZE-SM !important;
+  }
 }
