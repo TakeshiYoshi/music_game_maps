@@ -103,8 +103,7 @@ RSpec.describe 'Users', type: :system do
         expect(user.email).to eq('hogefuga@fuga.com'), 'メールの編集が適応されていません。'
         expect(user.anonymous).to eq(true), '匿名設定の編集が適応されていません'
         # 再度ログインを行いパスワードが変更されたかチェックする
-        page.find('label[for=nav-menu-check]').click
-        sleep 1
+        find('.m-userMenu__button').click
         click_on 'ログアウト'
         expect(page.find('.flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
         visit login_path

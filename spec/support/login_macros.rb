@@ -8,8 +8,7 @@ module LoginMacros
 
   def logout(user)
     visit login_path
-    find('label[for=nav-menu-check]').click
-    sleep 1
+    find('.m-userMenu__button').click
     click_on 'ログアウト'
     has_css?('.flash-message', text: 'ログアウトしました')
   end
