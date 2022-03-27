@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def new_with_twitter
     @user_form = UserForm.new
+    @nickname = params[:nickname]
   end
 
   def create_with_twitter
