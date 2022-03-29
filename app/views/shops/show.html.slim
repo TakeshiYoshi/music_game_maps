@@ -1,30 +1,8 @@
 - set_meta_tags title: @shop.name
-= render Shop::DescriptionComponent.new(shop: @shop)
-.col-12.main-content.d-flex
-  .col-sm-12.col-md-12.glass.user-review class="col-lg-#{@shop.twitter_id ? '9' : '12'}"
-    input.d-none#user-review-form-check type="checkbox"
-    .d-flex
-      .col-6.d-flex.align-items-center
-        = render Shared::LabelComponent.new(name: t('shops.show.user_review_label'))
-      .col-6.d-flex.align-items-center.justify-content-end
-        - if logged_in?
-          label.btn.btn-glass.btn-label-size.rounded-pill.user-review-form-button for="user-review-form-check"
-            = t 'shops.show.user_review_btn'
-        - else
-          = render Shared::PrimaryButtonComponent.new(text: t('shops.show.user_review_btn_signup'), href: signup_path, class: 'user-review-form-button')
-    = render 'user_reviews/form', user_review_form: @user_review_form, shop: @shop if logged_in?
-    - if @shop.user_reviews.present? && !@shop.user_reviews.first.id.nil?
-      #userReviews
-        .user-review-content.user-reviews
-          = render partial: 'user_reviews/user_review', collection: @shop.user_reviews
-          = javascript_pack_tag 'user_review'
-    - else 
-      .user-review-empty.mx-5.text-center
-        = image_pack_tag 'user_review_empty.png', class: 'user-review-empty-img'
-        p.glass-text
-          = t 'shops.show.user_review_empty'
+= render ::Shops::DescriptionComponent.new(shop: @shop)
+
+.col-12.d-flex
+  = render ::Shops::DetailComponent.new(shop: @shop, user_review_form: @user_review_form, logged_in: logged_in?, current_user: current_user)
 
   - if @shop.twitter_id
-    = render Shop::TwitterComponent.new(twitter_id: @shop.twitter_id)
-
-= render 'user_reviews/image_preview'
+    = render ::Shops::TwitterComponent.new(twitter_id: @shop.twitter_id)

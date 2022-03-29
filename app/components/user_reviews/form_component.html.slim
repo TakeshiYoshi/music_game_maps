@@ -1,0 +1,25 @@
+.m-userReviewForm.my-4
+  #user_review_form_adjust_position
+  = form_with model: user_review_form, url: shop_user_reviews_path(shop.id), method: :post, id: 'userReviewForm', local: true, data: { turbo: false } do |f|
+    = render 'shared/error_messages', object: user_review_form
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :shop_id, value: shop.id
+    = f.text_area :body, id: 'userReviewBody', rows: 5, class: 'basic-text-field', 'v-model': "bodyField", '@input': 'bodyValid()', ':class': "bodyError ? 'basic-error-field' : ''", placeholder: "#{UserReview.human_attribute_name(:body)}#{t('defaults.user_review_body_valid')}"
+    p.basic-error-text v-text='bodyError'
+    label.btn-basic for="userReviewImages"
+      = t 'user_reviews.new.upload_images'
+    p.basic-error-text v-text='imagesError'
+    = f.file_field :images, accept: 'image/jpeg,image/jpg,image/gif,image/png', multiple: true, id: 'userReviewImages', class: 'd-none', '@change': 'previewImages'
+    .m-userReviewForm__image.mb-3
+      .m-userReviewForm__image-container v-for='(image, index) in images' v-if='index < 4'
+        img.m-userReviewForm__image-thumb :src='image'
+    p.basic-text.mb-3 = t('user_reviews.new.about_games_exp')
+    - Game.all.each do |game|
+      input.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user"
+      label.user-games-label for="game_#{game.id}_user"
+        = game.title
+    .text-center.mt-4
+      = f.submit t('defaults.post'), class: 'btn-basic px-5 w-auto'
+
+= javascript_pack_tag 'user_review_scroll'
+= javascript_pack_tag 'user_review_form'

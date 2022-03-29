@@ -1,5 +1,0 @@
-.glass.twitter-content.text-center
-  = render Shared::LabelComponent.new(name: t('shops.show.twitter_label'))
-  .twitter-timeline
-    =link_to 'Tweets by TwitterDev', "https://twitter.com/#{twitter_id}", class: 'twitter-timeline', 'data-chrome': 'noheader transparent', 	'data-link-color': "#FFFFFF", 'data-theme': 'dark', 'data-tweet-limit': '3'
-    script async='' charset='utf-8' src='https://platform.twitter.com/widgets.js'

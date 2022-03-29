@@ -1,0 +1,23 @@
+= form_with model: profile_form, url: user_profile_path(user), scope: :profile_form, method: :patch, local: true, id: 'edit_profile_form', class: 'row m-usersProfilesForm', data: { turbo: false, controller: 'edit-profile-form' } do |f| 
+  .m-usersProfilesForm__avatar-container.col-md-2.col-sm-12
+    label.m-usersProfilesForm__avatar-label for="avatar"
+      .m-usersProfilesForm__avatar-image-container
+        = image_tag user.avatar.url, id: 'avatarImg', class: 'm-usersProfilesForm__avatar-image'
+      .avatar-cover.d-flex.justify-content-center.align-items-center
+        = helpers.fa_icon 'file-upload'
+    = f.file_field :avatar, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'avatar', class: 'd-none', data: { action: 'change->edit-profile-form#imagePreview', preview_id: 'avatarImg' }
+  .m-usersProfilesForm__body.col-md-10.col-sm-12
+    = render 'shared/error_messages', object: profile_form
+    = f.text_field :nickname, id: 'userNickname', class: 'basic-text-field', ':class': "nicknameError ? 'error-field' : ''", placeholder: User.human_attribute_name(:nickname), data: { action: 'edit-profile-form#validation' }
+    p.basic-error-text#userNicknameError
+    = f.text_area :description, id: 'userDescription', rows: 5, class: 'basic-text-field', placeholder: User.human_attribute_name(:description), data: { action: 'edit-profile-form#validation' }
+    p.basic-error-text#userDescriptionError
+
+    .m-usersProfilesForm__playing-games 
+      span.basic-text = t 'users.new.explain_playing_game'
+      .m-usersProfilesForm__user-games
+        - Game.all.each do |game|
+          input.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user" checked=(user.games.include?(game))
+          label.user-games-label for="game_#{game.id}_user"
+            = game.title
+  = f.submit class: 'btn btn-basic px-4 w-auto'

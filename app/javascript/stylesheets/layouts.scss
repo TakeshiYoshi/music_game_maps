@@ -49,7 +49,6 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  z-index: 9999;
   border-top: solid 1px $GRAY1;
   font-size: $FONT-SIZE-MD;
   color: $GRAY0;
@@ -147,7 +146,6 @@ footer {
   transition: 0.3s;
   
   &:hover {
-    padding: 0 0 10px 0;
     font-weight: $FONT-WEIGHT-BOLD;
     color: $WHITE0;
   }
@@ -155,6 +153,75 @@ footer {
 
 .map-menu-icon {
   margin-left: 10px;
+}
+
+// フラッシュメッセージ
+.message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  z-index: 99999;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.message-dialog.display {
+  top: 10px;
+  padding: 5px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+.map-message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.map-message-dialog.display {
+  top: 5px;
+  padding: 5px 20px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+/* ユーザー登録時のラベル */
+.user-games-label {
+  height: 24px;
+  border-radius: 12px;
+  border: solid 0.5px $GRAY0;
+  font-size: $FONT-SIZE-SM;
+  font-weight: $FONT-WEIGHT-MEDIUM;
+  color: $GRAY0;
+  padding: 0 10px;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+input:checked + .user-games-label {
+  background-color: $GRAY1;
+  color: $GRAY2;
 }
 
 /* ダークモード時の色 */

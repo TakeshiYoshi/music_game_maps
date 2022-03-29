@@ -27,7 +27,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'userPassword', with: 'Foobarhogehoge'
           fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
           fill_in 'userNickname', with: 'FOOBAR'
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
       end
@@ -38,7 +38,7 @@ RSpec.describe 'Users', type: :system do
         visit signup_path
         expect {
           fill_in 'userEmail', with: 'worng'
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
         expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
         visit signup_path
         expect {
           fill_in 'userEmail', with: user.email
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
         expect(current_path).to eq(users_path), '別のページへリダイレクトされています'

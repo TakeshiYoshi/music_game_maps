@@ -1,0 +1,17 @@
+.m-imagePreview.modal.fade#userReviewModal tabindex="-1" aria-labelledby="userReviewModalLabel" aria-hidden="true"
+  .m-imagePreview__modal.modal-dialog
+    .m-imagePreview__modal-container.modal-content
+      .m-imagePreview__modal-body.modal-body
+        .m-imagePreview__modal-body-close-button type="button" data-bs-dismiss="modal" aria-label="Close"
+          = helpers.fa_icon 'times'
+        .m-imagePreview__modal-user-review
+          .container-xl
+            .m-imagePreview__modal-user-review-container
+              img.m-imagePreview__modal-user-review-icon#userReviewIconPreview
+              span.m-imagePreview__modal-user-review-name#userReviewNicknamePreview
+              span.m-imagePreview__modal-user-review-date#userReviewCreatedAtPreview
+            .m-imagePreview__modal-user-review-body#userReviewBodyPreview
+        .m-imagePreview__modal-images
+          #imageSwiper
+
+= javascript_pack_tag 'image_preview'

@@ -32,12 +32,12 @@ RSpec.describe 'Users::Profile', type: :system do
       it 'ユーザープロフィールの編集が成功すること(プレー機種)' do
         visit edit_user_profile_path(user)
         expect {
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '更新する'
         }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
         expect(current_path).to eq(user_path(user)), 'プロフィールページへリダイレクトされていません'
         expect(page.find('.flash-message')).to have_content('プロフィールを編集しました。'), 'フラッシュメッセージが表示されてません'
-        expect(page.all('label.glass-game-label').length).to eq(1), 'プレー機種の編集が適応されていません'
+        expect(page.all('.m-badge__badge').length).to eq(1), 'プレー機種の編集が適応されていません'
       end
 
       it 'ユーザープロフィールの編集が成功すること(アバター)' do
@@ -99,7 +99,7 @@ RSpec.describe 'Users::Profile', type: :system do
       end
 
       context '他のユーザーで自分のプロフィールを表示' do
-        it 'ユーザー投稿に関する部分が表示されないこと' do
+        it 'ユーザー投稿に関する部分が表示されないこと' do
           logout user
           login another_user
           visit user_path(user)

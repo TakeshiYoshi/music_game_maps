@@ -12,7 +12,7 @@ export default class extends Controller {
       ],
       'userDescription': [
         {
-          'reg': /^[\s\S]{1,300}$/,
+          'reg': /^[\s\S]{0,300}$/,
           'errorMessage': '自己紹介は300文字以内で入力してください。'
         }
       ]
@@ -31,10 +31,10 @@ export default class extends Controller {
     this.validations[id].map((valid) => {
       if (valid['reg'].test(value)) {
         errorNode.textContent = '';
-        e.target.classList.remove('error-field');
+        e.target.classList.remove('basic-error-field');
       } else {
         errorNode.textContent = valid['errorMessage'];
-        e.target.classList.add('error-field');
+        e.target.classList.add('basic-error-field');
       }
     })
 
@@ -42,7 +42,7 @@ export default class extends Controller {
     if (this.nullChecks[id]) {
       if (value.length === 0) {
         errorNode.textContent = this.nullChecks[id];
-        e.target.classList.add('error-field');
+        e.target.classList.add('basic-error-field');
       }
     }
   }

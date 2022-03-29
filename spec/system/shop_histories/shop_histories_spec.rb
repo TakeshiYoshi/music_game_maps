@@ -14,7 +14,7 @@ RSpec.describe "ShopHistories", type: :system do
     context '未ログイン状態' do
       it 'ユーザー登録ボタンが表示されること' do
         visit shop_path(shop)
-        expect(page).to have_content('ユーザー登録してこの店舗の情報を編集する'), 'ユーザー登録ボタンが表示されていません'
+        expect(page).to have_content('ユーザー登録して情報編集'), 'ユーザー登録ボタンが表示されていません'
       end
     end
 

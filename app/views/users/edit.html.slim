@@ -1,8 +1,8 @@
 - set_meta_tags title: t('.title')
-.col-12.glass.glass-round.text-center
-  h1.page-title-text.glass-text
+.col-12.basic-box.text-center
+  h1.basic-title
     = t '.title'
   .d-flex.justify-content-center
     = render 'edit_form', user: @user
   .mt-4.mb-2
-    = link_to 'アカウントを削除する', user_path(@user), class: 'btn btn-glass rounded-pill px-4', method: :delete, data: { confirm: t('.destroy_confirm'), turbo: false }
+    = link_to 'アカウントを削除する', user_path(@user), class: 'btn-basic', method: :delete, data: { confirm: t('.destroy_confirm'), turbo: false }

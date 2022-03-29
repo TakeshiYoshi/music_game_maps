@@ -1,15 +1,17 @@
 - set_meta_tags title: t('.title')
-.col-12.glass.login-container.text-center
-  h1.page-title-text.glass-text
+.col-12.basic-box.text-center
+  h1.basic-title
     = t '.title'
   .d-flex.justify-content-center
-    = render 'form'
+    = render ::UserSessions::FormComponent.new
   .twitter-login.mt-4
-    = link_to auth_at_provider_path(provider: :twitter), class: 'btn btn-glass rounded-pill px-4' do 
+    = link_to auth_at_provider_path(provider: :twitter), class: 'btn-basic' do 
       i.fab.fa-twitter 
       span.twitter-login-text = t('.twitter_login')
   .page-links.d-flex.justify-content-center
-    = link_to signup_path, class: 'glass-link'
-      = t '.users_new_link'
-    = link_to new_password_reset_path, class: 'glass-link'
-      = t '.forgot_password_link'
+    ins
+      = link_to signup_path, class: 'basic-link'
+        = t '.users_new_link'
+    ins
+      = link_to new_password_reset_path, class: 'basic-link'
+        = t '.forgot_password_link'

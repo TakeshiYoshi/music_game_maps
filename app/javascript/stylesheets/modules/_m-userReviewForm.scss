@@ -1,0 +1,34 @@
+.m-userReviewForm {
+  position: relative;
+  border: solid 1px $GRAY0;
+  padding: 20px 30px;
+
+  &__image {
+    display: flex;
+
+    &-container {
+      margin-top: 10px;
+      background: white;
+      border-radius: 10px;
+      margin-right: 5px;
+      width: 150px;
+      height: 150px;
+      box-shadow: 0 0 6px 0 rgba($SHADOW0, 0.4);
+      object-fit: cover;
+    }
+
+    &-thumb {
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// 以下スマホ向け
+@include media-breakpoint-down(sm) {
+  .m-userReviewForm {
+    padding: 10px;
+  }
+}
