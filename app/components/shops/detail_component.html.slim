@@ -4,7 +4,7 @@
       = render ::Shared::LabelComponent.new(name: t('shops.show.user_review_label'))
     .m-shopDetail__header-form-button.col-6
       - if logged_in?
-        = link_to t('shops.show.user_review_btn'), '#userReviewCollapse', class: 'btn-basic btn-label-size', 'data-bs-toggle': 'collapse', 'aria-expanded': false, 'aria-controls': 'userReviewCollapse'
+        = link_to t('shops.show.user_review_btn'), '#userReviewCollapse', class: 'btn-basic btn-label-size', 'data-bs-toggle': 'collapse', 'aria-expanded': false, 'aria-controls': 'userReviewCollapse', id: 'userReviewFormCollapseBtn'
       - else
         = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.user_review_btn_signup'), href: signup_path, class: 'btn-label-size')
 

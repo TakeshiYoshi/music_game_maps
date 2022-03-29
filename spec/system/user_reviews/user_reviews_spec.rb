@@ -110,13 +110,14 @@ RSpec.describe "UserReviews", type: :system do
         page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
+          page.find(".user-games-label", text: 'GAME BEAT').click
           attach_file 'userReviewImages', 'spec/images/icon.png', make_visible: true
           click_button '投稿する'
         end
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
         expect(page.find('.flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
         within('#userReviews') do
-          expect(page.all('.user-review-image').length).to eq(1), 'ユーザー投稿に画像が添付されていません'
+          expect(page.all('.m-userReview__image-thumb').length).to eq(1), 'ユーザー投稿に画像が添付されていません'
         end
       end
     end
@@ -128,6 +129,7 @@ RSpec.describe "UserReviews", type: :system do
         page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
+          page.find(".user-games-label", text: 'GAME BEAT').click
           attach_file 'userReviewImages', ['spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png'], make_visible: true
           expect(page).to have_content('添付画像の枚数を4枚以下にしてください。'), 'バリデーションエラーが表示されていません'
           click_button '投稿する'
@@ -135,7 +137,7 @@ RSpec.describe "UserReviews", type: :system do
         expect(current_path).to eq(shop_path(shop)), 'ショップページへリダイレクトされていません'
         expect(page.find('.flash-message')).to have_content('情報提供ありがとうございました！！'), 'フラッシュメッセージが表示されてません'
         within('#userReviews') do
-          expect(page.all('.user-review-image').length).to eq(4), 'ユーザー投稿に正しい枚数の画像が添付されていません'
+          expect(page.all('.m-userReview__image-thumb').length).to eq(4), 'ユーザー投稿に正しい枚数の画像が添付されていません'
         end
       end
     end
@@ -204,11 +206,12 @@ RSpec.describe "UserReviews", type: :system do
         page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
+          page.find(".user-games-label", text: 'GAME BEAT').click
           attach_file 'userReviewImages', ['spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png'], make_visible: true
           click_button '投稿する'
         end
         within('#userReviews') do
-          page.all('.user-review-image').first.click
+          page.all('.m-userReview__image-thumb').first.click
         end
         within('#userReviewModal') do
           expect(page).to have_content(user.nickname), 'モーダルにユーザー名が表示されていません'
