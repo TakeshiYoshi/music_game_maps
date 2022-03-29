@@ -1,17 +1,20 @@
 @import './modules/m-shopCard';
 @import './modules/m-badge';
 @import './modules/m-userMenu';
-@import './modules/m-mapForm';
 @import './modules/m-scrollTop';
 @import './modules/m-loader';
 @import './modules/m-policy';
 @import './modules/m-inquiry';
 @import './modules/m-label';
-@import './modules/m-usersProfilesForm';
-@import './modules/m-userNewForm';
 @import './modules/m-shopDescription';
 @import './modules/m-twitter';
-@import './modules/m-userReviewForm';
 @import './modules/m-shopDetail';
 @import './modules/m-userReview';
 @import './modules/m-imagePreview';
+
+/* フォーム */
+@import './modules/m-mapForm';
+@import './modules/m-usersProfilesForm';
+@import './modules/m-userNewForm';
+@import './modules/m-userReviewForm';
+@import './modules/m-shopHistoryForm';

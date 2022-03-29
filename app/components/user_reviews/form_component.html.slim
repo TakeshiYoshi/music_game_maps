@@ -10,9 +10,9 @@
       = t 'user_reviews.new.upload_images'
     p.basic-error-text v-text='imagesError'
     = f.file_field :images, accept: 'image/jpeg,image/jpg,image/gif,image/png', multiple: true, id: 'userReviewImages', class: 'd-none', '@change': 'previewImages'
-    .user-review-content.user-review-images.d-flex.mb-3
-      .user-review-image v-for='(image, index) in images' v-if='index < 4'
-        img.review_image_thum :src='image'
+    .m-userReviewForm__image.mb-3
+      .m-userReviewForm__image-container v-for='(image, index) in images' v-if='index < 4'
+        img.m-userReviewForm__image-thumb :src='image'
     p.basic-text.mb-3 = t('user_reviews.new.about_games_exp')
     - Game.all.each do |game|
       input.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user"
