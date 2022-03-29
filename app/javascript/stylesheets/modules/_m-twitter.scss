@@ -1,0 +1,20 @@
+.m-twitter {
+  width: 100%;
+  display: flexbox;
+  margin-left: 15px;
+  text-align: center;
+
+  .twitter-timeline {
+    margin-top: 10px;
+
+    *:hover {
+      background: rgba(white, 0);
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .m-twitter {
+    display: none;
+  }
+}

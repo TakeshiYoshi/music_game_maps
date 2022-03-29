@@ -116,7 +116,7 @@ ja:
   shops:
     show:
       user_review_label: 'ユーザー投稿された情報'
-      user_review_btn: 'この店舗の筐体情報を投稿'
+      user_review_btn: '筐体情報を投稿'
       user_review_btn_signup: 'ユーザー登録して投稿する'
       user_review_empty: 'まだ投稿がありません。本店舗の情報提供お待ちしています。'
       twitter_label: '店舗Twitter情報'

@@ -1,0 +1,12 @@
+.m-userReviewForm {
+  position: relative;
+  border: solid 1px $GRAY0;
+  padding: 20px 30px;
+}
+
+// 以下スマホ向け
+@include media-breakpoint-down(sm) {
+  .m-userReviewForm {
+    padding: 10px;
+  }
+}

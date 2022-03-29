@@ -1,0 +1,21 @@
+.m-shopDetail.basic-box.col-sm-12.col-md-12 class="col-lg-#{shop.twitter_id ? '9' : '12'}"
+  .d-flex
+    .col-6.d-flex.align-items-center
+      = render ::Shared::LabelComponent.new(name: t('shops.show.user_review_label'))
+    .col-6.d-flex.align-items-center.justify-content-end
+      - if logged_in?
+        = link_to t('shops.show.user_review_btn'), '#userReviewCollapse', class: 'btn-basic btn-label-size', 'data-bs-toggle': 'collapse', 'aria-expanded': false, 'aria-controls': 'userReviewCollapse'
+      - else
+        = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.user_review_btn_signup'), href: signup_path, class: 'btn-label-size')
+  #userReviewCollapse.collapse
+    = render ::UserReviews::FormComponent.new(user_review_form: user_review_form, shop: shop, current_user: current_user) if logged_in?
+  - if shop.user_reviews.present? && !shop.user_reviews.first.id.nil?
+    #userReviews
+      .user-review-content.user-reviews
+        = render partial: 'user_reviews/user_review', collection: shop.user_reviews
+        = javascript_pack_tag 'user_review'
+  - else 
+    .user-review-empty.mx-5.text-center
+      = image_pack_tag 'user_review_empty.png', class: 'user-review-empty-img'
+      p.glass-text
+        = t 'shops.show.user_review_empty'

@@ -1,0 +1,9 @@
+.m-shopDetail {
+}
+
+// 以下スマホ向け
+@include media-breakpoint-down(md) {
+  .m-shopDetail {
+    width: 100%;
+  }
+}
