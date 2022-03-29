@@ -30,7 +30,7 @@ RSpec.describe "UserReviews", type: :system do
         user.update(anonymous: true)
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
           click_button '投稿する'
@@ -55,10 +55,10 @@ RSpec.describe "UserReviews", type: :system do
       it '正常に投稿が完了すること' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
-          page.find(".glass-game-label", text: 'GAME BEAT').click
+          page.find(".user-games-label", text: 'GAME BEAT').click
           sleep 0.5
           click_button '投稿する'
         end
@@ -75,7 +75,7 @@ RSpec.describe "UserReviews", type: :system do
       it '投稿に失敗し「本文を入力してください」とエラーが表示されること' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           click_button '投稿する'
         end
@@ -90,7 +90,7 @@ RSpec.describe "UserReviews", type: :system do
       it '投稿に失敗し「本文は1000文字以内で入力してください」とエラーが表示される' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: 'a'*1001
           expect(page).to have_content('本文は1~1000文字で入力してください。'), 'バリデーションエラーが表示されていません'
@@ -107,7 +107,7 @@ RSpec.describe "UserReviews", type: :system do
       it '投稿に成功し画像が表示されること' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
           attach_file 'userReviewImages', 'spec/images/icon.png', make_visible: true
@@ -125,7 +125,7 @@ RSpec.describe "UserReviews", type: :system do
       it '投稿に成功するが5枚目以降の画像は投稿されないこと' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
           attach_file 'userReviewImages', ['spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png'], make_visible: true
@@ -147,7 +147,7 @@ RSpec.describe "UserReviews", type: :system do
       another_user.activate!
       login user
       visit shop_path(shop)
-      page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+      page.find(".btn-basic", text: '筐体情報を投稿').click
       within('#userReviewForm') do
         fill_in 'userReviewBody', with: '本文本文本文'
         click_button '投稿する'
@@ -188,7 +188,7 @@ RSpec.describe "UserReviews", type: :system do
         visit shop_path(shop)
         within('#userReviews') do
           page.accept_confirm do
-            page.find(".btn-glass", text: '削除する').click
+            page.find(".btn-basic", text: '削除する').click
           end
         end
         expect(page).to have_content('まだ投稿がありません。本店舗の情報提供お待ちしています。'), 'ユーザーレビューが削除されていません'
@@ -201,7 +201,7 @@ RSpec.describe "UserReviews", type: :system do
       it 'モーダルが開き画像が拡大表示されること' do
         login user
         visit shop_path(shop)
-        page.find(".btn-glass", text: 'この店舗の筐体情報を投稿').click
+        page.find(".btn-basic", text: '筐体情報を投稿').click
         within('#userReviewForm') do
           fill_in 'userReviewBody', with: '本文本文本文'
           attach_file 'userReviewImages', ['spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png', 'spec/images/icon.png'], make_visible: true

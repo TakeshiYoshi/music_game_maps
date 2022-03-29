@@ -1,4 +1,31 @@
 .m-shopDetail {
+  &__header {
+    display: flex;
+
+    &-label {
+      display: flex;
+      align-items: center;
+    }
+
+    &-form-button {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+  }
+
+  &__user-review {
+    margin: 10px 0;
+
+    &-empty {
+      text-align: center;
+
+      img {
+        width: 400px;
+        height: auto;
+      }
+    }
+  }
 }
 
 // 以下スマホ向け

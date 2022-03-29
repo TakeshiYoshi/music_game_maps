@@ -113,6 +113,8 @@ ja:
       upload_images: '画像を投稿する(最大4枚)'
     create:
       success: '情報提供ありがとうございました！！'
+    destroy:
+      success: '投稿を削除しました。'
   shops:
     show:
       user_review_label: 'ユーザー投稿された情報'

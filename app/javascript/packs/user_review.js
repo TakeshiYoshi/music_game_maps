@@ -1,9 +1,9 @@
-window.setInformationToPreview = function(userReviewId, imageIndex) {
+window.setInformationToPreview = function (userReviewId, imageIndex) {
   // データ取得
   const nickname = document.getElementById('userReview-nickname-' + userReviewId).textContent;
   const iconUrl = document.getElementById('userReview-icon-' + userReviewId).dataset.url;
   const createdAt = document.getElementById('userReview-created-at-' + userReviewId).textContent;
-  const body = document.getElementById('userReview-body-' + userReviewId).cloneNode(true);
+  const body = document.getElementById('userReview-body-' + userReviewId).cloneNode(true).children[0];
   const images = document.getElementById('userReview-images-' + userReviewId);
   // データセット
   document.getElementById('userReviewNicknamePreview').textContent = nickname;
@@ -15,11 +15,11 @@ window.setInformationToPreview = function(userReviewId, imageIndex) {
   const swiper = document.getElementById('previewImages');
   swiper.firstChild.innerHTML = '';
 
-  for(const child of images.children) {
+  for (const child of images.children) {
     // タグ作成
     let swiperSlide = document.createElement('div');
     let image = document.createElement('img');
-    swiperSlide.setAttribute('class', 'glass-text userReview-image swiper-slide');
+    swiperSlide.setAttribute('class', 'm-imagePreview__modal-image swiper-slide');
     image.setAttribute('src', child.dataset.url);
     swiperSlide.appendChild(image);
     // タグ追加
