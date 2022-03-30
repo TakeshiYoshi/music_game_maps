@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_30_143913) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -147,6 +147,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_143913) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "station_lines", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.bigint "station_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_company_id"], name: "index_station_lines_on_station_company_id"
+  end
+
   create_table "stations", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "lat", precision: 10, scale: 7
@@ -210,6 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_143913) do
   add_foreign_key "shop_stations", "stations"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
+  add_foreign_key "station_lines", "station_companies"
   add_foreign_key "user_reviews", "shops"
   add_foreign_key "user_reviews", "users"
 end

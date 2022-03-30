@@ -11,4 +11,8 @@ namespace :stations do
   task get_companies: :environment do
     get_companies
   end
+
+  task get_lines: :environment do
+    get_lines
+  end
 end
