@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_25_120917) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_30_143913) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -138,6 +138,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_120917) do
     t.index ["city_id"], name: "index_shops_on_city_id"
     t.index ["name"], name: "index_shops_on_name", unique: true
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
+  end
+
+  create_table "station_companies", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stations", charset: "utf8mb4", force: :cascade do |t|

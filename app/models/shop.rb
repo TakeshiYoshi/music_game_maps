@@ -5,8 +5,6 @@ class Shop < ApplicationRecord
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
   has_many :shop_histories, dependent: :destroy
-  has_many :shop_stations, dependent: :destroy
-  has_many :stations, through: :shop_stations
   after_create :create_base_history unless Rails.env.test?
 
   mount_uploader :appearance_image, ShopAppearanceImageUploader
