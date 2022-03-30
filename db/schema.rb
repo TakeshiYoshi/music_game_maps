@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_30_155615) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -38,6 +38,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
+  create_table "companies", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "game_machines", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "shop_id", null: false
     t.bigint "game_id", null: false
@@ -58,9 +65,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
 
   create_table "lines", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "code"
+    t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_lines_on_name", unique: true
+    t.index ["company_id"], name: "index_lines_on_company_id"
   end
 
   create_table "playing_games", charset: "utf8mb4", force: :cascade do |t|
@@ -96,17 +105,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
     t.index ["user_id"], name: "index_shop_histories_on_user_id"
   end
 
-  create_table "shop_stations", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "shop_id", null: false
-    t.bigint "station_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "distance"
-    t.index ["shop_id", "station_id"], name: "index_shop_stations_on_shop_id_and_station_id", unique: true
-    t.index ["shop_id"], name: "index_shop_stations_on_shop_id"
-    t.index ["station_id"], name: "index_shop_stations_on_station_id"
-  end
-
   create_table "shops", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "twitter_id"
@@ -140,28 +138,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
   end
 
-  create_table "station_companies", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "station_lines", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "code"
-    t.bigint "station_company_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["station_company_id"], name: "index_station_lines_on_station_company_id"
-  end
-
   create_table "stations", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "code"
+    t.bigint "line_id", null: false
+    t.integer "index_number"
     t.decimal "lat", precision: 10, scale: 7
     t.decimal "lng", precision: 10, scale: 7
     t.bigint "prefecture_id", null: false
-    t.bigint "line_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["line_id"], name: "index_stations_on_line_id"
@@ -211,15 +195,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_154334) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "game_machines", "games"
   add_foreign_key "game_machines", "shops"
+  add_foreign_key "lines", "companies"
   add_foreign_key "playing_games", "games"
   add_foreign_key "playing_games", "users"
   add_foreign_key "shop_histories", "shops"
   add_foreign_key "shop_histories", "users"
-  add_foreign_key "shop_stations", "shops"
-  add_foreign_key "shop_stations", "stations"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
-  add_foreign_key "station_lines", "station_companies"
+  add_foreign_key "stations", "lines"
+  add_foreign_key "stations", "prefectures"
   add_foreign_key "user_reviews", "shops"
   add_foreign_key "user_reviews", "users"
 end
