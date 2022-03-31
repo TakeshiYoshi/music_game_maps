@@ -1,4 +1,4 @@
-class CreateShopHistories < ActiveRecord::Migration[6.0]
+class CreateShopHistories < ActiveRecord::Migration[7.0]
   def change
     create_table :shop_histories do |t|
       t.string :name

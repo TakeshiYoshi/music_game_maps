@@ -1,4 +1,4 @@
-class CreateGameMachines < ActiveRecord::Migration[6.0]
+class CreateGameMachines < ActiveRecord::Migration[7.0]
   def change
     create_table :game_machines do |t|
       t.references :shop, null: false, foreign_key: true

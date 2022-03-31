@@ -6,11 +6,4 @@ RSpec.describe Line, type: :model do
     line.valid?
     expect(line.errors[:name]).to include('を入力してください')
   end
-
-  it '路線名は一意であること' do
-    line = create(:line)
-    another_line = build(:line, name: line.name)
-    another_line.valid?
-    expect(another_line.errors[:name]).to include('はすでに存在します')
-  end
 end

@@ -1,4 +1,4 @@
-class AddColumnsToShops < ActiveRecord::Migration[6.0]
+class AddColumnsToShops < ActiveRecord::Migration[7.0]
   def change
     add_column :shops, :opening_hours, :text
     add_column :shops, :phone_number, :string

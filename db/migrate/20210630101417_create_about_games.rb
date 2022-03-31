@@ -1,4 +1,4 @@
-class CreateAboutGames < ActiveRecord::Migration[6.0]
+class CreateAboutGames < ActiveRecord::Migration[7.0]
   def change
     create_table :about_games do |t|
       t.references :user_review, null: false, foreign_key: true

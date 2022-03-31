@@ -1,4 +1,4 @@
-class ModifyEmailValidOfUsers < ActiveRecord::Migration[6.0]
+class ModifyEmailValidOfUsers < ActiveRecord::Migration[7.0]
   def up
     change_column :users, :email, :string, null: true
   end

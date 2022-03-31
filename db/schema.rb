@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_30_155615) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_082550) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -103,6 +103,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_155615) do
     t.integer "status", default: 0, null: false
     t.index ["shop_id"], name: "index_shop_histories_on_shop_id"
     t.index ["user_id"], name: "index_shop_histories_on_user_id"
+  end
+
+  create_table "shop_stations", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.bigint "station_id", null: false
+    t.integer "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id", "station_id"], name: "index_shop_stations_on_shop_id_and_station_id", unique: true
+    t.index ["shop_id"], name: "index_shop_stations_on_shop_id"
+    t.index ["station_id"], name: "index_shop_stations_on_station_id"
   end
 
   create_table "shops", charset: "utf8", force: :cascade do |t|
@@ -200,6 +211,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_30_155615) do
   add_foreign_key "playing_games", "users"
   add_foreign_key "shop_histories", "shops"
   add_foreign_key "shop_histories", "users"
+  add_foreign_key "shop_stations", "shops"
+  add_foreign_key "shop_stations", "stations"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
   add_foreign_key "stations", "lines"

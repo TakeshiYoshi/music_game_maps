@@ -1,11 +1,16 @@
 class Shop < ApplicationRecord
+  include Calculatorable
+
   belongs_to :prefecture
   belongs_to :city
   has_many :user_reviews, dependent: :destroy
   has_many :game_machines, dependent: :destroy
   has_many :games, through: :game_machines
   has_many :shop_histories, dependent: :destroy
+  has_many :shop_stations, dependent: :destroy
+  has_many :stations, through: :shop_stations
   after_create :create_base_history unless Rails.env.test?
+  after_create :create_shop_stations unless Rails.env.test?
 
   mount_uploader :appearance_image, ShopAppearanceImageUploader
 
@@ -102,5 +107,35 @@ class Shop < ApplicationRecord
 
   def set_games_info
     update(games_info: games_array.map(&:to_s).to_s)
+  end
+
+  def create_shop_stations
+    stations = near_stations
+
+    stations.each do |station|
+      distance = distance(lat, lng, station.lat, station.lng)
+
+      # 距離が10km以上の場合は最寄り駅としない
+      next if distance > 10_000
+
+      ShopStation.create(shop: self, station:, distance: distance(lat, lng, station.lat, station.lng))
+    end
+  end
+
+  def near_stations
+    companies = []
+    stations = []
+
+    Station.by_distance(origin: [lat, lng]).limit(50).each do |s|
+      # 駅を3個取得したら停止
+      break if stations.length >= 3
+      # 同じ会社の駅の場合はスキップ
+      next if companies.include?(s.line.company) && stations.map(&:name).include?(s.name)
+
+      companies << s.line.company
+      stations << s
+    end
+
+    stations
   end
 end
