@@ -3,6 +3,8 @@ class CreateShopStations < ActiveRecord::Migration[7.0]
     create_table :shop_stations do |t|
       t.references :shop, null: false, foreign_key: true
       t.references :station, null: false, foreign_key: true
+      t.integer :distance
+
       t.timestamps
     end
 

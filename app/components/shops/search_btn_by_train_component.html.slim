@@ -1,0 +1,5 @@
+.m-searchBtnByTrain
+  = link_to '#searchByTrainModal', class: icon_classes, 'data-bs-toggle': 'modal', 'data-bs-target': '#searchByTrainModal' do 
+    = helpers.fa_icon 'subway'
+
+= render ::Shops::SearchByTrainModalComponent.new(stations: stations)

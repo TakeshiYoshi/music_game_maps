@@ -22,11 +22,12 @@ li.m-shopCard data-target-marker="shop-marker-#{shop.id}"
                 tr 
                   th 最寄り駅
                   td
-                    - shop.shop_stations.each do |shop_station|
+                    - shop.shop_stations.order(distance: :ASC).each do |shop_station|
                       .m-shopCard__information-station
-                        span = shop_station.station.line.name
-                        span = shop_station.station.name
-                        span = shop_station.distance
+                        span.m-shopCard__information-line = shop_station.station.line.name
+                        span = "#{shop_station.station.name}駅"
+                        span = "#{shop_station.distance}m"
+                        span = shop_station.minutes_text
                 tr
                   th 営業時間
                   td = shop.today_text if shop.opening_hours.present?

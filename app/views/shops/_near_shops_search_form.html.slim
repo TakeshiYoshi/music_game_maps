@@ -1,6 +1,7 @@
 = form_with url: near_shops_search_path, method: :post, format: :turbo_stream do |f|
   = f.hidden_field :lat, id:"map-lat"
   = f.hidden_field :lng, id:"map-lng"
+  = f.hidden_field :type, value: :location
   = f.button class: 'search-around-here-button', id: 'search-near_shops_button', data: { controller: 'display-loader', action: 'display-loader#display' } do 
-    .icon-container class="#{ 'icon-blue' if session[:lat] }"
+    .icon-container class="#{ 'icon-blue' if session[:lat] && session[:search_type] == 'location' }"
       = fa_icon 'search'

@@ -1,5 +1,6 @@
 class Line < ApplicationRecord
-  has_many :stations
+  belongs_to :company
+  has_many :stations, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true
 end

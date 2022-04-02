@@ -16,6 +16,7 @@
       - if session[:lat] 
         = render ::Shops::ClearLocationSessionButtonComponent.new
       = render 'near_shops_search_form'
+      = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)
     = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
 .col-sm-12.col-md-12.col-lg-9
   = turbo_frame_tag 'shops' do

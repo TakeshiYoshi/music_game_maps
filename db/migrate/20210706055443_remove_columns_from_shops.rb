@@ -1,4 +1,4 @@
-class RemoveColumnsFromShops < ActiveRecord::Migration[6.0]
+class RemoveColumnsFromShops < ActiveRecord::Migration[7.0]
   def up
     remove_column :shops, :opening_time
     remove_column :shops, :closing_time

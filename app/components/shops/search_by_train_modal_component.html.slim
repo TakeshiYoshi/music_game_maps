@@ -1,0 +1,16 @@
+.modal.fade#searchByTrainModal tabindex="-1" aria-labelledby="searchByTrainModalLabel" aria-hidden="true"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.basic-title#searchByTrainModalLabel 駅から検索
+        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
+      .modal-body
+        = form_with url: stations_path, format: :turbo_stream do |f|
+          .form-group.d-flex
+            = f.text_field :name, class: 'basic-text-field mr-2', placeholder: '駅名を入力してください'
+            = f.submit '検索', class: 'btn-basic'
+        .m-searchByTrainModal-stations#stations
+          - if @stations.present?
+            p.basic-text.m-2
+              | 最寄り駅一覧
+          = render ::Stations::StationComponent.with_collection(@stations)

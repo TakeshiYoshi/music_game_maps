@@ -18,12 +18,18 @@ class FiltersController < ApplicationController
     set_filter
   end
 
-  def clear_near_shops_search
+  def clear_near_shops_search # rubocop:disable Metrics/AbcSize
     session.delete :lat
     session.delete :lng
     @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     set_filter
     flash.now[:map] = t('defaults.map_flash_message.clear_near_shops_search')
+    if cookies.permanent[:location_lat]
+      # 現在位置が有効の場合最寄り駅を5件取得
+      @stations = Station.by_distance(origin: [cookies.permanent[:location_lat], cookies.permanent[:location_lng]]).includes(:line).limit(5)
+    else
+      @station = nil
+    end
   end
 
   def cities_select
@@ -34,11 +40,16 @@ class FiltersController < ApplicationController
   def near_shops_search # rubocop:disable Metrics/AbcSize
     session[:lat] = params[:lat]
     session[:lng] = params[:lng]
+    session[:search_type] = params[:type]
     session.delete :prefecture_id
     session.delete :city_id
     @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     set_filter
-    flash.now[:map] = t('defaults.map_flash_message.near_shops_search')
+    flash.now[:map] = if session[:search_type] == 'location'
+                        t('defaults.map_flash_message.near_shops_search')
+                      else
+                        t('defaults.map_flash_message.train_search')
+                      end
   end
 
   def set_location

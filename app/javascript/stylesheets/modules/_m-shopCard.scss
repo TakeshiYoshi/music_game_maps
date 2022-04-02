@@ -113,9 +113,15 @@
     }
   }
 
-  &__information-station {
-    :not(:last-child) {
-      margin-right: 5px;
+  &__information {
+    &-station {
+      :not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+
+    &-line {
+      font-weight: $FONT-WEIGHT-BOLD;
     }
   }
 }
