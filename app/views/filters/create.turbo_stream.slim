@@ -11,3 +11,4 @@
     - if session[:lat] 
       = render ::Shops::ClearLocationSessionButtonComponent.new
     = render 'shops/near_shops_search_form'
+    = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)

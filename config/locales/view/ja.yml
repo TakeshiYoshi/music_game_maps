@@ -52,6 +52,7 @@ ja:
     map_flash_message:
       clear_near_shops_search: '周辺検索設定をクリアにしました'
       near_shops_search: 'マップで表示している周囲の店舗を検索しました'
+      train_search: '駅周辺の店舗を検索しました'
   users:
     new:
       title: '新規ユーザー登録'

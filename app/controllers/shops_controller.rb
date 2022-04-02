@@ -7,6 +7,12 @@ class ShopsController < ApplicationController
   def index
     @shops_filter = @shops_filter.includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
     @filter_form = FilterForm.new
+    if cookies.permanent[:location_lat]
+      # 現在位置が有効の場合最寄り駅を5件取得
+      @stations = Station.by_distance(origin: [cookies.permanent[:location_lat], cookies.permanent[:location_lng]]).includes(:line).limit(5)
+    else
+      @station = nil
+    end
   end
 
   def show

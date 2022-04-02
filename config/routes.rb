@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create update edit]
   resources :user_sessions, only: %i[create]
   resource :theme, only: %i[create]
+  post 'stations', to: 'stations#index'
   get 'signup', to: 'users#new'
   get 'signup_with_twitter', to: 'users#new_with_twitter'
   post 'create_users_with_twitter', to: 'users#create_with_twitter'

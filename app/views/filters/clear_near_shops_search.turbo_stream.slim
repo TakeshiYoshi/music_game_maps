@@ -11,3 +11,10 @@
     - if session[:lat] 
       = render ::Shops::ClearLocationSessionButtonComponent.new
     = render 'shops/near_shops_search_form'
+    = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)
+
+= turbo_stream.update 'stations' do
+  - if @stations.present?
+    p.basic-text.m-2
+      | 最寄り駅一覧
+  = render ::Stations::StationComponent.with_collection(@stations)
