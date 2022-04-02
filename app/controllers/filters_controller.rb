@@ -55,6 +55,9 @@ class FiltersController < ApplicationController
   def set_location
     cookies.permanent[:location_lat] = params[:lat]
     cookies.permanent[:location_lng] = params[:lng]
+
+    @shops = sort_shops(@shops).includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
+    set_filter
   end
 
   private
