@@ -1,0 +1,14 @@
+= turbo_stream.update 'shops' do
+  = turbo_frame_tag 'shops' do
+    ul.m-shopCard__list
+      = render ::ShopComponent.with_collection(@shops_filter)
+    = tag.div id: 'shopData', data: { controller: 'map-update', shops_data: @shops_filter.to_json(only: %i[id lat lng]) }
+
+= turbo_stream.update 'mapAcitonsFrame' do 
+  = turbo_frame_tag 'mapAcitonsFrame' do
+    = render ::Shops::LoadingComponent.new
+    = render ::Layouts::MapFlashMessageComponent.new(flash:)
+    - if session[:lat] 
+      = render ::Shops::ClearLocationSessionButtonComponent.new
+    = render 'shops/near_shops_search_form'
+    = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)
