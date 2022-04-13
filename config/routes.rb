@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :shops, only: %i[index show edit update destroy]
     resources :user_reviews, only: %i[index destroy]
     resources :shop_histories, only: %i[index update destroy]
-    resources :shop_fix_requests, only: %i[index destroy]
+    resources :shop_fix_requests, only: %i[index update]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

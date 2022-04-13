@@ -6,7 +6,7 @@
           h5.card-title
             = link_to shop_fix_request.shop.name, shop_path(shop_fix_request.shop), target: :_blank, rel: 'noopener noreferrer'
         .admin-shop-header-end
-          = link_to t('admin.shop_fix_requests.index.confirm'), admin_shop_fix_request_path(shop_fix_request), method: :delete, class: 'btn btn-primary mr-2', local: true, data: { turbo: false }
+          = link_to t('admin.shop_fix_requests.index.confirm'), admin_shop_fix_request_path(shop_fix_request), method: :patch, class: 'btn btn-primary mr-2', local: true, data: { turbo: false }
       .admin-shop-body
         - if shop_fix_request.not_exist
           .mb-2
