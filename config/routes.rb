@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :shops, only: %i[show] do
     resources :user_reviews, only: %i[create destroy]
     resources :shop_histories, only: %i[new create]
+    scope module: :shops do
+      resources :shop_fix_requests, only: %i[new create]
+    end
   end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update destroy] do

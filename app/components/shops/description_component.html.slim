@@ -49,4 +49,4 @@
       - else 
         = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'btn-label-size')
     .m-shopDescription__fix-form-button-container
-        = render ::Shared::PrimaryButtonComponent.new(text: '店舗情報修正依頼', href: signup_path, class: 'btn-label-size')
+        = render ::Shared::PrimaryButtonComponent.new(text: '店舗情報修正依頼', href: new_shop_shop_fix_request_path(shop), class: 'btn-label-size')

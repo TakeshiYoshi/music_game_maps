@@ -1,0 +1,9 @@
+- set_meta_tags title: t('.title')
+
+.basic-box.col-12
+  .text-center 
+    h1.basic-title = t '.title'
+    p.basic-text = "管理人に #{@shop.name} の店舗情報の修正を依頼する"
+  .d-flex.justify-content-center
+    div style="max-width: 600px; width: 600px;"
+      = render ::Shops::ShopFixRequests::FormComponent.new(shop_fix_request: @shop_fix_request)
