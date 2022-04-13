@@ -1,0 +1,22 @@
+.col-12
+  .main-card.mb-3.card
+    .card-body
+      .admin-shop-header.mb-2.d-flex.justify-content-between
+        .admin-shop-header-start.d-flex
+          h5.card-title
+            = link_to shop_fix_request.shop.name, shop_path(shop_fix_request.shop), target: :_blank, rel: 'noopener noreferrer'
+        .admin-shop-header-end
+          = link_to t('admin.shop_fix_requests.index.confirm'), admin_shop_fix_request_path(shop_fix_request), method: :delete, class: 'btn btn-primary mr-2', local: true, data: { turbo: false }
+      .admin-shop-body
+        - if shop_fix_request.not_exist
+          .mb-2
+            span = ShopFixRequest.human_attribute_name(:not_exist)
+        - if shop_fix_request.duplicate
+          .mb-2
+            span = ShopFixRequest.human_attribute_name(:duplicate)
+        - if shop_fix_request.fix_shop_info
+          .mb-4
+            span = ShopFixRequest.human_attribute_name(:fix_shop_info)
+        - if shop_fix_request.body.present?
+          div 
+            span = shop_fix_request.body

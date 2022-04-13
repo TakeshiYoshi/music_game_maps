@@ -339,3 +339,8 @@ ja:
         confirm: '承認する'
         disconfirm: '承認しない'
         no_data: '未承認の店舗履歴がありません'
+    shop_fix_requests:
+      index:
+        title: '修正依頼一覧'
+        confirm: '修正完了'
+        no_data: '未確認の修正依頼がありません'

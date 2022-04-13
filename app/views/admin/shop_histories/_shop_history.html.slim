@@ -2,7 +2,7 @@
   .main-card.mb-3.card
     .card-body
       .admin-shop-header.mb-2.d-flex.justify-content-between
-        .admin-shop-header-start.d-flex.
+        .admin-shop-header-start.d-flex
           h5.card-title
             = link_to shop_history.shop.name, shop_path(shop_history.shop), target: :_blank, rel: 'noopener noreferrer'
           = link_to "(#{shop_history.user.nickname})", user_path(shop_history.user), class: 'admin-link'
