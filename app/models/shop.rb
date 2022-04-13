@@ -9,6 +9,7 @@ class Shop < ApplicationRecord
   has_many :shop_histories, dependent: :destroy
   has_many :shop_stations, dependent: :destroy
   has_many :stations, through: :shop_stations
+  has_many :shop_fix_requests, dependent: :destroy
   after_create :create_base_history unless Rails.env.test?
   after_create :create_shop_stations unless Rails.env.test?
 

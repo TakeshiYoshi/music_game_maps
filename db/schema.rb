@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_31_082550) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_13_103411) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -87,6 +87,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_082550) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_prefectures_on_name", unique: true
+  end
+
+  create_table "shop_fix_requests", charset: "utf8mb4", force: :cascade do |t|
+    t.boolean "not_exist", default: false, null: false
+    t.boolean "duplicate", default: false, null: false
+    t.boolean "fix_shop_info", default: false, null: false
+    t.text "body"
+    t.integer "status", default: 0, null: false
+    t.bigint "shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_shop_fix_requests_on_shop_id"
   end
 
   create_table "shop_histories", charset: "utf8", force: :cascade do |t|
@@ -209,6 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_082550) do
   add_foreign_key "lines", "companies"
   add_foreign_key "playing_games", "games"
   add_foreign_key "playing_games", "users"
+  add_foreign_key "shop_fix_requests", "shops"
   add_foreign_key "shop_histories", "shops"
   add_foreign_key "shop_histories", "users"
   add_foreign_key "shop_stations", "shops"
