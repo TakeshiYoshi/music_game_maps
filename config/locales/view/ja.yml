@@ -130,6 +130,9 @@ ja:
     shop_fix_requests:
       new:
         title: '店舗情報修正依頼'
+      create:
+        success: '修正依頼ありがとうございます。'
+        danger: '依頼内容をご確認ください。'
   shop_histories:
     new:
       apply_update: '情報の更新を申請する'

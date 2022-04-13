@@ -1,13 +1,13 @@
 = render 'shared/error_messages', object: shop_fix_request
 = form_with model: shop_fix_request, url: shop_shop_fix_requests_path, method: :post, local: true, data: { turbo: false } do |f|
   .form-group.mb-2
-    = f.check_box :not_exist, class: 'mr-2'
+    = f.check_box :not_exist, { class: 'mr-2' }, 'true', 'false'
     = f.label :not_exist
   .form-group.mb-2
-    = f.check_box :duplicate, class: 'mr-2'
+    = f.check_box :duplicate, { class: 'mr-2' }, 'true', 'false'
     = f.label :duplicate, class: ''
   .form-group.mb-2
-    = f.check_box :fix_shop_info, class: 'mr-2'
+    = f.check_box :fix_shop_info, { class: 'mr-2' }, 'true', 'false'
     = f.label :fix_shop_info
   .form-group
     = f.text_area :body, rows: 5, class: 'basic-text-field', placeholder: "#{ShopFixRequest.human_attribute_name(:body)}#{t('defaults.shop_fix_request_body_valid')}"
