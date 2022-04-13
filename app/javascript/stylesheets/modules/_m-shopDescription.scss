@@ -66,6 +66,17 @@
       }
     }
   }
+
+  &__edit-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  &__edit-bitton-container {
+    margin-right: 10px;
+  }
 }
 
 // 以下スマホ向け

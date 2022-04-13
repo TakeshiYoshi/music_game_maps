@@ -6,10 +6,6 @@
   .m-shopDescription__header
     .m-shopDescription__header-game-machines
       = render ::Shared::LabelComponent.new(name: GameMachine.model_name.human)
-    - if helpers.logged_in?
-      = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn'), href: new_shop_shop_history_path(shop), class: 'btn-label-size')
-    - else 
-      = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'btn-label-size')
   .m-shopDescription__badges
     = render ::Shops::BadgeComponent.with_collection(shop.game_machines)
   = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :address) do |c|
@@ -46,3 +42,11 @@
             tr 
               th.basic-text = shop.day_of_week_convert_to_text_from_num text.first
               th.basic-text = text.last
+  .m-shopDescription__edit-buttons 
+    .m-shopDescription__edit-bitton-container 
+      - if helpers.logged_in?
+        = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn'), href: new_shop_shop_history_path(shop), class: 'btn-label-size')
+      - else 
+        = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'btn-label-size')
+    .m-shopDescription__fix-form-button-container
+        = render ::Shared::PrimaryButtonComponent.new(text: '店舗情報修正依頼', href: signup_path, class: 'btn-label-size')
