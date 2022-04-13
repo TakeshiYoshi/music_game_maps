@@ -317,6 +317,7 @@ ja:
         shops: 'Shops'
         user_reviews: 'UserReviews'
         shop_histories: 'ShopHistories'
+        shop_fix_requests: 'ShopFixRequests'
     dashboards:
       index:
         title: 'ダッシュボード'

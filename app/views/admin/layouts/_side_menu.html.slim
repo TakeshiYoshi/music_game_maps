@@ -26,3 +26,9 @@
         span.mr-2 = t 'admin.defaults.side_menu.shop_histories'
         - if ShopHistory.draft.present?
           .badge.bg-success.m-0 = t 'defaults.new'
+    li
+      = link_to admin_shop_fix_requests_path, class: "#{'side-menu-item-active' if params[:controller] == 'admin/shop_fix_requests'}"
+        = fa_icon 'database', class: 'side-menu-icon'
+        span.mr-2 = t 'admin.defaults.side_menu.shop_fix_requests'
+        - if ShopHistory.draft.present?
+          .badge.bg-success.m-0 = t 'defaults.new'
