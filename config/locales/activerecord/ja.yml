@@ -45,6 +45,11 @@ ja:
         twitter_id: 'Twitter ID'
         phone_number: '電話番号'
         website: 'URL'
+      shop_fix_request:
+        not_exist: 'この店舗は存在しません'
+        duplicate: 'サイト内に同じ店舗が重複して存在しています'
+        fix_shop_info: '店舗情報が大きく間違っています'
+        body: '依頼内容詳細'
       user_review:
         body: '本文'
       game_machine:

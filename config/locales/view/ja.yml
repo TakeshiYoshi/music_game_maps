@@ -35,6 +35,7 @@ ja:
     password_valid: '(大文字, 小文字英数を含む8~30文字)'
     nickname_valid: '(1~30文字)'
     user_review_body_valid: '(1~1,000文字)'
+    shop_fix_request_body_valid: '(1~1,000文字)'
     password_reset: 'パスワードを変更する'
     search: '検索'
     no_count_info: '台数不明'
@@ -126,6 +127,12 @@ ja:
       edit_shop_btn: '店舗情報を編集'
       edit_shop_btn_signup: 'ユーザー登録して情報編集'
       lastest_update_date: '最終更新日時'
+    shop_fix_requests:
+      new:
+        title: '店舗情報修正依頼'
+      create:
+        success: '修正依頼ありがとうございます。'
+        danger: '依頼内容をご確認ください。'
   shop_histories:
     new:
       apply_update: '情報の更新を申請する'
@@ -310,6 +317,7 @@ ja:
         shops: 'Shops'
         user_reviews: 'UserReviews'
         shop_histories: 'ShopHistories'
+        shop_fix_requests: 'ShopFixRequests'
     dashboards:
       index:
         title: 'ダッシュボード'
@@ -331,3 +339,8 @@ ja:
         confirm: '承認する'
         disconfirm: '承認しない'
         no_data: '未承認の店舗履歴がありません'
+    shop_fix_requests:
+      index:
+        title: '修正依頼一覧'
+        confirm: '修正完了'
+        no_data: '未確認の修正依頼がありません'

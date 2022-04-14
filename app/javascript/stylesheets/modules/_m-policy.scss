@@ -16,7 +16,7 @@
   &-title {
     font-size: $FONT-SIZE-MD;
     font-weight: $FONT-WEIGHT-BOLD;
-    border-left: solid 5px $THEME;
+    border-left: solid 5px var(--theme);
     padding-left: 5px;
   }
 
