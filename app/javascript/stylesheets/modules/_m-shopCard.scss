@@ -19,7 +19,7 @@
     top: 0;
     left: 0;
     border-bottom: 5em solid transparent;
-    border-left: 5em solid $THEME;
+    border-left: 5em solid var(--theme);
     position: absolute;
     z-index: 100;
   }
@@ -156,7 +156,7 @@
 
     &__label {
       border-bottom: 4em solid transparent;
-      border-left: 4em solid $THEME;
+      border-left: 4em solid var(--theme);
       position: absolute;
       z-index: 100;
     }

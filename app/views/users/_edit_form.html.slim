@@ -15,6 +15,21 @@
       = f.check_box :anonymous
       = f.label :anonymous, t('defaults.form.anonymous'), class: 'basic-text ms-2 mb-2'
       = render ::Shared::QuestionTooltipComponent.new(text: t('users.edit.anonymous_exp'))
+    .form-group-signup.mb-4
+      h3.basic-title テーマ設定
+      .panel-container
+        = f.radio_button :theme, :normal, class: 'd-none'
+        label.normal-panel.theme-panel for="user_theme_normal" value="normal"
+        = f.radio_button :theme, :dark, class: 'd-none'
+        label.dark-panel.theme-panel for="user_theme_dark" value="dark"
+        = f.radio_button :theme, :darkBlue, class: 'd-none'
+        label.darkBlue-panel.theme-panel for="user_theme_darkblue" value="darkBlue"
+        = f.radio_button :theme, :shinkai, class: 'd-none'
+        label.shinkai-panel.theme-panel for="user_theme_shinkai" value="shinkai"
+        = f.radio_button :theme, :yumekawa, class: 'd-none'
+        label.yumekawa-panel.theme-panel for="user_theme_yumekawa" value="yumekawa"
+        = f.radio_button :theme, :mono, class: 'd-none'
+        label.mono-panel.theme-panel for="user_theme_mono" value="mono"
     = f.submit class: 'btn-basic'
 
 = javascript_pack_tag 'edit_form'

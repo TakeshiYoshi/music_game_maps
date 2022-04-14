@@ -1,17 +1,13 @@
 .m-userMenu__button {
   width: 50px;
   height: 50px;
-  background-color: $THEME;
+  background-color: var(--theme);
   position: absolute;
   top: 0;
   right: 0;
   box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
   transition: 0.3s;
   z-index: 1000;
-
-  &:hover {
-    background-color: lighten($THEME, 10%);
-  }
 
   &-container {
     width: 50px;
@@ -82,7 +78,7 @@
     margin-left: 100px;
 
     &:hover {
-      background-color: lighten($THEME, 10%);
+      opacity: 0.8;
     }
   }
 
@@ -115,7 +111,7 @@
   height: 170px;
 
   &:hover {
-    background-color: $THEME;
+    background-color: var(--theme);
   }
 
   .m-userMenu__button-line-1 {
