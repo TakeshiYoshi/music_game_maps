@@ -18,7 +18,8 @@
       = render 'near_shops_search_form'
       = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)
     = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
-.col-sm-12.col-md-12.col-lg-9
+/.col-sm-12.col-md-12.col-lg-9
+.col-12
   = turbo_frame_tag 'shops' do
     ul.m-shopCard__list
       = render ShopComponent.with_collection(@shops_filter)
