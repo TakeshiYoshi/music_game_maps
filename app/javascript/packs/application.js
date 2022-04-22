@@ -1,6 +1,7 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+require("normalize-css");
 
 import "bootstrap"
 import "../stylesheets/application";
