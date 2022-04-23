@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
+    meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no"
     = display_meta_tags default_meta_tags
     = include_gon 
     = csrf_meta_tags
@@ -11,9 +11,8 @@ html
     = render 'layouts/analytics' if Rails.env.production?
   body
     .container-xl.px-0.footer-fixed
-      = render 'layouts/flash_message'
-      = render 'layouts/header'
+      = render ::Layouts::FlashMessageComponent.new(flash:)
+      = render ::Layouts::HeaderComponent.new
+      = render ::Layouts::UserMenuComponent.new(current_user:)
       = yield
-      = render 'layouts/footer'
-    input.d-none#bg-color-check type="checkbox"
-    .bg-color-changing
+      = render ::Layouts::FooterComponent.new

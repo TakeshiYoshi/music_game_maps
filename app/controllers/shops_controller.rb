@@ -5,7 +5,14 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: %i[show edit]
 
   def index
-    @shops_filter = @shops_filter.includes(:games).page(params[:page]).per(session[:number_of_searches])
+    @shops_filter = @shops_filter.includes([:games, :shop_histories, { shop_stations: { station: :line } }]).page(params[:page]).per(session[:number_of_searches])
+    @filter_form = FilterForm.new
+    if cookies.permanent[:location_lat]
+      # 現在位置が有効の場合最寄り駅を5件取得
+      @stations = Station.by_distance(origin: [cookies.permanent[:location_lat], cookies.permanent[:location_lng]]).includes(:line).limit(5)
+    else
+      @station = nil
+    end
   end
 
   def show
@@ -24,7 +31,11 @@ class ShopsController < ApplicationController
       select_games = session[:games].select do |_game_id, should_filter|
         should_filter
       end.keys.map(&:to_i)
-      @shops_filter = @shops_filter.joins(:games).merge(Game.where(id: select_games))
+      query = []
+      select_games.each do |game_id|
+        query << "games_info LIKE '%\"#{game_id}\"%'"
+      end
+      @shops_filter = @shops_filter.where(query.join(' AND '))
     end
     @shops_filter = sort_shops(@shops_filter)
   end

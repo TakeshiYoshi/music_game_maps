@@ -1,16 +1,32 @@
 - set_meta_tags reverse: false
-.col-12.map-container.d-flex.align-items-center.justify-content-center
-  #map
-  #geolocation_button
-  = render 'map_flash_message'
-  = render 'near_shops_search_form'
-  = render 'clear_location_session_button'
-= render ShopComponent.with_collection(@shops_filter)
-.col-12.d-flex.align-items-center.justify-content-center
-  = paginate @shops_filter
+.col-12.map-wrapper 
+  .map-menu
+    a.map-menu-btn href="#mapMenuCollapse" data-bs-toggle="collapse"
+      | MAP MENU
+      .map-menu-icon
+        = fa_icon 'caret-down'
+    .collapse#mapMenuCollapse
+      = turbo_frame_tag 'mapFormFrame' do
+        = render ::Shops::MapFormComponent.new(filter_form: @filter_form)
+  .col-12.map-container
+    #map
+    = turbo_frame_tag 'mapAcitonsFrame' do
+      = render ::Shops::LoadingComponent.new
+      = render ::Layouts::MapFlashMessageComponent.new(flash:)
+      - if session[:lat] 
+        = render ::Shops::ClearLocationSessionButtonComponent.new
+      = render 'near_shops_search_form'
+      = render ::Shops::SearchBtnByTrainComponent.new(stations: @stations)
+    = render ::Shops::GeolocationButtonComponent.new(location: cookies.permanent[:location_lat])
+/.col-sm-12.col-md-12.col-lg-9
+.col-12
+  = turbo_frame_tag 'shops' do
+    ul.m-shopCard__list
+      = render ShopComponent.with_collection(@shops_filter)
+    #shopData data-shops="#{@shops_filter.to_json only: %i[id lat lng]}"
+.col-4
 
-#scrollTop
-#tutorial
+= render ::Shared::ScrollTopComponent.new
 
 script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"
 script src="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.js"
@@ -18,7 +34,3 @@ script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.
 link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css"
 link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css"
 = javascript_pack_tag 'map'
-= javascript_pack_tag 'geolocation'
-= javascript_pack_tag 'map_flash_message'
-= javascript_pack_tag 'scroll_top'
-= javascript_pack_tag 'tutorial'

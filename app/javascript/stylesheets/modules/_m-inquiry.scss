@@ -1,0 +1,23 @@
+.m-policy {
+  color: $GRAY0;
+  text-align: center;
+
+  &__title {
+    font-size: $FONT-SIZE-XL;
+    font-weight: $FONT-WEIGHT-BOLD;
+  }
+
+  &__body-container {
+    margin-bottom: 10px;
+  }
+
+  &__body {
+    font-size: $FONT-SIZE-MD;
+    margin-bottom: 2px;
+  }
+
+  &__image {
+    max-width: 300px;
+    height: auto;
+  }
+}

@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe '店舗検索機能', type: :system do
+  # TODO: 検索機能実装後spec修正
   describe 'ヘッダー内検索フィールド' do
     context '店舗名で検索する' do
       let!(:shop_include_search_word_1) { create(:shop, name: 'タウトーステーション1号店', address: '東京都江戸川区南小岩1-1-1') }
       let!(:shop_include_search_word_2) { create(:shop, name: 'タウトーステーション2号店', address: '東京都江戸川区西葛西1-1-1') }
       let!(:another_shop) { create(:shop, name: '別店舗', address: '神奈川県藤沢市江ノ島1-1-1') }
 
-      it '入力された文字列が含まれている店舗のみ表示される(店舗名)' do
+      xit '入力された文字列が含まれている店舗のみ表示される(店舗名)' do
         visit root_path
         fill_in 'search-field', with: 'タウトーステーション'
         click_button 'search-button'
@@ -16,7 +17,7 @@ RSpec.describe '店舗検索機能', type: :system do
         expect(page).not_to have_content(another_shop.name), '入力された文字列が含まれていない店舗が表示されています'
       end
 
-      it '入力された文字列が含まれている店舗のみ表示される(住所)' do
+      xit '入力された文字列が含まれている店舗のみ表示される(住所)' do
         visit root_path
         fill_in 'search-field', with: '東京都'
         click_button 'search-button'
@@ -27,7 +28,7 @@ RSpec.describe '店舗検索機能', type: :system do
     end
   end
 
-  describe 'ヘッダー内検索フィルター' do
+  describe '検索フィルター' do
     context 'ゲーム機種でフィルターをかける' do
       let!(:game) { create(:game, title: 'GAME BEAT') }
       let!(:another_game) { create(:game) }
@@ -37,16 +38,16 @@ RSpec.describe '店舗検索機能', type: :system do
 
       it 'フィルターをかけた機種が設置されている店舗のみ検索結果に表示させる' do
         visit root_path
-        click_button 'filter-button'
-        within('.modal') do
-          page.find(".game-label", text: 'GAME BEAT').click
-          click_button 'フィルター設定'
+        click_on 'MAP MENU'
+        within('.map-menu') do
+          page.find(".m-mapForm__games-label", text: 'GAME BEAT').click
         end
         expect(page).to have_content(shop_include_filtered_game.name), 'フィルターをかけた機種が設置されている店舗が表示されていません'
         expect(page).not_to have_content(another_shop.name), 'フィルターをかけた機種が設置されていない店舗が表示されています'
       end
     end
 
+    # TODO: 都道府県市区町村フィルタ実装後にspec修正
     context 'エリアでフィルターをかける' do
       let!(:prefecture) { create(:prefecture, name: 'Prefecture') }
       let!(:another_prefecture) { create(:prefecture, name: 'Another_Prefecture') }
@@ -56,7 +57,7 @@ RSpec.describe '店舗検索機能', type: :system do
       let!(:shop_in_another_pref) { create(:shop, prefecture: another_prefecture) }
       let!(:shop_in_pref_another_city) { create(:shop, prefecture: prefecture, city: another_city) }
 
-      it 'フィルターをかけたエリアにある店舗のみ検索結果に表示される' do
+      xit 'フィルターをかけたエリアにある店舗のみ検索結果に表示される' do
         visit root_path
         # 都道府県のみフィルターをかける
         click_button 'filter-button'
@@ -85,12 +86,12 @@ RSpec.describe '店舗検索機能', type: :system do
 
       it '1ページに表示される検索件数が20件になること' do
         visit root_path
-        click_button 'filter-button'
-        within('.modal') do
-          select '20', from: 'number_of_searches'
-          click_button 'フィルター設定'
+        click_on 'MAP MENU'
+        within('.map-menu') do
+          select '20', from: 'filter_number_of_searches'
         end
-        expect(page.all('.shop-card').length).to eq(20), '1ページに表示される検索件数が20件になっていません'
+        sleep 1
+        expect(page.all('.m-shopCard').length).to eq(20), '1ページに表示される検索件数が20件になっていません'
       end
     end
   end

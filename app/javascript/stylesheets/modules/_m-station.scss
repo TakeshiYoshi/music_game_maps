@@ -1,0 +1,24 @@
+.m-station {
+  margin: 0 0 5px 5px;
+
+  &-link {
+    &:hover {
+      .m-station-icon,.m-station-line,.m-station-station {
+        color: lighten($GRAY0, 20%);
+      }
+    }
+  }
+
+  &-line,&-icon {
+    font-weight: $FONT-WEIGHT-BOLD;
+    font-size: $FONT-SIZE-MD;
+    color: $GRAY0;
+    margin-right: 5px;
+  }
+
+  &-station {
+    font-weight: $FONT-WEIGHT-NORMAL;
+    font-size: $FONT-SIZE-MD;
+    color: $GRAY0;
+  }
+}

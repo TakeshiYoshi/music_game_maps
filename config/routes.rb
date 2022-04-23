@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :shops, only: %i[show] do
     resources :user_reviews, only: %i[create destroy]
     resources :shop_histories, only: %i[new create]
+    scope module: :shops do
+      resources :shop_fix_requests, only: %i[new create]
+    end
   end
   resource :filter, only: %i[create destroy]
   resources :users, only: %i[create show edit update destroy] do
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create update edit]
   resources :user_sessions, only: %i[create]
   resource :theme, only: %i[create]
+  post 'stations', to: 'stations#index'
   get 'signup', to: 'users#new'
   get 'signup_with_twitter', to: 'users#new_with_twitter'
   post 'create_users_with_twitter', to: 'users#create_with_twitter'
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
     resources :shops, only: %i[index show edit update destroy]
     resources :user_reviews, only: %i[index destroy]
     resources :shop_histories, only: %i[index update destroy]
+    resources :shop_fix_requests, only: %i[index update]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

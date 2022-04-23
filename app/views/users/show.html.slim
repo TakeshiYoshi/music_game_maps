@@ -1,29 +1,28 @@
 - set_meta_tags title: t('.title', nickname: @user.nickname)
-.col-12.glass.glass-round.py-4.mb-3
+.col-12.basic-box.py-4.mb-3
   .row.user-profile.d-flex.justify-content-center
-    .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
-      .profile-icon-container
+    .col-md-2.col-sm-12.d-flex.justify-content-center
+      .profile-icon-container.mb-3
         = image_tag @user.avatar.url, class: 'rounded-circle icon profile-icon', size: '100x100'
     .col-md-10.col-sm-12
-      p.glass-text.mb-2.nickname = @user.nickname
-      .glass-text.mb-3
+      p.basic-title.mb-2 = @user.nickname
+      .basic-text.mb-3
         = simple_format(@user.description)
 
       - if @user.games.present?
-        p.glass-text = PlayingGame.model_name.human
-        .glass-game-labels
-          - @user.games.each do |game|
-            label.glass-game-label.rounded-pill
-              = game.title
+        .mb-3
+          p.basic-text.mb-1 = PlayingGame.model_name.human
+          = render ::Users::BadgeComponent.with_collection(@user.games)
     - if @user == current_user
-      = link_to t('.edit_profile'), edit_user_profile_path(@user.id), class: 'btn-glass edit-profile rounded-pill'
-- if current_user == @user || ( !@user.anonymous? && @user_reviews.present? )
-  .col-12.glass.glass-round
+      = link_to t('.edit_profile'), edit_user_profile_path(@user.id), class: 'btn-basic edit-profile'
+
+- if @user == current_user || ( !@user.anonymous? && @user_reviews.present? )
+  .col-12.basic-box
     = render Shared::LabelComponent.new(name: t('.user_reviews_label'), class: 'mb-2')
-    span.glass-text
+    span.basic-text
       = "#{t '.user_reviews_length'}#{@user_reviews.size}件"
     - if @user.anonymous?
-      p.glass-text.anonymous-explain
+      p.basic-explanation.mb-1
         = t '.user_review_anonymous_exp'
     ul.profile-user-reviews.mb-3
       = render partial: 'user_review', collection: @user_reviews.limit(5)

@@ -14,10 +14,10 @@ RSpec.describe 'マップ内機能', type: :system do
       page.execute_script("document.getElementById('map-lat').value = '30.0000'");
       page.execute_script("document.getElementById('map-lng').value = '150.0000'");
       click_button 'search-near_shops_button'
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-      expect(page.all('.shop-card')[0]).to have_content(near_shop_1.name), '検索中心から近い店舗順に表示されていません'
-      expect(page.all('.shop-card')[1]).to have_content(near_shop_2.name), '検索中心から近い店舗順に表示されていません'
-      expect(page.all('.shop-card')[2]).to have_content(far_away_shop.name), '検索中心から近い店舗順に表示されていません'
+      expect(page).to have_content('マップで表示している周囲の店舗を検索しました'), 'マップフラッシュメッセージが表示されていません'
+      expect(page.all('.m-shopCard')[0]).to have_content(near_shop_1.name), '検索中心から近い店舗順に表示されていません'
+      expect(page.all('.m-shopCard')[1]).to have_content(near_shop_2.name), '検索中心から近い店舗順に表示されていません'
+      expect(page.all('.m-shopCard')[2]).to have_content(far_away_shop.name), '検索中心から近い店舗順に表示されていません'
     end
 
     it '周辺検索と機種フィルターが同時に機能すること' do
@@ -26,14 +26,12 @@ RSpec.describe 'マップ内機能', type: :system do
       page.execute_script("document.getElementById('map-lat').value = '30.0000'");
       page.execute_script("document.getElementById('map-lng').value = '150.0000'");
       click_button 'search-near_shops_button'
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
+      expect(page).to have_content('マップで表示している周囲の店舗を検索しました'), 'マップフラッシュメッセージが表示されていません'
       # フィルターをかける
-      click_button 'filter-button'
-      within('.modal') do
-        page.find(".game-label", text: 'GAME BEAT').click
-        click_button 'フィルター設定'
+      click_on 'MAP MENU'
+      within('.map-menu') do
+        page.find(".m-mapForm__games-label", text: 'GAME BEAT').click
       end
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
       expect(page).to have_content(near_shop_1.name), '周辺検索と機種フィルターが同時に機能していません'
       expect(page).not_to have_content(near_shop_2.name), '周辺検索と機種フィルターが同時に機能していません'
       expect(page).not_to have_content(far_away_shop.name), '周辺検索と機種フィルターが同時に機能していません'
@@ -42,7 +40,7 @@ RSpec.describe 'マップ内機能', type: :system do
     it '検索後に検索クリアボタンが表示される' do
       visit root_path
       click_button 'search-near_shops_button'
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
+      expect(page).to have_content('マップで表示している周囲の店舗を検索しました'), 'マップフラッシュメッセージが表示されていません'
       expect(page.all('a#clear-location-session').length).to eq(1), '検索後に検索クリアボタンが表示されていません'
     end
 
@@ -52,28 +50,28 @@ RSpec.describe 'マップ内機能', type: :system do
       page.execute_script("document.getElementById('map-lat').value = '30.0000'");
       page.execute_script("document.getElementById('map-lng').value = '150.0000'");
       click_button 'search-near_shops_button'
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-      expect(page.all('.shop-card')[0]).to have_content(near_shop_1.name), '検索中心から近い店舗順に表示されていません'
-      expect(page.all('.shop-card')[1]).to have_content(near_shop_2.name), '検索中心から近い店舗順に表示されていません'
-      expect(page.all('.shop-card')[2]).to have_content(far_away_shop.name), '検索中心から近い店舗順に表示されていません'
+      expect(page).to have_content('マップで表示している周囲の店舗を検索しました'), 'マップフラッシュメッセージが表示されていません'
+      expect(page.all('.m-shopCard')[0]).to have_content(near_shop_1.name), '検索中心から近い店舗順に表示されていません'
+      expect(page.all('.m-shopCard')[1]).to have_content(near_shop_2.name), '検索中心から近い店舗順に表示されていません'
+      expect(page.all('.m-shopCard')[2]).to have_content(far_away_shop.name), '検索中心から近い店舗順に表示されていません'
       click_link 'clear-location-session'
-      expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-      expect(page.all('.shop-card')[0]).to have_content(far_away_shop.name), '周辺検索が解除されていません'
-      expect(page.all('.shop-card')[1]).to have_content(near_shop_1.name), '周辺検索が解除されていません'
-      expect(page.all('.shop-card')[2]).to have_content(near_shop_2.name), '周辺検索が解除されていません'
+      expect(page).to have_content('周辺検索設定をクリアにしました'), 'マップフラッシュメッセージが表示されていません'
+      expect(page.all('.m-shopCard')[0]).to have_content(far_away_shop.name), '周辺検索が解除されていません'
+      expect(page.all('.m-shopCard')[1]).to have_content(near_shop_1.name), '周辺検索が解除されていません'
+      expect(page.all('.m-shopCard')[2]).to have_content(near_shop_2.name), '周辺検索が解除されていません'
     end
 
     it '検索後、「マップで表示している周囲の店舗を検索しました」とメッセージが表示される' do
       visit root_path
       click_button 'search-near_shops_button'
-      expect(page.find('#map-flash-message')).to have_content('マップで表示している周囲の店舗を検索しました'), 'フラッシュメッセージが表示されてません'
+      expect(page).to have_content('マップで表示している周囲の店舗を検索しました'), 'フラッシュメッセージが表示されてません'
     end
 
     it '検索クリア後、「周辺検索設定をクリアにしました」とメッセージが表示される' do
       visit root_path
       click_button 'search-near_shops_button'
       click_link 'clear-location-session'
-      expect(page.find('#map-flash-message')).to have_content('周辺検索設定をクリアにしました'), 'フラッシュメッセージが表示されてません'
+      expect(page).to have_content('周辺検索設定をクリアにしました'), 'フラッシュメッセージが表示されてません'
     end
   end
 
@@ -83,7 +81,7 @@ RSpec.describe 'マップ内機能', type: :system do
     it '「位置情報の利用が許可されていません」と表示される' do
       visit root_path
       click_button 'update-geo-button'
-      expect(page.find('#map-flash-message')).to have_content('位置情報の利用が許可されていません'), 'フラッシュメッセージが表示されてません'
+      expect(page.find('.map-flash-message')).to have_content('位置情報の利用が許可されていません'), 'フラッシュメッセージが表示されてません'
     end
   end
 end

@@ -1,0 +1,27 @@
+.m-policy__header {
+  color: $GRAY0;
+  &-title {
+    font-size: $FONT-SIZE-XL;
+    font-weight: $FONT-WEIGHT-BOLD;
+  }
+
+  &-explanation {
+    font-size: $FONT-SIZE-XS;
+    font-weight: $FONT-WEIGHT-NORMAL;
+  }
+}
+
+.m-policy__body {
+  color: $GRAY0;
+  &-title {
+    font-size: $FONT-SIZE-MD;
+    font-weight: $FONT-WEIGHT-BOLD;
+    border-left: solid 5px var(--theme);
+    padding-left: 5px;
+  }
+
+  &-main {
+    font-size: $FONT-SIZE-XS;
+    font-weight: $FONT-WEIGHT-NORMAL;
+  }
+}

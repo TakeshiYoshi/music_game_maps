@@ -14,6 +14,7 @@ class UserReviewsController < ApplicationController
     user_review = current_user.user_reviews.find(params[:id])
     authorize user_review
     user_review.destroy
+    flash[:success] = t '.success'
     redirect_back(fallback_location: shop_path(params[:shop_id]))
   end
 

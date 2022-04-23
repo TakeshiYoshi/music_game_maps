@@ -1,0 +1,49 @@
+.m-shopHistoryForm.col-12.basic-box
+  = render 'shared/error_messages', object: shop_history
+  = form_with model: [:shop, shop_history], id: 'edit_shop_form', class: 'm-shopHistoryForm__form row', local: true, data: { turbo: false } do |f|
+    .m-shopHistoryForm__image.col-md-2.col-sm-12
+      label.m-shopHistoryForm__image-label for="appearanceImage"
+        = image_tag shop_history.appearance_image.url, class: 'm-shopHistoryForm__image-image', id: 'shopImg'
+        .m-shopHistoryForm__image-cover
+          = helpers.fa_icon 'file-upload'
+      = f.file_field :appearance_image, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'appearanceImage', class: 'd-none', '@change': 'imagePreview'
+    = f.hidden_field :user_id, value: current_user.id
+    .m-shopHistoryForm__body.col-md-10.col-sm-12
+      .form-group
+        .m-shopHistoryForm__body-field
+          = f.label :name, class: 'm-label m-shopHistoryForm__label limit-width'
+          = f.text_field :name, id: 'shopName', class: 'basic-text-field', 'v-model': "nameField", '@input': 'nameValid()', ':class': "nameError ? 'basic-error-field' : ''", placeholder: Shop.human_attribute_name(:name)
+        p.basic-error-text v-text='nameError'
+      .form-group
+        .m-shopHistoryForm__body-field
+          = f.label :phone_number, class: 'm-label m-shopHistoryForm__label limit-width'
+          = f.text_field :phone_number, id: 'shopPhoneNumber', class: 'basic-text-field'
+        p.basic-error-text
+      .form-group
+        .m-shopHistoryForm__body-field
+          = f.label :website, class: 'm-label m-shopHistoryForm__label limit-width'
+          = f.text_field :website, id: 'shopWebsite', class: 'basic-text-field', 'v-model': "websiteField", '@input': 'websiteValid()', ':class': "websiteError ? 'basic-error-field' : ''", placeholder: Shop.human_attribute_name(:website)
+        p.basic-error-text v-text='websiteError'
+      .form-group
+        .m-shopHistoryForm__body-field
+          = f.label :twitter_id, class: 'm-label m-shopHistoryForm__label limit-width'
+          = f.text_field :twitter_id, id: 'shopTwitter', class: 'basic-text-field'
+        p.basic-error-text
+      .form-group
+        .m-shopHistoryForm__games
+          .m-label.m-shopHistoryForm__label.limit-width
+            = GameMachine.model_name.human
+          a.basic-link data-bs-toggle="collapse" href="#collapseGames" role="button" aria-expanded="false" aria-controls="collapseGames"
+            span.mr-1 = t('defaults.edit')
+            span = helpers.fa_icon 'caret-down'
+        .m-shopHistoryForm__games-form.collapse#collapseGames
+          - Game.all.each do |game|
+            .m-shopHistoryForm__games-form-group
+              .m-label.m-shopHistoryForm__game-label
+                span.m-shopHistoryForm__game-label-text
+                  = game.title
+              = select_tag "games[#{game.id}]", options_for_select([[t('defaults.no_count'), 0], [t('defaults.no_count_info'), 99]].concat((1..50).map { |n| [n, n] }), shop_history.games[game.id.to_s]), { class: 'form-select m-shopHistoryForm__games-form-select' }
+    .m-shopHistoryForm__submit
+      = f.submit t('shop_histories.new.apply_update'), class: 'btn-basic'
+
+= javascript_pack_tag 'edit_shop'

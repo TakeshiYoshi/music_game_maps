@@ -17,7 +17,7 @@ RSpec.describe 'Users', type: :system do
           click_button '登録する'
         }.to change { User.count }.by(1), 'ユーザーのDB登録が出来ていません'
         expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('アカウント有効化用のメールを送信しました。'), 'フラッシュメッセージが表示されてません'
       end
 
       it 'PlayingGameモデルが作成されること' do
@@ -27,7 +27,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'userPassword', with: 'Foobarhogehoge'
           fill_in 'userPasswordConfirmation', with: 'Foobarhogehoge'
           fill_in 'userNickname', with: 'FOOBAR'
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(1), 'PlayingGameのDB登録が出来ていません'
       end
@@ -38,7 +38,7 @@ RSpec.describe 'Users', type: :system do
         visit signup_path
         expect {
           fill_in 'userEmail', with: 'worng'
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
         expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
         visit signup_path
         expect {
           fill_in 'userEmail', with: user.email
-          page.first('label.glass-game-label').click
+          page.first('label.user-games-label').click
           click_button '登録する'
         }.to change { PlayingGame.count }.by(0), 'ユーザーがDB登録されています'
         expect(current_path).to eq(users_path), '別のページへリダイレクトされています'
@@ -70,7 +70,7 @@ RSpec.describe 'Users', type: :system do
         user = User.last
         visit activate_user_path(user.activation_token)
         expect(current_path).to eq(login_path), 'ログインページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('アカウントが有効化されました。'), 'フラッシュメッセージが表示されてません'
         expect(user.reload.activation_state).to eq('active'), 'ユーザーの有効化が完了していません'
       end
     end
@@ -98,20 +98,20 @@ RSpec.describe 'Users', type: :system do
         check 'user_anonymous'
         click_button '更新する'
         expect(current_path).to eq(edit_user_path(user)), 'ユーザー編集ページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ユーザー設定の変更が完了しました。'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ユーザー設定の変更が完了しました。'), 'フラッシュメッセージが表示されてません'
         user.reload
         expect(user.email).to eq('hogefuga@fuga.com'), 'メールの編集が適応されていません。'
         expect(user.anonymous).to eq(true), '匿名設定の編集が適応されていません'
         # 再度ログインを行いパスワードが変更されたかチェックする
-        page.find('label[for=nav-menu-check]').click
-        sleep 1
+        find('.m-userMenu__button').click
         click_on 'ログアウト'
+        expect(page.find('.flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
         visit login_path
         fill_in 'email', with: user.email
         fill_in 'password', with: 'Password1234'
         click_button 'ログイン'
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -138,8 +138,9 @@ RSpec.describe 'Users', type: :system do
           page.accept_confirm do
             click_on 'アカウントを削除する'
           end
+          has_css?('.flash-message', text: '今までご利用頂きましてありがとうございました。')
           expect(current_path).to eq(root_path), 'トップページへリダイレクトされていません'
-          expect(page.find('#flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
+          expect(page.find('.flash-message')).to have_content('今までご利用頂きましてありがとうございました。'), 'フラッシュメッセージが表示されてません'
         }.to change { User.count }.by(-1), 'アカウントが削除されていません'
       end
     end

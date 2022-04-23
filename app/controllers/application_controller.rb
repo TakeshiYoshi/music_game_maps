@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Pundit
   include ErrorHandlers unless Rails.env.development?
+  include Turbo::Redirection
 
   before_action :set_search
   before_action :set_variable_to_javascript

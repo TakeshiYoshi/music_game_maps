@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_13_103411) do
   create_table "about_games", charset: "utf8", force: :cascade do |t|
     t.bigint "user_review_id", null: false
     t.bigint "game_id", null: false
@@ -38,6 +38,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
+  create_table "companies", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "game_machines", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "shop_id", null: false
     t.bigint "game_id", null: false
@@ -54,6 +61,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_games_on_title", unique: true
+  end
+
+  create_table "lines", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_lines_on_company_id"
   end
 
   create_table "playing_games", charset: "utf8mb4", force: :cascade do |t|
@@ -73,6 +89,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
     t.index ["name"], name: "index_prefectures_on_name", unique: true
   end
 
+  create_table "shop_fix_requests", charset: "utf8mb4", force: :cascade do |t|
+    t.boolean "not_exist", default: false, null: false
+    t.boolean "duplicate", default: false, null: false
+    t.boolean "fix_shop_info", default: false, null: false
+    t.text "body"
+    t.integer "status", default: 0, null: false
+    t.bigint "shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_shop_fix_requests_on_shop_id"
+  end
+
   create_table "shop_histories", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
@@ -87,6 +115,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
     t.integer "status", default: 0, null: false
     t.index ["shop_id"], name: "index_shop_histories_on_shop_id"
     t.index ["user_id"], name: "index_shop_histories_on_user_id"
+  end
+
+  create_table "shop_stations", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "shop_id", null: false
+    t.bigint "station_id", null: false
+    t.integer "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id", "station_id"], name: "index_shop_stations_on_shop_id_and_station_id", unique: true
+    t.index ["shop_id"], name: "index_shop_stations_on_shop_id"
+    t.index ["station_id"], name: "index_shop_stations_on_station_id"
   end
 
   create_table "shops", charset: "utf8", force: :cascade do |t|
@@ -116,9 +155,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
     t.string "tetote_name"
     t.string "takara_name"
     t.string "bandai_name"
+    t.text "games_info"
     t.index ["city_id"], name: "index_shops_on_city_id"
     t.index ["name"], name: "index_shops_on_name", unique: true
     t.index ["prefecture_id"], name: "index_shops_on_prefecture_id"
+  end
+
+  create_table "stations", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "code"
+    t.bigint "line_id", null: false
+    t.integer "index_number"
+    t.decimal "lat", precision: 10, scale: 7
+    t.decimal "lng", precision: 10, scale: 7
+    t.bigint "prefecture_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["line_id"], name: "index_stations_on_line_id"
+    t.index ["prefecture_id"], name: "index_stations_on_prefecture_id"
   end
 
   create_table "user_reviews", charset: "utf8mb4", force: :cascade do |t|
@@ -164,12 +218,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_091256) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "game_machines", "games"
   add_foreign_key "game_machines", "shops"
+  add_foreign_key "lines", "companies"
   add_foreign_key "playing_games", "games"
   add_foreign_key "playing_games", "users"
+  add_foreign_key "shop_fix_requests", "shops"
   add_foreign_key "shop_histories", "shops"
   add_foreign_key "shop_histories", "users"
+  add_foreign_key "shop_stations", "shops"
+  add_foreign_key "shop_stations", "stations"
   add_foreign_key "shops", "cities"
   add_foreign_key "shops", "prefectures"
+  add_foreign_key "stations", "lines"
+  add_foreign_key "stations", "prefectures"
   add_foreign_key "user_reviews", "shops"
   add_foreign_key "user_reviews", "users"
 end

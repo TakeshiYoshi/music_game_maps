@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def new_with_twitter
     @user_form = UserForm.new
+    @nickname = params[:nickname]
   end
 
   def create_with_twitter
@@ -70,7 +71,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :anonymous).to_h
+    params.require(:user).permit(:email, :password, :password_confirmation, :anonymous, :theme).to_h
   end
 
   def user_form_params

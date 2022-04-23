@@ -1,16 +1,13 @@
-let flashMessage = document.getElementById('map-flash-message');
-let showFlag = document.getElementById('dialog-check');
-
-window.onload = function() {
-  if(flashMessage.textContent.length != 0) {
-    show_message(flashMessage.textContent);
-  };
-};
+const flashMessage = document.getElementsByClassName('map-message-dialog')[0]
 
 function show_message(message) {
   flashMessage.textContent = message;
-  showFlag.checked = true;
-  setTimeout( () => { showFlag.checked = false }, 3000 )
+  // フェードインアニメーション
+  flashMessage.classList.add('display');
+  // 5秒でフェードアウトアニメーション
+  setTimeout(() => {
+    flashMessage.classList.remove('display');
+  }, 5000);
 };
 
 export default {

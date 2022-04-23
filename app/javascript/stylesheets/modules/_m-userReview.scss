@@ -1,0 +1,88 @@
+.m-userReview {
+  margin-bottom: 15px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      width: 40px;
+      border-radius: 5px;
+      border: 1px solid $gray-200;
+      margin-right: 10px;
+    }
+
+    &-name {
+      margin-right: 10px;
+      font-size: $FONT-SIZE-MD;
+      font-weight: $FONT-WEIGHT-BOLD;
+      color: $GRAY0;
+
+      a {
+        color: $GRAY0;
+
+        &:hover {
+          color: lighten($GRAY0, 20%);
+        }
+      }
+    }
+
+    &-date {
+      margin-right: 10px;
+      font-size: $FONT-SIZE-SM;
+      font-weight: $FONT-WEIGHT-NORMAL;
+      color: $GRAY1;
+    }
+  }
+
+  &__games {
+    margin-top: 10px;
+  }
+
+  &__body {
+    font-size: $FONT-SIZE-MD;
+    font-weight: $FONT-WEIGHT-NORMAL;
+    color: $GRAY0;
+  }
+
+  &__image {
+    display: flex;
+
+    &-container {
+      margin-top: 10px;
+      background: white;
+      border-radius: 10px;
+      margin-right: 5px;
+      width: 150px;
+      height: 150px;
+      box-shadow: 0 0 6px 0 rgba($SHADOW0, 0.4);
+      object-fit: cover;
+    }
+
+    &-thumb {
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// 以下スマホ向け
+@include media-breakpoint-down(sm) {
+  .m-userReview {
+    &__header {
+      &-icon {
+        width: 30px;
+        margin-right: 5px;
+      }
+    }
+
+    &__image {
+      &-container {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+}

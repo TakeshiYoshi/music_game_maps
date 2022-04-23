@@ -1,25 +1,23 @@
-= form_with model: profile_form, url: user_profile_path(user), scope: :profile_form, method: :patch, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center' do |f| 
+= form_with model: profile_form, url: user_profile_path(user), scope: :profile_form, method: :patch, local: true, id: 'edit_profile_form', class: 'row user-profile d-flex justify-content-center', data: { turbo: false, controller: 'edit-profile-form' } do |f| 
   .col-md-2.col-sm-12.d-flex.justify-content-center.mb-sm-3
     label.avatar-container.mb-4 for="avatar"
       .profile-icon-container
         = image_tag user.avatar.url, id: 'avatarImg', class: 'rounded-circle icon profile-icon'
       .avatar-cover.d-flex.justify-content-center.align-items-center
         = fa_icon 'file-upload'
-    = f.file_field :avatar, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'avatar', class: 'd-none', '@change': 'imagePreview'
+    = f.file_field :avatar, accept: 'image/jpeg,image/jpg,image/gif,image/png', id: 'avatar', class: 'd-none', data: { action: 'change->edit-profile-form#imagePreview', preview_id: 'avatarImg' }
   .col-md-10.col-sm-12
     = render 'shared/error_messages', object: profile_form
-    = f.text_field :nickname, id: 'userNickname', class: 'glass-text-field', 'v-model': "nicknameField", '@input': 'nicknameValid()', ':class': "nicknameError ? 'error-field' : ''", placeholder: User.human_attribute_name(:nickname)
-    p.error-text v-text='nicknameError'
-    = f.text_area :description, id: 'userDescription', rows: 5, class: 'glass-text-area', 'v-model': "descriptionField", '@input': 'descriptionValid()', ':class': "descriptionError ? 'error-field' : ''", placeholder: User.human_attribute_name(:description)
-    p.error-text v-text='descriptionError'
+    = f.text_field :nickname, id: 'userNickname', class: 'basic-text-field', ':class': "nicknameError ? 'error-field' : ''", placeholder: User.human_attribute_name(:nickname), data: { action: 'edit-profile-form#validation' }
+    p.basic-error-text#userNicknameError
+    = f.text_area :description, id: 'userDescription', rows: 5, class: 'basic-text-field', placeholder: User.human_attribute_name(:description), data: { action: 'edit-profile-form#validation' }
+    p.basic-error-text#userDescriptionError
 
     .playing-games 
-      span.glass-text = t 'users.new.explain_playing_game'
+      span.basic-text = t 'users.new.explain_playing_game'
       .glass-game-labels
         - Game.all.each do |game|
           input.glass-game-check.d-none type="checkbox" name="games[#{game.id}]" id="game_#{game.id}_user" checked=(user.games.include?(game))
           label.glass-game-label.rounded-pill for="game_#{game.id}_user"
             = game.title
-  = f.submit class: 'btn btn-glass rounded-pill px-4 w-auto'
-
-= javascript_pack_tag 'edit_profile'
+  = f.submit class: 'btn btn-basic px-4 w-auto'

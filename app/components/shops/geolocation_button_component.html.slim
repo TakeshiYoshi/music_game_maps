@@ -1,0 +1,4 @@
+#geolocationButton
+  = tag.button class: 'update-geo-button', id: 'update-geo-button', data: { controller: 'geolocation', action: 'geolocation#get' }
+    = tag.div class: button_classes
+      = helpers.fa_icon 'crosshairs'

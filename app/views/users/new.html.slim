@@ -1,9 +1,9 @@
 - set_meta_tags title: t('.title')
-.col-12.glass.signup-container.text-center
-  h1.page-title-text.glass-text
+.col-12.basic-box.text-center
+  h1.basic-title
     = t '.title'
   .mt-3
     ins
-      = link_to t('.signup_with_twitter'), auth_at_provider_path(provider: :twitter), class: 'glass-link'
+      = link_to t('.signup_with_twitter'), auth_at_provider_path(provider: :twitter), class: 'basic-link'
   .d-flex.justify-content-center
-    = render 'form', user_form: @user_form, provider: nil
+    = render ::Users::New::FormComponent.new(user_form: @user_form, provider: nil)

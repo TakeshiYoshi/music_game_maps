@@ -1,0 +1,7 @@
+- set_meta_tags title: t('.title')
+- if @shop_fix_requests.present?
+  = render @shop_fix_requests
+  .col-12.d-flex.justify-content-center
+    = paginate @shop_fix_requests, views_prefix: 'admin'
+- else 
+  p = t '.no_data'

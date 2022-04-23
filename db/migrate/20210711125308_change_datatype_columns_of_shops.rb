@@ -1,4 +1,4 @@
-class ChangeDatatypeColumnsOfShops < ActiveRecord::Migration[6.0]
+class ChangeDatatypeColumnsOfShops < ActiveRecord::Migration[7.0]
   def change
     rename_column :shops, :lat, :lat_old
     rename_column :shops, :lng, :lng_old

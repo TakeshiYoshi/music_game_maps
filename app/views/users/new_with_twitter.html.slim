@@ -1,6 +1,6 @@
 - set_meta_tags title: t('.title')
-.col-12.glass.signup-container.text-center
-  h1.page-title-text.glass-text
+.col-12.basic-box.text-center
+  h1.basic-title
       = t '.title'
   .d-flex.justify-content-center
-    = render 'form', user_form: @user_form, provider: :twitter, nickname: params[:nickname]
+    = render ::Users::New::FormComponent.new(user_form: @user_form, provider: :twitter, nickname: @nickname)

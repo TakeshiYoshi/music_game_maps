@@ -1,0 +1,10 @@
+.m-badge
+  = tag.div class: badge_classes
+    p.m-badge__badge-name
+      = game_machine.game.title
+    - if game_machine.unknown_count?
+      // スタイル調整のため
+      = tag.div style: 'margin-left: 5px;'
+    - else
+      = tag.div class: count_classes
+        = game_machine.count

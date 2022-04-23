@@ -1,0 +1,52 @@
+.m-shopDescription.basic-box.col-12
+  .m-shopDescription__appearance-image-container
+    .m-shopDescription__appearance-image-cover
+      p = shop.name
+    img.m-shopDescription__appearance-image src="#{shop.get_photo_url}"
+  .m-shopDescription__header
+    .m-shopDescription__header-game-machines
+      = render ::Shared::LabelComponent.new(name: GameMachine.model_name.human)
+  .m-shopDescription__badges
+    = render ::Shops::BadgeComponent.with_collection(shop.game_machines)
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :address) do |c|
+    - c.description_content
+      p.basic-text.m-0
+        = shop.address
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :phone_number) do |c|
+    - c.description_content
+      p.basic-text.m-0
+        = link_to shop.phone_number, 'tel:', class: 'basic-link'
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :website) do |c|
+    - c.description_content
+      p.basic-text.m-0
+        = link_to shop.website.truncate(35), shop.website, target: :_blank, rel: 'nopener noreferrer', class: 'basic-link'
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :twitter_id) do |c|
+    - c.description_content
+      p.basic-text.m-0
+        = link_to shop.twitter_id, "https://twitter.com/#{shop.twitter_id}", target: :_blank, rel: 'nopener noreferrer', class: 'basic-link'
+  = render ::Shops::DescriptionListComponent.new(shop: shop, attribute: :opening_hours) do |c|
+    - c.description_content
+      = link_to '#openingHoursCollapse', 'data-bs-toggle': 'collapse', 'aria-expanded': false, 'aria-controls': 'openingHoursCollapse' do
+        span.basic-text.mr-1
+          - if shop.opening_time? == 'open'
+            = shop.today_text
+          - else
+            = t "defaults.#{shop.opening_time?}"
+        span.basic-text
+          = helpers.fa_icon 'caret-down'
+  - if shop.opening_hours
+    #openingHoursCollapse.collapse
+      table.m-shopDescription__opening-hours
+        tbody
+          - shop.opening_hours_text.sort.each do |text|
+            tr 
+              th.basic-text = shop.day_of_week_convert_to_text_from_num text.first
+              th.basic-text = text.last
+  .m-shopDescription__edit-buttons 
+    .m-shopDescription__edit-bitton-container 
+      - if helpers.logged_in?
+        = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn'), href: new_shop_shop_history_path(shop), class: 'btn-label-size')
+      - else 
+        = render ::Shared::PrimaryButtonComponent.new(text: t('shops.show.edit_shop_btn_signup'), href: signup_path, class: 'btn-label-size')
+    .m-shopDescription__fix-form-button-container
+        = render ::Shared::PrimaryButtonComponent.new(text: '店舗情報修正依頼', href: new_shop_shop_fix_request_path(shop), class: 'btn-label-size')

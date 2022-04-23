@@ -1,0 +1,5 @@
+.m-station
+  = link_to near_shops_search_path(lat: station.lat, lng: station.lng, type: :station), class: 'm-station-link', method: :post, format: :turbo_stream, 'data-bs-dismiss': 'modal', data: { controller: 'display-loader', action: 'display-loader#display' } do 
+    = helpers.fa_icon 'subway', class: 'm-station-icon'
+    span.m-station-line = station.line.name
+    span.m-station-station = station.name

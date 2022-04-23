@@ -1,0 +1,12 @@
+= form_with model: filter_form, url: filter_path, scope: :filter, method: :post, data: { controller: 'map-form' }, class: 'm-mapForm' do |f|
+  .m-mapForm__number-of-searches
+    p.m-mapForm__number-of-searches-header = f.label t('defaults.label_number_of_searches')
+    = f.select :number_of_searches, options_for_select([[10, 10], [20, 20], [30, 30]], selected: session[:number_of_searches]), { }, data: { action: 'map-form#submit' }, class: 'm-mapForm__number-of-searches-select'
+  .m-mapForm__games
+    p.m-mapForm__games-header = f.label t('defaults.label_game')
+    - games.each do |game|
+      = f.check_box "games[#{game.id}]", { class: 'm-mapForm__games-checkbox', id: "game_#{game.id}", checked: "#{'checked' if helpers.game_filtered?(game.id)}", data: { action: 'map-form#submit' } }, true, false
+      = f.label :game, game.title, for: "game_#{game.id}", class: 'm-mapForm__games-label' 
+  .m-mapForm__buttons
+    = f.submit id: 'mapMenuSubmitButton', class: 'm-mapForm__buttons-submit'
+    = link_to t('defaults.clear'), filter_path, method: :delete, class: 'm-mapForm__buttons-clear'

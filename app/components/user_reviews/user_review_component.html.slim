@@ -1,0 +1,17 @@
+.m-userReview id="userReivew-#{user_review.id}"
+  .m-userReview__header id="userReview-icon-#{user_review.id}" data-url="#{user_review.user.avatar_url_in_review}"
+    = image_tag user_review.user.avatar_url_in_review, class: 'm-userReview__header-icon'
+    .m-userReview__header-name id="#{'userReview-nickname-' + user_review.id.to_s if user_review.user.anonymous?}"
+      = link_to_if !user_review.user.anonymous?, user_review.user.nickname_in_review, user_path(user_review.user), id: "userReview-nickname-#{user_review.id}"
+    span.m-userReview__header-date id="userReview-created-at-#{user_review.id}"
+      = l user_review.created_at, format: :user_review
+    - if user_review.own?(current_user)
+      = link_to t('defaults.destroy'), shop_user_review_path(user_review.shop, user_review), method: :delete, data: { confirm: t('defaults.destroy_message')}, class: 'btn-basic btn-label-size'
+  .m-userReview__games
+    = render ::Users::BadgeComponent.with_collection(user_review.games)
+  .m-userReview__body id="userReview-body-#{user_review.id}"
+    = simple_format(user_review.body)
+  .m-userReview__image id="userReview-images-#{user_review.id}"
+    - user_review.images.each_with_index do |image, index|
+      .m-userReview__image-container data-bs-toggle="modal" data-bs-target="#userReviewModal" data-url="#{image.url}" id="#{user_review.id}" onclick="setInformationToPreview(this.id, #{index})"
+        = image_tag image.url(:thumb), class: 'm-userReview__image-thumb'

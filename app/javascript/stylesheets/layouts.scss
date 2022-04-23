@@ -1,0 +1,345 @@
+/* body等の共通スタイル */
+
+body {
+  background-color: $WHITE2;
+  counter-reset: shop-counter;
+}
+
+.logo-base-color {
+  fill: black;
+}
+
+.logo-theme-color {
+  fill: var(--theme);
+}
+
+.main-logo {
+  width: 250px;
+}
+
+.footer-logo {
+  width: 100px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  z-index: 9999;
+  margin-bottom: 30px;
+  border-bottom: solid 1px $GRAY1;
+  a {
+    margin-bottom: 0;
+    opacity: 1;
+    transition: .3s;
+    &:hover {
+      margin-bottom: 6px;
+      opacity: .8;
+    }
+  }
+
+  .svg-container {
+    width: 250px;
+    height: auto;
+  }
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  border-top: solid 1px $GRAY1;
+  font-size: $FONT-SIZE-MD;
+  color: $GRAY0;
+  font-weight: $FONT-WEIGHT-NORMAL;
+
+  .copyright-container {
+    display: flex;
+  }
+
+  .footer-links {
+    display: flex;
+  }
+
+  a {
+    color: $GRAY0;
+    padding: 0 5px;
+
+    &:not(:last-child) {
+      border-right: solid 1px $GRAY1;
+    }
+
+    &:hover {
+      color: lighten($GRAY0, 30%)
+    }
+  }
+
+  .copyright-text {
+    font-weight: $FONT-WEIGHT-BOLD;
+  }
+
+  .footer-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px 2px 5px;
+  }
+}
+
+.footer-fixed {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 110px;
+  box-sizing: border-box;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.map-container {
+  background-color: $WHITE0;
+  height: 500px;
+  margin-bottom: 30px;
+  position: relative;
+
+  .map-loading {
+    background-color: rgba($GRAY0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+  }
+}
+
+.map-loading.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-wrapper {
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+}
+
+.map-menu {
+  background-color: var(--theme);
+  width: 100%;
+  font-size: $FONT-SIZE-MD;
+  color: $WHITE0;
+}
+
+.map-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $FONT-WEIGHT-BOLD;
+  color: $WHITE0;
+  padding: 0;
+  transition: 0.3s;
+  
+  &:hover {
+    font-weight: $FONT-WEIGHT-BOLD;
+    color: $WHITE0;
+  }
+}
+
+.map-menu-icon {
+  margin-left: 10px;
+}
+
+// フラッシュメッセージ
+.message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  z-index: 99999;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.message-dialog.display {
+  top: 10px;
+  padding: 5px 15px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+.map-message-dialog {
+  background: $WHITE0;
+  border: solid 1px $GRAY0;
+  box-shadow: 0 0 10px 0 rgba($SHADOW0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 0;
+  opacity: 0;
+  transform: translate(-50%, 0%);
+  transition: all 0.3s;
+  font-size: $FONT-SIZE-MD;
+  font-weight: $FONT-WEIGHT-NORMAL;
+  color: $GRAY0;
+  white-space: nowrap;
+}
+
+.map-message-dialog.display {
+  top: 5px;
+  padding: 5px 20px;
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
+/* テーマカラーパネル */
+.panel-container {
+  margin-top: 10px;
+
+  :not(:last-child) {
+    margin-right: 10px;
+  }
+
+  input:checked + label {
+    opacity: 0.8;
+    border: solid 5px #f51010;
+    width: 60px;
+  }
+}
+.theme-panel {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba($SHADOW0, 0.4);
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.normal-panel {
+  background-color: #FF8524;
+}
+.dark-panel {
+  background-color: #7E3C06;
+}
+.darkBlue-panel {
+  background-color: #394C7F;
+}
+.shinkai-panel {
+  background-color: #A19F28;
+}
+.yumekawa-panel {
+  background-color: #CA2CCA;
+}
+.mono-panel {
+  background-color: #777777;
+}
+
+/* ユーザー登録時のラベル */
+.user-games-label {
+  height: 24px;
+  border-radius: 12px;
+  border: solid 0.5px $GRAY0;
+  font-size: $FONT-SIZE-SM;
+  font-weight: $FONT-WEIGHT-MEDIUM;
+  color: $GRAY0;
+  padding: 0 10px;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+input:checked + .user-games-label {
+  background-color: $GRAY1;
+  color: $GRAY2;
+}
+
+/* ダークモード時の色 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $GRAY0;
+  }
+
+  .logo-base-color {
+    fill: white;
+  }
+
+  footer {
+    color: $WHITE0;
+  
+    a {
+      color: $WHITE0;
+  
+      &:hover {
+        color: $WHITE2;
+      }
+    }
+  }
+}
+
+// スマホ向け
+@include media-breakpoint-down(sm) {
+  .main-logo {
+    width: 220px;
+  }
+
+  footer {
+    display: block;
+
+    .copyright-container {
+      align-items: center;
+      justify-content: center;
+      margin: 5px 0;
+    }
+
+    .footer-links {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .map-menu-btn {
+    &:hover {
+      padding: 0;
+      font-weight: $FONT-WEIGHT-BOLD;
+      color: $WHITE0;
+    }
+  }
+}
+
+// iPhone 5Sサイズ以下
+@media screen and (max-width: 365px) {
+  header {
+    justify-content: start;
+    margin-left: 10px;
+  }
+
+  .main-logo {
+    width: 200px;
+  }
+
+  footer {
+    .footer-links {
+      font-size: $FONT-SIZE-XS;
+    }
+  }
+}

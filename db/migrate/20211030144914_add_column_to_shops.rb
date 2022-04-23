@@ -1,4 +1,4 @@
-class AddColumnToShops < ActiveRecord::Migration[6.0]
+class AddColumnToShops < ActiveRecord::Migration[7.0]
   def change
     add_column :shops, :konami_name, :string
     add_column :shops, :sega_name, :string

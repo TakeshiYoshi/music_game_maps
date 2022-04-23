@@ -1,0 +1,40 @@
+.m-scrollTop {
+  position: fixed;
+  bottom: -100px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--theme);
+  transition: 0.5s;
+  opacity: 0;
+  z-index: 10000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    color: $WHITE0;
+    font-size: 40px;
+    font-weight: $FONT-WEIGHT-BOLD;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.m-scrollTop.visible {
+  opacity: 1;
+  bottom: 20px;
+}
+
+// スマホ用
+@include media-breakpoint-down(sm) {
+  .m-scrollTop {
+    right: 10px;
+  }
+
+  .m-scrollTop.visible {
+    bottom: 10px;
+  }
+}

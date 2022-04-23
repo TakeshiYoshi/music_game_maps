@@ -9,7 +9,7 @@ RSpec.describe "UserSessions", type: :system do
       it '正常にログインが完了する' do
         login user
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに成功しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -20,18 +20,17 @@ RSpec.describe "UserSessions", type: :system do
         fill_in 'password', with: 'wrong'
         click_button 'ログイン'
         expect(current_path).to eq(user_sessions_path), '別のページへリダイレクトされています'
-        expect(page.find('#flash-message')).to have_content('ログインに失敗しました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログインに失敗しました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
     context 'ログアウトリンクをクリックする' do
       it '正常にログアウトする' do
         login user
-        page.find('label[for=nav-menu-check]').click
-        sleep 1
+        find('.m-userMenu__button').click
         click_on 'ログアウト'
         expect(current_path).to eq(root_path), 'ルートページへリダイレクトされていません'
-        expect(page.find('#flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
+        expect(page.find('.flash-message')).to have_content('ログアウトしました'), 'フラッシュメッセージが表示されてません'
       end
     end
 
@@ -48,7 +47,8 @@ RSpec.describe "UserSessions", type: :system do
     context '未ログイン状態' do
       it 'ログインボタンが表示される' do
         visit root_path
-        expect(page.all('a.login_icon').length).to eq(1), 'ログインボタンが表示されていません'
+        find('.m-userMenu__button').click
+        expect(find('.m-userMenu__button')).to have_content('ログイン'), 'ログインボタンが表示されていません'
       end
     end
 
@@ -56,7 +56,8 @@ RSpec.describe "UserSessions", type: :system do
       it 'ユーザーメニューが表示される' do
         login user
         visit root_path
-        expect(page.all('label[for=nav-menu-check]').length).to eq(1), 'ユーザーメニューが表示されてません'
+        find('.m-userMenu__button').click
+        expect(find('.m-userMenu__button')).to have_content('ログアウト'), 'ユーザーメニューが表示されてません'
       end
     end
   end

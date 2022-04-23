@@ -29,10 +29,11 @@ gem 'ransack'
 gem 'carrierwave'
 gem 'meta-tags'
 gem "view_component"
+gem 'hotwire-rails'
 
 # Turbolinks
 gem 'jbuilder', '~> 2.7'
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 
 # Authentication
 gem 'sorcery'

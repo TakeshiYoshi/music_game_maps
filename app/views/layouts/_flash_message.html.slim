@@ -1,8 +1,5 @@
-.flash-message 
-  input.d-none#flash-check type="checkbox"
-  .message-dialog.blur
+.flash-message
+  .message-dialog.blur data-controller="flash-message"
     - flash.each do |key, value|
       - if key != 'map'
-        p#flash-message calss="flash-text-#{key}"
-          = value
-= javascript_pack_tag 'flash_message'
+        = value
