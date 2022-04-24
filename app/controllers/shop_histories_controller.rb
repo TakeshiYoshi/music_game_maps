@@ -12,7 +12,7 @@ class ShopHistoriesController < ApplicationController
     )
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @shop_history = @shop.shop_histories.new(shop_history_params)
     @shop_history.format_model(params[:games])
     @shop_history.status = :published if current_user.admin?
