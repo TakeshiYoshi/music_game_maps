@@ -11,12 +11,16 @@ def scraping_andamiro(game_title)
     page = URI.parse(url).open.read
     document = Nokogiri::HTML(page)
 
+    puts url
+    puts 'ここまできてるよ'
     # 都道府県取得
     pref_name = document.at_css('option[selected]')&.text
     prefecture = Prefecture.find_by(name: pref_name) if pref_name && pref_name != '-'
     start_message(prefecture.name, game_title) if pref_name && pref_name != '-'
     # サーバー負荷軽減のため待機
     sleep $sleep_time
+
+    puts pref_name
 
     tr_list = document.css('table.board_st > tbody > tr')
 

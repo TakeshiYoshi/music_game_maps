@@ -38,7 +38,6 @@ def register_shop_data(shops)
     if shop[:place_id].present? && db_shop = Shop.find_by(place_id: shop[:place_id])
       puts "\n*** DB上の店舗情報を更新します ***"
       db_shop.update( name: name,
-                      twitter_id: nil,
                       address: address,
                       prefecture: prefecture,
                       city: city,
@@ -331,5 +330,87 @@ def delete_game_machine_tetote(registered_shops, game_title)
       puts '店舗が閉店しているか音ゲーが設置されていないため店舗情報そのものを削除します。'
       shop.destroy
     end
+  end
+end
+
+def update_shop(shop_model)
+  shop = { place_id: shop_model.place_id, lat: shop_model.lat, lon: shop_model.lng, prefecture: shop_model.prefecture.name }
+
+  # PlaceDetailsを利用して店舗の詳細情報を入手する
+  puts "店舗情報を取得します id=#{shop_model.id}"
+  place_detail_url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=#{shop[:place_id]}&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,formatted_phone_number,international_phone_number,opening_hours,website&language=ja&key=#{Rails.application.credentials[:gcp][:places_api_key]}"
+  puts place_detail_url
+  page = URI.parse(place_detail_url).open.read
+  data = JSON.parse(page)
+
+  # 取得した位置が緯度または経度が1km以上離れている場合は別店舗とみなしデータの使用をしない
+  if shop[:lat].present? && shop[:lon].present? && !Shop.find_by(place_id: shop[:place_id])
+    puts shop[:lat]
+    puts shop[:lon]
+    puts data['result']['geometry']['location']['lat']
+    puts data['result']['geometry']['location']['lng']
+    if (data['result']['geometry']['location']['lat'].to_f - shop[:lat].to_f).abs >= 0.01 || (data['result']['geometry']['location']['lng'].to_f - shop[:lon].to_f).abs >= 0.01
+      shop[:place_id] = nil
+      return shop
+    end
+  end
+
+  if data['result'].present?
+    # データ格納
+    shop[:name] = data['result']['name']
+    shop[:address] = data['result']['formatted_address'][/[^ \d]..??[都道府県].*/]
+    shop[:phone_number] = data['result']['formatted_phone_number']
+    shop[:lat] = data['result']['geometry']['location']['lat']
+    shop[:lon] = data['result']['geometry']['location']['lng']
+    shop[:opening_hours] = data['result']['opening_hours']['periods'] if data['result']['opening_hours'].present?
+    shop[:opening_hours_text] = data['result']['opening_hours']['weekday_text'] if data['result']['opening_hours'].present?
+    shop[:website] = data['result']['website']
+    shop[:photo_reference] = data['result']['photos'][0]['photo_reference'] if data['result']['photos'].present?
+
+    # 例外処理
+    shop[:address] = '東京都武蔵野市吉祥寺本町1-11-5' if data['result']['formatted_address'] == '日本、〒180-0004 Tokyo, Musashino, Kichijoji Honcho, 1 Chome−11, 6Fコピス吉祥寺 1 Chome-1-11-5 吉祥寺本町 Musashino-shi Tōkyō-to 180-0004'
+    shop[:address] = '愛知県岡崎市戸崎町大道西-20' if data['result']['formatted_address'] == 'Daidonishi-２０ Tosakicho, Okazaki, Aichi 444-0840 日本'
+    shop[:address] = '北海道岩見沢市大和4条8-1' if data['result']['formatted_address'] == '8 Chome-１ Yamato 4 Jo, Iwamizawa, Hokkaido 063-0854 日本'
+    shop[:address] = '宮城県登米市南方町新島前-46' if data['result']['formatted_address'] == 'Shinshimamae-４６ Minamikatamachi, Tome, Miyagi 987-0404 日本'
+    shop[:address] = '北海道石狩市緑苑台中央1-2' if data['result']['formatted_address'] == '1 Chome-2 Ryokuendaichuo, Ishikari, Hokkaido 061-3230 日本'
+    shop[:address] = '新潟県燕市井土巻3-65' if data['result']['formatted_address'] == '3 Chome-６５ Idomaki, Tsubame, Niigata 959-1232 日本'
+    shop[:address] = '大阪府河内長野市本町２４−１ ノバティながの北館 4Ｆ' if data['result']['formatted_address'] == '日本、〒586-0015 大阪府内長野市本町２４−１ ノバティながの北館 4Ｆ'
+    if data['result']['formatted_address'][-2,2] == '日本' && data['result']['formatted_address'].include?(shop[:prefecture])
+      shop[:address] = data['result']['formatted_address'].split(' ').reverse.join[/[^ \d]..??[都道府県].*/]
+    end
+
+    puts "\n*** DB上の店舗情報を更新します ***"
+
+    shop_model.update( address: shop[:address],
+                       opening_hours: shop[:opening_hours],
+                       opening_hours_text: shop[:opening_hours_text],
+                       photo_reference: shop[:photo_reference])
+
+    # 履歴データ作成
+    name = shop[:name] if shop[:name] != shop_model.name
+    phone_number = shop[:phone_number] if shop[:phone_number] != shop_model.phone_number
+    website = shop[:website] if shop[:website] != shop_model.website
+
+    shop_history = shop_model.shop_histories.build( user: User.admin.first,
+                                                    name: shop[:name],
+                                                    phone_number: shop[:phone_number],
+                                                    website: shop[:website],
+                                                    games: shop_model.game_machines_to_hash,
+                                                    status: :published)
+    p shop_history
+    
+    shop_history.format_model(shop_model.game_machines_to_hash)
+
+    p shop_history
+    if shop_history.validate
+      shop_history.save
+      shop_model.update_to_latest
+    end
+  end
+end
+
+def update_shops
+  Shop.where.not(place_id: nil).order(:id).each do |shop|
+    update_shop(shop)
   end
 end

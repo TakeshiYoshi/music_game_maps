@@ -36,6 +36,8 @@ def scraping_takara(game_title)
       next if name == "namcoニッケパークタウン加古川店"
       next if name == "SOYU Game Field高松"
       next if name == "アミュージアム高松"
+      name = 'プリモピア鴻巣店' if name == 'プリモピア 鴻巣'
+      name = 'ブランチ 大津京' if name == 'アピナキッズパーク大津京'
 
       shop = { name: name,
                takara_name: name,
