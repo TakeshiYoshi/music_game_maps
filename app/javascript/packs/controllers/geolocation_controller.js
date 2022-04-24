@@ -3,11 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="geolocation"
 export default class extends Controller {
   connect() {
-    this.isGeoChecked = gon.location;
-    this.latitude = gon.location ? gon.location[0] : "";
-    this.longitude = gon.location ? gon.location[1] : "";
-    this.getMode = 'first';
-
     this.getCsrfToken = () => {
       const metas = document.getElementsByTagName('meta');
       for (let meta of metas) {
@@ -19,12 +14,36 @@ export default class extends Controller {
     }
   }
 
+  initialize() {
+    this.isGeoChecked = gon.location;
+    this.latitude = gon.location ? gon.location[0] : "";
+    this.longitude = gon.location ? gon.location[1] : "";
+
+    // 初回処理
+    this.getMode = 'first';
+    this.getGeolocation();
+    if (this.isGeoChecked) {
+      // 現在位置の取得がオンになっていたら５秒に1度現在地の更新を行う。
+      // 頻繁に更新をするためRails側でセッションは作成せず地図のマーカーの位置のみを変更する。
+      this.intervalFunction = setInterval(function () {
+        this.updateGeolocation;
+      }, 5000);
+    }
+  }
+
   get() {
     this.getMode = "button";
     this.getGeolocation();
     if (this.isGeoChecked) {
       // 2回目以降に現在地取得をする場合は現在地のズームを行う
       this.focusCurrentPosition();
+    }
+  }
+
+  updateGeolocation() {
+    if (this.isGeoChecked) {
+      this.getMode = 'auto';
+      this.getGeolocation();
     }
   }
 
@@ -69,7 +88,9 @@ export default class extends Controller {
               ) {
                 // 現在位置の取得がオンかつマップ検索されていないかつ以前取得した位置情報と比べ1km以上離れている場合
                 // ページリロードを実行
-                location.reload();
+                //location.reload();
+                document.getElementsByClassName('map-loading')[0].classList.add('visible');
+                document.getElementById('mapMenuSubmitButton').click();
               }
               if (this.getMode == "button") {
                 this.flashMessage("現在位置を取得しました");
