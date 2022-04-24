@@ -85,4 +85,8 @@ namespace :scraping do
     scraping_tetote 'テトテコネクト'
     scraping_takara 'ワッチャプリマジ！'
   end
+
+  task update_shops: :environment do
+    update_shops
+  end
 end

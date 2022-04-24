@@ -3,7 +3,7 @@ require './lib/scraping/scraping'
 def scraping_bandai(game_title)
   # 以下スクレイピング処理
   Prefecture.all.each do |prefecture|
-    next if prefecture.id != 1
+    next if prefecture.id < 43
     start_message(prefecture.name, game_title)
     # 変数初期化
     shops_all = []
@@ -29,6 +29,9 @@ def scraping_bandai(game_title)
         address = shop.at_css('tr.shop_address span:last-child').text;
 
         place_id = Shop.find_by(bandai_name: name).place_id if Shop.find_by(bandai_name: name) && Shop.find_by(bandai_name: name).prefecture == Prefecture.find(prefecture.id)
+
+        name = 'ブランチ 大津京' if name == 'アピナキッズパーク大津京'
+        name = 'スーパーセンタートライアル三重店' if name == 'ピノキオランド三重店'
 
         shop = { name: name,
                  bandai_name: name,
