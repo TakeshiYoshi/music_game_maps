@@ -12,10 +12,12 @@ class ShopHistoriesController < ApplicationController
     )
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @shop_history = @shop.shop_histories.new(shop_history_params)
     @shop_history.format_model(params[:games])
+    @shop_history.status = :published if current_user.admin?
     if @shop_history.validate && @shop_history.save
+      @shop.update_to_latest if current_user.admin?
       redirect_to shop_path(@shop), success: t('.success')
     else
       # モデルをフォーム入力時の状態に戻す
